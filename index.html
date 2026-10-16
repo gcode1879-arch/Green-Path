@@ -123,6 +123,17 @@ h2{text-shadow:0 3px 0 rgba(0,0,0,.12)}
 #gstage{position:relative;height:320px;border-radius:22px;background:linear-gradient(#bfe9ff,#fff6e8);overflow:hidden;touch-action:manipulation;user-select:none;margin:10px 0}
 .gi{position:absolute;top:-50px;animation:gf var(--t) linear forwards;cursor:pointer}
 @keyframes gf{to{transform:translateY(390px) rotate(40deg)}}
+@keyframes sp{to{transform:rotate(360deg)}}
+.spin{width:70px;height:70px;border:8px solid #ffe0c2;border-top-color:var(--red);border-right-color:var(--org);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto}
+.pmr{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);padding:12px;border-radius:18px;box-shadow:var(--sh);border:2px solid transparent;margin-top:8px;color:var(--ink)}
+.pmr.on{border-color:var(--red)}.pmr .ri{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;flex:none}
+.rad{width:22px;height:22px;border-radius:50%;border:2px solid #cbb89f;margin-left:auto;flex:none}.pmr.on .rad{border-color:var(--red);background:radial-gradient(var(--red) 45%,transparent 50%)}
+.bch{display:flex;align-items:center;gap:7px}.bch i{width:14px;height:14px;border-radius:50%;display:block}
+.pcard{border-radius:20px;padding:18px;color:#fff;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);position:relative;overflow:hidden;margin-top:4px}
+.pcard:after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.12)}
+.paytop{border-radius:22px;padding:16px;color:#fff;background:linear-gradient(135deg,#7c5cff,#b45cff);text-align:center;margin-bottom:6px}
+@keyframes dots{0%,20%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
+.ld span{animation:dots 1.2s infinite}.ld span:nth-child(2){animation-delay:.2s}.ld span:nth-child(3){animation-delay:.4s}
 #wheel{transition:transform 4s cubic-bezier(.1,.7,.1,1)}
 </style></head><body>
 <div id="root"></div>
@@ -479,14 +490,20 @@ const WAL=['Apple Pay','Google Pay','Samsung Pay','GrabPay'];
 const orderNo=()=>'HP-'+String((S.seq=(S.seq||0)+1)%10000).padStart(4,'0')+Math.floor(Math.random()*90+10);
 const payTxt=()=>PM.m==='cash'?'Cash on delivery (pay the driver)':PM.m==='qr'?'QR code (paid)':PM.b+' (paid, demo)';
 const qr=()=>{let s='',r=hh('pay'+Date.now()%1e5);const N=21,u=8;for(let y=0;y<N;y++)for(let x=0;x<N;x++){const f=(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);let on;if(f){const a=x>13?x-14:x,b=y>13?y-14:y;on=a===0||a===6||b===0||b===6||(a>=2&&a<=4&&b>=2&&b<=4)}else{r=(r*1103515245+12345)>>>0;on=(r>>16)&1}if(on)s+=`<rect x="${x*u}" y="${y*u}" width="${u}" height="${u}"/>`}return`<svg viewBox="0 0 168 168" width="190" style="background:#fff;padding:8px;border-radius:12px"><g fill="#111">${s}</g></svg>`};
-function drawPay(){const t=totals();
- sheet(`<h2>Payment</h2><div class="sub">Total ${money(t.tot)}</div><h3 style="margin-top:12px">How would you like to pay?</h3>
- <div class="opts">${[['cash','Cash on delivery'],['card','Card or wallet'],['qr','QR code']].map(([k,n])=>`<button class="opt ${PM.m===k?'on':''}" data-a="pm" data-v="${k}">${n}</button>`).join('')}</div>
- ${PM.m==='cash'?`<div class="sub">Pay the delivery driver in cash when your food arrives. Please have ${money(t.tot)} ready.</div>`:''}
- ${PM.m==='card'?`<h3>Choose a card or wallet</h3><div class="opts">${BR.map(b=>`<button class="opt ${PM.b===b?'on':''}" data-a="pb" data-v="${b}">${b}</button>`).join('')}</div>
- <div style="border-radius:18px;padding:16px;color:#fff;background:linear-gradient(135deg,${BC[PM.b]},#222)"><div style="font-weight:800;font-size:18px">${PM.b}</div>${WAL.includes(PM.b)?'<div style="margin:18px 0 6px">Demo wallet. Tap Pay to confirm.</div>':'<div style="font-size:19px;letter-spacing:2px;margin:18px 0 8px">4242 4242 4242 4242</div><div style="font-size:13px">DEMO CARD | 12/30 | CVC 123</div>'}</div><div class="sub" style="margin-top:6px">Demo only. No real payment is made.</div>`:''}
- ${PM.m==='qr'?`<div style="display:grid;place-items:center;margin:10px 0">${qr()}</div><div class="sub" style="text-align:center">Scan with your banking app (demo QR), then tap Pay.</div>`:''}
- <button class="btn full" data-a="payok">${PM.m==='cash'?'Confirm order (pay cash)':'Pay '+money(t.tot)}</button><button class="btn g full" data-a="cart">Back</button>`)}
+function drawPay(){const t=totals(),w=WAL.includes(PM.b);
+ const M=[['cash','Cash on delivery','Pay the driver when food arrives','#22b573','<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/>'],['card','Card or wallet','Visa, Mastercard, Apple Pay and more','#7c5cff','<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'],['qr','QR code','Scan with your banking app','#ff9f1c','<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v3M14 20h7"/>']];
+ const mk=BC[PM.b];
+ sheet(`<div class="line" style="padding-top:0"><h2>Payment</h2><button class="plus" style="background:var(--card);color:var(--ink)" data-a="cart">${ic(IC.x,20)}</button></div>
+ <div class="paytop"><div style="font-size:13px;opacity:.9;display:flex;gap:6px;justify-content:center;align-items:center">${ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',15)} Secure checkout (demo)</div><div style="font-size:34px;font-weight:900;font-family:Fredoka,sans-serif;margin-top:2px">${money(t.tot)}</div><div style="font-size:12px;opacity:.9">${cart.reduce((a,l)=>a+l.q,0)} item(s) from ${new Set(cart.map(l=>l.s)).size} stall(s)</div></div>
+ <h3 style="margin-top:14px">Payment method</h3>
+ ${M.map(([k,n,d,c,i])=>`<button class="pmr ${PM.m===k?'on':''}" data-a="pm" data-v="${k}"><div class="ri" style="background:${c}">${ic(i,24)}</div><div><b>${n}</b><div class="sub">${d}</div></div><span class="rad"></span></button>`).join('')}
+ ${PM.m==='cash'?`<div class="hist" style="margin-top:12px"><b>Pay ${money(t.tot)} in cash</b><div class="sub">Please have the exact amount ready for the delivery driver.</div></div>`:''}
+ ${PM.m==='card'?`<h3 style="margin-top:16px">Choose a card or wallet</h3><div class="opts">${BR.map(b=>`<button class="opt bch ${PM.b===b?'on':''}" data-a="pb" data-v="${b}"><i style="background:${BC[b]}"></i>${b}</button>`).join('')}</div>
+ <div class="pcard" style="background:linear-gradient(135deg,${mk},#1b1b2b)"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:19px;font-style:${PM.b==='Visa'?'italic':'normal'}">${PM.b}</b>${PM.b==='Mastercard'?'<span style="display:flex"><i style="width:26px;height:26px;border-radius:50%;background:#eb001b;display:block"></i><i style="width:26px;height:26px;border-radius:50%;background:#f79e1b;display:block;margin-left:-10px;opacity:.9"></i></span>':'<span style="font-size:12px;opacity:.85">DEMO</span>'}</div>
+ ${w?`<div style="margin:26px 0 4px;font-size:15px">Demo wallet<div style="font-size:12px;opacity:.85">Tap Pay to approve with ${PM.b}</div></div>`:`<div style="width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,#ffe082,#ffb300);margin-top:16px"></div><div style="font-size:20px;letter-spacing:3px;margin:12px 0 10px;font-family:monospace">4242 4242 4242 4242</div><div style="display:flex;justify-content:space-between;font-size:12px;opacity:.9"><span>DEMO CARDHOLDER</span><span>12/30 &nbsp; CVC 123</span></div>`}</div>
+ <div class="sub" style="margin-top:8px;text-align:center">Demo only. No real payment is made.</div>`:''}
+ ${PM.m==='qr'?`<div style="display:grid;place-items:center;margin:14px 0 4px;background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--sh)">${qr()}<div class="sub" style="margin-top:8px;text-align:center"><b style="color:var(--ink)">${money(t.tot)}</b><br>Scan with your banking app (demo QR), then tap Pay.</div></div>`:''}
+ <button class="btn full" data-a="payok" style="display:flex;gap:8px;justify-content:center;align-items:center;margin-top:16px">${ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',20)}${PM.m==='cash'?'Confirm order (pay cash)':'Pay '+money(t.tot)}</button><button class="btn g full" data-a="cart">Back to tray</button>`)}
 function receipt(num,mn,pay,rc,xp,tt){const ar=m=>new Date(Date.now()+m*6e4).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
  sheet(`<div style="text-align:center"><div class="bob" style="display:inline-block">${em('bowl',70)}</div><h2>Order confirmed!</h2><div class="sub">Your order number</div><div style="font-size:30px;font-weight:900;font-family:Fredoka,sans-serif;color:var(--red)">#${num}</div></div>
  <div class="hist" style="margin-top:12px"><h3>Estimated arrival</h3><div style="font-size:22px;font-weight:900">${mn}-${mn+5} min</div><div class="sub">Around ${ar(mn)} to ${ar(mn+5)}</div></div>
@@ -621,7 +638,7 @@ cm:v=>{const l=cart[+v];if(--l.q<=0)cart.splice(+v,1);drawCart();render()},
 cpl:v=>{cart[+v].q++;drawCart();render()},
 place:()=>{if(!cart.length)return;PM={m:'cash',b:'Visa'};drawPay()},
 pm:v=>{PM.m=v;drawPay()},pb:v=>{PM.b=v;drawPay()},
-payok:()=>{if(PM.m==='cash'){A.fin();return}sheet('<h2>Processing payment...</h2><p class="sub" style="padding:20px 0">Please wait a moment.</p>');sfx('pop');setTimeout(()=>A.fin(),1300)},
+payok:()=>{const c=PM.m==='cash';sheet(`<div style="text-align:center;padding:26px 0 18px"><div class="spin"></div><h2 style="margin-top:20px">${c?'Placing your order':'Processing payment'}<span class="ld"><span>.</span><span>.</span><span>.</span></span></h2><div class="sub" style="margin-top:8px">${c?'Sending it to the stalls':'Paying '+money(totals().tot)+' with '+(PM.m==='qr'?'QR code':PM.b)}</div><div class="sub" style="margin-top:14px">Please do not close this screen</div></div>`);sfx('pop');setTimeout(()=>A.fin(),c?1000:2200)},
 fin:()=>{const d=disc(lvl().l),b=lvl().l,by={};cart.forEach(l=>(by[l.s]=by[l.s]||[]).push(l));let xp=0;const num=orderNo(),mn=25+Math.floor(Math.random()*15)+(Object.keys(by).length-1)*5,pay=payTxt(),rc=[],tt=totals().tot;
  Object.entries(by).forEach(([n,ls])=>{rc.push([n,ls]);const tot=ls.reduce((a,l)=>a+l.u*l.q,0)*(1-d/100),x=Math.round(tot*10);xp+=x;S.orders.unshift({shop:n,lines:ls.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:tot,xp:x,raw:ls.map(l=>({...l})),num,pay,mn,date:new Date().toLocaleDateString()})});
  S.life+=xp;S.wallet+=xp;save();cart=[];sfx('bell');render();receipt(num,mn,pay,rc,xp,tt);if(lvl().l>b){setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l+': '+disc(lvl().l)+'% off')},1400)}},
