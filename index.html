@@ -389,6 +389,7 @@ const BP=[
 ['.....a......','....aaa.....','.....b......','.cccccccccc.','..cccccccc..','...dddddd...']];
 const BS=[['Hawker Stall Bricks','#e8892b',300,0,['#e53935','#fdd835','#ffffff','#8d6e63']],['Supertree Grove Bricks','#43a047',450,1,['#66bb6a','#8d6e63','#ab47bc','#546e7a']],['MRT Train Bricks','#e53935',600,2,['#e53935','#ffffff','#42a5f5','#37474f']],['Rocket Launcher Bricks','#5c6bc0',800,3,['#eceff1','#42a5f5','#ef5350','#ffb300']],['Merlion Tower Bricks','#4dd0e1',1000,4,['#e0f7fa','#4dd0e1','#0288d1','#8d6e63']],['Bumboat Bricks','#ffb74d',1400,5,['#ffffff','#ff7043','#0288d1','#5d4037']],['Satay Stand Bricks','#8d6e63',1800,0,['#a1887f','#ffb300','#e53935','#4e342e']],['Durian Tower Bricks','#c0ca33',2400,1,['#9ccc65','#ffca28','#795548','#33691e']],['Bak Kut Teh Express Bricks','#6d4c41',3200,2,['#6d4c41','#ffe0b2','#ff7043','#212121']],['Space Shuttle Bricks','#78909c',4500,3,['#ffffff','#90a4ae','#ff5252','#ffd54f']],['Grand Pyramid Bricks','#ffc107',6500,4,['#ffd54f','#ffb300','#ff8f00','#6d4c41']],['Dragon Boat Bricks','#d32f2f',10000,5,['#fff59d','#d32f2f','#00897b','#3e2723']]];
 TOYS.unshift(...BS.map(s=>[s[0],s[1],s[2],'Brick Sets','brick',s[4],s[3]]));
+TOYS.forEach(t=>t[2]*=10);
 const mix=(h,t,p)=>{const n=parseInt(h.slice(1),16),f=t?255:0,ch=x=>Math.round(((n>>x)&255)*(1-p)+f*p);return'#'+[16,8,0].map(x=>ch(x).toString(16).padStart(2,'0')).join('')};
 const E=(x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${r/2}" fill="#222"/>`;
 const SM=(x,y)=>`<path d="M${x-7} ${y}q7 6 14 0" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
@@ -405,8 +406,8 @@ brick:(c,d,l)=>`<rect x="12" y="62" width="76" height="26" rx="4" fill="${c}"/>$
 const toyArt=(t,sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}">${ART[t[4]](t[1],mix(t[1],0,.3),mix(t[1],1,.45))}</svg>`;
 
 /* ===== STATE ===== */
-let S;try{S=JSON.parse(localStorage.hp3)}catch(e){}S=S||{life:0,wallet:0,orders:[],toys:[],ok:0};
-const save=()=>{try{localStorage.hp3=JSON.stringify(S)}catch(e){}};
+let S;try{S=JSON.parse(localStorage.hp4)}catch(e){}if(!S){let o={};try{o=JSON.parse(localStorage.hp3)||{}}catch(e){}S={life:0,wallet:0,orders:[],toys:[],ok:o.ok||0}}
+const save=()=>{try{localStorage.hp4=JSON.stringify(S)}catch(e){}};
 addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
 let V='intro',shop=null,tab='menu',hf='All',tser='All',cart=[],cfg=null,PV=null;
 const need=l=>Math.round(100*Math.pow(1.5,l));
@@ -460,10 +461,10 @@ ${[...Array(9)].map((_,i)=>`<g transform="translate(${88+i*15} 0)"><path class="
  let body='';
  if(tab==='menu'){body=`<div class="list">${shop.items.map((it,i)=>{const lk=it.t==='e'&&v.l<51,fp=it.p*(1-d/100);return`<button class="row2 ${lk?'lock':''}" data-a="item" data-v="${i}"><div class="tile" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${itemImg(it.n,it.t,46)}</div><div class="in"><h3>${it.n}${it.t==='e'?'<span class="tag">Lv 51+</span>':''}${it.t==='c'?'<span class="tag" style="background:var(--red)">Combo</span>':''}</h3><div class="sub">${lk?'Unlocks at level 51':(it.parts?it.parts.join(' + ')+' | ':'')+'Earn ~'+Math.round(fp*10)+' XP'}</div><div>${d?`<s class="sub">${money(it.p)}</s> `:''}<b>${money(fp)}</b></div></div><div class="plus" ${lk?'style="background:var(--mute)"':''}>${lk?em('lock',20):'<b style="font-size:24px">+</b>'}</div></button>`}).join('')}</div>`}
  else{const ser=['All',...new Set(TOYS.map(t=>t[3]))];
-  body=`<p class="sub" style="margin-bottom:6px">Spend XP on collectible toys. Press Preview to play with any toy, or to build with the Brick Sets, before you buy it.</p><div class="tabs">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-a="ts" data-v="${x}">${x}</button>`).join('')}</div>
-  <div class="toys">${TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser).map(([t,i])=>`<div class="toy"><div class="tile" style="background:${t[1]}44">${toyArt(t,58)}</div><h3 style="font-size:14px">${t[0]}</h3><div class="sub">${t[3]} | ${fmt(t[2])} XP</div><div class="b"><button class="pv" data-a="pv" data-v="${i}">Preview</button><button data-a="buy" data-v="${i}" ${S.wallet<t[2]?'disabled':''}>Redeem</button></div></div>`).join('')}</div>
+  body=`<p class="sub" style="margin-bottom:6px">Toys are expensive and cost your experience points, so buying can lower your level and your discount. Preview just lets you try a toy or build a brick set. It never gives it to you.</p><div class="tabs">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-a="ts" data-v="${x}">${x}</button>`).join('')}</div>
+  <div class="toys">${TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser).map(([t,i])=>`<div class="toy"><div class="tile" style="background:${t[1]}44">${toyArt(t,58)}</div><h3 style="font-size:14px">${t[0]}</h3><div class="sub">${t[3]} | ${fmt(t[2])} XP</div><div class="b"><button class="pv" data-a="pv" data-v="${i}">Preview</button><button data-a="buy" data-v="${i}" ${S.wallet<t[2]?'disabled':''}>Buy</button></div></div>`).join('')}</div>
   <h2 style="margin:20px 0 8px">My toys</h2>${S.toys.length?Object.entries(S.toys.reduce((c,x)=>(c[x]=(c[x]||0)+1,c),{})).map(([k,n])=>`<div class="line"><span>${k} <b>x${n}</b></span><button class="opt" data-a="pv" data-v="${TOYS.findIndex(x=>x[0]===k)}">Play</button></div>`).join(''):'<p class="sub">No toys yet.</p>'}
-  <button class="btn g full" data-a="boost" style="font-size:14px">Demo: +5,000 XP</button>`}
+  <button class="btn g full" data-a="boost" style="font-size:14px">Demo: +25,000 XP</button>`}
  R.innerHTML=`<div class="w"><button class="tab" data-a="back" style="margin-bottom:8px">&larr; All stalls</button><div class="ban" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${em(shop.ic,54)}<div><h2>${shop.n}</h2><div style="margin-top:4px">${hb(shop)}</div></div></div>${xpCard()}${body}</div>
  <div id="nav"><button class="${tab==='menu'?'on':''}" data-a="tab" data-v="menu">${em('bowl',18)} Menu</button><button class="${tab==='toys'?'on':''}" data-a="tab" data-v="toys">${em('bear',18)} Toys</button><button data-a="cart" style="display:flex;gap:6px;align-items:center">${em('cart',20)}<b>${cart.reduce((a,l)=>a+l.q,0)}</b></button></div>`;
 }
@@ -481,7 +482,13 @@ function drawCart(){
  const t=totals(),g={};cart.forEach((l,i)=>(g[l.s]=g[l.s]||[]).push(i));
  sheet(`<h2>Your order</h2><div class="sub">Checkout for all stalls at once</div>`+(cart.length?Object.entries(g).map(([n,ix])=>`<h3 style="margin-top:12px">${n}</h3>`+ix.map(i=>{const l=cart[i];return`<div class="line" style="align-items:flex-start"><div><b>${l.n}</b><div class="sub">${[l.desc,l.note&&'Note: '+l.note].filter(Boolean).join(' | ')}</div></div><span class="qty"><button data-a="cm" data-v="${i}">-</button>${l.q}<button data-a="cpl" data-v="${i}">+</button></span></div>`}).join('')).join('')+`<div style="border-top:2px dashed #e5d5bb;margin-top:8px;padding-top:6px"><div class="line"><span>Subtotal</span><span>${money(t.sub)}</span></div><div class="line"><span>Level discount (${t.d}%)</span><span>-${money(t.sub-t.tot)}</span></div><div class="line"><b>Total</b><b style="font-size:22px">${money(t.tot)}</b></div><div class="sub">You will earn ${Math.round(t.tot*10)} XP</div></div><button class="btn full" data-a="place">Continue to payment</button>`:'<p class="sub" style="padding:20px 0">Your tray is empty.</p>')+`<button class="btn g full" data-a="close">Close</button>`);
 }
-function buy(i){const t=TOYS[i];if(S.wallet<t[2])return false;sfx('toy');S.wallet-=t[2];S.toys.push(t[0]);save();toast('You got the '+t[0]+'!');return true}
+const lvlAt=x=>{let l=0;while(x>=need(l)){x-=need(l);l++}return l};
+function buy(i){const t=TOYS[i];if(S.wallet<t[2]||S.life<t[2])return false;const b=lvl().l;sfx('toy');S.wallet-=t[2];S.life-=t[2];S.toys.push(t[0]);save();const a=lvl().l;toast('You got the '+t[0]+'!'+(a<b?' Level '+b+' to '+a:''));return true}
+function askBuy(i){const t=TOYS[i],b=lvl().l,a=lvlAt(S.life-t[2]),ok=S.wallet>=t[2]&&S.life>=t[2];if(PV){cancelAnimationFrame(PV.raf);PV=null}GT.forEach(clearInterval);GT=[];sfx('pop');
+ sheet(`<div style="text-align:center"><div style="display:inline-block">${toyArt(t,90)}</div><h2>Buy ${t[0]}?</h2><div class="sub">Buying a toy spends your experience points for good.</div></div>
+ <div class="hist" style="margin-top:12px"><div class="line"><span>Price</span><b>${fmt(t[2])} XP</b></div><div class="line"><span>Your XP now</span><b>${fmt(S.wallet)} XP</b></div><div class="line"><span>XP after buying</span><b>${ok?fmt(S.wallet-t[2]):'Not enough'}</b></div><div class="line"><span>Your level</span><b>Level ${b} &rarr; Level ${ok?a:b}</b></div><div class="line"><span>Level discount</span><b>${disc(b)}% &rarr; ${disc(ok?a:b)}%</b></div></div>
+ ${ok&&a<b?`<div class="hist" style="background:#ffe6cc;color:#a24a00"><b>Careful! You will drop ${b-a} level${b-a>1?'s':''}.</b><div class="sub" style="color:#a24a00">Your discount gets smaller${b>=51&&a<51?' and Level 51+ exclusive dishes will lock again':''}.</div></div>`:''}
+ ${ok?`<button class="btn full" data-a="buyyes" data-v="${i}">Yes, spend ${fmt(t[2])} XP</button>`:`<div class="sub" style="text-align:center;margin-top:8px">You need ${fmt(t[2]-S.wallet)} more XP.</div>`}<button class="btn g full" data-a="close">${ok?'No, keep my XP':'Close'}</button>`)}
 /* ===== payment + receipt ===== */
 let PM={m:'cash',b:'Visa'};
 const BR=['Visa','Mastercard','Amex','Apple Pay','Google Pay','Samsung Pay','UnionPay','JCB','Discover','Diners Club','GrabPay'];
@@ -516,7 +523,7 @@ function openPreview(i){
  sheet(`<div class="line" style="padding-top:0"><div><h2 style="font-size:21px">${t[0]}</h2><div class="sub">${t[3]} | ${fmt(t[2])} XP</div></div><button class="plus" style="background:var(--card);color:var(--ink)" data-a="close">${ic(IC.x,20)}</button></div>
  <div id="stage"><div id="pt">${toyArt(t,120)}</div><div class="hint">Drag it, throw it, or tap it!</div></div>
  <div class="opts" style="justify-content:center;margin-top:12px"><button class="opt" id="pj">Jump</button><button class="opt" id="ps">Spin</button><button class="opt" id="pq">Squeak</button><button class="opt" id="pr">Reset</button></div>
- <button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Redeem for ${fmt(t[2])} XP</button>`);
+ <div class="sub" style="text-align:center;margin:2px 0 8px">Preview only. Nothing here is added to your toys.</div><button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Buy for ${fmt(t[2])} XP</button>`);
  const st=$('#stage'),el=$('#pt'),R=60,W=st.clientWidth,FL=st.clientHeight-26-52;
  const p=PV={x:W/2,y:70,vx:0,vy:0,r:0,vr:0,sq:0,drag:false,lx:0,ly:0,mv:0};
  const burst=()=>{for(let k=0;k<10;k++){const d=document.createElement('div'),a=Math.random()*6.28,m=40+Math.random()*50;d.className='spk';d.style.cssText=`left:${p.x}px;top:${p.y}px;background:${['#ff4b3e','#ffb400','#22b573','#7c5cff'][k%4]};--dx:${Math.cos(a)*m}px;--dy:${Math.sin(a)*m}px`;st.appendChild(d);setTimeout(()=>d.remove(),650)}};
@@ -527,7 +534,7 @@ function openPreview(i){
  el.onpointerup=el.onpointercancel=()=>{if(!p.drag)return;p.drag=false;const c=v=>Math.max(-38,Math.min(38,v));if(p.mv<8)poke();else{p.vx=c(p.vx);p.vy=c(p.vy);p.vr+=p.vx*1.2;sfx('whoosh')}};
  $('#pj').onclick=poke;$('#ps').onclick=()=>{p.vr=38;p.vy=-6;sfx('whoosh')};$('#pq').onclick=()=>{p.sq=.3;sfx('squeak',i);burst()};
  $('#pr').onclick=()=>{p.x=W/2;p.y=70;p.vx=p.vy=p.vr=p.r=0};
- $('#pb').onclick=()=>{if(buy(i)){$('#pb').disabled=true;$('#pb').textContent='Redeemed!';render()}};
+ $('#pb').onclick=()=>askBuy(i);
  const tick=()=>{if(PV!==p)return;
   if(!p.drag){p.vy+=.75;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vr*=.985;p.vx*=.995;
    if(p.y>FL){p.y=FL;if(Math.abs(p.vy)>6){sfx('thud');p.sq=Math.min(.3,Math.abs(p.vy)/50)}p.vy*=-.6;if(Math.abs(p.vy)<1.6)p.vy=0;p.vx*=.92;p.vr*=.92}
@@ -543,13 +550,13 @@ function openBuilder(i){
  <svg id="bsvg" viewBox="0 0 ${C*cw} ${R*ch+6}" style="width:100%;background:linear-gradient(#bfe9ff,#fff6e8);border-radius:18px;touch-action:manipulation"><rect x="0" y="${R*ch+3}" width="${C*cw}" height="3" fill="#8d6e63"/><g id="bsv"></g></svg>
  <div class="opts" id="bc" style="margin-top:12px">${pal.map((c,k)=>`<button class="opt ${k?'':'on'}" data-c="${k}" style="background:${c};width:40px;height:34px"></button>`).join('')}${[1,2,3,4].map(w=>`<button class="opt ${w===2?'on':''}" data-w="${w}">${w}x</button>`).join('')}</div>
  <div class="opts"><button class="opt" id="bg">Guide: off</button><button class="opt" id="ba">Auto-build</button><button class="opt" id="bx">Clear</button></div>
- <button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Redeem for ${fmt(t[2])} XP</button>`);
+ <div class="sub" style="text-align:center;margin:2px 0 8px">Preview only. Nothing here is added to your toys.</div><button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Buy for ${fmt(t[2])} XP</button>`);
  const cell=(x,y)=>br.find(b=>y===b.y&&x>=b.x&&x<b.x+b.w);
  const draw=()=>{let s='';
   if(g)bp.forEach((row,r)=>[...row].forEach((c,x)=>{if(c!=='.')s+=`<rect x="${x*cw+2}" y="${(r+off)*ch+4}" width="${cw-4}" height="${ch-5}" rx="3" fill="${pal[K.indexOf(c)]}" opacity=".3" stroke="#555" stroke-dasharray="3 2"/>`}));
   br.forEach(b=>{s+=`<rect x="${b.x*cw+1}" y="${b.y*ch+3}" width="${b.w*cw-2}" height="${ch-2}" rx="3" fill="${pal[b.c]}" stroke="rgba(0,0,0,.3)"/>`;for(let k=0;k<b.w;k++)s+=`<rect x="${(b.x+k)*cw+8}" y="${b.y*ch}" width="10" height="5" rx="2" fill="${pal[b.c]}" stroke="rgba(0,0,0,.3)"/>`});
   $('#bsv').innerHTML=s};
- const chk=()=>{if(won)return;if(bp.every((row,r)=>[...row].every((c,x)=>c==='.'||(cell(x,r+off)||{}).c===K.indexOf(c)))){won=1;sfx('level');toast('Perfect build! Great job!')}};
+ const chk=()=>{if(won)return;if(bp.every((row,r)=>[...row].every((c,x)=>c==='.'||(cell(x,r+off)||{}).c===K.indexOf(c)))){won=1;sfx('level');toast('Perfect build! (preview only)')}};
  const svg=$('#bsvg');
  svg.onclick=e=>{const b=svg.getBoundingClientRect();let x=Math.floor((e.clientX-b.left)/b.width*C),y=Math.min(R-1,Math.floor((e.clientY-b.top)/b.height*(R*ch+6)/ch));x=Math.max(0,Math.min(C-1,x));
   const hit=cell(x,y);if(hit){br.splice(br.indexOf(hit),1);won=0;sfx('pop');draw();return}
@@ -563,7 +570,7 @@ function openBuilder(i){
  $('#ba').onclick=()=>{GT.forEach(clearInterval);GT=[];br=[];won=0;g=1;$('#bg').textContent='Guide: on';const q=[];
   for(let r=bp.length-1;r>=0;r--){let x=0;const row=bp[r];while(x<C){const c=row[x];if(c==='.'){x++;continue}let n=1;while(x+n<C&&row[x+n]===c&&n<4)n++;q.push({x,y:r+off,w:n,c:K.indexOf(c)});x+=n}}
   draw();GT.push(setInterval(()=>{const b=q.shift();if(!b){GT.forEach(clearInterval);GT=[];chk();return}br.push(b);sfx('tap');draw()},130))};
- $('#pb').onclick=()=>{if(buy(i)){$('#pb').disabled=true;$('#pb').textContent='Redeemed!';render()}};
+ $('#pb').onclick=()=>askBuy(i);
  draw();
 }
 /* ===== mini games ===== */
@@ -643,8 +650,8 @@ fin:()=>{const d=disc(lvl().l),b=lvl().l,by={};cart.forEach(l=>(by[l.s]=by[l.s]|
  Object.entries(by).forEach(([n,ls])=>{rc.push([n,ls]);const tot=ls.reduce((a,l)=>a+l.u*l.q,0)*(1-d/100),x=Math.round(tot*10);xp+=x;S.orders.unshift({shop:n,lines:ls.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:tot,xp:x,raw:ls.map(l=>({...l})),num,pay,mn,date:new Date().toLocaleDateString()})});
  S.life+=xp;S.wallet+=xp;save();cart=[];sfx('bell');render();receipt(num,mn,pay,rc,xp,tt);if(lvl().l>b){setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l+': '+disc(lvl().l)+'% off')},1400)}},
 pv:v=>openPreview(+v),
-buy:v=>{if(buy(+v))render()},
-boost:()=>{sfx('coin');S.life+=5000;S.wallet+=5000;save();render();toast('Demo XP added')}};
+buy:v=>askBuy(+v),buyyes:v=>{if(buy(+v)){closeSheet();render()}},
+boost:()=>{sfx('coin');S.life+=25000;S.wallet+=25000;save();render();toast('Demo XP added')}};
 document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;if(!t.dataset.a.match(/^(start|skip|chk)$/))sfx('tap');A[t.dataset.a]&&A[t.dataset.a](t.dataset.v,t)});
 render();
 </script></body></html>
