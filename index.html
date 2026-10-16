@@ -169,6 +169,44 @@ vol:'<path d="M6 18h8l10-8v28l-10-8H6z" fill="#ff9f1c"/><path d="M30 17a9 9 0 01
 mute:'<path d="M6 18h8l10-8v28l-10-8H6z" fill="#ff9f1c"/><path d="M32 18l10 12M42 18L32 30" stroke="#ff4b3e" stroke-width="4" stroke-linecap="round"/>',
 pin:'<path d="M24 44s14-12 14-24a14 14 0 10-28 0c0 12 14 24 14 24z" fill="#fff"/><circle cx="24" cy="20" r="6" fill="#ff4b3e"/>',
 bear:'<circle cx="12" cy="12" r="6" fill="#a1887f"/><circle cx="36" cy="12" r="6" fill="#a1887f"/><circle cx="24" cy="26" r="16" fill="#c8a07a"/><ellipse cx="24" cy="32" rx="7" ry="5" fill="#f3e0c8"/><circle cx="18" cy="23" r="2.5" fill="#222"/><circle cx="30" cy="23" r="2.5" fill="#222"/><circle cx="24" cy="30" r="2" fill="#222"/>'};
+const B=(c,s,a,b)=>bw(c)+`<ellipse cx="24" cy="24" rx="18" ry="4" fill="${s}"/><circle cx="17" cy="22" r="2.5" fill="${a}"/><circle cx="29" cy="22" r="2.5" fill="${b}"/><path d="M20 15q-3-4 0-8M28 15q-3-4 0-8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+const P=(f,a,b)=>`<ellipse cx="24" cy="36" rx="21" ry="7" fill="#fff"/><ellipse cx="24" cy="34" rx="15" ry="4.5" fill="#f1e4d0"/><path d="M10 33q14-26 28 0z" fill="${f}"/><circle cx="19" cy="25" r="3" fill="${a}"/><circle cx="29" cy="28" r="3" fill="${b}"/>`;
+const C=(l,t,s)=>`<path d="M12 14h24l-3 28H15z" fill="#fff"/><path d="M14 22h20l-2 18H16z" fill="${l}"/><rect x="10" y="10" width="28" height="6" rx="3" fill="${t}"/><path d="M28 10l4-7" stroke="${s}" stroke-width="3" stroke-linecap="round"/>`;
+const W=(w,f)=>`<path d="M8 36L34 8l8 8-26 28z" fill="${w}"/><path d="M34 8l8 8" stroke="#fff" stroke-width="3"/><circle cx="12" cy="40" r="3.5" fill="${f}"/><circle cx="18" cy="43" r="2.5" fill="#fff"/>`;
+const U=(b,f,g)=>`<path d="M6 22a18 14 0 0136 0z" fill="${b}"/><rect x="5" y="24" width="38" height="4" rx="2" fill="${g}"/><rect x="6" y="28" width="36" height="6" rx="2" fill="${f}"/><rect x="6" y="35" width="36" height="7" rx="4" fill="${b}"/>`;
+Object.assign(SV,{
+x0:B('#e65100','#ff7043','#43a047','#ffd54f'),
+x1:B('#ad1457','#e53935','#fff','#ffd54f'),
+x2:P('#ffb74d','#e53935','#43a047'),
+x3:B('#c62828','#ff8a65','#fff3e0','#ffcc80'),
+x4:P('#ff7043','#827717','#fdd835'),
+x5:P('#ce93d8','#81c784','#fff'),
+x6:C('#ffa726','#43a047','#e53935'),
+x7:P('#fdd835','#e53935','#43a047'),
+x8:P('#8d6e63','#ffca28','#fff'),
+x9:P('#ffb74d','#c62828','#fff'),
+x10:C('#d7a86e','#7c5cff','#ff4b3e'),
+x11:W('#e0b46a','#43a047'),
+x12:W('#fff3e0','#c62828'),
+x13:P('#fff','#e53935','#ff9800'),
+x14:'<path d="M16 24l8 20 8-20z" fill="#e0a45c"/><circle cx="24" cy="18" r="9" fill="#f48fb1"/><circle cx="19" cy="14" r="5" fill="#fff59d"/><circle cx="30" cy="15" r="4" fill="#a5d6a7"/>',
+x15:P('#a1887f','#ffca28','#43a047'),
+x16:B('#00796b','#e0f2f1','#fff','#ffcc80'),
+x17:B('#ffa000','#fff8e1','#fff','#ffb300'),
+x18:P('#ef5350','#fff','#43a047'),
+x19:B('#4e342e','#a1887f','#fff','#ffb74d'),
+x20:P('#bf360c','#ffb74d','#fff'),
+x21:B('#2e7d32','#a5d6a7','#fff','#f48fb1'),
+x22:B('#b71c1c','#ff5252','#ffd54f','#fff'),
+x23:B('#6d4c41','#8d6e63','#ffd54f','#fff'),
+x24:P('#5d4037','#ffd54f','#fff'),
+x25:B('#37474f','#ffcc80','#fff','#43a047'),
+x26:U('#e0a45c','#795548','#43a047'),
+x27:P('#fff59d','#ffd54f','#43a047'),
+x28:B('#558b2f','#c5e1a5','#fff','#ff8a65'),
+x29:B('#d32f2f','#ff1744','#ffd54f','#43a047'),
+});
+Object.assign(SV,{ub:P('#e8892b','#ffca28','#fff3e0'),kc:B('#8d6e63','#bcaaa4','#f48fb1','#fff')});
 const em=(k,z)=>`<svg viewBox="0 0 48 48" width="${z}" height="${z}" style="flex:none">${SV[k]}</svg>`;
 /* ===== SOUND (loud) ===== */
 let AC,MG,MUTE=false;try{MUTE=localStorage.hpm==='1'}catch(e){}
@@ -196,6 +234,7 @@ const G={
 f:[['Spice',1,[['No spice',0],['Mild',0],['Spicy',0]]],['Extras',0,[['Extra portion',1.5],['Fried egg',1]]]],
 d:[['Ice',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],['Sweetness',1,[['Normal',0],['Less sweet',0],['No sugar',0]]]],
 m:[['Ice',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],['Sweetness',1,[['Normal',0],['Less sweet',0],['No sugar',0]]],['Toppings',0,[['Extra Milo powder',.5],['Whipped cream',.8],['Ice cream scoop',1.2],['Pearls',.8]]]],
+w:[['Sauce',1,[['Original',0],['Cheese',.8],['Black pepper',.5],['Mushroom',.5],['Spicy sambal',.3]]],['Extras',0,[['Extra cheese',1],['Add fries',2.5],['Add coleslaw',1.5],['Fried egg',1]]]],
 e:[]};
 /* name:price:type  (f food, d drink, m milo-style drink, e exclusive lvl 51) */
 const RAW=[
@@ -210,7 +249,40 @@ const RAW=[
 ['Kopi & Toast Station',1,'#d9a066','#8b5a2b','toast','Kaya Butter Toast Set:4:f|Soft-boiled Eggs:2.5:f|French Toast:3.5:f|Kopi:1.6:d|Teh:1.6:d|Yuan Yang:2.2:d|Gold Kaya Toastbox:9:e'],
 ['Jade Garden Dim Sum',0,'#ff9a8b','#e0527a','dumpling','Har Gow:4.5:f|Siew Mai:4.5:f|Char Siew Bao:3.8:f|Xiao Long Bao:5.5:f|Jasmine Tea:1.5:d|Chrysanthemum Tea:1.8:d|Golden Dim Sum Tower:28:e'],
 ['Big Wok Zi Char',0,'#ff7043','#bf360c','crab','Sweet and Sour Pork:10:f|Cereal Prawns:14:f|Salted Egg Squid:12:f|Black Pepper Crab:22:f|Iced Lemon Tea:2.5:d|Chinese Tea Pot:3:d|Chilli Crab Royale:38:e'],
-['Dino Milo Bar',1,'#43a047','#1b5e20','cupm','Milo Dinosaur:3.2:m|Milo Godzilla:4.2:m|Milo Peng:2.5:m|Milo Kosong:2.2:d|Milo Gao:2.8:d|Hot Milo:2:d|Horlicks Dinosaur:3.2:m|Teh Tarik:2:d|Sirap Bandung:2.5:d|Barley:1.8:d|Lime Juice:2:d|Milo Tyrannosaurus:9:e|Golden Godzilla Tower:14:e']];
+['Dino Milo Bar',1,'#43a047','#1b5e20','cupm','Milo Dinosaur:3.2:m|Milo Godzilla:4.2:m|Milo Peng:2.5:m|Milo Kosong:2.2:d|Milo Gao:2.8:d|Hot Milo:2:d|Horlicks Dinosaur:3.2:m|Teh Tarik:2:d|Sirap Bandung:2.5:d|Barley:1.8:d|Lime Juice:2:d|Milo Tyrannosaurus:9:e|Golden Godzilla Tower:14:e'],
+['Siam Street Kitchen',1,'#ffb74d','#e65100','x0','Pad Thai:6:f|Green Curry Rice:6.5:f|Tom Yum Soup:6:f|Basil Chicken Rice:5.5:f|Mango Sticky Rice:5.5:f|Thai Milk Tea:2.8:d|Tiger Prawn Tom Yum:16:e'],
+['Seoul Bites',1,'#f06292','#ad1457','x1','Bibimbap:7.5:f|Kimchi Stew:7:f|Tteokbokki:5.5:f|Korean Fried Chicken:8:f|Yuja Citron Tea:3:d|Banana Milk:3:d|Wagyu Bulgogi Bowl:18:e'],
+['Mamak Corner',1,'#81c784','#2e7d32','x2','Mee Goreng:4.5:f|Mee Rebus:4.5:f|Maggi Goreng:4:f|Nasi Goreng:5:f|Indian Rojak:5:f|Teh Tarik:2:d|Wagyu Briyani Pot:17:e'],
+['Haji Kassim Soup Tulang',1,'#64b5f6','#1565c0','x3','Soup Tulang:6.5:f|Mee Soto:4.5:f|Soup Ekor:9:f|Lontong:4.5:f|Sirap Selasih:2.2:d|Jumbo Bone Marrow Tulang:14:e'],
+['Warung Padang Sari',1,'#ba68c8','#6a1b9a','x4','Nasi Padang Set:6:f|Nasi Ayam Penyet:6.5:f|Nasi Ikan Bakar:7.5:f|Pisang Goreng:2.5:f|Es Teh Manis:2:d|Rendang Daging Royal:17:e'],
+['Nenek Kueh & Tau Huay',1,'#ff8a65','#bf360c','x5','Ondeh Ondeh:2.5:f|Kueh Lapis:2.5:f|Ang Ku Kueh:2:f|Tau Huay:2:d|Barley:1.8:d|Heritage Kueh Hamper:20:e'],
+['Fresh Squeeze Juice Bar',1,'#4db6ac','#00695c','x6','Watermelon Juice:3:d|Mango Juice:3.5:d|Orange Juice:3.5:d|Mixed Fruit Juice:4:d|Mango Sago:4.5:f|Mao Shan Wang Smoothie:11:e'],
+['Bismillah Briyani House',1,'#ffd54f','#f57f17','x7','Chicken Briyani:6:f|Mutton Briyani:7.5:f|Fish Briyani:7:f|Samosa:2:f|Mango Lassi:3.5:d|Royal Dum Briyani:16:e'],
+['Zaini Western Grill',1,'#a1887f','#4e342e','x8','Chicken Chop:7.5:f|Fish and Chips:7:f|Beef Burger:6.5:f|Sausage Platter:6.5:f|Iced Lemon Tea:2.2:d|Wagyu Steak Plate:22:e'],
+['Ayam Penyet Express',1,'#90a4ae','#37474f','x9','Ayam Penyet:6.5:f|Ayam Bakar:7:f|Tempeh Penyet:5:f|Sambal Egg:3:f|Es Jeruk:2.2:d|Jumbo Penyet Platter:15:e'],
+['Cool Bubble Tea Hub',1,'#ffb74d','#e65100','x10','Classic Milk Tea:3.8:d|Brown Sugar Boba:4.5:d|Taro Milk Tea:4.5:d|Matcha Latte:4.8:d|Lychee Green Tea:3.8:d|Golden Boba Tower:12:e'],
+['Turkish Kebab Corner',1,'#f06292','#ad1457','x11','Chicken Kebab Wrap:6:f|Lamb Doner Wrap:7:f|Kebab Rice Plate:7.5:f|Falafel Wrap:5.5:f|Ayran:2.5:d|Sultan Mixed Grill:18:e'],
+['Arabian Shawarma Stop',1,'#81c784','#2e7d32','x12','Chicken Shawarma:5.5:f|Beef Shawarma:6.5:f|Hummus Plate:5:f|Mandi Rice:8:f|Mint Lemonade:3:d|Royal Mandi Platter:20:e'],
+['Nasi Kandar Corner',1,'#64b5f6','#1565c0','x13','Nasi Kandar Set:6.5:f|Ayam Goreng Berempah:5:f|Fish Head Curry:9:f|Telur Masak:2:f|Teh Tarik:2:d|Kandar Banquet Tray:18:e'],
+['Ice Cream & Waffle Cart',1,'#ba68c8','#6a1b9a','x14','Ice Cream Waffle:4.5:f|Chocolate Crepe:4:f|Mango Sundae:5:f|Ice Cream Scoop:2:f|Iced Milo:2.5:d|Gold Sundae Tower:14:e'],
+['Hainan Western Grill',0,'#ff8a65','#bf360c','x15','Pork Chop:7.5:f|Chicken Chop:7.5:f|Fish and Chips:7:f|Sausage Platter:6.5:f|Iced Milo:2.5:d|Surf and Turf Grill:32:e'],
+['Ah Seng Fishball Noodles',0,'#4db6ac','#00695c','x16','Fishball Noodles:4.5:f|Minced Meat Noodles:5:f|Fishcake Mee Pok:4.5:f|Fish Dumplings:3:f|Barley:1.8:d|Abalone Noodle Bowl:25:e'],
+['Ming Kee Porridge',0,'#ffd54f','#f57f17','x17','Century Egg Porridge:4:f|Fish Slice Porridge:5:f|Minced Pork Porridge:4.5:f|Youtiao:1.5:f|Soya Bean Milk:2:d|Imperial Seafood Porridge:28:e'],
+['Tokyo Don Bar',0,'#a1887f','#4e342e','x18','Chicken Katsu Don:7:f|Salmon Don:9:f|Unagi Don:12:f|Gyudon:7.5:f|Green Tea:2:d|Omakase Chirashi Bowl:35:e'],
+['Claypot Corner',0,'#90a4ae','#37474f','x19','Claypot Chicken Rice:9:f|Claypot Pork Rib Rice:10:f|Braised Tofu:4:f|Stir-fry Greens:5:f|Lemon Barley:2.2:d|Abalone Claypot Rice:22:e'],
+['Roast Duck & Char Siew',0,'#ffb74d','#e65100','x20','Roast Duck Rice:6.5:f|Char Siew Rice:5:f|Siew Yoke Rice:5.5:f|Roast Platter:12:f|Chinese Tea:1.5:d|Imperial Roast Feast:26:e'],
+['Yong Tau Foo Corner',0,'#f06292','#ad1457','x21','Yong Tau Foo Soup:6:f|Yong Tau Foo Dry:6:f|Laksa Yong Tau Foo:6.5:f|Stuffed Tofu Set:5:f|Chrysanthemum Tea:1.8:d|Premium Yong Tau Foo Pot:15:e'],
+['Steamboat Hot Pot Hub',0,'#81c784','#2e7d32','x22','Mala Hot Pot:12:f|Tomato Hot Pot:11:f|Seafood Platter:10:f|Meat Platter:10:f|Winter Melon Tea:2.2:d|Wagyu Hot Pot Feast:30:e'],
+['Lor Mee House',0,'#64b5f6','#1565c0','x23','Lor Mee:5:f|Braised Pork Noodles:5.5:f|Fried Fish Bits:2:f|Braised Egg:1:f|Sugarcane:2.2:d|Deluxe Lor Mee:14:e'],
+['Teochew Braised Duck',0,'#ba68c8','#6a1b9a','x24','Braised Duck Rice:6:f|Duck Noodles:6:f|Braised Tofu:2:f|Pig Trotter Rice:6.5:f|Chinese Tea:1.5:d|Braised Duck Banquet:24:e'],
+['Ramen Ichi',0,'#ff8a65','#bf360c','x25','Tonkotsu Ramen:9:f|Shoyu Ramen:8:f|Miso Ramen:8.5:f|Gyoza:4.5:f|Ramune:3:d|Black Garlic Wagyu Ramen:20:e'],
+['Ah Beng Burger Joint',0,'#4db6ac','#00695c','x26','Cheeseburger:6:f|Bacon Burger:7:f|Fries:2.5:f|Chicken Nuggets:4:f|Iced Lemon Tea:2.5:d|Double Wagyu Tower:18:e'],
+['Oyster Omelette Stall',0,'#ffd54f','#f57f17','x27','Oyster Omelette:6:f|Fried Carrot Cake:4:f|Fried Oyster Mee:5.5:f|Fried Fish Skin:3:f|Luo Han Guo:2:d|Jumbo Oyster Feast:16:e'],
+['Hakka Lei Cha House',0,'#a1887f','#4e342e','x28','Lei Cha Rice:6:f|Abacus Seeds:5:f|Yam Abacus:5.5:f|Hakka Yong Tau Foo:5:f|Hot Chinese Tea:1.5:d|Hakka Heritage Set:15:e'],
+['Mala Xiang Guo',0,'#90a4ae','#37474f','x29','Mala Xiang Guo:10:f|Mala Tang:9:f|Spicy Skewers:5:f|Cold Tofu Salad:4:f|Plum Juice:2.5:d|Royal Mala Pot:22:e']
+,['Uncle Bob Ayam Gunting',1,'#ffb74d','#e65100','ub','Ayam Gunting Original:6.5:w|Ayam Gunting Cheese:7.5:w|Ayam Gunting Black Pepper:7.5:w|Ayam Gunting Mushroom:7.5:w|Chicken Chop:7:w|Chicken Cutlet:6.5:w|Chicken Wings (6):5:w|Fries:2.5:f|Coleslaw:1.5:f|Baked Beans:1.5:f|Iced Lemon Tea:2.2:d|Iced Milo:2.5:d|Golden Ayam Gunting Platter:15:e|Wagyu Chicken Feast:22:e'],
+['Uncle Lim Kway Chap',0,'#8d6e63','#4e342e','kc','Kway Chap Set:6:f|Braised Pork Belly:5:f|Braised Egg:1:f|Braised Tofu:2:f|Braised Duck Slices:5.5:f|Chinese Tea:1.5:d|Soya Bean Milk:2:d|Royal Kway Chap Platter:22:e']
+];
 const SH=RAW.map((r,i)=>({id:i,n:r[0],h:r[1],c:[r[2],r[3]],ic:r[4],items:r[5].split('|').map(s=>{const[a,b,t]=s.split(':');return{n:a,p:+b,t}})}));
 
 /* toys: 30 things x 10 styles = 300 + legends */
@@ -236,6 +308,7 @@ const toyArt=(t,sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}">${
 /* ===== STATE ===== */
 let S;try{S=JSON.parse(localStorage.hp3)}catch(e){}S=S||{life:0,wallet:0,orders:[],toys:[],ok:0};
 const save=()=>{try{localStorage.hp3=JSON.stringify(S)}catch(e){}};
+addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
 let V='intro',shop=null,tab='menu',hf='All',tser='All',cart=[],cfg=null,PV=null;
 const need=l=>Math.round(100*Math.pow(1.5,l));
 const lvl=()=>{let l=0,x=S.life;while(x>=need(l)){x-=need(l);l++}return{l,x,n:need(l)}};
@@ -269,11 +342,11 @@ ${[...Array(9)].map((_,i)=>`<g transform="translate(${88+i*15} 0)"><path class="
   <div class="tabs">${['All','Halal','Non-halal'].map(x=>`<button class="tab ${x===hf?'on':''}" data-a="hf" data-v="${x}">${x}</button>`).join('')}</div>
   <div class="list">${SH.filter(s=>hf==='All'||(hf==='Halal')===!!s.h).map(s=>`<button class="row2" data-a="shop" data-v="${s.id}" style="border-left:7px solid ${s.c[0]}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${em(s.ic,34)}</div><div><h3>${s.n}</h3><div style="margin-top:4px">${hb(s)}</div></div></button>`).join('')}</div>
   <h2 style="margin:22px 0 8px">All my orders</h2>
-  ${o.length?`<div class="sub" style="margin-bottom:10px">${o.length} order${o.length>1?'s':''} | ${money(sp)} spent across all stalls</div>`+o.slice(0,30).map(x=>`<div class="hist"><div class="line" style="padding:0"><b>${x.shop}</b><span>${money(x.total)}</span></div><div class="sub">${x.date} | +${x.xp} XP<br>${x.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet. Pick a stall and order something.</p>'}</div>`;return}
+  ${o.length?`<div class="sub" style="margin-bottom:10px">${o.length} order${o.length>1?'s':''} | ${money(sp)} spent across all stalls</div>`+o.slice(0,30).map(x=>`<div class="hist"><div class="line" style="padding:0"><b>${x.shop}</b><span>${money(x.total)}</span></div><div class="sub">${x.date} | +${x.xp} XP<br>${x.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet. Pick a stall and order something.</p>'}<button class="btn g full" data-a="reset" style="margin-top:24px;font-size:14px">Reset account</button><div class="sub" style="text-align:center;margin-top:8px">Your progress saves automatically on this device</div></div>`;return}
  /* shop view */
  const v=lvl(),d=disc(v.l);
  let body='';
- if(tab==='menu'){body=`<div class="list">${shop.items.map((it,i)=>{const lk=it.t==='e'&&v.l<51,fp=it.p*(1-d/100);return`<button class="row2 ${lk?'lock':''}" data-a="item" data-v="${i}"><div class="tile" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${em(it.t==='e'?'crown':it.t==='f'?shop.ic:'drink',30)}</div><div class="in"><h3>${it.n}${it.t==='e'?'<span class="tag">Lv 51+</span>':''}</h3><div class="sub">${lk?'Unlocks at level 51':'Earn ~'+Math.round(fp*10)+' XP'}</div><div>${d?`<s class="sub">${money(it.p)}</s> `:''}<b>${money(fp)}</b></div></div><div class="plus" ${lk?'style="background:var(--mute)"':''}>${lk?em('lock',20):'<b style="font-size:24px">+</b>'}</div></button>`}).join('')}</div>`}
+ if(tab==='menu'){body=`<div class="list">${shop.items.map((it,i)=>{const lk=it.t==='e'&&v.l<51,fp=it.p*(1-d/100);return`<button class="row2 ${lk?'lock':''}" data-a="item" data-v="${i}"><div class="tile" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${em(it.t==='e'?'crown':(it.t==='f'||it.t==='w')?shop.ic:'drink',30)}</div><div class="in"><h3>${it.n}${it.t==='e'?'<span class="tag">Lv 51+</span>':''}</h3><div class="sub">${lk?'Unlocks at level 51':'Earn ~'+Math.round(fp*10)+' XP'}</div><div>${d?`<s class="sub">${money(it.p)}</s> `:''}<b>${money(fp)}</b></div></div><div class="plus" ${lk?'style="background:var(--mute)"':''}>${lk?em('lock',20):'<b style="font-size:24px">+</b>'}</div></button>`}).join('')}</div>`}
  else{const ser=['All',...new Set(TOYS.map(t=>t[3]))];
   body=`<p class="sub" style="margin-bottom:6px">Spend XP on collectible toys. Press Preview to play with any toy before you buy it.</p><div class="tabs">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-a="ts" data-v="${x}">${x}</button>`).join('')}</div>
   <div class="toys">${TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser).map(([t,i])=>`<div class="toy"><div class="tile" style="background:${t[1]}44">${toyArt(t,58)}</div><h3 style="font-size:14px">${t[0]}</h3><div class="sub">${t[3]} | ${fmt(t[2])} XP</div><div class="b"><button class="pv" data-a="pv" data-v="${i}">Preview</button><button data-a="buy" data-v="${i}" ${S.wallet<t[2]?'disabled':''}>Redeem</button></div></div>`).join('')}</div>
@@ -328,6 +401,8 @@ const pass=()=>{sfx('success');S.ok=1;save();V='stalls';render()};
 function cut(){}
 cut.T=[];
 const A={
+reset:()=>{sfx('pop');sheet(`<h2>Reset account?</h2><p class="sub" style="margin:10px 0 4px">Are you sure? This permanently deletes your level, XP, toys and order history on this device. You cannot undo this.</p><button class="btn full" data-a="resetyes" style="background:#c62828">Yes, reset everything</button><button class="btn g full" data-a="close">No, keep my progress</button>`)},
+resetyes:()=>{S={life:0,wallet:0,orders:[],toys:[],ok:1};cart=[];save();closeSheet();V='stalls';render();scrollTo(0,0);sfx('error');toast('Account reset')},
 begin:()=>{const c=$('#cut');$('#tap').remove();c.classList.add('go');const at=(ms,f)=>cut.T.push(setTimeout(f,ms));
  at(700,()=>sfx('thud'));for(let i=0;i<9;i++)at(1900+i*220,()=>sfx('tap'));at(2900,()=>sfx('pop'));at(3900,()=>sfx('whoosh'));at(4800,()=>sfx('coin'));at(5200,()=>sfx('level'));at(6700,()=>c.classList.add('rdy'))},
 skipc:()=>{cut.T.forEach(clearTimeout);const t=$('#tap');t&&t.remove();$('#cut').classList.add('go','fin','rdy')},
