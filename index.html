@@ -129,6 +129,16 @@ h3.sec{margin:18px 0 10px;font-size:20px}
 .hb{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px;vertical-align:middle;margin-left:6px;letter-spacing:.02em}
 .hb.y{background:#d9f7e8;color:#0b7a4b}.hb.n{background:#ffe6cc;color:#a24a00}
 @media(prefers-color-scheme:dark){.hb.y{background:#123d2a;color:#7be3b2}.hb.n{background:#4a2a10;color:#ffc58a}}
+#stage{position:relative;height:300px;border-radius:24px;background:linear-gradient(180deg,#bfe9ff,#fff6e8 75%);overflow:hidden;touch-action:none;user-select:none}
+#stage:after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:repeating-linear-gradient(90deg,#e0b979 0 24px,#d4a762 24px 48px)}
+#ptoy{position:absolute;left:0;top:0;width:120px;height:120px;cursor:grab;will-change:transform;z-index:2;touch-action:none}
+.hint{position:absolute;top:10px;left:0;right:0;text-align:center;font-weight:800;font-size:13px;color:#4a6a80;pointer-events:none}
+.spk{position:absolute;width:9px;height:9px;border-radius:50%;z-index:3;pointer-events:none;animation:spk .6s ease-out forwards}
+@keyframes spk{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+.tb{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.toy .tb{gap:6px}
+.toy .pv{background:transparent;color:var(--pur);box-shadow:inset 0 0 0 2px var(--pur)}
+.toy .tile svg{display:block}
 </style>
 </head>
 <body>
@@ -215,6 +225,7 @@ h3.sec{margin:18px 0 10px;font-size:20px}
 </nav>
 
 <button id="snd" aria-label="Toggle sound"></button>
+<div class="sheet" id="pv" style="z-index:70"><div class="box" id="pvbox"></div></div>
 <div class="sheet" id="sheet"><div class="box" id="sbox"></div></div>
 <div id="toast"></div>
 
@@ -269,6 +280,11 @@ const G={
  zs:['Portion',1,[['Small',0],['Medium',4],['Large',8]]],
  ws:['Sauce',1,[['Black pepper',0],['Mushroom',0],['Brown gravy',0],['Cheese',.5]]],
  side:['Side',1,[['Fries',0],['Coleslaw',0],['Baked beans',0],['Salad',0]]],
+ tp:['Protein',1,[['Chicken',0],['Prawn',1.5],['Tofu',0],['Mixed seafood',2]]],
+ ramen:['Broth',1,[['Tonkotsu',0],['Shoyu',0],['Miso',0],['Spicy miso',.5]]],
+ cp:['Claypot add-ons',0,[['Salted fish',1.5],['Extra egg',1],['Extra veg',1]]],
+ por:['Toppings',0,[['Century egg',1],['Youtiao',1],['Fish slices',2],['Preserved veg',0]]],
+ pad:['Pick your dishes',0,[['Beef rendang',2],['Ayam balado',1.8],['Sambal egg',1],['Sayur lodeh',1],['Tempeh goreng',.8],['Fried fish',2]]],
  reg:['Size',1,[['Regular',0],['Large',1]]]
 };
 const I=(n,t,p,g=[],req=0)=>({n,t,p,g,req});
@@ -341,15 +357,104 @@ const SHOPS=[
   'Grill':[I('Chicken Chop','plate',7.5,['ws','side']),I('Pork Chop','plate',7.5,['ws','side']),I('Fish and Chips','plate',7,['side']),I('Sausage Platter','plate',6.5,['ws','side'])],
   'Sides':[I('Fries','plate',2.5),I('Coleslaw','bowl',1.5),I('Garlic Bread','bread',2)],
   'Drinks':[I('Iced Milo','cup',2.5,['ice','sweet']),I('Lemon Barley','cup',2,['ice'])],
-  'Exclusive':[I('Wagyu Steak Plate','crown',22,['ws','side'],51),I('Surf and Turf Grill','crown',32,['ws'],58)]}}
+  'Exclusive':[I('Wagyu Steak Plate','crown',22,['ws','side'],51),I('Surf and Turf Grill','crown',32,['ws'],58)]}},
+ {id:'o',halal:false,name:'Ah Seng Fishball Noodles',sub:'Handmade fishballs and springy noodles',c:['#80cbc4','#00796b'],cats:{
+  'Noodles':[I('Fishball Noodles','bowl',4.5,['noodle','soup','spice']),I('Minced Meat Noodles','bowl',5,['noodle','soup','spice']),I('Fishball Soup Only','bowl',3.5),I('Fishcake Mee Pok','bowl',4.5,['soup','spice'])],
+  'Sides':[I('Fried Beancurd Skin','plate',2.5),I('Fish Dumplings','plate',3)],
+  'Drinks':[I('Chrysanthemum Tea','cup',1.8,['ice','sweet']),I('Barley','cup',1.8,['ice'])],
+  'Exclusive':[I('Jumbo Fishball Feast','crown',12,['noodle'],51),I('Abalone Noodle Bowl','crown',25,['soup'],58)]}},
+ {id:'p',halal:true,name:'Haji Kassim Soup Tulang',sub:'Spicy bone soup and soto',c:['#ff8a65','#c62828'],cats:{
+  'Soups':[I('Soup Tulang','bowl',6.5,['spice','rice']),I('Mee Soto','bowl',4.5,['spice']),I('Soup Ekor','bowl',9,['spice','rice']),I('Lontong','bowl',4.5,['spice'])],
+  'Sides':[I('Ketupat','plate',1),I('Fried Chicken Wing','plate',2),I('Begedil','plate',1.5)],
+  'Drinks':[I('Teh Tarik','cup',2,['sweet','ice']),I('Sirap Selasih','cup',2.2,['ice'])],
+  'Exclusive':[I('Jumbo Bone Marrow Tulang','crown',14,['spice'],51),I('Sultan Soup Platter','crown',26,[],59)]}},
+ {id:'q',halal:false,name:'Ming Kee Porridge',sub:'Silky Teochew-style congee',c:['#ffe082','#ffa000'],cats:{
+  'Porridge':[I('Century Egg Porridge','bowl',4,['por','reg']),I('Fish Slice Porridge','bowl',5,['por','reg']),I('Minced Pork Porridge','bowl',4.5,['por','reg']),I('Plain Porridge Set','bowl',3,['por'])],
+  'Sides':[I('Salted Egg','bowl',1),I('Youtiao','bread',1.5),I('Steamed Fish','plate',8)],
+  'Drinks':[I('Chinese Tea','cup',1.5),I('Soya Bean Milk','cup',2,['sweet','ice'])],
+  'Exclusive':[I('Crab Congee Pot','crown',18,['por'],51),I('Imperial Seafood Porridge','crown',28,[],58)]}},
+ {id:'r',halal:true,name:'Siam Street Kitchen',sub:'Thai street food, bold and tangy',c:['#ffb74d','#d84315'],cats:{
+  'Mains':[I('Pad Thai','plate',6,['tp','spice']),I('Green Curry Rice','plate',6.5,['tp','spice']),I('Tom Yum Soup','bowl',6,['tp','spice']),I('Basil Chicken Rice','plate',5.5,['spice'])],
+  'Sweets':[I('Mango Sticky Rice','bowl',5.5),I('Red Ruby Coconut','cup',3.5,['ice'])],
+  'Drinks':[I('Thai Milk Tea','cup',2.8,['sweet','ice']),I('Lemongrass Drink','cup',2.5,['ice'])],
+  'Exclusive':[I('Tiger Prawn Tom Yum','crown',16,['spice'],51),I('Royal Thai Platter','crown',27,[],59)]}},
+ {id:'s',halal:true,name:'Seoul Bites',sub:'Korean comfort food and crispy chicken',c:['#f06292','#ad1457'],cats:{
+  'Mains':[I('Bibimbap','bowl',7.5,['tp','spice']),I('Kimchi Stew','bowl',7,['spice']),I('Tteokbokki','plate',5.5,['spice']),I('Japchae','plate',6.5)],
+  'Fried Chicken':[I('Korean Fried Chicken','plate',8,['sauce','sat']),I('Chicken Skewers','skewer',4)],
+  'Drinks':[I('Yuja Citron Tea','cup',3,['ice','sweet']),I('Banana Milk','cup',3)],
+  'Exclusive':[I('Wagyu Bulgogi Bowl','crown',18,['spice'],51),I('Seoul Feast Set','crown',30,[],60)]}},
+ {id:'t',halal:false,name:'Tokyo Don Bar',sub:'Rice bowls and ramen',c:['#ef5350','#37474f'],cats:{
+  'Rice Bowls':[I('Chicken Katsu Don','plate',7,['reg']),I('Salmon Don','plate',9,['reg']),I('Unagi Don','plate',12,['reg']),I('Gyudon','plate',7.5,['reg'])],
+  'Ramen':[I('Tonkotsu Ramen','bowl',9,['ramen','spice']),I('Chicken Ramen','bowl',8,['ramen','spice'])],
+  'Drinks':[I('Green Tea','cup',2,['ice','sweet']),I('Ramune','cup',3)],
+  'Exclusive':[I('Wagyu Don','crown',24,['reg'],51),I('Omakase Chirashi Bowl','crown',35,[],60)]}},
+ {id:'u',halal:true,name:'Nenek Kueh & Tau Huay',sub:'Traditional kueh and warm beancurd',c:['#b39ddb','#5e35b1'],cats:{
+  'Kueh':[I('Ondeh Ondeh','plate',2.5,['dsp']),I('Kueh Lapis','plate',2.5,['dsp']),I('Ang Ku Kueh','plate',2,['dsp']),I('Kueh Salat','plate',2.5)],
+  'Beancurd':[I('Tau Huay','bowl',2,['sweet','ice']),I('Soya Beancurd','cup',2,['sweet','ice'])],
+  'Drinks':[I('Barley','cup',1.8,['ice']),I('Teh O','cup',1.5,['sweet','ice'])],
+  'Exclusive':[I('Gula Melaka Kueh Tower','crown',9,[],51),I('Heritage Kueh Hamper','crown',20,[],57)]}},
+ {id:'v',halal:false,name:'Claypot Corner',sub:'Smoky claypot rice, slow cooked',c:['#a1887f','#4e342e'],cats:{
+  'Claypot':[I('Claypot Chicken Rice','bowl',9,['cp','spice']),I('Claypot Frog Leg Rice','bowl',11,['cp','spice']),I('Claypot Pork Rib Rice','bowl',10,['cp'])],
+  'Sides':[I('Braised Tofu','plate',4),I('Stir-fry Greens','plate',5)],
+  'Drinks':[I('Iced Chrysanthemum','cup',2,['ice','sweet']),I('Lemon Barley','cup',2.2,['ice'])],
+  'Exclusive':[I('Abalone Claypot Rice','crown',22,['cp'],51),I('Lobster Claypot Feast','crown',38,[],60)]}},
+ {id:'w',halal:true,name:'Warung Padang Sari',sub:'Pick your own Padang dishes',c:['#ff7043','#827717'],cats:{
+  'Padang':[I('Nasi Padang Set','plate',6,['pad','spice']),I('Nasi Ayam Penyet','plate',6.5,['spice']),I('Nasi Ikan Bakar','plate',7.5,['spice']),I('Lontong Sayur','bowl',4.5,['spice'])],
+  'Snacks':[I('Pisang Goreng','plate',2.5),I('Kerepek','plate',2)],
+  'Drinks':[I('Es Teh Manis','cup',2,['ice']),I('Es Cendol','cup',3,['ice'])],
+  'Exclusive':[I('Rendang Daging Royal','crown',17,['spice'],51),I('Raja Padang Banquet','crown',29,[],59)]}}
 ];
 const TOYS=[
- ['Mini Kopi Figurine','#c8863a',300,'Kopitiam'],['Kaya Toast Pin','#e0a45c',350,'Kopitiam'],['Teh Tarik Mug Toy','#b5651d',450,'Kopitiam'],['Mini Stool Set','#8d6e63',600,'Kopitiam'],['Coffee Sock Keychain','#6d4c41',700,'Kopitiam'],['Soft-boiled Egg Plush','#ffcc80',900,'Kopitiam'],
- ['Chicken Rice Eraser Set','#ffb347',400,'Street Food'],['Satay Keychain','#c0392b',500,'Street Food'],['Prata Spinner','#d4a14a',600,'Street Food'],['Ice Kachang Slime','#ff6fa5',650,'Street Food'],['Laksa Bowl Squishy','#ff7043',700,'Street Food'],['Dim Sum Basket Set','#f06292',1200,'Street Food'],['Durian Plush','#9ccc65',1800,'Street Food'],['Chilli Crab Plushie','#ff4b3e',2200,'Street Food'],
- ['Plush Merlion','#3aa0ff',800,'Singapore'],['Peranakan Tile Coasters','#26a69a',900,'Singapore'],['Bumboat Toy','#29b6f6',1300,'Singapore'],['Hawker Cart Playset','#22b573',1500,'Singapore'],['Marina Bay Sands Model','#5c6bc0',1600,'Singapore'],['Singapore Flyer Toy','#7e57c2',1700,'Singapore'],['Supertree Night Lamp','#00c896',2000,'Singapore'],['HDB Block Builder','#ef9a9a',2400,'Singapore'],['MRT Train Model','#e53935',2600,'Singapore'],
- ['Pigeon Chef','#90a4ae',400,'Critters'],['Chilli Padi Mascot','#e53935',480,'Critters'],['Hawker Cat Plush','#ffa726',550,'Critters'],['Roti Dog','#d7a86e',650,'Critters'],['Kopi Uncle Bear','#8d6e63',750,'Critters'],['Otter Family Plush','#a1887f',1100,'Critters'],
- ['Golden Chopsticks','#e8b400',3000,'Legendary'],['Jade Wok Trophy','#26a69a',4500,'Legendary'],['Crystal Merlion','#4dd0e1',6000,'Legendary'],['Dragon Noodle Statue','#d32f2f',8000,'Legendary'],['Platinum Satay Grill','#90a4ae',10000,'Legendary'],['Hawker King Crown','#ffb300',15000,'Legendary']];
+ ['Mini Kopi Figurine','#c8863a',300,'Kopitiam','cup'],['Kaya Toast Pin','#e0a45c',350,'Kopitiam','squishy'],['Teh Tarik Mug Toy','#b5651d',450,'Kopitiam','cup'],['Mini Stool Set','#8d6e63',600,'Kopitiam','squishy'],['Coffee Sock Keychain','#6d4c41',700,'Kopitiam','cup'],['Soft-boiled Egg Plush','#ffcc80',900,'Kopitiam','squishy'],['Kopi Bot','#a1887f',1100,'Kopitiam','robot'],['Kaya Jar Toy','#aed581',450,'Kopitiam','cup'],
+ ['Chicken Rice Eraser Set','#ffb347',400,'Street Food','squishy'],['Satay Keychain','#c0392b',500,'Street Food','skewer'],['Prata Spinner','#d4a14a',600,'Street Food','spinner'],['Ice Kachang Slime','#ff6fa5',650,'Street Food','dessert'],['Laksa Bowl Squishy','#ff7043',700,'Street Food','bowl'],['Dim Sum Basket Set','#f06292',1200,'Street Food','bowl'],['Durian Plush','#9ccc65',1800,'Street Food','durian'],['Chilli Crab Plushie','#ff4b3e',2200,'Street Food','plush'],['Mee Pok Bowl Buddy','#ffd54f',750,'Street Food','bowl'],['Roti Canai Plush','#e0b46a',550,'Street Food','squishy'],
+ ['Plush Merlion','#3aa0ff',800,'Singapore','plush'],['Peranakan Tile Coasters','#26a69a',900,'Singapore','spinner'],['Bumboat Toy','#29b6f6',1300,'Singapore','boat'],['Hawker Cart Playset','#22b573',1500,'Singapore','cart'],['Marina Bay Sands Model','#5c6bc0',1600,'Singapore','mbs'],['Singapore Flyer Toy','#7e57c2',1700,'Singapore','spinner'],['Supertree Night Lamp','#00c896',2000,'Singapore','tree'],['HDB Block Builder','#ef9a9a',2400,'Singapore','tower'],['MRT Train Model','#e53935',2600,'Singapore','train'],['Esplanade Durian Dome','#ffb74d',1900,'Singapore','durian'],
+ ['Pigeon Chef','#90a4ae',400,'Critters','bird'],['Chilli Padi Mascot','#e53935',480,'Critters','chili'],['Hawker Cat Plush','#ffa726',550,'Critters','cat'],['Roti Dog','#d7a86e',650,'Critters','dog'],['Kopi Uncle Bear','#8d6e63',750,'Critters','plush'],['Otter Family Plush','#a1887f',1100,'Critters','plush'],
+ ['Lucky Lantern','#e53935',500,'Festive','lantern'],['Red Packet Pouch','#d32f2f',350,'Festive','gift'],['Mandarin Orange Squishy','#ff9800',450,'Festive','squishy'],['Pineapple Tart Squishy','#ffca28',500,'Festive','squishy'],['Ketupat Charm','#66bb6a',600,'Festive','ketupat'],['Diya Light','#ff7043',650,'Festive','diya'],['Pelita Lamp','#ffa726',700,'Festive','diya'],['Mooncake Plush','#c8a165',800,'Festive','squishy'],['Fireworks Spinner','#7e57c2',900,'Festive','spinner'],['Lion Dance Head','#ffb300',1400,'Festive','dragon'],['Prosperity Pot','#ffd54f',1600,'Festive','bowl'],['Dragon Dance Plush','#e53935',2100,'Festive','dragon'],
+ ['Noodle Bot','#4fc3f7',900,'Robots','robot'],['Wok Bot','#8d6e63',1000,'Robots','robot'],['Prata Bot','#ffcc80',1000,'Robots','robot'],['Satay Chef Bot','#ef5350',1200,'Robots','robot'],['Dumpling Droid','#f8bbd0',1300,'Robots','robot'],['Rice Cooker Bot','#cfd8dc',1500,'Robots','robot'],['Tray Return Bot','#66bb6a',1800,'Robots','robot'],['Laksa Mech','#ff7043',2800,'Robots','robot'],['Golden Hawker Bot','#ffc107',5000,'Robots','robot'],
+ ['Moon Dumpling','#e0e0e0',900,'Space','planet'],['Alien Chilli Padi','#7cb342',900,'Space','chili'],['Galaxy Spinner','#5c6bc0',1000,'Space','spinner'],['Saturn Bagel','#ffb74d',1100,'Space','planet'],['Star Satay','#fdd835',1200,'Space','skewer'],['Comet Noodle Rocket','#ff8a65',1300,'Space','rocket'],['Astronaut Merlion','#90caf9',1400,'Space','plush'],['Rocket Cart','#42a5f5',1500,'Space','rocket'],['UFO Wok','#ab47bc',1800,'Space','ufo'],['Black Hole Bubble Tea','#37474f',2000,'Space','cup'],
+ ['Ice Cream Dream','#f48fb1',600,'Sweet Treats','dessert'],['Cendol Cup Toy','#81c784',650,'Sweet Treats','dessert'],['Bubble Tea Buddy','#d7a86e',700,'Sweet Treats','cup'],['Mango Sago Cup','#ffca28',700,'Sweet Treats','dessert'],['Kueh Squishy Pack','#ce93d8',500,'Sweet Treats','squishy'],['Tau Huay Bowl','#ffe0b2',600,'Sweet Treats','bowl'],['Gula Melaka Pudding','#8d6e63',550,'Sweet Treats','squishy'],['Pandan Chiffon Plush','#9ccc65',800,'Sweet Treats','squishy'],['Durian Ice Delight','#c5e1a5',900,'Sweet Treats','dessert'],
+ ['Sepak Takraw Ball','#ffa726',400,'Heartland','planet'],['Kopitiam Uncle Figure','#8d6e63',900,'Heartland','plush'],['Hawker Aunty Figure','#f06292',900,'Heartland','plush'],['Mini Bumboat','#29b6f6',1000,'Heartland','boat'],['Kampung House Blocks','#a1887f',1300,'Heartland','tower'],['Pasar Malam Cart','#ff9800',1500,'Heartland','cart'],['Shophouse Model','#ffb74d',1500,'Heartland','tower'],['Interchange Bus','#e53935',1600,'Heartland','train'],['Trishaw Toy','#26c6da',1700,'Heartland','cart'],
+ ['Egret Plush','#eceff1',750,'Wildlife','bird'],['Macaque Chef','#8d6e63',700,'Wildlife','plush'],['Horseshoe Crab Plush','#607d8b',600,'Wildlife','plush'],['Mouse Deer','#bcaaa4',800,'Wildlife','dog'],['Kingfisher','#29b6f6',850,'Wildlife','bird'],['Otter Pup','#8d6e63',900,'Wildlife','plush'],['Hornbill','#ffb300',1000,'Wildlife','bird'],['Sun Bear Cub','#4e342e',1100,'Wildlife','plush'],['Sea Turtle','#26a69a',1200,'Wildlife','plush'],['Pangolin Plush','#a1887f',1300,'Wildlife','plush'],
+ ['Golden Chopsticks','#e8b400',3000,'Legendary','chop'],['Jade Wok Trophy','#26a69a',4500,'Legendary','trophy'],['Crystal Merlion','#4dd0e1',6000,'Legendary','plush'],['Dragon Noodle Statue','#d32f2f',8000,'Legendary','dragon'],['Platinum Satay Grill','#90a4ae',10000,'Legendary','skewer'],['Diamond Wok Trophy','#4dd0e1',12000,'Legendary','trophy'],['Hawker King Crown','#ffb300',15000,'Legendary','crown'],['Emerald Dragon','#00c853',18000,'Legendary','dragon'],['Gold Merlion Statue','#ffc107',20000,'Legendary','trophy'],['Grand Master Cup','#ffd54f',25000,'Legendary','trophy']];
 let tser='All';
+const mix=(h,t,p)=>{const n=parseInt(h.slice(1),16),f=t?255:0,ch=x=>Math.round(((n>>x)&255)*(1-p)+f*p);return'#'+[16,8,0].map(x=>ch(x).toString(16).padStart(2,'0')).join('')};
+const E=(x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${r/2}" fill="#222"/>`;
+const SM=(x,y)=>`<path d="M${x-7} ${y}q7 6 14 0" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
+const win=(x0,y0,cols,rows,w,h,g,f)=>{let o='';for(let i=0;i<cols;i++)for(let j=0;j<rows;j++)o+=`<rect x="${x0+i*g}" y="${y0+j*g}" width="${w}" height="${h}" rx="1" fill="${f}"/>`;return o};
+const ART={
+plush:(c,d,l)=>`<circle cx="26" cy="30" r="11" fill="${d}"/><circle cx="74" cy="30" r="11" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/><ellipse cx="50" cy="69" rx="15" ry="11" fill="${l}"/><circle cx="50" cy="63" r="4" fill="#333"/>${E(37,48)}${E(63,48)}${SM(50,72)}`,
+cat:(c,d,l)=>`<path d="M18 42L24 10L46 28zM82 42L76 10L54 28z" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/>${E(37,52)}${E(63,52)}<path d="M47 63l3 3 3-3z" fill="#f48fb1"/>${SM(50,69)}<path d="M20 62h14M20 70l13-3M80 62H66M80 70l-13-3" stroke="#333" stroke-width="1.8" stroke-linecap="round"/>`,
+bird:(c,d,l)=>`<ellipse cx="50" cy="60" rx="32" ry="30" fill="${c}"/><ellipse cx="50" cy="72" rx="20" ry="16" fill="${l}"/><path d="M42 54l8 12 8-12z" fill="#ff9800"/>${E(38,44)}${E(62,44)}<path d="M40 22q10-14 20 0" stroke="${d}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M40 90l-4 7M60 90l4 7" stroke="#ff9800" stroke-width="3" stroke-linecap="round"/>`,
+dog:(c,d,l)=>`<ellipse cx="22" cy="50" rx="10" ry="22" fill="${d}" transform="rotate(14 22 50)"/><ellipse cx="78" cy="50" rx="10" ry="22" fill="${d}" transform="rotate(-14 78 50)"/><circle cx="50" cy="56" r="32" fill="${c}"/><ellipse cx="50" cy="68" rx="17" ry="13" fill="${l}"/><ellipse cx="50" cy="62" rx="6" ry="4" fill="#333"/>${E(38,46)}${E(62,46)}${SM(50,74)}`,
+dragon:(c,d,l)=>`<path d="M30 30L22 6l18 12zM70 30L78 6 60 18z" fill="${l}"/><path d="M38 28l6-9 6 9 6-9 6 9z" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/><ellipse cx="50" cy="70" rx="19" ry="13" fill="${l}"/><circle cx="43" cy="68" r="2.5" fill="#333"/><circle cx="57" cy="68" r="2.5" fill="#333"/>${E(36,48,6)}${E(64,48,6)}<path d="M40 78q10 7 20 0" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`,
+chili:(c,d,l)=>`<path d="M34 24c30-8 52 14 46 42-4 18-16 26-28 28 4-24-6-46-18-70z" fill="${c}"/><path d="M30 22q4-12 16-8l-4 14z" fill="#43a047"/>${E(52,52,4.5)}${E(66,56,4.5)}${SM(60,72)}`,
+bowl:(c,d,l)=>`<path d="M12 50h76c0 24-16 40-38 40S12 74 12 50z" fill="${c}"/><ellipse cx="50" cy="50" rx="38" ry="9" fill="${l}"/><path d="M26 48q8-8 16 0t16 0 16 0" stroke="${d}" stroke-width="4" fill="none"/><path d="M38 30q-6-8 0-16M52 32q-6-8 0-16M66 30q-6-8 0-16" stroke="#bbb" stroke-width="3" fill="none" stroke-linecap="round"/>${E(38,70,4)}${E(62,70,4)}`,
+cup:(c,d,l)=>`<path d="M26 32h48l-6 58H32z" fill="${c}"/><rect x="22" y="24" width="56" height="12" rx="6" fill="${d}"/><path d="M54 24l8-18" stroke="${l}" stroke-width="5" stroke-linecap="round"/>${E(40,58,4.5)}${E(60,58,4.5)}${SM(50,71)}`,
+skewer:(c,d,l)=>`<g transform="rotate(-35 50 50)"><rect x="6" y="47" width="88" height="5" rx="2.5" fill="#d7a86e"/>${[22,42,62].map(x=>`<ellipse cx="${x+6}" cy="50" rx="10" ry="14" fill="${c}"/><ellipse cx="${x+6}" cy="50" rx="5" ry="9" fill="${d}" opacity=".5"/>`).join('')}</g>`,
+dessert:(c,d,l)=>`<path d="M24 34h52l-8 56H32z" fill="#fff" opacity=".7"/><path d="M28 56h44l-3 20H31z" fill="${c}"/><path d="M26 44h48l-2 12H28z" fill="${l}"/><path d="M31 76h38l-2 12H33z" fill="${d}"/><circle cx="50" cy="30" r="14" fill="${l}"/><circle cx="50" cy="17" r="5" fill="#e53935"/>`,
+durian:(c,d,l)=>`<circle cx="50" cy="56" r="32" fill="${c}" stroke="${d}" stroke-width="12" stroke-dasharray="5 6"/><circle cx="50" cy="56" r="27" fill="${c}"/>${E(40,52)}${E(60,52)}${SM(50,67)}`,
+tower:(c,d,l)=>`<rect x="30" y="14" width="40" height="76" rx="4" fill="${c}"/><rect x="24" y="84" width="52" height="9" rx="3" fill="${d}"/>${win(36,22,3,6,8,6,11,l)}`,
+mbs:(c,d,l)=>`<path d="M18 90L24 24h14l4 66zM43 90L46 24h12l3 66zM64 90L68 24h14l6 66z" fill="${c}"/><path d="M10 20h80l-4 10H14z" fill="${d}"/><path d="M18 14q32-14 64 0z" fill="${l}"/>`,
+tree:(c,d,l)=>`<rect x="44" y="40" width="12" height="52" fill="${d}"/><ellipse cx="50" cy="32" rx="38" ry="20" fill="${c}"/><ellipse cx="50" cy="28" rx="26" ry="11" fill="${l}"/>${[20,38,62,80].map(x=>`<circle cx="${x}" cy="36" r="3" fill="#fff"/>`).join('')}<path d="M30 92h40" stroke="${d}" stroke-width="6" stroke-linecap="round"/>`,
+train:(c,d,l)=>`<rect x="10" y="30" width="80" height="46" rx="14" fill="${c}"/><rect x="10" y="60" width="80" height="8" fill="${d}"/>${win(18,38,4,1,14,14,17,l)}<circle cx="28" cy="82" r="7" fill="#333"/><circle cx="72" cy="82" r="7" fill="#333"/><circle cx="86" cy="52" r="4" fill="#ffeb3b"/>`,
+boat:(c,d,l)=>`<path d="M12 62h76l-12 24H26z" fill="${c}"/><rect x="40" y="42" width="24" height="20" rx="3" fill="${l}"/><path d="M74 12v48H54z" fill="#fff"/><path d="M8 92q10-6 21 0t21 0 21 0 21 0" stroke="#4fc3f7" stroke-width="4" fill="none"/>`,
+cart:(c,d,l)=>`<path d="M12 40a38 28 0 0176 0z" fill="${c}"/><rect x="47" y="40" width="5" height="40" fill="${d}"/><rect x="18" y="62" width="64" height="20" rx="4" fill="${l}"/><circle cx="30" cy="88" r="8" fill="#333"/><circle cx="70" cy="88" r="8" fill="#333"/>`,
+trophy:(c,d,l)=>`<path d="M28 14h44v22q0 22-22 26-22-4-22-26z" fill="${c}"/><path d="M28 20H14q0 18 16 22M72 20h14q0 18-16 22" stroke="${c}" stroke-width="5" fill="none"/><rect x="44" y="60" width="12" height="18" fill="${d}"/><rect x="30" y="78" width="40" height="12" rx="3" fill="${d}"/><path d="M50 22l4 8 9 1-6 6 2 9-9-5-9 5 2-9-6-6 9-1z" fill="${l}"/>`,
+crown:(c,d,l)=>`<path d="M12 74L8 30l26 22 16-30 16 30 26-22-4 44z" fill="${c}"/><rect x="12" y="74" width="76" height="12" rx="3" fill="${d}"/><circle cx="50" cy="62" r="5" fill="#e53935"/><circle cx="28" cy="64" r="4" fill="#42a5f5"/><circle cx="72" cy="64" r="4" fill="#66bb6a"/>`,
+chop:(c,d,l)=>`<rect x="24" y="4" width="8" height="92" rx="4" fill="${c}" transform="rotate(14 28 50)"/><rect x="62" y="4" width="8" height="92" rx="4" fill="${c}" transform="rotate(-8 66 50)"/><rect x="20" y="20" width="16" height="6" fill="${d}" transform="rotate(14 28 23)"/><rect x="58" y="20" width="16" height="6" fill="${d}" transform="rotate(-8 66 23)"/>`,
+robot:(c,d,l)=>`<path d="M50 8v12" stroke="${d}" stroke-width="4"/><circle cx="50" cy="8" r="5" fill="#ff5252"/><rect x="22" y="20" width="56" height="40" rx="10" fill="${c}"/><rect x="30" y="30" width="14" height="12" rx="3" fill="#fff"/><rect x="56" y="30" width="14" height="12" rx="3" fill="#fff"/><circle cx="37" cy="36" r="3" fill="#222"/><circle cx="63" cy="36" r="3" fill="#222"/><path d="M38 51h24" stroke="#333" stroke-width="3" stroke-dasharray="4 3"/><rect x="28" y="64" width="44" height="26" rx="6" fill="${d}"/><circle cx="50" cy="77" r="5" fill="${l}"/><circle cx="16" cy="40" r="5" fill="${d}"/><circle cx="84" cy="40" r="5" fill="${d}"/>`,
+spinner:(c,d,l)=>`<circle cx="50" cy="50" r="12" fill="${d}"/>${[0,120,240].map(a=>`<g transform="rotate(${a} 50 50)"><circle cx="50" cy="20" r="14" fill="${c}"/><circle cx="50" cy="20" r="6" fill="${l}"/></g>`).join('')}<circle cx="50" cy="50" r="6" fill="${l}"/>`,
+squishy:(c,d,l)=>`<rect x="12" y="26" width="76" height="62" rx="30" fill="${c}"/><ellipse cx="34" cy="38" rx="14" ry="6" fill="${l}" opacity=".7"/>${E(36,58)}${E(64,58)}<ellipse cx="25" cy="68" rx="6" ry="4" fill="#ff8a80" opacity=".7"/><ellipse cx="75" cy="68" rx="6" ry="4" fill="#ff8a80" opacity=".7"/>${SM(50,70)}`,
+lantern:(c,d,l)=>`<rect x="40" y="6" width="20" height="8" rx="2" fill="${d}"/><ellipse cx="50" cy="48" rx="34" ry="32" fill="${c}"/><path d="M50 16v64M32 20q-10 28 0 56M68 20q10 28 0 56" stroke="${d}" stroke-width="2.5" fill="none"/><rect x="38" y="78" width="24" height="8" rx="2" fill="${d}"/><path d="M44 86v10M50 86v12M56 86v10" stroke="#ffc107" stroke-width="3" stroke-linecap="round"/>`,
+ketupat:(c,d,l)=>`<path d="M50 6l42 44-42 44L8 50z" fill="${c}"/><path d="M29 28l42 44M71 28L29 72M50 6v88M8 50h84" stroke="${l}" stroke-width="3"/>`,
+gift:(c,d,l)=>`<rect x="14" y="40" width="72" height="50" rx="5" fill="${c}"/><rect x="10" y="30" width="80" height="16" rx="5" fill="${d}"/><rect x="44" y="30" width="12" height="60" fill="${l}"/><path d="M50 30c-14-22-30-4-16 0zM50 30c14-22 30-4 16 0z" fill="${l}"/>`,
+diya:(c,d,l)=>`<path d="M12 58h76c0 20-16 30-38 30S12 78 12 58z" fill="${c}"/><ellipse cx="50" cy="58" rx="38" ry="8" fill="${d}"/><path d="M50 52c-12-14-6-26 0-36 6 10 12 22 0 36z" fill="#ffca28"/><path d="M50 50c-5-7-2-13 0-18 3 5 5 11 0 18z" fill="#ff7043"/>`,
+rocket:(c,d,l)=>`<path d="M50 6c20 14 24 42 20 62H30c-4-20 0-48 20-62z" fill="${c}"/><circle cx="50" cy="38" r="9" fill="${l}" stroke="${d}" stroke-width="3"/><path d="M30 56L14 76l18-4zM70 56l16 20-18-4z" fill="${d}"/><path d="M40 72h20l-10 24z" fill="#ffb300"/>`,
+ufo:(c,d,l)=>`<ellipse cx="50" cy="44" rx="22" ry="20" fill="${l}" opacity=".85"/><ellipse cx="50" cy="58" rx="44" ry="16" fill="${c}"/>${[22,40,58,76].map(x=>`<circle cx="${x}" cy="60" r="3.5" fill="#ffeb3b"/>`).join('')}<path d="M36 74l-8 18M64 74l8 18M50 74v18" stroke="${d}" stroke-width="3" stroke-linecap="round"/>${E(44,42,4)}${E(56,42,4)}`,
+planet:(c,d,l)=>`<circle cx="50" cy="50" r="30" fill="${c}"/><circle cx="40" cy="42" r="6" fill="${d}" opacity=".35"/><circle cx="62" cy="62" r="8" fill="${d}" opacity=".35"/><ellipse cx="50" cy="52" rx="46" ry="12" fill="none" stroke="${l}" stroke-width="4" transform="rotate(-18 50 52)"/>`
+};
+const toyArt=(t,sz=100)=>{const c=t[1];return `<svg viewBox="0 0 100 100" width="${sz}" height="${sz}">${ART[t[4]](c,mix(c,0,.3),mix(c,1,.45))}</svg>`};
+
 
 let S;try{S=JSON.parse(localStorage.hp)}catch(e){}S=S||{life:0,wallet:0,orders:[],toys:[],reviewed:{}};
 let shop=null,cart=[],cat='',cfg=null;
@@ -363,9 +468,13 @@ function confetti(){const cs=['#ff4b3e','#ff9f1c','#ffd23f','#22b573','#7c5cff']
 
 /* ===== SFX (generated with Web Audio, no files needed) ===== */
 let AC,MUTE=false;try{MUTE=localStorage.hpm==='1'}catch(e){}
-function tone(f,t,d,type='sine',v=.12,f2){const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime+t;o.type=type;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(AC.destination);o.start(n);o.stop(n+d+.05)}
-function noise(t,d,v=.08,fq=3000){const b=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type='highpass';f.frequency.value=fq;g.gain.value=v;s.connect(f).connect(g).connect(AC.destination);s.start(AC.currentTime+t)}
+let MG;function M(){if(!MG){const c=AC.createDynamicsCompressor();MG=AC.createGain();MG.gain.value=3;MG.connect(c);c.connect(AC.destination)}return MG}
+function tone(f,t,d,type='sine',v=.12,f2){const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime+t;o.type=type;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(M());o.start(n);o.stop(n+d+.05)}
+function noise(t,d,v=.08,fq=3000){const b=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type='highpass';f.frequency.value=fq;g.gain.value=v;s.connect(f).connect(g).connect(M());s.start(AC.currentTime+t)}
 const SFX={
+ squeak:a=>{const b=700+(a%7)*90;tone(b,0,.1,'sine',.2,b*1.9);tone(b*1.5,.07,.12,'triangle',.14,b*2.2)},
+ thud:()=>tone(130,0,.14,'sine',.35,55),
+ whoosh:()=>{noise(0,.35,.12,1200);tone(300,0,.3,'sine',.1,900)},
  tap:()=>tone(700,0,.05,'triangle',.09),
  pop:()=>tone(400,0,.12,'sine',.14,900),
  add:()=>{tone(523,0,.09,'square',.06);tone(784,.07,.14,'square',.06)},
@@ -486,15 +595,49 @@ function place(){
   $('#done').onclick=()=>{$('#sheet').classList.remove('on');renderXP();renderMenu()};
   renderXP();
 }
+function buy(i){const t=TOYS[i];if(S.wallet<t[2])return false;sfx('toy');S.wallet-=t[2];S.toys.push(t[0]);save();renderXP();toast('You got the '+t[0]+'!');confetti();return true}
 function renderToys(){
   const ser=['All',...new Set(TOYS.map(t=>t[3]))];
   const list=TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser);
   $('#toys').innerHTML=`<div class="tabs tt" style="grid-column:1/-1">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-ts="${x}">${x}</button>`).join('')}</div>`+
-  list.map(([t,i])=>`<div class="toy"><div class="tile" style="background:${t[1]}">${t[0][0]}</div><h3 style="font-size:15px">${t[0]}</h3><div class="rar">${t[3]}</div><div class="sub">${fmt(t[2])} XP</div><button data-t="${i}" ${S.wallet<t[2]?'disabled':''}>Redeem</button></div>`).join('');
+  list.map(([t,i])=>`<div class="toy"><div class="tile" style="background:linear-gradient(135deg,${t[1]}33,${t[1]}88)">${toyArt(t,60)}</div><h3 style="font-size:15px">${t[0]}</h3><div class="rar">${t[3]}</div><div class="sub">${fmt(t[2])} XP</div><div class="tb"><button class="pv" data-pv="${i}">Preview</button><button data-t="${i}" ${S.wallet<t[2]?'disabled':''}>Redeem</button></div></div>`).join('');
   $$('[data-ts]').forEach(b=>b.onclick=()=>{tser=b.dataset.ts;renderToys()});
-  $$('[data-t]').forEach(b=>b.onclick=()=>{const t=TOYS[b.dataset.t];if(S.wallet<t[2])return;sfx('toy');S.wallet-=t[2];S.toys.push(t[0]);save();renderXP();renderToys();toast('You got the '+t[0]+'!');confetti()});
+  $$('[data-pv]').forEach(b=>b.onclick=()=>openPreview(+b.dataset.pv));
+  $$('[data-t]').forEach(b=>b.onclick=()=>{if(buy(+b.dataset.t))renderToys()});
   const c={};S.toys.forEach(x=>c[x]=(c[x]||0)+1);
-  $('#owned').innerHTML=S.toys.length?Object.entries(c).map(([k,v])=>`<div class="row">${k}<b>x${v}</b></div>`).join(''):'No toys yet. Earn XP and redeem some.';
+  $('#owned').innerHTML=S.toys.length?Object.entries(c).map(([k,v])=>`<div class="row"><span>${k} <b>x${v}</b></span><button class="opt" data-play="${TOYS.findIndex(x=>x[0]===k)}">Play</button></div>`).join(''):'No toys yet. Earn XP and redeem some.';
+  $$('[data-play]').forEach(b=>b.onclick=()=>openPreview(+b.dataset.play));
+}
+/* toy preview: drag, throw and tap */
+let PV=null;
+function closePV(){if(PV)cancelAnimationFrame(PV.raf);PV=null;$('#pv').classList.remove('on')}
+$('#pv').onclick=e=>{if(e.target.id==='pv')closePV()};
+addEventListener('keydown',e=>{if(e.key==='Escape')closePV()});
+function openPreview(i){
+  const t=TOYS[i];sfx('pop');
+  $('#pvbox').innerHTML=`<div class="top" style="margin:0 0 10px"><div><h2 style="font-size:22px">${t[0]}</h2><div class="sub">${t[3]} | ${fmt(t[2])} XP</div></div><button class="plus" id="pvx" style="background:var(--card);color:var(--ink);box-shadow:var(--sh)">${ic('plus',20,2.5).replace('M12 5v14M5 12h14','M6 6l12 12M18 6L6 18')}</button></div>
+  <div id="stage"><div id="ptoy">${toyArt(t,120)}</div><div class="hint">Drag it, throw it, or tap it!</div></div>
+  <div class="tb" style="margin-top:12px"><button class="opt" id="pj">Jump</button><button class="opt" id="ps">Spin</button><button class="opt" id="pq">Squeak</button><button class="opt" id="pr">Reset</button></div>
+  <button class="btn" id="pb" style="width:100%;margin-top:12px" ${S.wallet<t[2]?'disabled':''}>Redeem for ${fmt(t[2])} XP</button>`;
+  $('#pv').classList.add('on');
+  const st=$('#stage'),el=$('#ptoy'),R=60,W=st.clientWidth,H=st.clientHeight,FL=H-26-52;
+  const p=PV={x:W/2,y:70,vx:0,vy:0,r:0,vr:0,sq:0,drag:false,lx:0,ly:0,mv:0,W,FL};
+  const burst=()=>{for(let k=0;k<10;k++){const d=document.createElement('div'),a=Math.random()*6.28,m=40+Math.random()*50;d.className='spk';d.style.cssText=`left:${p.x}px;top:${p.y}px;background:${['#ff4b3e','#ffb400','#22b573','#7c5cff'][k%4]};--dx:${Math.cos(a)*m}px;--dy:${Math.sin(a)*m}px`;st.appendChild(d);setTimeout(()=>d.remove(),650)}};
+  const poke=()=>{const sp=t[4]==='spinner';p.vy=sp?-8:-15;p.vr+=(Math.random()<.5?-1:1)*(sp?45:12);p.sq=.25;sfx('squeak',i);burst()};
+  const pos=e=>{const b=st.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
+  el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);const[x,y]=pos(e);p.drag=true;p.ox=x-p.x;p.oy=y-p.y;p.mv=0;p.lx=p.x;p.ly=p.y;p.vx=p.vy=0;el.style.cursor='grabbing'};
+  el.onpointermove=e=>{if(!p.drag)return;const[x,y]=pos(e);const nx=Math.min(W-R,Math.max(R,x-p.ox)),ny=Math.min(p.FL,Math.max(R,y-p.oy));p.vx=(nx-p.lx)*.6+p.vx*.4;p.vy=(ny-p.ly)*.6+p.vy*.4;p.mv+=Math.abs(nx-p.lx)+Math.abs(ny-p.ly);p.x=p.lx=nx;p.y=p.ly=ny};
+  el.onpointerup=el.onpointercancel=()=>{if(!p.drag)return;p.drag=false;el.style.cursor='grab';const cap=v=>Math.max(-38,Math.min(38,v));if(p.mv<8){poke()}else{p.vx=cap(p.vx);p.vy=cap(p.vy);p.vr+=p.vx*1.2;sfx('whoosh')}};
+  $('#pj').onclick=poke;$('#ps').onclick=()=>{p.vr=38*(Math.random()<.5?-1:1);p.vy=-6;sfx('whoosh')};$('#pq').onclick=()=>{p.sq=.3;sfx('squeak',i);burst()};
+  $('#pr').onclick=()=>{p.x=W/2;p.y=70;p.vx=p.vy=p.vr=0;p.r=0};
+  $('#pvx').onclick=closePV;
+  $('#pb').onclick=()=>{if(buy(i)){$('#pb').disabled=true;$('#pb').textContent='Redeemed!';renderToys()}};
+  const tick=()=>{if(PV!==p)return;
+    if(!p.drag){p.vy+=.75;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vr*=.985;p.vx*=.995;
+      if(p.y>p.FL){p.y=p.FL;if(Math.abs(p.vy)>6){sfx('thud');p.sq=Math.min(.3,Math.abs(p.vy)/50)}p.vy*=-.6;if(Math.abs(p.vy)<1.6)p.vy=0;p.vx*=.92;p.vr*=.92}
+      if(p.x<R){p.x=R;p.vx*=-.7}if(p.x>W-R){p.x=W-R;p.vx*=-.7}if(p.y<R){p.y=R;p.vy*=-.5}}
+    p.sq*=.85;el.style.transform=`translate(${p.x-R}px,${p.y-R}px) rotate(${p.r}deg) scale(${1+p.sq},${1-p.sq})`;p.raf=requestAnimationFrame(tick)};
+  tick();
 }
 function renderMe(){
   $('#hist').innerHTML=S.orders.length?S.orders.slice(0,10).map(o=>`<div class="hist"><div class="row" style="padding:0"><b>${o.shop}</b><span>${money(o.total)}</span></div><div class="sub">${o.date} | +${o.xp} XP<br>${o.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet.</p>';
