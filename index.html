@@ -371,6 +371,8 @@ SH.forEach(s=>{const fo=s.items.filter(x=>x.t==='f'||x.t==='w'),dr=s.items.filte
   for(let j=CS[k][0];sum*.88<10;j++)add(F[(k+j)%F.length]);
   const m={};pk.forEach(x=>m[x]=(m[x]||0)+1);
   out.push({n:F[k%F.length].n+' '+CN[k],p:Math.min(110,Math.max(10,Math.round(sum*.88*2)/2)),t:'c',parts:Object.entries(m).map(([x,q])=>q>1?q+'x '+x:x)})}
+ [['Grand Hawker Feast',35,60],['Ultimate Hawker Banquet',70,110]].forEach(([nm,lo,hi],ti)=>{const tg=lo+(s.id*7+ti*3)%(hi-lo-9),pk=[];let sum=0,j=0;while(sum*.88<tg){const x=j%3===2?D[(j+ti)%D.length]:F[(j+ti*2)%F.length];pk.push(x.n);sum+=x.p;j++}
+  const m={};pk.forEach(x=>m[x]=(m[x]||0)+1);out.push({n:nm,p:Math.min(hi,Math.max(lo,Math.round(sum*.88*2)/2)),t:'c',parts:Object.entries(m).map(([x,q])=>q>1?q+'x '+x:x)})});
  s.items.unshift(...out)});
 
 /* toys: 30 things x 10 styles = 300 + legends */
