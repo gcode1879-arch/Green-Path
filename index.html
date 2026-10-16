@@ -122,9 +122,13 @@ h3.sec{margin:18px 0 10px;font-size:20px}
 #toast.on{transform:translate(-50%,0)}
 .conf{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;z-index:90;pointer-events:none;animation:fall 2.2s ease-in forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.3}}
+#back{display:inline-flex;align-items:center;gap:6px;background:var(--card);box-shadow:var(--sh);padding:8px 14px;border-radius:99px;font-weight:800;margin-bottom:8px;color:var(--ink)}
 #snd{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:60;width:42px;height:42px;border-radius:50%;background:var(--card);color:var(--ink);box-shadow:var(--sh);display:grid;place-items:center}
 #snd.off{opacity:.55}
 .rar{font-size:11px;font-weight:800;color:var(--pur)}
+.hb{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px;vertical-align:middle;margin-left:6px;letter-spacing:.02em}
+.hb.y{background:#d9f7e8;color:#0b7a4b}.hb.n{background:#ffe6cc;color:#a24a00}
+@media(prefers-color-scheme:dark){.hb.y{background:#123d2a;color:#7be3b2}.hb.n{background:#4a2a10;color:#ffc58a}}
 </style>
 </head>
 <body>
@@ -176,6 +180,7 @@ h3.sec{margin:18px 0 10px;font-size:20px}
   <div class="wrap">
     <div class="top"><div><div class="sub">Welcome to Hawker Paradise</div><h2>Choose a stall</h2></div></div>
     <div class="xpcard" data-xp></div>
+    <div class="tabs" id="hf"></div>
     <div class="shops" id="shoplist"></div>
   </div>
 </section>
@@ -202,6 +207,7 @@ h3.sec{margin:18px 0 10px;font-size:20px}
 </section>
 
 <nav id="nav">
+  <button id="navback">Stalls</button>
   <button class="on" data-pn="menu">Menu</button>
   <button data-pn="rew">Toys</button>
   <button data-pn="me">Me</button>
@@ -267,71 +273,71 @@ const G={
 };
 const I=(n,t,p,g=[],req=0)=>({n,t,p,g,req});
 const SHOPS=[
- {id:'a',name:"Ah Hock Chicken Rice",sub:'Chicken rice, poached and roasted',c:['#ffb347','#ff7a2f'],cats:{
+ {id:'a',halal:false,name:"Ah Hock Chicken Rice",sub:'Chicken rice, poached and roasted',c:['#ffb347','#ff7a2f'],cats:{
   'Chicken Rice':[I('Roasted Chicken Rice','plate',4.5,['part','crice','cside']),I('Steamed Chicken Rice','plate',4.5,['part','crice','cside']),I('Char Siew Rice','plate',5,['crice','cside']),I('Chicken Drumstick Rice','plate',5.5,['crice','cside'])],
   'Sides':[I('Braised Egg','bowl',1),I('Bok Choy with Oyster Sauce','bowl',2.5),I('Chicken Soup','bowl',2,['reg'])],
   'Drinks':[I('Barley','cup',1.8,['ice','reg']),I('Lime Juice','cup',2,['ice','sweet']),I('Iced Milo','cup',2.5,['ice','sweet','reg'])],
   'Exclusive':[I('Golden Truffle Chicken Rice','crown',9,['part'],51),I('Wagyu Char Siew Rice','crown',14,[],55),I('Imperial Feast Platter','crown',28,[],60)]}},
- {id:'b',name:"Mdm Lim Laksa & Noodles",sub:'Soupy, spicy and slurpable',c:['#ff6a5c','#d62f4b'],cats:{
+ {id:'b',halal:false,name:"Mdm Lim Laksa & Noodles",sub:'Soupy, spicy and slurpable',c:['#ff6a5c','#d62f4b'],cats:{
   'Noodles':[I('Curry Laksa','bowl',5,['noodle','spice','topn']),I('Prawn Mee','bowl',5.5,['noodle','soup','spice','topn']),I('Bak Chor Mee','bowl',5,['noodle','soup','spice']),I('Wanton Mee','bowl',4.5,['noodle','soup','spice'])],
   'Snacks':[I('Fried Wanton','plate',3),I('Otah','plate',2.5),I('Fishball Skewer','skewer',2)],
   'Drinks':[I('Sugarcane','cup',2.2,['ice']),I('Teh Tarik','cup',2,['sweet','ice']),I('Chrysanthemum Tea','cup',1.8,['sweet','ice'])],
   'Exclusive':[I('Lobster Laksa','crown',15,['noodle','spice'],51),I('Black Truffle Mee Pok','crown',13,['soup'],54),I('Dragon Noodle Banquet','crown',30,[],60)]}},
- {id:'c',name:'Uncle Raj Prata House',sub:'Crispy prata and rich curries',c:['#43c98a','#17977b'],cats:{
+ {id:'c',halal:true,name:'Uncle Raj Prata House',sub:'Crispy prata and rich curries',c:['#43c98a','#17977b'],cats:{
   'Prata':[I('Roti Prata','bread',2.5,['prata','curry','pextra']),I('Prata Set of 3','bread',6.5,['prata','curry','pextra']),I('Mutton Murtabak','bread',6.5,['curry','pextra']),I('Chicken Murtabak','bread',6,['curry','pextra'])],
   'Curries':[I('Chicken Curry Bowl','bowl',4,['spice']),I('Dhal Bowl','bowl',2)],
   'Drinks':[I('Teh Tarik','cup',2,['sweet','ice']),I('Mango Lassi','cup',3.5,['reg']),I('Masala Chai','cup',2.5,['sweet'])],
   'Exclusive':[I('Gold Leaf Prata','crown',10,['curry'],51),I('Lamb Rogan Murtabak','crown',15,[],55),I('Maharaja Thali','crown',26,[],60)]}},
- {id:'d',name:'Pak Hamid Satay Club',sub:'Charcoal-grilled skewers',c:['#8a5a3c','#c0392b'],cats:{
+ {id:'d',halal:true,name:'Pak Hamid Satay Club',sub:'Charcoal-grilled skewers',c:['#8a5a3c','#c0392b'],cats:{
   'Satay':[I('Satay','skewer',5,['cut','sat','sauce']),I('Grilled Stingray','plate',9,['spice']),I('Grilled Sambal Prawns','plate',10,['spice'])],
   'Sides':[I('Ketupat','plate',1),I('Otak Otak','plate',2.5),I('Cucumber and Onion','bowl',1)],
   'Drinks':[I('Sirap Bandung','cup',2.5,['ice','sweet']),I('Lime Juice','cup',2,['ice','sweet'])],
   'Exclusive':[I('Wagyu Satay Set','crown',18,['sauce'],51),I('Jumbo Tiger Prawn Grill','crown',24,['spice'],56)]}},
- {id:'e',name:'Wok Hei Express',sub:'Smoky fried rice and noodles',c:['#ffcc33','#f08a00'],cats:{
+ {id:'e',halal:false,name:'Wok Hei Express',sub:'Smoky fried rice and noodles',c:['#ffcc33','#f08a00'],cats:{
   'Wok':[I('Char Kway Teow','plate',5,['wok','spice','topn']),I('Hokkien Mee','plate',5.5,['spice','topn']),I('Fried Rice','plate',4.5,['fried','spice']),I('Carrot Cake','plate',4,['spice'])],
   'Sides':[I('Fried Egg','plate',1),I('Extra Lap Cheong','plate',1.5)],
   'Drinks':[I('Soya Bean Milk','cup',2,['sweet','ice']),I('Luo Han Guo','cup',2,['ice'])],
   'Exclusive':[I('Prawn Wok Feast','crown',16,['spice'],51),I('Black Gold Fried Rice','crown',20,[],58)]}},
- {id:'f',name:'Sweet Corner Desserts',sub:'Cold treats and cooling drinks',c:['#ff8fb1','#a45cff'],cats:{
+ {id:'f',halal:true,name:'Sweet Corner Desserts',sub:'Cold treats and cooling drinks',c:['#ff8fb1','#a45cff'],cats:{
   'Ice':[I('Ice Kachang','cup',3.5,['dessert']),I('Chendol','cup',3.5,['flav','dessert']),I('Cendol Durian','cup',5)],
   'Hot':[I('Orh Nee','bowl',4),I('Bubur Cha Cha','bowl',3.5),I('Tau Suan','bowl',3)],
   'Drinks':[I('Bandung','cup',2.5,['ice']),I('Soya Beancurd','cup',2,['sweet'])],
   'Exclusive':[I('Mao Shan Wang Chendol','crown',12,['dessert'],51),I('Gold Flake Ice Mountain','crown',22,[],60)]}},
- {id:'g',name:'Teck Heng Bak Kut Teh',sub:'Peppery pork rib soup',c:['#6b5b4e','#2f2a26'],cats:{
+ {id:'g',halal:false,name:'Teck Heng Bak Kut Teh',sub:'Peppery pork rib soup',c:['#6b5b4e','#2f2a26'],cats:{
   'Soups':[I('Pork Rib Soup','bowl',7,['bkt','rice']),I('Pig Trotter Soup','bowl',7.5,['bkt','rice']),I('Pork Belly Soup','bowl',7,['bkt','rice']),I('Prawn Soup','bowl',8,['bkt','rice'])],
   'Sides':[I('You Tiao','bread',1.5),I('Braised Peanuts','bowl',1.5),I('Dried Chilli Soy Sauce','bowl',.5),I('Tau Pok','plate',2)],
   'Drinks':[I('Chinese Tea','cup',1.5,['ice']),I('Soya Bean Milk','cup',2,['sweet','ice'])],
   'Exclusive':[I('Premium Spare Rib Pot','crown',16,['bkt'],51),I('Black Pig Trotter Feast','crown',22,['bkt'],57)]}},
- {id:'h',name:'Mak Cik Nasi Lemak',sub:'Coconut rice with crunchy sides',c:['#5fd1a0','#1a9e78'],cats:{
+ {id:'h',halal:true,name:'Mak Cik Nasi Lemak',sub:'Coconut rice with crunchy sides',c:['#5fd1a0','#1a9e78'],cats:{
   'Nasi Lemak':[I('Nasi Lemak with Chicken Wing','plate',4.5,['nl','spice']),I('Nasi Lemak with Fish','plate',4.5,['nl','spice']),I('Nasi Lemak with Otah','plate',4,['nl','spice']),I('Rendang Set','plate',6.5,['nl','spice'])],
   'Sides':[I('Fried Chicken Wing','plate',2),I('Fried Egg','plate',1),I('Ikan Bilis and Peanuts','bowl',1)],
   'Drinks':[I('Teh Halia','cup',2,['sweet','ice']),I('Sirap Bandung','cup',2.5,['ice'])],
   'Exclusive':[I('Wagyu Beef Rendang Set','crown',15,['spice'],51),I('Royal Nasi Ambeng','crown',24,['spice'],58)]}},
- {id:'i',name:'Kopi & Toast Station',sub:'Kaya toast and traditional kopi',c:['#d9a066','#8b5a2b'],cats:{
+ {id:'i',halal:true,name:'Kopi & Toast Station',sub:'Kaya toast and traditional kopi',c:['#d9a066','#8b5a2b'],cats:{
   'Breakfast':[I('Kaya Butter Toast Set','bread',4,['bread','kopi','sweet']),I('Soft-boiled Eggs','bowl',2.5),I('Peanut Butter Toast','bread',2.2,['bread']),I('French Toast','bread',3.5)],
   'Kopi':[I('Kopi','cup',1.6,['kopi','sweet','ice']),I('Teh','cup',1.6,['kopi','sweet','ice']),I('Yuan Yang','cup',2.2,['sweet','ice'])],
   'Exclusive':[I('Gold Kaya Toastbox','crown',9,['bread'],51),I('Aged Kopi Tasting Flight','crown',14,[],56)]}},
- {id:'j',name:'Jade Garden Dim Sum',sub:'Steamed baskets and sweet buns',c:['#ff9a8b','#e0527a'],cats:{
+ {id:'j',halal:false,name:'Jade Garden Dim Sum',sub:'Steamed baskets and sweet buns',c:['#ff9a8b','#e0527a'],cats:{
   'Steamed':[I('Har Gow','bowl',4.5,['dsp']),I('Siew Mai','bowl',4.5,['dsp']),I('Char Siew Bao','bowl',3.8,['dsp']),I('Xiao Long Bao','bowl',5.5,['dsp'])],
   'Fried and Rice':[I('Chee Cheong Fun','plate',3.5,['dsp']),I('Carrot Cake Fried','plate',4.5,['spice']),I('Glutinous Rice','plate',4)],
   'Drinks':[I('Chrysanthemum Tea','cup',1.8,['sweet','ice']),I('Jasmine Tea','cup',1.5)],
   'Exclusive':[I('Truffle Har Gow Basket','crown',12,['dsp'],51),I('Golden Dim Sum Tower','crown',28,[],60)]}},
- {id:'k',name:'Big Wok Zi Char',sub:'Family-style dishes to share',c:['#ff7043','#bf360c'],cats:{
+ {id:'k',halal:false,name:'Big Wok Zi Char',sub:'Family-style dishes to share',c:['#ff7043','#bf360c'],cats:{
   'Mains':[I('Sweet and Sour Pork','plate',10,['zs']),I('Cereal Prawns','plate',14,['zs']),I('Salted Egg Squid','plate',12,['zs']),I('Black Pepper Crab','plate',22,['spice'])],
   'Veg and Rice':[I('Sambal Kangkong','plate',8,['zs','spice']),I('Egg Fried Rice','plate',4.5),I('Tofu Claypot','bowl',9,['zs'])],
   'Drinks':[I('Iced Lemon Tea','cup',2.5,['ice']),I('Chinese Tea Pot','cup',3)],
   'Exclusive':[I('Chilli Crab Royale','crown',38,['spice'],51),I('Live Lobster Wok Fry','crown',45,[],59)]}},
- {id:'l',name:'Mamak Corner',sub:'Mee goreng, rojak and mee rebus',c:['#ffb74d','#e65100'],cats:{
+ {id:'l',halal:true,name:'Mamak Corner',sub:'Mee goreng, rojak and mee rebus',c:['#ffb74d','#e65100'],cats:{
   'Noodles':[I('Mee Goreng','plate',4.5,['spice','topn']),I('Mee Rebus','bowl',4.5,['spice','topn']),I('Mee Soto','bowl',4.5,['spice']),I('Maggi Goreng','plate',4,['spice','topn'])],
   'Rice':[I('Nasi Goreng','plate',5,['spice','fried']),I('Nasi Briyani','plate',6,['cut','spice'])],
   'Snacks':[I('Indian Rojak','plate',5),I('Samosa','plate',2)],
   'Drinks':[I('Teh Tarik','cup',2,['sweet','ice']),I('Milo Dinosaur','cup',3.2,['ice'])],
   'Exclusive':[I('Wagyu Briyani Pot','crown',17,['spice'],51),I('Mamak Banquet Platter','crown',30,[],60)]}},
- {id:'m',name:'Fresh Squeeze Juice Bar',sub:'Cold-pressed juices and cut fruit',c:['#ffd54f','#43a047'],cats:{
+ {id:'m',halal:true,name:'Fresh Squeeze Juice Bar',sub:'Cold-pressed juices and cut fruit',c:['#ffd54f','#43a047'],cats:{
   'Juices':[I('Watermelon Juice','cup',3,['ice','reg']),I('Mango Juice','cup',3.5,['ice','reg']),I('Orange Juice','cup',3.5,['ice','reg']),I('Mixed Fruit Juice','cup',4,['ice','reg'])],
   'Fruit':[I('Cut Fruit Cup','bowl',3),I('Mango Sago','bowl',4.5),I('Pomelo Sago','bowl',4.5)],
   'Exclusive':[I('Mao Shan Wang Smoothie','crown',11,['reg'],51),I('Golden Pineapple Bowl','crown',16,[],55)]}},
- {id:'n',name:'Hainan Western Grill',sub:'Hawker-style chops and fries',c:['#90a4ae','#37474f'],cats:{
+ {id:'n',halal:false,name:'Hainan Western Grill',sub:'Hawker-style chops and fries',c:['#90a4ae','#37474f'],cats:{
   'Grill':[I('Chicken Chop','plate',7.5,['ws','side']),I('Pork Chop','plate',7.5,['ws','side']),I('Fish and Chips','plate',7,['side']),I('Sausage Platter','plate',6.5,['ws','side'])],
   'Sides':[I('Fries','plate',2.5),I('Coleslaw','bowl',1.5),I('Garlic Bread','bread',2)],
   'Drinks':[I('Iced Milo','cup',2.5,['ice','sweet']),I('Lemon Barley','cup',2,['ice'])],
@@ -396,13 +402,18 @@ function renderXP(){
   const h=`<div class="r"><div><small>YOUR LEVEL</small><div class="lvl">Level ${v.l}</div></div><div style="text-align:right"><span class="disc">${d}% off</span><div style="margin-top:6px;font-weight:800;font-size:13px">${fmt(S.wallet)} XP to spend</div></div></div><div class="bar"><i style="width:${v.x/v.n*100}%"></i></div><small>${fmt(v.x)} / ${fmt(v.n)} XP to level ${v.l+1}</small>`;
   $$('[data-xp]').forEach(e=>e.innerHTML=h);
 }
+let hfil='All';
+const hb=s=>`<span class="hb ${s.halal?'y':'n'}">${s.halal?'Halal':'Non-halal'}</span>`;
 function renderShops(){
   renderXP();
-  $('#shoplist').innerHTML=SHOPS.map(s=>`<button class="shop" data-s="${s.id}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${ic('bowl',34)}</div><div><h3>${s.name}</h3><div class="sub">${s.sub}</div></div></button>`).join('');
-  $$('.shop').forEach(b=>b.onclick=()=>{shop=SHOPS.find(s=>s.id===b.dataset.s);cart=[];openShop()});
+  $('#hf').innerHTML=['All','Halal','Non-halal'].map(x=>`<button class="tab ${x===hfil?'on':''}" data-hf="${x}">${x}</button>`).join('');
+  $$('[data-hf]').forEach(b=>b.onclick=()=>{hfil=b.dataset.hf;renderShops()});
+  $('#shoplist').innerHTML=SHOPS.filter(s=>hfil==='All'||(hfil==='Halal')===s.halal).map(s=>`<button class="shop" data-s="${s.id}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${ic('bowl',34)}</div><div><h3>${s.name}</h3><div class="sub">${s.sub}</div><div style="margin-top:4px">${hb(s).replace('margin-left:6px','')}</div></div></button>`).join('');
+  $$('.shop').forEach(b=>b.onclick=()=>{const ns=SHOPS.find(s=>s.id===b.dataset.s);if(!shop||shop.id!==ns.id)cart=[];shop=ns;openShop()});
 }
-$('#back').onclick=()=>{renderShops();show('shops')};
-function openShop(){$('#shopname').textContent=shop.name;$('#shopsub').textContent=shop.sub;cat=Object.keys(shop.cats)[0];tab('menu');renderMenu();renderXP();cc();show('app')}
+const toStalls=()=>{sfx('tap');renderShops();show('shops')};
+$('#back').onclick=toStalls;$('#navback').onclick=toStalls;
+function openShop(){$('#shopname').textContent=shop.name;$('#shopsub').innerHTML=shop.sub+hb(shop);cat=Object.keys(shop.cats)[0];tab('menu');renderMenu();renderXP();cc();show('app')}
 function renderMenu(){
   const v=lvl(),d=disc(v.l);
   $('#cats').innerHTML=Object.keys(shop.cats).map(c=>`<button class="tab ${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
