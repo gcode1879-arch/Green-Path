@@ -1,649 +1,360 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hawker Paradise</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff6e8;--card:#fff;--ink:#2b1d14;--mute:#8a7766;--red:#ff4b3e;--org:#ff9f1c;--grn:#22b573;--pur:#7c5cff;--line:#f0e2cc;--sh:0 10px 30px -14px rgba(120,60,10,.35)}
-@media(prefers-color-scheme:dark){:root{--bg:#1c130e;--card:#2a1d15;--ink:#fff3e3;--mute:#b9a38d;--line:#3d2b1f;--sh:0 10px 30px -12px #000}}
+:root{--bg:#fff6e8;--card:#fff;--ink:#2b1d14;--mute:#8a7766;--red:#ff4b3e;--org:#ff9f1c;--grn:#22b573;--pur:#7c5cff;--sh:0 10px 30px -14px rgba(120,60,10,.35)}
+@media(prefers-color-scheme:dark){:root{--bg:#1c130e;--card:#2a1d15;--ink:#fff3e3;--mute:#b9a38d;--sh:0 10px 30px -12px #000}}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-h1,h2,h3,.f{font-family:Fredoka,Nunito,sans-serif}
+body{font-family:system-ui,sans-serif;font-weight:600;background:var(--bg);color:var(--ink);min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 button{font:inherit;color:inherit;border:0;cursor:pointer;background:none}
 svg{display:block}
-.screen{display:none;min-height:100%;animation:in .5s ease}
-.screen.on{display:block}
-@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.wrap{max-width:560px;margin:auto;padding:18px 18px 110px}
-.btn{background:linear-gradient(135deg,var(--red),var(--org));color:#fff;font-family:Fredoka;font-weight:600;font-size:18px;padding:15px 30px;border-radius:99px;box-shadow:0 10px 24px -8px var(--red);transition:.2s}
-.btn:active{transform:scale(.96)}
-.btn:disabled{opacity:.5}
-.btn.ghost{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
-/* intro */
-#intro{background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),radial-gradient(circle at 90% 85%,#ff6a4d,transparent 55%),linear-gradient(160deg,#e8362f,#ff9f1c);color:#fff;text-align:center;position:relative;overflow:hidden}
-#intro .wrap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding-bottom:40px}
-#hero{width:min(300px,72vw);overflow:visible}
-.bowlg{animation:drop 1s cubic-bezier(.2,1.4,.4,1) both}
-@keyframes drop{from{transform:translateY(-120px);opacity:0}to{transform:none;opacity:1}}
-.noodle{fill:none;stroke:#ffe7a3;stroke-width:5;stroke-linecap:round;stroke-dasharray:140;stroke-dashoffset:140;animation:draw 1.2s .9s ease forwards}
-.noodle:nth-of-type(2){animation-delay:1.1s}.noodle:nth-of-type(3){animation-delay:1.3s}
-@keyframes draw{to{stroke-dashoffset:0}}
-.steam{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:0;animation:steam 2.6s infinite ease-out}
-.steam.s2{animation-delay:.8s}.steam.s3{animation-delay:1.6s}
-@keyframes steam{0%{opacity:0;transform:translateY(14px)}35%{opacity:.8}100%{opacity:0;transform:translateY(-26px)}}
-.stick{animation:stick 1s 1.5s cubic-bezier(.2,1,.3,1) both}
-@keyframes stick{from{transform:translate(90px,-60px) rotate(25deg);opacity:0}to{transform:none;opacity:1}}
-.spark{fill:#fff;transform-box:fill-box;transform-origin:center;animation:tw 2s infinite}
-.spark:nth-of-type(2){animation-delay:.6s}.spark:nth-of-type(3){animation-delay:1.2s}
-@keyframes tw{0%,100%{transform:scale(0)}50%{transform:scale(1)}}
-#intro h1{font-size:clamp(40px,11vw,60px);line-height:1;margin-top:8px;text-shadow:0 4px 0 rgba(0,0,0,.12)}
-#intro h1 span{display:inline-block;opacity:0;animation:pop .6s calc(1.6s + var(--i)*.05s) cubic-bezier(.2,1.5,.4,1) forwards}
-@keyframes pop{from{opacity:0;transform:translateY(30px) scale(.6)}to{opacity:1;transform:none}}
-#intro p{font-size:18px;max-width:320px;font-weight:700;margin-top:12px;opacity:0;animation:fade .8s 2.8s forwards}
-#intro .btn{background:#fff;color:var(--red);margin-top:24px;opacity:0;animation:fade .8s 3.2s forwards;box-shadow:0 14px 30px -10px rgba(0,0,0,.4)}
-@keyframes fade{to{opacity:1}}
+.w{max-width:560px;margin:auto;padding:16px 16px 110px}
+h2{font-size:24px}h3{font-size:16px}
+.sub{color:var(--mute);font-size:13px;font-weight:700}
+.btn{background:linear-gradient(135deg,var(--red),var(--org));color:#fff;font-weight:800;font-size:17px;padding:14px 28px;border-radius:99px;box-shadow:0 10px 24px -8px var(--red)}
+.btn:active{transform:scale(.96)}.btn:disabled{opacity:.5}
+.btn.g{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.full{width:100%;margin-top:10px}
+#intro{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:24px;background:linear-gradient(160deg,#e8362f,#ff9f1c);color:#fff}
+#intro h1{font-size:clamp(40px,12vw,64px);line-height:1}
+#intro .btn{background:#fff;color:var(--red)}
+.bob{animation:bob 2s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-12px)}}
+.xp{background:linear-gradient(135deg,#7c5cff,#b45cff);color:#fff;border-radius:24px;padding:14px 16px;margin:12px 0}
+.xp .r{display:flex;justify-content:space-between;align-items:center}
+.lv{font-size:28px;font-weight:900}.pill{background:rgba(255,255,255,.22);padding:5px 11px;border-radius:99px;font-size:13px;font-weight:800}
+.bar{height:11px;background:rgba(255,255,255,.25);border-radius:99px;margin:8px 0 4px;overflow:hidden}.bar i{display:block;height:100%;background:#ffe27a;border-radius:99px}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:10px 0;padding-bottom:4px;scrollbar-width:none}
+.tab{padding:8px 15px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-size:14px;font-weight:800;white-space:nowrap}
+.tab.on{background:var(--ink);color:var(--bg)}
+.list{display:grid;gap:12px}
+.row2{display:flex;gap:13px;align-items:center;background:var(--card);padding:13px;border-radius:22px;box-shadow:var(--sh);width:100%;text-align:left}
+.row2:active{transform:scale(.98)}
+.tile{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;flex:none;color:#fff}
+.in{flex:1;min-width:0}
+.hb{font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:6px}
+.hb.y{background:#d9f7e8;color:#0b7a4b}.hb.n{background:#ffe6cc;color:#a24a00}
+.plus{width:38px;height:38px;border-radius:50%;background:var(--grn);color:#fff;display:grid;place-items:center;flex:none}
+.lock{opacity:.55}
+.tag{background:var(--pur);color:#fff;font-size:11px;padding:2px 7px;border-radius:99px;margin-left:5px}
+.hist{background:var(--card);border-radius:18px;padding:13px;margin-bottom:10px;box-shadow:var(--sh)}
+.line{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0}
+#nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));background:var(--card);padding:6px;border-radius:99px;box-shadow:0 14px 40px -10px rgba(0,0,0,.45);display:flex;gap:4px;z-index:20}
+#nav button{padding:10px 16px;border-radius:99px;font-weight:800;font-size:14px}
+#nav button.on{background:linear-gradient(135deg,var(--red),var(--org));color:#fff}
+.sheet{position:fixed;inset:0;background:rgba(20,10,0,.55);display:none;align-items:flex-end;z-index:40}
+.sheet.on{display:flex}
+.box{background:var(--bg);width:100%;max-width:560px;margin:auto;border-radius:28px 28px 0 0;padding:20px;max-height:92vh;overflow:auto}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.opt{padding:8px 13px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-size:14px;font-weight:800;border:2px solid transparent}
+.opt.on{border-color:var(--red);color:var(--red)}
+textarea{width:100%;border-radius:14px;border:2px solid #f0e2cc;background:var(--card);color:var(--ink);font:inherit;padding:10px;height:64px;resize:none}
+.qty{display:flex;align-items:center;gap:10px}.qty button{width:30px;height:30px;border-radius:50%;background:var(--card);box-shadow:var(--sh);font-weight:900}
+.toys{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toy{background:var(--card);border-radius:22px;padding:12px;text-align:center;box-shadow:var(--sh)}
+.toy .tile{margin:0 auto 6px;border-radius:50%;width:70px;height:70px}
+.toy .b{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.toy .b button{padding:7px 12px;border-radius:99px;background:var(--pur);color:#fff;font-size:13px;font-weight:800}
+.toy .b .pv{background:none;color:var(--pur);box-shadow:inset 0 0 0 2px var(--pur)}
+.toy .b button:disabled{background:#d9cbb8;color:#8a7766}
+#stage{position:relative;height:300px;border-radius:22px;background:linear-gradient(180deg,#bfe9ff,#fff6e8 75%);overflow:hidden;touch-action:none;user-select:none}
+#stage:after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:repeating-linear-gradient(90deg,#e0b979 0 24px,#d4a762 24px 48px)}
+#pt{position:absolute;left:0;top:0;width:120px;height:120px;cursor:grab;touch-action:none;z-index:2}
+.hint{position:absolute;top:10px;left:0;right:0;text-align:center;font-size:13px;color:#4a6a80;font-weight:800;pointer-events:none}
+.spk{position:absolute;width:9px;height:9px;border-radius:50%;pointer-events:none;animation:spk .6s ease-out forwards}
+@keyframes spk{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+#toast{position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-120px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:99px;font-weight:800;z-index:99;transition:.4s;max-width:92%;text-align:center}
+#toast.on{transform:translate(-50%,0)}
+#snd{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:60;width:40px;height:40px;border-radius:50%;background:var(--card);box-shadow:var(--sh);display:grid;place-items:center}
+
+#cut{position:fixed;inset:0;overflow:hidden;z-index:10;color:#fff;text-align:center;background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),radial-gradient(circle at 90% 85%,#ff6a4d,transparent 55%),linear-gradient(160deg,#e8362f,#ff9f1c);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+#cut *{animation-fill-mode:both}
+#cut:not(.go) *{animation-play-state:paused!important}
+#hero{width:min(320px,76vw);overflow:visible}
 .blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.12);animation:fl 12s ease-in-out infinite}
 @keyframes fl{50%{transform:translate(20px,-40px) scale(1.15)}}
-/* location */
-.center{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:24px}
-.ring{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--red),var(--org));color:#fff;box-shadow:0 0 0 0 rgba(255,75,62,.5);animation:pulse 2s infinite}
-@keyframes pulse{to{box-shadow:0 0 0 28px rgba(255,75,62,0)}}
-.center p{color:var(--mute);max-width:320px;font-weight:700}
-.err{color:var(--red)!important;font-weight:800}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.top h2{font-size:26px}
-.sub{color:var(--mute);font-weight:700;font-size:14px}
-.xpcard{background:linear-gradient(135deg,#7c5cff,#b45cff);color:#fff;border-radius:26px;padding:16px 18px;box-shadow:0 16px 30px -14px #7c5cff;margin-bottom:16px}
-.xpcard .r{display:flex;justify-content:space-between;align-items:center}
-.lvl{font-family:Fredoka;font-size:30px;font-weight:700}
-.disc{background:rgba(255,255,255,.22);padding:6px 12px;border-radius:99px;font-weight:800;font-size:13px}
-.bar{height:12px;background:rgba(255,255,255,.25);border-radius:99px;margin:10px 0 6px;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffe27a,#fff);border-radius:99px;transition:width .8s cubic-bezier(.2,.9,.3,1)}
-.xpcard small{font-weight:800;opacity:.9}
-.shops{display:grid;gap:12px}
-.shop{display:flex;gap:14px;align-items:center;background:var(--card);padding:14px;border-radius:24px;box-shadow:var(--sh);text-align:left;width:100%;transition:.2s}
-.shop:active{transform:scale(.98)}
-.tile{width:68px;height:68px;border-radius:20px;display:grid;place-items:center;flex:none;color:#fff}
-.shop h3{font-size:18px}
-.item{display:flex;gap:14px;align-items:center;background:var(--card);border-radius:24px;padding:14px;box-shadow:var(--sh);width:100%;text-align:left;transition:.15s}
-.item:active{transform:scale(.98)}
-.item .in{flex:1;min-width:0}
-.item h3{font-size:17px}
-.item p{font-size:13px;color:var(--mute);font-weight:700}
-.price{font-family:Fredoka;font-weight:600;font-size:17px}
-.price s{color:var(--mute);font-size:13px;font-weight:400;margin-right:6px}
-.plus{width:40px;height:40px;border-radius:50%;background:var(--grn);color:#fff;display:grid;place-items:center;flex:none;box-shadow:0 8px 16px -6px var(--grn)}
-.item.lock{opacity:.6}
-.item.lock .tile{filter:grayscale(.7)}
-.item.excl{outline:2px dashed var(--pur)}
-.tag{display:inline-block;background:var(--pur);color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
-.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px;scrollbar-width:none}
-.tab{padding:8px 16px;border-radius:99px;background:var(--card);font-weight:800;white-space:nowrap;box-shadow:var(--sh);font-size:14px}
-.tab.on{background:var(--ink);color:var(--bg)}
-.grid{display:grid;gap:12px}
-nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));background:var(--card);padding:6px;border-radius:99px;box-shadow:0 14px 40px -10px rgba(0,0,0,.4);z-index:20;display:none;gap:4px}
-nav.on{display:flex}
-nav button{padding:11px 18px;border-radius:99px;font-weight:800;font-size:14px;position:relative;display:flex;gap:6px;align-items:center}
-nav button.on{background:linear-gradient(135deg,var(--red),var(--org));color:#fff}
-.badge{background:var(--pur);color:#fff;font-size:11px;border-radius:99px;min-width:18px;padding:1px 5px;text-align:center}
-.pane{display:none}.pane.on{display:block;animation:in .35s}
-.sheet{position:fixed;inset:0;background:rgba(20,10,0,.5);display:none;align-items:flex-end;z-index:40;backdrop-filter:blur(3px)}
-.sheet.on{display:flex}
-.sheet .box{background:var(--bg);width:100%;max-width:560px;margin:auto;border-radius:30px 30px 0 0;padding:22px;max-height:90vh;overflow:auto;animation:in .3s}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;font-weight:700}
-.qty{display:flex;align-items:center;gap:10px}
-.qty button{width:30px;height:30px;border-radius:50%;background:var(--card);box-shadow:var(--sh);font-weight:800}
-.tot{border-top:2px dashed var(--line);margin-top:8px;padding-top:8px}
-.big{font-family:Fredoka;font-size:22px;font-weight:700}
-.grp{margin-top:16px}
-.grp h4{font-family:Fredoka;font-size:16px;display:flex;justify-content:space-between}
-.grp h4 small{font-family:Nunito;color:var(--mute);font-weight:800;font-size:12px}
-.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.opt{padding:9px 14px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-weight:800;font-size:14px;border:2px solid transparent;transition:.15s}
-.opt.on{border-color:var(--red);background:#fff1ee;color:#c02a1f}
-@media(prefers-color-scheme:dark){.opt.on{background:#46231d;color:#ffb3a8}}
-textarea{width:100%;margin-top:8px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:600;padding:12px;resize:none;height:76px}
-textarea:focus{outline:none;border-color:var(--org)}
-.stars{display:flex;gap:6px;justify-content:center;margin:12px 0}
-.stars button{color:#d7c8b2;transition:.15s}
-.stars button.on{color:#ffb400;transform:scale(1.12)}
-.toy{background:var(--card);border-radius:24px;padding:16px;text-align:center;box-shadow:var(--sh)}
-.toy .tile{margin:0 auto 8px;border-radius:50%;width:64px;height:64px;font-family:Fredoka;font-size:26px;font-weight:700}
-.toys{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.toy button{margin-top:8px;background:var(--pur);color:#fff;padding:8px 14px;border-radius:99px;font-weight:800;font-size:13px}
-.toy button:disabled{background:var(--line);color:var(--mute)}
-.hist{background:var(--card);border-radius:20px;padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
-h3.sec{margin:18px 0 10px;font-size:20px}
-#toast{position:fixed;top:calc(16px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-120px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;font-weight:800;z-index:99;transition:.4s;max-width:92%;text-align:center}
-#toast.on{transform:translate(-50%,0)}
-.conf{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;z-index:90;pointer-events:none;animation:fall 2.2s ease-in forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.3}}
-#back{display:inline-flex;align-items:center;gap:6px;background:var(--card);box-shadow:var(--sh);padding:8px 14px;border-radius:99px;font-weight:800;margin-bottom:8px;color:var(--ink)}
-#snd{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:60;width:42px;height:42px;border-radius:50%;background:var(--card);color:var(--ink);box-shadow:var(--sh);display:grid;place-items:center}
-#snd.off{opacity:.55}
-.rar{font-size:11px;font-weight:800;color:var(--pur)}
-.hb{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px;vertical-align:middle;margin-left:6px;letter-spacing:.02em}
-.hb.y{background:#d9f7e8;color:#0b7a4b}.hb.n{background:#ffe6cc;color:#a24a00}
-@media(prefers-color-scheme:dark){.hb.y{background:#123d2a;color:#7be3b2}.hb.n{background:#4a2a10;color:#ffc58a}}
-#stage{position:relative;height:300px;border-radius:24px;background:linear-gradient(180deg,#bfe9ff,#fff6e8 75%);overflow:hidden;touch-action:none;user-select:none}
-#stage:after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:repeating-linear-gradient(90deg,#e0b979 0 24px,#d4a762 24px 48px)}
-#ptoy{position:absolute;left:0;top:0;width:120px;height:120px;cursor:grab;will-change:transform;z-index:2;touch-action:none}
-.hint{position:absolute;top:10px;left:0;right:0;text-align:center;font-weight:800;font-size:13px;color:#4a6a80;pointer-events:none}
-.spk{position:absolute;width:9px;height:9px;border-radius:50%;z-index:3;pointer-events:none;animation:spk .6s ease-out forwards}
-@keyframes spk{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
-.tb{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.toy .tb{gap:6px}
-.toy .pv{background:transparent;color:var(--pur);box-shadow:inset 0 0 0 2px var(--pur)}
-.toy .tile svg{display:block}
-</style>
-</head>
-<body>
+.bw{animation:drop 1s cubic-bezier(.2,1.4,.4,1)}
+@keyframes drop{from{transform:translateY(-140px);opacity:0}to{transform:none;opacity:1}}
+.nf{fill:none;stroke:#ffe7a3;stroke-width:5;stroke-linecap:round;animation:nf 1s cubic-bezier(.5,0,.9,.6) calc(1s + var(--d)*.22s)}
+@keyframes nf{0%{transform:translateY(-330px);opacity:1}85%{transform:translateY(62px);opacity:1}100%{transform:translateY(62px);opacity:0}}
+.nd{fill:none;stroke:#ffe7a3;stroke-width:5;stroke-linecap:round;stroke-dasharray:140;animation:draw 1s ease}
+@keyframes draw{from{stroke-dashoffset:140}to{stroke-dashoffset:0}}
+.eg{transform-box:fill-box;transform-origin:center;animation:pp .5s 4.9s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pp{from{transform:scale(0);opacity:0}to{transform:none;opacity:1}}
+.st{transform-origin:140px 70px;filter:drop-shadow(0 0 7px #fff);animation:star 1s cubic-bezier(.15,.7,.3,1) 3.9s}
+@keyframes star{0%{transform:translate(300px,-260px) rotate(-30deg);opacity:0}15%{opacity:1}100%{transform:none;opacity:1}}
+.tr{animation:tr 1.5s 3.9s}
+@keyframes tr{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.fl{fill:none;stroke:#fff;stroke-width:4;transform-box:fill-box;transform-origin:center;animation:ring .7s 4.8s ease-out}
+@keyframes ring{from{transform:scale(0);opacity:1}to{transform:scale(5);opacity:0}}
+.steam{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;animation:steam 2.6s infinite ease-out calc(5s + var(--s))}
+@keyframes steam{0%{opacity:0;transform:translateY(14px)}35%{opacity:.8}100%{opacity:0;transform:translateY(-26px)}}
+.spark{fill:#fff;transform-box:fill-box;transform-origin:center;animation:tw 2s infinite calc(5s + var(--s))}
+@keyframes tw{0%,100%{transform:scale(0)}50%{transform:scale(1)}}
+#cut h1{font-family:Fredoka,sans-serif;font-size:clamp(40px,11vw,60px);line-height:1;margin-top:8px;text-shadow:0 4px 0 rgba(0,0,0,.12)}
+#cut h1 span{display:inline-block;animation:pop .6s calc(5.2s + var(--i)*.05s) cubic-bezier(.2,1.5,.4,1)}
+@keyframes pop{from{opacity:0;transform:translateY(30px) scale(.6)}to{opacity:1;transform:none}}
+#cut p{font-size:18px;max-width:320px;font-weight:800;margin-top:12px;animation:fade .8s 6.2s}
+.go2{margin-top:22px;background:#fff!important;color:var(--red)!important;animation:fade .8s 6.7s;pointer-events:none;box-shadow:0 14px 30px -10px rgba(0,0,0,.4)}
+#cut.rdy .go2{pointer-events:auto}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+#cut.fin *:not(.steam):not(.spark){animation-delay:0s!important;animation-duration:.01s!important}
+#cut.fin .steam,#cut.fin .spark{animation-delay:0s!important}
+#tap{position:absolute;inset:0;background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),linear-gradient(160deg,#e8362f,#ff9f1c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:5}
+#tap .btn{background:#fff;color:var(--red)}
+.skip{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;background:rgba(255,255,255,.25);padding:7px 14px;border-radius:99px;font-size:13px;font-weight:800;color:#fff;z-index:6}
+.ban{border-radius:24px;padding:16px;color:#fff;margin:8px 0;display:flex;align-items:center;gap:14px;box-shadow:var(--sh)}
+.tile span{filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
 
-<section id="intro" class="screen on">
-  <div class="blob" style="width:220px;height:220px;left:-60px;top:8%"></div>
-  <div class="blob" style="width:160px;height:160px;right:-40px;bottom:12%;animation-delay:-4s"></div>
-  <div class="wrap">
-    <svg id="hero" viewBox="0 0 300 260" aria-hidden="true">
-      <g class="bowlg">
-        <ellipse cx="150" cy="232" rx="82" ry="9" fill="rgba(0,0,0,.18)"/>
-        <path d="M52 124h196c0 62-40 104-98 104S52 186 52 124z" fill="#fff"/>
-        <path d="M60 150h180c-8 40-40 70-90 70s-82-30-90-70z" fill="#ff4b3e"/>
-        <path d="M60 150h180" stroke="#ffc94d" stroke-width="6" stroke-linecap="round"/>
-        <rect x="108" y="222" width="84" height="10" rx="5" fill="#fff"/>
-        <ellipse cx="150" cy="124" rx="98" ry="16" fill="#fff"/>
-        <ellipse cx="150" cy="124" rx="86" ry="11" fill="#ffb347"/>
-      </g>
-      <path class="noodle" d="M80 120c14-16 28 16 42 0s28 16 42 0 28 16 42 0"/>
-      <path class="noodle" d="M90 126c14-14 26 12 40 0s26 14 40 0 26 12 36-2"/>
-      <path class="noodle" d="M96 116c12-12 24 12 38 0s24 12 38 0 24 12 34-2"/>
-      <circle cx="190" cy="112" r="12" fill="#fff8e1"/><circle cx="190" cy="112" r="6" fill="#ffb400"/>
-      <g class="stick"><rect x="120" y="20" width="7" height="110" rx="3.5" fill="#6b3e1d" transform="rotate(-8 123 75)"/><rect x="138" y="18" width="7" height="110" rx="3.5" fill="#8a5028" transform="rotate(-2 141 73)"/></g>
-      <path class="steam" d="M110 80c-10-14 10-22 0-38"/>
-      <path class="steam s2" d="M150 74c-10-14 10-22 0-38"/>
-      <path class="steam s3" d="M190 80c-10-14 10-22 0-38"/>
-      <path class="spark" d="M40 60l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
-      <path class="spark" d="M260 90l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
-      <path class="spark" d="M238 24l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
-    </svg>
-    <h1 class="f" id="ttl"></h1>
-    <p>Order local favourites, level up with every meal, and eat for less.</p>
-    <button class="btn" id="start">Start ordering</button>
-  </div>
-</section>
-
-<section id="loc" class="screen">
-  <div class="center">
-    <div class="ring" id="pinic"></div>
-    <h2>Are you in Singapore?</h2>
-    <p>Hawker Paradise only serves customers in Singapore, so we need to check your location.</p>
-    <p class="err" id="locerr"></p>
-    <button class="btn" id="chk">Check my location</button>
-    <button class="btn ghost" id="demo" style="font-size:14px;padding:10px 20px">Demo: skip check</button>
-  </div>
-</section>
-
-<section id="shops" class="screen">
-  <div class="wrap">
-    <div class="top"><div><div class="sub">Welcome to Hawker Paradise</div><h2>Choose a stall</h2></div></div>
-    <div class="xpcard" data-xp></div>
-    <div class="tabs" id="hf"></div>
-    <div class="shops" id="shoplist"></div>
-  </div>
-</section>
-
-<section id="app" class="screen">
-  <div class="wrap">
-    <div class="top">
-      <div><button class="sub" id="back">&larr; All stalls</button><h2 id="shopname"></h2><div class="sub" id="shopsub"></div></div>
-    </div>
-    <div class="xpcard" data-xp></div>
-    <div class="pane on" id="p-menu"><div class="tabs" id="cats"></div><div class="grid" id="menu"></div></div>
-    <div class="pane" id="p-rew">
-      <h3 class="sec" style="margin-top:0">Toy shop</h3>
-      <p class="sub" style="margin-bottom:12px">Spend XP on collectible toys. Your level stays, only your XP wallet goes down.</p>
-      <div class="toys" id="toys"></div>
-      <h3 class="sec">My toys</h3><div id="owned" class="sub"></div>
-    </div>
-    <div class="pane" id="p-me">
-      <h3 class="sec" style="margin-top:0">Orders</h3><div id="hist"></div>
-      <h3 class="sec">Level perks</h3><div id="perks" class="sub"></div>
-      <button class="btn ghost" id="boost" style="margin-top:16px;font-size:14px;padding:10px 18px">Demo: +5,000 XP</button>
-    </div>
-  </div>
-</section>
-
-<nav id="nav">
-  <button id="navback">Stalls</button>
-  <button class="on" data-pn="menu">Menu</button>
-  <button data-pn="rew">Toys</button>
-  <button data-pn="me">Me</button>
-  <button id="cartbtn"><span id="cartic"></span><span class="badge" id="cc">0</span></button>
-</nav>
-
-<button id="snd" aria-label="Toggle sound"></button>
-<div class="sheet" id="pv" style="z-index:70"><div class="box" id="pvbox"></div></div>
-<div class="sheet" id="sheet"><div class="box" id="sbox"></div></div>
+:root{--bg:#fff6e8;--card:#fff;--ink:#2b1d14;--mute:#8a7766}
+body{background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),radial-gradient(circle at 90% 85%,#ff6a4d,transparent 55%),linear-gradient(160deg,#e8362f,#ff9f1c) fixed;color:#fff;font-family:Nunito,system-ui,sans-serif}
+h1,h2,h3,.btn,.lv,.tab,#nav button{font-family:Fredoka,Nunito,sans-serif}
+h2{text-shadow:0 3px 0 rgba(0,0,0,.12)}
+.sub{color:rgba(255,255,255,.92)}
+.row2,.hist,.toy,.box,.opt,.qty button,textarea,.btn.g{color:var(--ink)}
+.row2 .sub,.hist .sub,.toy .sub,.box .sub{color:var(--mute)}
+.tab{background:rgba(255,255,255,.22);color:#fff;box-shadow:none}
+.tab.on{background:#fff;color:var(--red)}
+#nav button{display:flex;gap:6px;align-items:center;color:var(--ink)}
+#nav button.on{color:#fff}
+#intro{font-family:Fredoka,sans-serif}
+</style></head><body>
+<div id="root"></div>
+<button id="snd" aria-label="Sound"></button>
+<div class="sheet" id="sheet"><div class="box" id="box"></div></div>
 <div id="toast"></div>
-
 <script>
-/* ====== CONFIG ====== */
-const XP_PER_DOLLAR=10, BASE_XP=100, GROWTH=1.5, REVIEW_XP=100, MAX_DISC_LEVEL=50;
-/* ==================== */
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const P={
- bowl:'<path d="M3 11h18c0 5-4 9-9 9s-9-4-9-9z"/><path d="M8 7c0-2 2-2 2-4M13 7c0-2 2-2 2-4"/>',
- plate:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>',
- cup:'<path d="M6 7h12l-1.5 13h-9z"/><path d="M9 7l2-4h3"/>',
- bread:'<path d="M3 15c0-5 4-9 9-9s9 4 9 9-4 4-9 4-9 1-9-4z"/><path d="M9 12l2 2M13 10l2 2"/>',
- skewer:'<path d="M3 21L21 3"/><circle cx="8" cy="16" r="2.5"/><circle cx="12.5" cy="11.5" r="2.5"/><circle cx="17" cy="7" r="2.5"/>',
- star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
- pin:'<path d="M12 21s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
- cart:'<path d="M3 4h3l2.5 11h10l2-8H7"/><circle cx="10" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
- lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
- plus:'<path d="M12 5v14M5 12h14"/>',
- vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/>',
- mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',
- crown:'<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/>'};
-const ic=(t,s=28,sw=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${P[t]}</svg>`;
+const $=s=>document.querySelector(s);
+const ic=(p,s=28)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const IC={
+chick:'<path d="M6 19c-2-4-1-9 3-11 3-2 7-1 8 2 1 2 0 4-2 5l1 4z"/><path d="M15 6l2-2"/>',
+noodle:'<path d="M3 12h18c0 5-4 8-9 8s-9-3-9-8z"/><path d="M6 8l12-5M8 9l11-4"/>',
+prata:'<circle cx="12" cy="12" r="9"/><path d="M5 9c5 2 9 2 14 0M5 15c5-2 9-2 14 0"/>',
+skewer:'<path d="M3 21L21 3"/><circle cx="8" cy="16" r="2.5"/><circle cx="12.5" cy="11.5" r="2.5"/><circle cx="17" cy="7" r="2.5"/>',
+wok:'<path d="M3 11h18c-1 6-5 9-9 9s-8-3-9-9z"/><path d="M21 9l3-2M7 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4"/>',
+sweet:'<path d="M5 9h14l-2 11H7z"/><circle cx="12" cy="6" r="3"/>',
+bone:'<path d="M6 9a2 2 0 11-1-3 2 2 0 013-1l8 8a2 2 0 013-1 2 2 0 11-1 3 2 2 0 01-3 1L7 10a2 2 0 01-1-1z"/>',
+leaf:'<path d="M5 19C4 9 11 4 20 4c0 9-5 16-15 15z"/><path d="M5 19L14 10"/>',
+toast:'<path d="M5 20V9a4 4 0 014-4h6a4 4 0 014 4v11z"/><path d="M9 12h6"/>',
+dumpling:'<path d="M3 15c0-6 4-10 9-10s9 4 9 10z"/><path d="M8 9l1 6M12 7v8M16 9l-1 6"/>',
+crab:'<ellipse cx="12" cy="14" rx="7" ry="5"/><path d="M5 11L3 6M19 11l2-5M8 8V4M16 8V4"/>',
+cupm:'<path d="M6 8h12l-1.5 12h-9z"/><path d="M5 8h14M9 5c1-2 5-2 6 0"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+cart:'<path d="M3 4h3l2.5 11h10l2-8H7"/><circle cx="10" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
+vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/>',
+mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',
+x:'<path d="M6 6l12 12M18 6L6 18"/>',pin:'<path d="M12 21s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>'};
 
-/* option groups: [title, single?, choices[[label,extra$]]] */
+const bw=c=>'<path d="M6 24h36c0 11-8 18-18 18S6 35 6 24z" fill="#fff"/><path d="M9 30h30c-2 6-8 10-15 10S11 36 9 30z" fill="'+c+'"/>';
+const SV={
+bowl:bw('#ff4b3e')+'<ellipse cx="24" cy="24" rx="18" ry="4" fill="#ffb347"/><path d="M12 23q4-4 8 0t8 0 8 0" stroke="#ffe7a3" stroke-width="2" fill="none"/>',
+chick:'<circle cx="30" cy="18" r="13" fill="#e8892b"/><circle cx="26" cy="14" r="4" fill="#f5b25e"/><path d="M21 27L9 39" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="7" cy="38" r="3.5" fill="#fff"/><circle cx="11" cy="42" r="3.5" fill="#fff"/>',
+noodle:bw('#ff6a5c')+'<path d="M9 22q4-8 8 0t8 0 8 0 6 0" stroke="#ffd36b" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M28 4l6 18M34 3l4 19" stroke="#6b3e1d" stroke-width="3" stroke-linecap="round"/>',
+prata:'<circle cx="24" cy="24" r="19" fill="#f2c26b"/><path d="M10 18q14 6 28 0M8 26q16 6 32 0M12 34q12 4 24 0" stroke="#d49a3a" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="12" r="6" fill="#e07b1a"/>',
+skewer:'<path d="M5 43L43 5" stroke="#d7a86e" stroke-width="3" stroke-linecap="round"/><ellipse cx="14" cy="34" rx="6" ry="8" fill="#a8541f" transform="rotate(45 14 34)"/><ellipse cx="24" cy="24" rx="6" ry="8" fill="#c0392b" transform="rotate(45 24 24)"/><ellipse cx="34" cy="14" rx="6" ry="8" fill="#a8541f" transform="rotate(45 34 14)"/>',
+wok:'<path d="M4 24h40c-2 12-10 18-20 18S6 36 4 24z" fill="#455a64"/><rect x="40" y="21" width="8" height="4" rx="2" fill="#8d6e63"/><ellipse cx="24" cy="23" rx="19" ry="5" fill="#ffd54f"/><circle cx="16" cy="22" r="2" fill="#e53935"/><circle cx="26" cy="21" r="2" fill="#43a047"/><circle cx="33" cy="23" r="2" fill="#ff8a65"/>',
+sweet:'<path d="M12 22h24l-3 20H15z" fill="#fff"/><path d="M8 24q16-26 32 0z" fill="#ff8fb1"/><path d="M14 24q10-15 20 0z" fill="#7be3b2"/><circle cx="24" cy="8" r="3.5" fill="#e53935"/>',
+bone:bw('#8d6e63')+'<ellipse cx="24" cy="24" rx="18" ry="4" fill="#d9b48f"/><path d="M26 6a3 3 0 112 4l8 8a3 3 0 11-2 4l-4-4-4 4a3 3 0 11-4-2l4-4-4-4a3 3 0 014-2z" fill="#f5e6d3" stroke="#b08968" stroke-width="1.5"/>',
+leaf:'<path d="M3 36C3 16 20 5 45 6c0 21-13 34-42 30z" fill="#43a047"/><circle cx="22" cy="24" r="9" fill="#fff"/><circle cx="33" cy="17" r="5.5" fill="#ffca28" stroke="#fff" stroke-width="2"/><circle cx="13" cy="33" r="3.5" fill="#e53935"/><circle cx="31" cy="31" r="3" fill="#8d6e63"/>',
+toast:'<path d="M8 41V19a8 8 0 018-8h16a8 8 0 018 8v22z" fill="#e0a45c"/><rect x="13" y="18" width="22" height="19" rx="3" fill="#fff3c4"/><rect x="13" y="26" width="22" height="5" fill="#8bc34a"/>',
+dumpling:'<rect x="2" y="34" width="44" height="9" rx="3" fill="#c28b4a"/><path d="M5 35c0-14 8-23 19-23s19 9 19 23z" fill="#fff3e0" stroke="#e0b98a" stroke-width="2"/><path d="M14 19l3 15M24 14v20M34 19l-3 15" stroke="#e0b98a" stroke-width="2"/>',
+crab:'<path d="M6 24a6 6 0 1112-7M42 24a6 6 0 10-12-7" fill="#e53935"/><path d="M8 38l6-6M40 38l-6-6M12 42l5-6M36 42l-5-6" stroke="#c62828" stroke-width="3" stroke-linecap="round"/><ellipse cx="24" cy="28" rx="15" ry="11" fill="#e53935"/><circle cx="18" cy="19" r="4" fill="#fff"/><circle cx="30" cy="19" r="4" fill="#fff"/><circle cx="18" cy="19" r="2" fill="#222"/><circle cx="30" cy="19" r="2" fill="#222"/>',
+cupm:'<path d="M12 12h24l-3 30H15z" fill="#fff"/><path d="M14 21h20l-2 19H16z" fill="#6d4c41"/><rect x="10" y="8" width="28" height="6" rx="3" fill="#43a047"/><path d="M28 8l4-6" stroke="#ffd54f" stroke-width="3" stroke-linecap="round"/><path d="M19 21l3-5 3 5 3-5 3 5z" fill="#8bc34a"/>',
+drink:'<path d="M12 12h24l-3 30H15z" fill="#fff"/><path d="M14 21h20l-2 19H16z" fill="#ff9f1c"/><rect x="10" y="8" width="28" height="6" rx="3" fill="#ff4b3e"/><path d="M28 8l4-6" stroke="#7c5cff" stroke-width="3" stroke-linecap="round"/>',
+crown:'<path d="M5 34L3 14l10 8 11-14 11 14 10-8-2 20z" fill="#ffc107"/><rect x="5" y="34" width="38" height="6" rx="2" fill="#ff9800"/><circle cx="24" cy="29" r="3" fill="#e53935"/><circle cx="12" cy="30" r="2" fill="#42a5f5"/><circle cx="36" cy="30" r="2" fill="#66bb6a"/>',
+lock:'<rect x="10" y="22" width="28" height="20" rx="4" fill="#9e9e9e"/><path d="M16 22v-6a8 8 0 0116 0v6" stroke="#757575" stroke-width="4" fill="none"/><circle cx="24" cy="32" r="3" fill="#fff"/>',
+cart:'<path d="M4 8h6l5 22h20l5-16H13" stroke="#ff4b3e" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="19" cy="38" r="4" fill="#ff9f1c"/><circle cx="33" cy="38" r="4" fill="#ff9f1c"/>',
+vol:'<path d="M6 18h8l10-8v28l-10-8H6z" fill="#ff9f1c"/><path d="M30 17a9 9 0 010 14M35 12a16 16 0 010 24" stroke="#ff4b3e" stroke-width="3" fill="none" stroke-linecap="round"/>',
+mute:'<path d="M6 18h8l10-8v28l-10-8H6z" fill="#ff9f1c"/><path d="M32 18l10 12M42 18L32 30" stroke="#ff4b3e" stroke-width="4" stroke-linecap="round"/>',
+pin:'<path d="M24 44s14-12 14-24a14 14 0 10-28 0c0 12 14 24 14 24z" fill="#fff"/><circle cx="24" cy="20" r="6" fill="#ff4b3e"/>',
+bear:'<circle cx="12" cy="12" r="6" fill="#a1887f"/><circle cx="36" cy="12" r="6" fill="#a1887f"/><circle cx="24" cy="26" r="16" fill="#c8a07a"/><ellipse cx="24" cy="32" rx="7" ry="5" fill="#f3e0c8"/><circle cx="18" cy="23" r="2.5" fill="#222"/><circle cx="30" cy="23" r="2.5" fill="#222"/><circle cx="24" cy="30" r="2" fill="#222"/>'};
+const em=(k,z)=>`<svg viewBox="0 0 48 48" width="${z}" height="${z}" style="flex:none">${SV[k]}</svg>`;
+/* ===== SOUND (loud) ===== */
+let AC,MG,MUTE=false;try{MUTE=localStorage.hpm==='1'}catch(e){}
+function M(){if(!MG){const c=AC.createDynamicsCompressor();MG=AC.createGain();MG.gain.value=10;MG.connect(c);c.connect(AC.destination)}return MG}
+function tone(f,t,d,ty='sine',v=.12,f2){const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime+t;o.type=ty;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(Math.min(v*2.5,.9),n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(M());o.start(n);o.stop(n+d+.05)}
+function noise(t,d,v=.08,fq=3000){const b=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type='highpass';f.frequency.value=fq;g.gain.value=v*2.5;s.connect(f).connect(g).connect(M());s.start(AC.currentTime+t)}
+const SFX={
+squeak:a=>{const b=700+(a%7)*90;tone(b,0,.1,'sine',.2,b*1.9);tone(b*1.5,.07,.12,'triangle',.14,b*2.2)},
+thud:()=>tone(130,0,.14,'sine',.35,55),
+whoosh:()=>{noise(0,.35,.12,1200);tone(300,0,.3,'sine',.1,900)},
+tap:()=>tone(700,0,.05,'triangle',.09),pop:()=>tone(400,0,.12,'sine',.14,900),
+add:()=>{tone(523,0,.09,'square',.06);tone(784,.07,.14,'square',.06)},
+coin:()=>{tone(988,0,.07,'square',.07);tone(1319,.07,.3,'square',.07)},
+error:()=>tone(220,0,.18,'sawtooth',.08,120),
+success:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.08,.2,'triangle',.12)),
+bell:()=>{noise(0,.5,.06,2500);tone(1568,0,.7,'sine',.12);tone(2093,.02,.5,'sine',.06)},
+toy:()=>{[659,784,988,1319,1568].forEach((f,i)=>tone(f,i*.06,.18,'square',.06));noise(.3,.3,.05,6000)},
+level:()=>{[392,523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.3,'triangle',.14));tone(1319,.6,.7,'triangle',.1)}};
+function sfx(n,a){if(MUTE)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();SFX[n](a)}catch(e){}}
+const drawSnd=()=>$('#snd').innerHTML=em(MUTE?'mute':'vol',22);
+$('#snd').onclick=()=>{MUTE=!MUTE;try{localStorage.hpm=MUTE?'1':'0'}catch(e){}drawSnd();sfx('pop')};drawSnd();
+
+/* ===== DATA ===== */
 const G={
- prata:['Type of prata',1,[['Plain',0],['Egg',1],['Cheese',2],['Onion',1],['Mushroom',2.5],['Banana',1.5]]],
- curry:['Choose your curry',1,[['Chicken curry',0],['Fish curry',0],['Mutton curry',.5],['Dhal',0],['No curry',0]]],
- pextra:['Extras',0,[['Extra curry',.5],['Sugar',0],['Crispy',0]]],
- crice:['Rice style',1,[['Plain rice',0],['Chicken rice',.3],['Chilli rice',.3]]],
- part:['Chicken part',1,[['Breast',0],['Thigh',.5],['Drumstick',.8],['Mixed',0]]],
- cside:['Add-ons',0,[['Braised egg',1],['Bok choy',2.5],['Cucumber',.5],['Extra chilli',0]]],
- noodle:['Noodle type',1,[['Yellow noodle',0],['Bee hoon',0],['Thick bee hoon',0],['Kway teow',0],['Mee pok',0]]],
- soup:['Soup or dry',1,[['Soup',0],['Dry',0]]],
- spice:['Spice level',1,[['No spice',0],['Mild',0],['Medium',0],['Spicy',0],['Extra spicy',0]]],
- topn:['Toppings',0,[['Extra prawns',2],['Egg',1],['Fishcake',1],['Cockles',1.5],['Tau pok',.8]]],
- cut:['Meat choice',1,[['Chicken',0],['Beef',1],['Mutton',1.2],['Mixed',1.5]]],
- sat:['How many sticks',1,[['5 sticks',0],['10 sticks',4.5],['20 sticks',9]]],
- sauce:['Sauce',1,[['Peanut sauce',0],['Chilli',0],['Both',.3]]],
- wok:['Wok style',1,[['Normal',0],['With cockles',1],['No cockles',0],['Extra wok hei',0]]],
- fried:['Fried rice type',1,[['Egg',0],['Chicken',.5],['Seafood',1.5],['Ikan bilis',.5]]],
- ice:['Ice level',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],
- sweet:['Sweetness',1,[['Normal',0],['Less sweet',0],['Half sweet',0],['No sugar',0]]],
- dessert:['Toppings',0,[['Red bean',.5],['Grass jelly',.5],['Attap seed',.5],['Ice cream',1]]],
- flav:['Flavour',1,[['Original',0],['Gula Melaka',.5],['Durian',2]]],
- bkt:['Soup style',1,[['Peppery',0],['Herbal',0],['Half and half',0]]],
- rice:['Rice',1,[['White rice',0],['Extra rice',.5],['No rice',0]]],
- nl:['Add-ons',0,[['Fried egg',1],['Ikan bilis',.5],['Otah',1.5],['Extra sambal',0],['Cucumber',0]]],
- bread:['Bread style',1,[['Toasted',0],['Steamed',0],['Thin crispy',.3]]],
- kopi:['Coffee or tea',1,[['Regular',0],['O (no milk)',0],['C (evaporated)',.1],['Gao (strong)',0],['Po (light)',0]]],
- dsp:['Portion',1,[['Small basket',0],['Large basket',1.5]]],
- zs:['Portion',1,[['Small',0],['Medium',4],['Large',8]]],
- ws:['Sauce',1,[['Black pepper',0],['Mushroom',0],['Brown gravy',0],['Cheese',.5]]],
- side:['Side',1,[['Fries',0],['Coleslaw',0],['Baked beans',0],['Salad',0]]],
- tp:['Protein',1,[['Chicken',0],['Prawn',1.5],['Tofu',0],['Mixed seafood',2]]],
- ramen:['Broth',1,[['Tonkotsu',0],['Shoyu',0],['Miso',0],['Spicy miso',.5]]],
- cp:['Claypot add-ons',0,[['Salted fish',1.5],['Extra egg',1],['Extra veg',1]]],
- por:['Toppings',0,[['Century egg',1],['Youtiao',1],['Fish slices',2],['Preserved veg',0]]],
- pad:['Pick your dishes',0,[['Beef rendang',2],['Ayam balado',1.8],['Sambal egg',1],['Sayur lodeh',1],['Tempeh goreng',.8],['Fried fish',2]]],
- reg:['Size',1,[['Regular',0],['Large',1]]]
-};
-const I=(n,t,p,g=[],req=0)=>({n,t,p,g,req});
-const SHOPS=[
- {id:'a',halal:false,name:"Ah Hock Chicken Rice",sub:'Chicken rice, poached and roasted',c:['#ffb347','#ff7a2f'],cats:{
-  'Chicken Rice':[I('Roasted Chicken Rice','plate',4.5,['part','crice','cside']),I('Steamed Chicken Rice','plate',4.5,['part','crice','cside']),I('Char Siew Rice','plate',5,['crice','cside']),I('Chicken Drumstick Rice','plate',5.5,['crice','cside'])],
-  'Sides':[I('Braised Egg','bowl',1),I('Bok Choy with Oyster Sauce','bowl',2.5),I('Chicken Soup','bowl',2,['reg'])],
-  'Drinks':[I('Barley','cup',1.8,['ice','reg']),I('Lime Juice','cup',2,['ice','sweet']),I('Iced Milo','cup',2.5,['ice','sweet','reg'])],
-  'Exclusive':[I('Golden Truffle Chicken Rice','crown',9,['part'],51),I('Wagyu Char Siew Rice','crown',14,[],55),I('Imperial Feast Platter','crown',28,[],60)]}},
- {id:'b',halal:false,name:"Mdm Lim Laksa & Noodles",sub:'Soupy, spicy and slurpable',c:['#ff6a5c','#d62f4b'],cats:{
-  'Noodles':[I('Curry Laksa','bowl',5,['noodle','spice','topn']),I('Prawn Mee','bowl',5.5,['noodle','soup','spice','topn']),I('Bak Chor Mee','bowl',5,['noodle','soup','spice']),I('Wanton Mee','bowl',4.5,['noodle','soup','spice'])],
-  'Snacks':[I('Fried Wanton','plate',3),I('Otah','plate',2.5),I('Fishball Skewer','skewer',2)],
-  'Drinks':[I('Sugarcane','cup',2.2,['ice']),I('Teh Tarik','cup',2,['sweet','ice']),I('Chrysanthemum Tea','cup',1.8,['sweet','ice'])],
-  'Exclusive':[I('Lobster Laksa','crown',15,['noodle','spice'],51),I('Black Truffle Mee Pok','crown',13,['soup'],54),I('Dragon Noodle Banquet','crown',30,[],60)]}},
- {id:'c',halal:true,name:'Uncle Raj Prata House',sub:'Crispy prata and rich curries',c:['#43c98a','#17977b'],cats:{
-  'Prata':[I('Roti Prata','bread',2.5,['prata','curry','pextra']),I('Prata Set of 3','bread',6.5,['prata','curry','pextra']),I('Mutton Murtabak','bread',6.5,['curry','pextra']),I('Chicken Murtabak','bread',6,['curry','pextra'])],
-  'Curries':[I('Chicken Curry Bowl','bowl',4,['spice']),I('Dhal Bowl','bowl',2)],
-  'Drinks':[I('Teh Tarik','cup',2,['sweet','ice']),I('Mango Lassi','cup',3.5,['reg']),I('Masala Chai','cup',2.5,['sweet'])],
-  'Exclusive':[I('Gold Leaf Prata','crown',10,['curry'],51),I('Lamb Rogan Murtabak','crown',15,[],55),I('Maharaja Thali','crown',26,[],60)]}},
- {id:'d',halal:true,name:'Pak Hamid Satay Club',sub:'Charcoal-grilled skewers',c:['#8a5a3c','#c0392b'],cats:{
-  'Satay':[I('Satay','skewer',5,['cut','sat','sauce']),I('Grilled Stingray','plate',9,['spice']),I('Grilled Sambal Prawns','plate',10,['spice'])],
-  'Sides':[I('Ketupat','plate',1),I('Otak Otak','plate',2.5),I('Cucumber and Onion','bowl',1)],
-  'Drinks':[I('Sirap Bandung','cup',2.5,['ice','sweet']),I('Lime Juice','cup',2,['ice','sweet'])],
-  'Exclusive':[I('Wagyu Satay Set','crown',18,['sauce'],51),I('Jumbo Tiger Prawn Grill','crown',24,['spice'],56)]}},
- {id:'e',halal:false,name:'Wok Hei Express',sub:'Smoky fried rice and noodles',c:['#ffcc33','#f08a00'],cats:{
-  'Wok':[I('Char Kway Teow','plate',5,['wok','spice','topn']),I('Hokkien Mee','plate',5.5,['spice','topn']),I('Fried Rice','plate',4.5,['fried','spice']),I('Carrot Cake','plate',4,['spice'])],
-  'Sides':[I('Fried Egg','plate',1),I('Extra Lap Cheong','plate',1.5)],
-  'Drinks':[I('Soya Bean Milk','cup',2,['sweet','ice']),I('Luo Han Guo','cup',2,['ice'])],
-  'Exclusive':[I('Prawn Wok Feast','crown',16,['spice'],51),I('Black Gold Fried Rice','crown',20,[],58)]}},
- {id:'f',halal:true,name:'Sweet Corner Desserts',sub:'Cold treats and cooling drinks',c:['#ff8fb1','#a45cff'],cats:{
-  'Ice':[I('Ice Kachang','cup',3.5,['dessert']),I('Chendol','cup',3.5,['flav','dessert']),I('Cendol Durian','cup',5)],
-  'Hot':[I('Orh Nee','bowl',4),I('Bubur Cha Cha','bowl',3.5),I('Tau Suan','bowl',3)],
-  'Drinks':[I('Bandung','cup',2.5,['ice']),I('Soya Beancurd','cup',2,['sweet'])],
-  'Exclusive':[I('Mao Shan Wang Chendol','crown',12,['dessert'],51),I('Gold Flake Ice Mountain','crown',22,[],60)]}},
- {id:'g',halal:false,name:'Teck Heng Bak Kut Teh',sub:'Peppery pork rib soup',c:['#6b5b4e','#2f2a26'],cats:{
-  'Soups':[I('Pork Rib Soup','bowl',7,['bkt','rice']),I('Pig Trotter Soup','bowl',7.5,['bkt','rice']),I('Pork Belly Soup','bowl',7,['bkt','rice']),I('Prawn Soup','bowl',8,['bkt','rice'])],
-  'Sides':[I('You Tiao','bread',1.5),I('Braised Peanuts','bowl',1.5),I('Dried Chilli Soy Sauce','bowl',.5),I('Tau Pok','plate',2)],
-  'Drinks':[I('Chinese Tea','cup',1.5,['ice']),I('Soya Bean Milk','cup',2,['sweet','ice'])],
-  'Exclusive':[I('Premium Spare Rib Pot','crown',16,['bkt'],51),I('Black Pig Trotter Feast','crown',22,['bkt'],57)]}},
- {id:'h',halal:true,name:'Mak Cik Nasi Lemak',sub:'Coconut rice with crunchy sides',c:['#5fd1a0','#1a9e78'],cats:{
-  'Nasi Lemak':[I('Nasi Lemak with Chicken Wing','plate',4.5,['nl','spice']),I('Nasi Lemak with Fish','plate',4.5,['nl','spice']),I('Nasi Lemak with Otah','plate',4,['nl','spice']),I('Rendang Set','plate',6.5,['nl','spice'])],
-  'Sides':[I('Fried Chicken Wing','plate',2),I('Fried Egg','plate',1),I('Ikan Bilis and Peanuts','bowl',1)],
-  'Drinks':[I('Teh Halia','cup',2,['sweet','ice']),I('Sirap Bandung','cup',2.5,['ice'])],
-  'Exclusive':[I('Wagyu Beef Rendang Set','crown',15,['spice'],51),I('Royal Nasi Ambeng','crown',24,['spice'],58)]}},
- {id:'i',halal:true,name:'Kopi & Toast Station',sub:'Kaya toast and traditional kopi',c:['#d9a066','#8b5a2b'],cats:{
-  'Breakfast':[I('Kaya Butter Toast Set','bread',4,['bread','kopi','sweet']),I('Soft-boiled Eggs','bowl',2.5),I('Peanut Butter Toast','bread',2.2,['bread']),I('French Toast','bread',3.5)],
-  'Kopi':[I('Kopi','cup',1.6,['kopi','sweet','ice']),I('Teh','cup',1.6,['kopi','sweet','ice']),I('Yuan Yang','cup',2.2,['sweet','ice'])],
-  'Exclusive':[I('Gold Kaya Toastbox','crown',9,['bread'],51),I('Aged Kopi Tasting Flight','crown',14,[],56)]}},
- {id:'j',halal:false,name:'Jade Garden Dim Sum',sub:'Steamed baskets and sweet buns',c:['#ff9a8b','#e0527a'],cats:{
-  'Steamed':[I('Har Gow','bowl',4.5,['dsp']),I('Siew Mai','bowl',4.5,['dsp']),I('Char Siew Bao','bowl',3.8,['dsp']),I('Xiao Long Bao','bowl',5.5,['dsp'])],
-  'Fried and Rice':[I('Chee Cheong Fun','plate',3.5,['dsp']),I('Carrot Cake Fried','plate',4.5,['spice']),I('Glutinous Rice','plate',4)],
-  'Drinks':[I('Chrysanthemum Tea','cup',1.8,['sweet','ice']),I('Jasmine Tea','cup',1.5)],
-  'Exclusive':[I('Truffle Har Gow Basket','crown',12,['dsp'],51),I('Golden Dim Sum Tower','crown',28,[],60)]}},
- {id:'k',halal:false,name:'Big Wok Zi Char',sub:'Family-style dishes to share',c:['#ff7043','#bf360c'],cats:{
-  'Mains':[I('Sweet and Sour Pork','plate',10,['zs']),I('Cereal Prawns','plate',14,['zs']),I('Salted Egg Squid','plate',12,['zs']),I('Black Pepper Crab','plate',22,['spice'])],
-  'Veg and Rice':[I('Sambal Kangkong','plate',8,['zs','spice']),I('Egg Fried Rice','plate',4.5),I('Tofu Claypot','bowl',9,['zs'])],
-  'Drinks':[I('Iced Lemon Tea','cup',2.5,['ice']),I('Chinese Tea Pot','cup',3)],
-  'Exclusive':[I('Chilli Crab Royale','crown',38,['spice'],51),I('Live Lobster Wok Fry','crown',45,[],59)]}},
- {id:'l',halal:true,name:'Mamak Corner',sub:'Mee goreng, rojak and mee rebus',c:['#ffb74d','#e65100'],cats:{
-  'Noodles':[I('Mee Goreng','plate',4.5,['spice','topn']),I('Mee Rebus','bowl',4.5,['spice','topn']),I('Mee Soto','bowl',4.5,['spice']),I('Maggi Goreng','plate',4,['spice','topn'])],
-  'Rice':[I('Nasi Goreng','plate',5,['spice','fried']),I('Nasi Briyani','plate',6,['cut','spice'])],
-  'Snacks':[I('Indian Rojak','plate',5),I('Samosa','plate',2)],
-  'Drinks':[I('Teh Tarik','cup',2,['sweet','ice']),I('Milo Dinosaur','cup',3.2,['ice'])],
-  'Exclusive':[I('Wagyu Briyani Pot','crown',17,['spice'],51),I('Mamak Banquet Platter','crown',30,[],60)]}},
- {id:'m',halal:true,name:'Fresh Squeeze Juice Bar',sub:'Cold-pressed juices and cut fruit',c:['#ffd54f','#43a047'],cats:{
-  'Juices':[I('Watermelon Juice','cup',3,['ice','reg']),I('Mango Juice','cup',3.5,['ice','reg']),I('Orange Juice','cup',3.5,['ice','reg']),I('Mixed Fruit Juice','cup',4,['ice','reg'])],
-  'Fruit':[I('Cut Fruit Cup','bowl',3),I('Mango Sago','bowl',4.5),I('Pomelo Sago','bowl',4.5)],
-  'Exclusive':[I('Mao Shan Wang Smoothie','crown',11,['reg'],51),I('Golden Pineapple Bowl','crown',16,[],55)]}},
- {id:'n',halal:false,name:'Hainan Western Grill',sub:'Hawker-style chops and fries',c:['#90a4ae','#37474f'],cats:{
-  'Grill':[I('Chicken Chop','plate',7.5,['ws','side']),I('Pork Chop','plate',7.5,['ws','side']),I('Fish and Chips','plate',7,['side']),I('Sausage Platter','plate',6.5,['ws','side'])],
-  'Sides':[I('Fries','plate',2.5),I('Coleslaw','bowl',1.5),I('Garlic Bread','bread',2)],
-  'Drinks':[I('Iced Milo','cup',2.5,['ice','sweet']),I('Lemon Barley','cup',2,['ice'])],
-  'Exclusive':[I('Wagyu Steak Plate','crown',22,['ws','side'],51),I('Surf and Turf Grill','crown',32,['ws'],58)]}},
- {id:'o',halal:false,name:'Ah Seng Fishball Noodles',sub:'Handmade fishballs and springy noodles',c:['#80cbc4','#00796b'],cats:{
-  'Noodles':[I('Fishball Noodles','bowl',4.5,['noodle','soup','spice']),I('Minced Meat Noodles','bowl',5,['noodle','soup','spice']),I('Fishball Soup Only','bowl',3.5),I('Fishcake Mee Pok','bowl',4.5,['soup','spice'])],
-  'Sides':[I('Fried Beancurd Skin','plate',2.5),I('Fish Dumplings','plate',3)],
-  'Drinks':[I('Chrysanthemum Tea','cup',1.8,['ice','sweet']),I('Barley','cup',1.8,['ice'])],
-  'Exclusive':[I('Jumbo Fishball Feast','crown',12,['noodle'],51),I('Abalone Noodle Bowl','crown',25,['soup'],58)]}},
- {id:'p',halal:true,name:'Haji Kassim Soup Tulang',sub:'Spicy bone soup and soto',c:['#ff8a65','#c62828'],cats:{
-  'Soups':[I('Soup Tulang','bowl',6.5,['spice','rice']),I('Mee Soto','bowl',4.5,['spice']),I('Soup Ekor','bowl',9,['spice','rice']),I('Lontong','bowl',4.5,['spice'])],
-  'Sides':[I('Ketupat','plate',1),I('Fried Chicken Wing','plate',2),I('Begedil','plate',1.5)],
-  'Drinks':[I('Teh Tarik','cup',2,['sweet','ice']),I('Sirap Selasih','cup',2.2,['ice'])],
-  'Exclusive':[I('Jumbo Bone Marrow Tulang','crown',14,['spice'],51),I('Sultan Soup Platter','crown',26,[],59)]}},
- {id:'q',halal:false,name:'Ming Kee Porridge',sub:'Silky Teochew-style congee',c:['#ffe082','#ffa000'],cats:{
-  'Porridge':[I('Century Egg Porridge','bowl',4,['por','reg']),I('Fish Slice Porridge','bowl',5,['por','reg']),I('Minced Pork Porridge','bowl',4.5,['por','reg']),I('Plain Porridge Set','bowl',3,['por'])],
-  'Sides':[I('Salted Egg','bowl',1),I('Youtiao','bread',1.5),I('Steamed Fish','plate',8)],
-  'Drinks':[I('Chinese Tea','cup',1.5),I('Soya Bean Milk','cup',2,['sweet','ice'])],
-  'Exclusive':[I('Crab Congee Pot','crown',18,['por'],51),I('Imperial Seafood Porridge','crown',28,[],58)]}},
- {id:'r',halal:true,name:'Siam Street Kitchen',sub:'Thai street food, bold and tangy',c:['#ffb74d','#d84315'],cats:{
-  'Mains':[I('Pad Thai','plate',6,['tp','spice']),I('Green Curry Rice','plate',6.5,['tp','spice']),I('Tom Yum Soup','bowl',6,['tp','spice']),I('Basil Chicken Rice','plate',5.5,['spice'])],
-  'Sweets':[I('Mango Sticky Rice','bowl',5.5),I('Red Ruby Coconut','cup',3.5,['ice'])],
-  'Drinks':[I('Thai Milk Tea','cup',2.8,['sweet','ice']),I('Lemongrass Drink','cup',2.5,['ice'])],
-  'Exclusive':[I('Tiger Prawn Tom Yum','crown',16,['spice'],51),I('Royal Thai Platter','crown',27,[],59)]}},
- {id:'s',halal:true,name:'Seoul Bites',sub:'Korean comfort food and crispy chicken',c:['#f06292','#ad1457'],cats:{
-  'Mains':[I('Bibimbap','bowl',7.5,['tp','spice']),I('Kimchi Stew','bowl',7,['spice']),I('Tteokbokki','plate',5.5,['spice']),I('Japchae','plate',6.5)],
-  'Fried Chicken':[I('Korean Fried Chicken','plate',8,['sauce','sat']),I('Chicken Skewers','skewer',4)],
-  'Drinks':[I('Yuja Citron Tea','cup',3,['ice','sweet']),I('Banana Milk','cup',3)],
-  'Exclusive':[I('Wagyu Bulgogi Bowl','crown',18,['spice'],51),I('Seoul Feast Set','crown',30,[],60)]}},
- {id:'t',halal:false,name:'Tokyo Don Bar',sub:'Rice bowls and ramen',c:['#ef5350','#37474f'],cats:{
-  'Rice Bowls':[I('Chicken Katsu Don','plate',7,['reg']),I('Salmon Don','plate',9,['reg']),I('Unagi Don','plate',12,['reg']),I('Gyudon','plate',7.5,['reg'])],
-  'Ramen':[I('Tonkotsu Ramen','bowl',9,['ramen','spice']),I('Chicken Ramen','bowl',8,['ramen','spice'])],
-  'Drinks':[I('Green Tea','cup',2,['ice','sweet']),I('Ramune','cup',3)],
-  'Exclusive':[I('Wagyu Don','crown',24,['reg'],51),I('Omakase Chirashi Bowl','crown',35,[],60)]}},
- {id:'u',halal:true,name:'Nenek Kueh & Tau Huay',sub:'Traditional kueh and warm beancurd',c:['#b39ddb','#5e35b1'],cats:{
-  'Kueh':[I('Ondeh Ondeh','plate',2.5,['dsp']),I('Kueh Lapis','plate',2.5,['dsp']),I('Ang Ku Kueh','plate',2,['dsp']),I('Kueh Salat','plate',2.5)],
-  'Beancurd':[I('Tau Huay','bowl',2,['sweet','ice']),I('Soya Beancurd','cup',2,['sweet','ice'])],
-  'Drinks':[I('Barley','cup',1.8,['ice']),I('Teh O','cup',1.5,['sweet','ice'])],
-  'Exclusive':[I('Gula Melaka Kueh Tower','crown',9,[],51),I('Heritage Kueh Hamper','crown',20,[],57)]}},
- {id:'v',halal:false,name:'Claypot Corner',sub:'Smoky claypot rice, slow cooked',c:['#a1887f','#4e342e'],cats:{
-  'Claypot':[I('Claypot Chicken Rice','bowl',9,['cp','spice']),I('Claypot Frog Leg Rice','bowl',11,['cp','spice']),I('Claypot Pork Rib Rice','bowl',10,['cp'])],
-  'Sides':[I('Braised Tofu','plate',4),I('Stir-fry Greens','plate',5)],
-  'Drinks':[I('Iced Chrysanthemum','cup',2,['ice','sweet']),I('Lemon Barley','cup',2.2,['ice'])],
-  'Exclusive':[I('Abalone Claypot Rice','crown',22,['cp'],51),I('Lobster Claypot Feast','crown',38,[],60)]}},
- {id:'w',halal:true,name:'Warung Padang Sari',sub:'Pick your own Padang dishes',c:['#ff7043','#827717'],cats:{
-  'Padang':[I('Nasi Padang Set','plate',6,['pad','spice']),I('Nasi Ayam Penyet','plate',6.5,['spice']),I('Nasi Ikan Bakar','plate',7.5,['spice']),I('Lontong Sayur','bowl',4.5,['spice'])],
-  'Snacks':[I('Pisang Goreng','plate',2.5),I('Kerepek','plate',2)],
-  'Drinks':[I('Es Teh Manis','cup',2,['ice']),I('Es Cendol','cup',3,['ice'])],
-  'Exclusive':[I('Rendang Daging Royal','crown',17,['spice'],51),I('Raja Padang Banquet','crown',29,[],59)]}}
-];
-const TOYS=[
- ['Mini Kopi Figurine','#c8863a',300,'Kopitiam','cup'],['Kaya Toast Pin','#e0a45c',350,'Kopitiam','squishy'],['Teh Tarik Mug Toy','#b5651d',450,'Kopitiam','cup'],['Mini Stool Set','#8d6e63',600,'Kopitiam','squishy'],['Coffee Sock Keychain','#6d4c41',700,'Kopitiam','cup'],['Soft-boiled Egg Plush','#ffcc80',900,'Kopitiam','squishy'],['Kopi Bot','#a1887f',1100,'Kopitiam','robot'],['Kaya Jar Toy','#aed581',450,'Kopitiam','cup'],
- ['Chicken Rice Eraser Set','#ffb347',400,'Street Food','squishy'],['Satay Keychain','#c0392b',500,'Street Food','skewer'],['Prata Spinner','#d4a14a',600,'Street Food','spinner'],['Ice Kachang Slime','#ff6fa5',650,'Street Food','dessert'],['Laksa Bowl Squishy','#ff7043',700,'Street Food','bowl'],['Dim Sum Basket Set','#f06292',1200,'Street Food','bowl'],['Durian Plush','#9ccc65',1800,'Street Food','durian'],['Chilli Crab Plushie','#ff4b3e',2200,'Street Food','plush'],['Mee Pok Bowl Buddy','#ffd54f',750,'Street Food','bowl'],['Roti Canai Plush','#e0b46a',550,'Street Food','squishy'],
- ['Plush Merlion','#3aa0ff',800,'Singapore','plush'],['Peranakan Tile Coasters','#26a69a',900,'Singapore','spinner'],['Bumboat Toy','#29b6f6',1300,'Singapore','boat'],['Hawker Cart Playset','#22b573',1500,'Singapore','cart'],['Marina Bay Sands Model','#5c6bc0',1600,'Singapore','mbs'],['Singapore Flyer Toy','#7e57c2',1700,'Singapore','spinner'],['Supertree Night Lamp','#00c896',2000,'Singapore','tree'],['HDB Block Builder','#ef9a9a',2400,'Singapore','tower'],['MRT Train Model','#e53935',2600,'Singapore','train'],['Esplanade Durian Dome','#ffb74d',1900,'Singapore','durian'],
- ['Pigeon Chef','#90a4ae',400,'Critters','bird'],['Chilli Padi Mascot','#e53935',480,'Critters','chili'],['Hawker Cat Plush','#ffa726',550,'Critters','cat'],['Roti Dog','#d7a86e',650,'Critters','dog'],['Kopi Uncle Bear','#8d6e63',750,'Critters','plush'],['Otter Family Plush','#a1887f',1100,'Critters','plush'],
- ['Lucky Lantern','#e53935',500,'Festive','lantern'],['Red Packet Pouch','#d32f2f',350,'Festive','gift'],['Mandarin Orange Squishy','#ff9800',450,'Festive','squishy'],['Pineapple Tart Squishy','#ffca28',500,'Festive','squishy'],['Ketupat Charm','#66bb6a',600,'Festive','ketupat'],['Diya Light','#ff7043',650,'Festive','diya'],['Pelita Lamp','#ffa726',700,'Festive','diya'],['Mooncake Plush','#c8a165',800,'Festive','squishy'],['Fireworks Spinner','#7e57c2',900,'Festive','spinner'],['Lion Dance Head','#ffb300',1400,'Festive','dragon'],['Prosperity Pot','#ffd54f',1600,'Festive','bowl'],['Dragon Dance Plush','#e53935',2100,'Festive','dragon'],
- ['Noodle Bot','#4fc3f7',900,'Robots','robot'],['Wok Bot','#8d6e63',1000,'Robots','robot'],['Prata Bot','#ffcc80',1000,'Robots','robot'],['Satay Chef Bot','#ef5350',1200,'Robots','robot'],['Dumpling Droid','#f8bbd0',1300,'Robots','robot'],['Rice Cooker Bot','#cfd8dc',1500,'Robots','robot'],['Tray Return Bot','#66bb6a',1800,'Robots','robot'],['Laksa Mech','#ff7043',2800,'Robots','robot'],['Golden Hawker Bot','#ffc107',5000,'Robots','robot'],
- ['Moon Dumpling','#e0e0e0',900,'Space','planet'],['Alien Chilli Padi','#7cb342',900,'Space','chili'],['Galaxy Spinner','#5c6bc0',1000,'Space','spinner'],['Saturn Bagel','#ffb74d',1100,'Space','planet'],['Star Satay','#fdd835',1200,'Space','skewer'],['Comet Noodle Rocket','#ff8a65',1300,'Space','rocket'],['Astronaut Merlion','#90caf9',1400,'Space','plush'],['Rocket Cart','#42a5f5',1500,'Space','rocket'],['UFO Wok','#ab47bc',1800,'Space','ufo'],['Black Hole Bubble Tea','#37474f',2000,'Space','cup'],
- ['Ice Cream Dream','#f48fb1',600,'Sweet Treats','dessert'],['Cendol Cup Toy','#81c784',650,'Sweet Treats','dessert'],['Bubble Tea Buddy','#d7a86e',700,'Sweet Treats','cup'],['Mango Sago Cup','#ffca28',700,'Sweet Treats','dessert'],['Kueh Squishy Pack','#ce93d8',500,'Sweet Treats','squishy'],['Tau Huay Bowl','#ffe0b2',600,'Sweet Treats','bowl'],['Gula Melaka Pudding','#8d6e63',550,'Sweet Treats','squishy'],['Pandan Chiffon Plush','#9ccc65',800,'Sweet Treats','squishy'],['Durian Ice Delight','#c5e1a5',900,'Sweet Treats','dessert'],
- ['Sepak Takraw Ball','#ffa726',400,'Heartland','planet'],['Kopitiam Uncle Figure','#8d6e63',900,'Heartland','plush'],['Hawker Aunty Figure','#f06292',900,'Heartland','plush'],['Mini Bumboat','#29b6f6',1000,'Heartland','boat'],['Kampung House Blocks','#a1887f',1300,'Heartland','tower'],['Pasar Malam Cart','#ff9800',1500,'Heartland','cart'],['Shophouse Model','#ffb74d',1500,'Heartland','tower'],['Interchange Bus','#e53935',1600,'Heartland','train'],['Trishaw Toy','#26c6da',1700,'Heartland','cart'],
- ['Egret Plush','#eceff1',750,'Wildlife','bird'],['Macaque Chef','#8d6e63',700,'Wildlife','plush'],['Horseshoe Crab Plush','#607d8b',600,'Wildlife','plush'],['Mouse Deer','#bcaaa4',800,'Wildlife','dog'],['Kingfisher','#29b6f6',850,'Wildlife','bird'],['Otter Pup','#8d6e63',900,'Wildlife','plush'],['Hornbill','#ffb300',1000,'Wildlife','bird'],['Sun Bear Cub','#4e342e',1100,'Wildlife','plush'],['Sea Turtle','#26a69a',1200,'Wildlife','plush'],['Pangolin Plush','#a1887f',1300,'Wildlife','plush'],
- ['Golden Chopsticks','#e8b400',3000,'Legendary','chop'],['Jade Wok Trophy','#26a69a',4500,'Legendary','trophy'],['Crystal Merlion','#4dd0e1',6000,'Legendary','plush'],['Dragon Noodle Statue','#d32f2f',8000,'Legendary','dragon'],['Platinum Satay Grill','#90a4ae',10000,'Legendary','skewer'],['Diamond Wok Trophy','#4dd0e1',12000,'Legendary','trophy'],['Hawker King Crown','#ffb300',15000,'Legendary','crown'],['Emerald Dragon','#00c853',18000,'Legendary','dragon'],['Gold Merlion Statue','#ffc107',20000,'Legendary','trophy'],['Grand Master Cup','#ffd54f',25000,'Legendary','trophy']];
-let tser='All';
+f:[['Spice',1,[['No spice',0],['Mild',0],['Spicy',0]]],['Extras',0,[['Extra portion',1.5],['Fried egg',1]]]],
+d:[['Ice',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],['Sweetness',1,[['Normal',0],['Less sweet',0],['No sugar',0]]]],
+m:[['Ice',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],['Sweetness',1,[['Normal',0],['Less sweet',0],['No sugar',0]]],['Toppings',0,[['Extra Milo powder',.5],['Whipped cream',.8],['Ice cream scoop',1.2],['Pearls',.8]]]],
+e:[]};
+/* name:price:type  (f food, d drink, m milo-style drink, e exclusive lvl 51) */
+const RAW=[
+['Ah Hock Chicken Rice',0,'#ffb347','#ff7a2f','chick','Roasted Chicken Rice:4.5:f|Steamed Chicken Rice:4.5:f|Char Siew Rice:5:f|Braised Egg:1:f|Barley:1.8:d|Iced Milo:2.5:d|Golden Truffle Chicken Rice:9:e|Wagyu Char Siew Rice:14:e'],
+['Mdm Lim Laksa & Noodles',0,'#ff6a5c','#d62f4b','noodle','Curry Laksa:5:f|Prawn Mee:5.5:f|Bak Chor Mee:5:f|Wanton Mee:4.5:f|Sugarcane:2.2:d|Teh Tarik:2:d|Lobster Laksa:15:e'],
+['Uncle Raj Prata House',1,'#43c98a','#17977b','prata','Roti Prata:2.5:f|Prata Set of 3:6.5:f|Mutton Murtabak:6.5:f|Chicken Curry Bowl:4:f|Mango Lassi:3.5:d|Teh Tarik:2:d|Gold Leaf Prata:10:e'],
+['Pak Hamid Satay Club',1,'#8a5a3c','#c0392b','skewer','Chicken Satay (10):5.5:f|Beef Satay (10):6.5:f|Grilled Stingray:9:f|Ketupat:1:f|Sirap Bandung:2.5:d|Lime Juice:2:d|Wagyu Satay Set:18:e'],
+['Wok Hei Express',0,'#ffcc33','#f08a00','wok','Char Kway Teow:5:f|Hokkien Mee:5.5:f|Fried Rice:4.5:f|Carrot Cake:4:f|Soya Bean Milk:2:d|Luo Han Guo:2:d|Prawn Wok Feast:16:e'],
+['Sweet Corner Desserts',1,'#ff8fb1','#a45cff','sweet','Ice Kachang:3.5:f|Chendol:3.5:f|Cendol Durian:5:f|Orh Nee:4:f|Bandung:2.5:d|Soya Beancurd:2:d|Mao Shan Wang Chendol:12:e'],
+['Teck Heng Bak Kut Teh',0,'#6b5b4e','#2f2a26','bone','Pork Rib Soup:7:f|Pig Trotter Soup:7.5:f|Prawn Soup:8:f|You Tiao:1.5:f|Chinese Tea:1.5:d|Soya Bean Milk:2:d|Premium Spare Rib Pot:16:e'],
+['Mak Cik Nasi Lemak',1,'#5fd1a0','#1a9e78','leaf','Nasi Lemak Chicken Wing:4.5:f|Nasi Lemak Fish:4.5:f|Nasi Lemak Otah:4:f|Rendang Set:6.5:f|Teh Halia:2:d|Sirap Bandung:2.5:d|Wagyu Beef Rendang Set:15:e'],
+['Kopi & Toast Station',1,'#d9a066','#8b5a2b','toast','Kaya Butter Toast Set:4:f|Soft-boiled Eggs:2.5:f|French Toast:3.5:f|Kopi:1.6:d|Teh:1.6:d|Yuan Yang:2.2:d|Gold Kaya Toastbox:9:e'],
+['Jade Garden Dim Sum',0,'#ff9a8b','#e0527a','dumpling','Har Gow:4.5:f|Siew Mai:4.5:f|Char Siew Bao:3.8:f|Xiao Long Bao:5.5:f|Jasmine Tea:1.5:d|Chrysanthemum Tea:1.8:d|Golden Dim Sum Tower:28:e'],
+['Big Wok Zi Char',0,'#ff7043','#bf360c','crab','Sweet and Sour Pork:10:f|Cereal Prawns:14:f|Salted Egg Squid:12:f|Black Pepper Crab:22:f|Iced Lemon Tea:2.5:d|Chinese Tea Pot:3:d|Chilli Crab Royale:38:e'],
+['Dino Milo Bar',1,'#43a047','#1b5e20','cupm','Milo Dinosaur:3.2:m|Milo Godzilla:4.2:m|Milo Peng:2.5:m|Milo Kosong:2.2:d|Milo Gao:2.8:d|Hot Milo:2:d|Horlicks Dinosaur:3.2:m|Teh Tarik:2:d|Sirap Bandung:2.5:d|Barley:1.8:d|Lime Juice:2:d|Milo Tyrannosaurus:9:e|Golden Godzilla Tower:14:e']];
+const SH=RAW.map((r,i)=>({id:i,n:r[0],h:r[1],c:[r[2],r[3]],ic:r[4],items:r[5].split('|').map(s=>{const[a,b,t]=s.split(':');return{n:a,p:+b,t}})}));
+
+/* toys: 30 things x 10 styles = 300 + legends */
+const NO=[['Satay','skewer'],['Laksa','bowl'],['Prata','plush'],['Kopi','cup'],['Durian','durian'],['Merlion','plush'],['Chilli','plush'],['Noodle','bowl'],['Dumpling','plush'],['Teh Tarik','cup'],['Ice Kachang','cup'],['Kaya Toast','plush'],['Hawker Cat','plush'],['Pigeon Chef','plush'],['Roti Dog','plush'],['Lion Dance','plush'],['Bumboat','robot'],['MRT','robot'],['Supertree','rocket'],['HDB','robot'],['Lantern','durian'],['Ketupat','durian'],['Rocket','rocket'],['UFO','rocket'],['Robot','robot'],['Spinner','durian'],['Trophy','crown'],['Crown','crown'],['Gift','bowl'],['Diya','bowl']];
+const AD=[['Tiny','#ff8a65',250],['Jumbo','#ffb74d',900],['Rainbow','#ba68c8',1200],['Golden','#ffc107',3500],['Neon','#26c6da',1500],['Pastel','#f48fb1',500],['Ninja','#546e7a',1100],['Space','#5c6bc0',1400],['Sleepy','#81c784',600],['Sparkle','#f06292',800]];
+const TOYS=[];
+NO.forEach(([n,t],i)=>AD.forEach(([a,c,p])=>TOYS.push([a+' '+n,c,Math.round(p*(1+i%5*.15)/50)*50,a,t])));
+[['Golden Chopsticks','#e8b400',3000,'Legendary','crown'],['Crystal Merlion','#4dd0e1',6000,'Legendary','plush'],['Dragon Noodle Statue','#d32f2f',8000,'Legendary','robot'],['Hawker King Crown','#ffb300',15000,'Legendary','crown'],['Grand Master Cup','#ffd54f',25000,'Legendary','crown']].forEach(t=>TOYS.push(t));
 const mix=(h,t,p)=>{const n=parseInt(h.slice(1),16),f=t?255:0,ch=x=>Math.round(((n>>x)&255)*(1-p)+f*p);return'#'+[16,8,0].map(x=>ch(x).toString(16).padStart(2,'0')).join('')};
 const E=(x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${r/2}" fill="#222"/>`;
 const SM=(x,y)=>`<path d="M${x-7} ${y}q7 6 14 0" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
-const win=(x0,y0,cols,rows,w,h,g,f)=>{let o='';for(let i=0;i<cols;i++)for(let j=0;j<rows;j++)o+=`<rect x="${x0+i*g}" y="${y0+j*g}" width="${w}" height="${h}" rx="1" fill="${f}"/>`;return o};
 const ART={
 plush:(c,d,l)=>`<circle cx="26" cy="30" r="11" fill="${d}"/><circle cx="74" cy="30" r="11" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/><ellipse cx="50" cy="69" rx="15" ry="11" fill="${l}"/><circle cx="50" cy="63" r="4" fill="#333"/>${E(37,48)}${E(63,48)}${SM(50,72)}`,
-cat:(c,d,l)=>`<path d="M18 42L24 10L46 28zM82 42L76 10L54 28z" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/>${E(37,52)}${E(63,52)}<path d="M47 63l3 3 3-3z" fill="#f48fb1"/>${SM(50,69)}<path d="M20 62h14M20 70l13-3M80 62H66M80 70l-13-3" stroke="#333" stroke-width="1.8" stroke-linecap="round"/>`,
-bird:(c,d,l)=>`<ellipse cx="50" cy="60" rx="32" ry="30" fill="${c}"/><ellipse cx="50" cy="72" rx="20" ry="16" fill="${l}"/><path d="M42 54l8 12 8-12z" fill="#ff9800"/>${E(38,44)}${E(62,44)}<path d="M40 22q10-14 20 0" stroke="${d}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M40 90l-4 7M60 90l4 7" stroke="#ff9800" stroke-width="3" stroke-linecap="round"/>`,
-dog:(c,d,l)=>`<ellipse cx="22" cy="50" rx="10" ry="22" fill="${d}" transform="rotate(14 22 50)"/><ellipse cx="78" cy="50" rx="10" ry="22" fill="${d}" transform="rotate(-14 78 50)"/><circle cx="50" cy="56" r="32" fill="${c}"/><ellipse cx="50" cy="68" rx="17" ry="13" fill="${l}"/><ellipse cx="50" cy="62" rx="6" ry="4" fill="#333"/>${E(38,46)}${E(62,46)}${SM(50,74)}`,
-dragon:(c,d,l)=>`<path d="M30 30L22 6l18 12zM70 30L78 6 60 18z" fill="${l}"/><path d="M38 28l6-9 6 9 6-9 6 9z" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/><ellipse cx="50" cy="70" rx="19" ry="13" fill="${l}"/><circle cx="43" cy="68" r="2.5" fill="#333"/><circle cx="57" cy="68" r="2.5" fill="#333"/>${E(36,48,6)}${E(64,48,6)}<path d="M40 78q10 7 20 0" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`,
-chili:(c,d,l)=>`<path d="M34 24c30-8 52 14 46 42-4 18-16 26-28 28 4-24-6-46-18-70z" fill="${c}"/><path d="M30 22q4-12 16-8l-4 14z" fill="#43a047"/>${E(52,52,4.5)}${E(66,56,4.5)}${SM(60,72)}`,
-bowl:(c,d,l)=>`<path d="M12 50h76c0 24-16 40-38 40S12 74 12 50z" fill="${c}"/><ellipse cx="50" cy="50" rx="38" ry="9" fill="${l}"/><path d="M26 48q8-8 16 0t16 0 16 0" stroke="${d}" stroke-width="4" fill="none"/><path d="M38 30q-6-8 0-16M52 32q-6-8 0-16M66 30q-6-8 0-16" stroke="#bbb" stroke-width="3" fill="none" stroke-linecap="round"/>${E(38,70,4)}${E(62,70,4)}`,
 cup:(c,d,l)=>`<path d="M26 32h48l-6 58H32z" fill="${c}"/><rect x="22" y="24" width="56" height="12" rx="6" fill="${d}"/><path d="M54 24l8-18" stroke="${l}" stroke-width="5" stroke-linecap="round"/>${E(40,58,4.5)}${E(60,58,4.5)}${SM(50,71)}`,
+bowl:(c,d,l)=>`<path d="M12 50h76c0 24-16 40-38 40S12 74 12 50z" fill="${c}"/><ellipse cx="50" cy="50" rx="38" ry="9" fill="${l}"/><path d="M26 48q8-8 16 0t16 0 16 0" stroke="${d}" stroke-width="4" fill="none"/><path d="M38 30q-6-8 0-16M52 32q-6-8 0-16M66 30q-6-8 0-16" stroke="#bbb" stroke-width="3" fill="none" stroke-linecap="round"/>${E(38,70,4)}${E(62,70,4)}`,
 skewer:(c,d,l)=>`<g transform="rotate(-35 50 50)"><rect x="6" y="47" width="88" height="5" rx="2.5" fill="#d7a86e"/>${[22,42,62].map(x=>`<ellipse cx="${x+6}" cy="50" rx="10" ry="14" fill="${c}"/><ellipse cx="${x+6}" cy="50" rx="5" ry="9" fill="${d}" opacity=".5"/>`).join('')}</g>`,
-dessert:(c,d,l)=>`<path d="M24 34h52l-8 56H32z" fill="#fff" opacity=".7"/><path d="M28 56h44l-3 20H31z" fill="${c}"/><path d="M26 44h48l-2 12H28z" fill="${l}"/><path d="M31 76h38l-2 12H33z" fill="${d}"/><circle cx="50" cy="30" r="14" fill="${l}"/><circle cx="50" cy="17" r="5" fill="#e53935"/>`,
+robot:(c,d,l)=>`<path d="M50 8v12" stroke="${d}" stroke-width="4"/><circle cx="50" cy="8" r="5" fill="#ff5252"/><rect x="22" y="20" width="56" height="40" rx="10" fill="${c}"/><rect x="30" y="30" width="14" height="12" rx="3" fill="#fff"/><rect x="56" y="30" width="14" height="12" rx="3" fill="#fff"/><circle cx="37" cy="36" r="3" fill="#222"/><circle cx="63" cy="36" r="3" fill="#222"/><path d="M38 51h24" stroke="#333" stroke-width="3" stroke-dasharray="4 3"/><rect x="28" y="64" width="44" height="26" rx="6" fill="${d}"/><circle cx="50" cy="77" r="5" fill="${l}"/>`,
 durian:(c,d,l)=>`<circle cx="50" cy="56" r="32" fill="${c}" stroke="${d}" stroke-width="12" stroke-dasharray="5 6"/><circle cx="50" cy="56" r="27" fill="${c}"/>${E(40,52)}${E(60,52)}${SM(50,67)}`,
-tower:(c,d,l)=>`<rect x="30" y="14" width="40" height="76" rx="4" fill="${c}"/><rect x="24" y="84" width="52" height="9" rx="3" fill="${d}"/>${win(36,22,3,6,8,6,11,l)}`,
-mbs:(c,d,l)=>`<path d="M18 90L24 24h14l4 66zM43 90L46 24h12l3 66zM64 90L68 24h14l6 66z" fill="${c}"/><path d="M10 20h80l-4 10H14z" fill="${d}"/><path d="M18 14q32-14 64 0z" fill="${l}"/>`,
-tree:(c,d,l)=>`<rect x="44" y="40" width="12" height="52" fill="${d}"/><ellipse cx="50" cy="32" rx="38" ry="20" fill="${c}"/><ellipse cx="50" cy="28" rx="26" ry="11" fill="${l}"/>${[20,38,62,80].map(x=>`<circle cx="${x}" cy="36" r="3" fill="#fff"/>`).join('')}<path d="M30 92h40" stroke="${d}" stroke-width="6" stroke-linecap="round"/>`,
-train:(c,d,l)=>`<rect x="10" y="30" width="80" height="46" rx="14" fill="${c}"/><rect x="10" y="60" width="80" height="8" fill="${d}"/>${win(18,38,4,1,14,14,17,l)}<circle cx="28" cy="82" r="7" fill="#333"/><circle cx="72" cy="82" r="7" fill="#333"/><circle cx="86" cy="52" r="4" fill="#ffeb3b"/>`,
-boat:(c,d,l)=>`<path d="M12 62h76l-12 24H26z" fill="${c}"/><rect x="40" y="42" width="24" height="20" rx="3" fill="${l}"/><path d="M74 12v48H54z" fill="#fff"/><path d="M8 92q10-6 21 0t21 0 21 0 21 0" stroke="#4fc3f7" stroke-width="4" fill="none"/>`,
-cart:(c,d,l)=>`<path d="M12 40a38 28 0 0176 0z" fill="${c}"/><rect x="47" y="40" width="5" height="40" fill="${d}"/><rect x="18" y="62" width="64" height="20" rx="4" fill="${l}"/><circle cx="30" cy="88" r="8" fill="#333"/><circle cx="70" cy="88" r="8" fill="#333"/>`,
-trophy:(c,d,l)=>`<path d="M28 14h44v22q0 22-22 26-22-4-22-26z" fill="${c}"/><path d="M28 20H14q0 18 16 22M72 20h14q0 18-16 22" stroke="${c}" stroke-width="5" fill="none"/><rect x="44" y="60" width="12" height="18" fill="${d}"/><rect x="30" y="78" width="40" height="12" rx="3" fill="${d}"/><path d="M50 22l4 8 9 1-6 6 2 9-9-5-9 5 2-9-6-6 9-1z" fill="${l}"/>`,
-crown:(c,d,l)=>`<path d="M12 74L8 30l26 22 16-30 16 30 26-22-4 44z" fill="${c}"/><rect x="12" y="74" width="76" height="12" rx="3" fill="${d}"/><circle cx="50" cy="62" r="5" fill="#e53935"/><circle cx="28" cy="64" r="4" fill="#42a5f5"/><circle cx="72" cy="64" r="4" fill="#66bb6a"/>`,
-chop:(c,d,l)=>`<rect x="24" y="4" width="8" height="92" rx="4" fill="${c}" transform="rotate(14 28 50)"/><rect x="62" y="4" width="8" height="92" rx="4" fill="${c}" transform="rotate(-8 66 50)"/><rect x="20" y="20" width="16" height="6" fill="${d}" transform="rotate(14 28 23)"/><rect x="58" y="20" width="16" height="6" fill="${d}" transform="rotate(-8 66 23)"/>`,
-robot:(c,d,l)=>`<path d="M50 8v12" stroke="${d}" stroke-width="4"/><circle cx="50" cy="8" r="5" fill="#ff5252"/><rect x="22" y="20" width="56" height="40" rx="10" fill="${c}"/><rect x="30" y="30" width="14" height="12" rx="3" fill="#fff"/><rect x="56" y="30" width="14" height="12" rx="3" fill="#fff"/><circle cx="37" cy="36" r="3" fill="#222"/><circle cx="63" cy="36" r="3" fill="#222"/><path d="M38 51h24" stroke="#333" stroke-width="3" stroke-dasharray="4 3"/><rect x="28" y="64" width="44" height="26" rx="6" fill="${d}"/><circle cx="50" cy="77" r="5" fill="${l}"/><circle cx="16" cy="40" r="5" fill="${d}"/><circle cx="84" cy="40" r="5" fill="${d}"/>`,
-spinner:(c,d,l)=>`<circle cx="50" cy="50" r="12" fill="${d}"/>${[0,120,240].map(a=>`<g transform="rotate(${a} 50 50)"><circle cx="50" cy="20" r="14" fill="${c}"/><circle cx="50" cy="20" r="6" fill="${l}"/></g>`).join('')}<circle cx="50" cy="50" r="6" fill="${l}"/>`,
-squishy:(c,d,l)=>`<rect x="12" y="26" width="76" height="62" rx="30" fill="${c}"/><ellipse cx="34" cy="38" rx="14" ry="6" fill="${l}" opacity=".7"/>${E(36,58)}${E(64,58)}<ellipse cx="25" cy="68" rx="6" ry="4" fill="#ff8a80" opacity=".7"/><ellipse cx="75" cy="68" rx="6" ry="4" fill="#ff8a80" opacity=".7"/>${SM(50,70)}`,
-lantern:(c,d,l)=>`<rect x="40" y="6" width="20" height="8" rx="2" fill="${d}"/><ellipse cx="50" cy="48" rx="34" ry="32" fill="${c}"/><path d="M50 16v64M32 20q-10 28 0 56M68 20q10 28 0 56" stroke="${d}" stroke-width="2.5" fill="none"/><rect x="38" y="78" width="24" height="8" rx="2" fill="${d}"/><path d="M44 86v10M50 86v12M56 86v10" stroke="#ffc107" stroke-width="3" stroke-linecap="round"/>`,
-ketupat:(c,d,l)=>`<path d="M50 6l42 44-42 44L8 50z" fill="${c}"/><path d="M29 28l42 44M71 28L29 72M50 6v88M8 50h84" stroke="${l}" stroke-width="3"/>`,
-gift:(c,d,l)=>`<rect x="14" y="40" width="72" height="50" rx="5" fill="${c}"/><rect x="10" y="30" width="80" height="16" rx="5" fill="${d}"/><rect x="44" y="30" width="12" height="60" fill="${l}"/><path d="M50 30c-14-22-30-4-16 0zM50 30c14-22 30-4 16 0z" fill="${l}"/>`,
-diya:(c,d,l)=>`<path d="M12 58h76c0 20-16 30-38 30S12 78 12 58z" fill="${c}"/><ellipse cx="50" cy="58" rx="38" ry="8" fill="${d}"/><path d="M50 52c-12-14-6-26 0-36 6 10 12 22 0 36z" fill="#ffca28"/><path d="M50 50c-5-7-2-13 0-18 3 5 5 11 0 18z" fill="#ff7043"/>`,
 rocket:(c,d,l)=>`<path d="M50 6c20 14 24 42 20 62H30c-4-20 0-48 20-62z" fill="${c}"/><circle cx="50" cy="38" r="9" fill="${l}" stroke="${d}" stroke-width="3"/><path d="M30 56L14 76l18-4zM70 56l16 20-18-4z" fill="${d}"/><path d="M40 72h20l-10 24z" fill="#ffb300"/>`,
-ufo:(c,d,l)=>`<ellipse cx="50" cy="44" rx="22" ry="20" fill="${l}" opacity=".85"/><ellipse cx="50" cy="58" rx="44" ry="16" fill="${c}"/>${[22,40,58,76].map(x=>`<circle cx="${x}" cy="60" r="3.5" fill="#ffeb3b"/>`).join('')}<path d="M36 74l-8 18M64 74l8 18M50 74v18" stroke="${d}" stroke-width="3" stroke-linecap="round"/>${E(44,42,4)}${E(56,42,4)}`,
-planet:(c,d,l)=>`<circle cx="50" cy="50" r="30" fill="${c}"/><circle cx="40" cy="42" r="6" fill="${d}" opacity=".35"/><circle cx="62" cy="62" r="8" fill="${d}" opacity=".35"/><ellipse cx="50" cy="52" rx="46" ry="12" fill="none" stroke="${l}" stroke-width="4" transform="rotate(-18 50 52)"/>`
-};
-const toyArt=(t,sz=100)=>{const c=t[1];return `<svg viewBox="0 0 100 100" width="${sz}" height="${sz}">${ART[t[4]](c,mix(c,0,.3),mix(c,1,.45))}</svg>`};
+crown:(c,d,l)=>`<path d="M12 74L8 30l26 22 16-30 16 30 26-22-4 44z" fill="${c}"/><rect x="12" y="74" width="76" height="12" rx="3" fill="${d}"/><circle cx="50" cy="62" r="5" fill="#e53935"/><circle cx="28" cy="64" r="4" fill="#42a5f5"/><circle cx="72" cy="64" r="4" fill="#66bb6a"/>`};
+const toyArt=(t,sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}">${ART[t[4]](t[1],mix(t[1],0,.3),mix(t[1],1,.45))}</svg>`;
 
+/* ===== STATE ===== */
+let S;try{S=JSON.parse(localStorage.hp3)}catch(e){}S=S||{life:0,wallet:0,orders:[],toys:[],ok:0};
+const save=()=>{try{localStorage.hp3=JSON.stringify(S)}catch(e){}};
+let V='intro',shop=null,tab='menu',hf='All',tser='All',cart=[],cfg=null,PV=null;
+const need=l=>Math.round(100*Math.pow(1.5,l));
+const lvl=()=>{let l=0,x=S.life;while(x>=need(l)){x-=need(l);l++}return{l,x,n:need(l)}};
+const disc=l=>Math.min(l,50),money=n=>'$'+n.toFixed(2),fmt=n=>Math.round(n).toLocaleString();
+const hb=s=>`<span class="hb ${s.h?'y':'n'}">${s.h?'Halal':'Non-halal'}</span>`;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
+const xpCard=()=>{const v=lvl();return`<div class="xp"><div class="r"><div><small>YOUR LEVEL</small><div class="lv">Level ${v.l}</div></div><div style="text-align:right"><span class="pill">${disc(v.l)}% off</span><div style="margin-top:6px;font-size:13px;font-weight:800">${fmt(S.wallet)} XP to spend</div></div></div><div class="bar"><i style="width:${v.x/v.n*100}%"></i></div><small>${fmt(v.x)} / ${fmt(v.n)} XP to level ${v.l+1}</small></div>`};
+const sheet=h=>{$('#box').innerHTML=h;$('#sheet').classList.add('on')};
+const closeSheet=()=>{$('#sheet').classList.remove('on');if(PV){cancelAnimationFrame(PV.raf);PV=null}};
+$('#sheet').onclick=e=>{if(e.target.id==='sheet')closeSheet()};
 
-let S;try{S=JSON.parse(localStorage.hp)}catch(e){}S=S||{life:0,wallet:0,orders:[],toys:[],reviewed:{}};
-let shop=null,cart=[],cat='',cfg=null;
-const save=()=>{try{localStorage.hp=JSON.stringify(S)}catch(e){}};
-const need=l=>Math.round(BASE_XP*Math.pow(GROWTH,l));
-function lvl(){let l=0,x=S.life;while(x>=need(l)){x-=need(l);l++}return{l,x,n:need(l)}}
-const disc=l=>Math.min(l,MAX_DISC_LEVEL),money=n=>'$'+n.toFixed(2),fmt=n=>n>=1e6?(n/1e6).toPrecision(3)+'M':Math.round(n).toLocaleString();
-function show(id){$$('.screen').forEach(e=>e.classList.remove('on'));$('#'+id).classList.add('on');$('#nav').classList.toggle('on',id==='app');scrollTo(0,0)}
-function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2800)}
-function confetti(){const cs=['#ff4b3e','#ff9f1c','#ffd23f','#22b573','#7c5cff'];for(let i=0;i<30;i++){const c=document.createElement('div');c.className='conf';c.style.background=cs[i%5];c.style.left=Math.random()*100+'vw';c.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),3200)}}
-
-/* ===== SFX (generated with Web Audio, no files needed) ===== */
-let AC,MUTE=false;try{MUTE=localStorage.hpm==='1'}catch(e){}
-let MG;function M(){if(!MG){const c=AC.createDynamicsCompressor();MG=AC.createGain();MG.gain.value=3;MG.connect(c);c.connect(AC.destination)}return MG}
-function tone(f,t,d,type='sine',v=.12,f2){const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime+t;o.type=type;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(v,n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(M());o.start(n);o.stop(n+d+.05)}
-function noise(t,d,v=.08,fq=3000){const b=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type='highpass';f.frequency.value=fq;g.gain.value=v;s.connect(f).connect(g).connect(M());s.start(AC.currentTime+t)}
-const SFX={
- squeak:a=>{const b=700+(a%7)*90;tone(b,0,.1,'sine',.2,b*1.9);tone(b*1.5,.07,.12,'triangle',.14,b*2.2)},
- thud:()=>tone(130,0,.14,'sine',.35,55),
- whoosh:()=>{noise(0,.35,.12,1200);tone(300,0,.3,'sine',.1,900)},
- tap:()=>tone(700,0,.05,'triangle',.09),
- pop:()=>tone(400,0,.12,'sine',.14,900),
- add:()=>{tone(523,0,.09,'square',.06);tone(784,.07,.14,'square',.06)},
- coin:()=>{tone(988,0,.07,'square',.07);tone(1319,.07,.3,'square',.07)},
- error:()=>{tone(220,0,.18,'sawtooth',.08,120)},
- success:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.08,.2,'triangle',.12)),
- bell:()=>{noise(0,.5,.06,2500);tone(1568,0,.7,'sine',.12);tone(2093,.02,.5,'sine',.06)},
- star:r=>tone(500+r*120,0,.25,'triangle',.13,700+r*160),
- toy:()=>{[659,784,988,1319,1568].forEach((f,i)=>tone(f,i*.06,.18,'square',.06));noise(.3,.3,.05,6000)},
- level:()=>{[392,523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.3,'triangle',.14));tone(1047,.6,.7,'square',.06);tone(1319,.6,.7,'triangle',.1)}
-};
-function sfx(n,a){if(MUTE)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();SFX[n](a)}catch(e){}}
-function drawSnd(){$('#snd').innerHTML=ic(MUTE?'mute':'vol',22);$('#snd').classList.toggle('off',MUTE)}
-$('#snd').onclick=()=>{MUTE=!MUTE;try{localStorage.hpm=MUTE?'1':'0'}catch(e){}drawSnd();sfx('pop')};
-document.addEventListener('click',e=>{if(e.target.closest('.opt,.tab,[data-pn],.qty button,.shop,.item,#back'))sfx('tap')});
-
-/* intro */
-$('#ttl').innerHTML=[...'Hawker Paradise'].map((c,i)=>c===' '?'<br>':`<span style="--i:${i}">${c}</span>`).join('');
-drawSnd();$('#start').addEventListener('click',()=>sfx('success'));$('#pinic').innerHTML=ic('pin',44);$('#cartic').innerHTML=ic('cart',20);
-$('#start').onclick=()=>S.ok?(renderShops(),show('shops')):show('loc');
-const inSG=(a,b)=>a>=1.15&&a<=1.48&&b>=103.6&&b<=104.1;
-const pass=()=>{sfx('success');S.ok=1;save();renderShops();show('shops')};
-$('#chk').onclick=()=>{
-  const e=$('#locerr');e.textContent='';
-  if(!navigator.geolocation){e.textContent='Location is not supported on this device.';return}
-  $('#chk').textContent='Checking...';
-  navigator.geolocation.getCurrentPosition(p=>{$('#chk').textContent='Check my location';inSG(p.coords.latitude,p.coords.longitude)?pass():(e.textContent='Sorry, Hawker Paradise only works in Singapore.',sfx('error'))},
-  ()=>{$('#chk').textContent='Check my location';e.textContent='Please allow location access so we can confirm you are in Singapore.'},{timeout:12000});
-};
-$('#demo').onclick=pass; /* remove before going live */
-
-function renderXP(){
-  const v=lvl(),d=disc(v.l);
-  const h=`<div class="r"><div><small>YOUR LEVEL</small><div class="lvl">Level ${v.l}</div></div><div style="text-align:right"><span class="disc">${d}% off</span><div style="margin-top:6px;font-weight:800;font-size:13px">${fmt(S.wallet)} XP to spend</div></div></div><div class="bar"><i style="width:${v.x/v.n*100}%"></i></div><small>${fmt(v.x)} / ${fmt(v.n)} XP to level ${v.l+1}</small>`;
-  $$('[data-xp]').forEach(e=>e.innerHTML=h);
+/* ===== RENDER ===== */
+function render(){
+ const R=$('#root');
+ if(V==='intro'){R.innerHTML=`<div id="cut"><div class="blob" style="width:220px;height:220px;left:-60px;top:8%"></div><div class="blob" style="width:160px;height:160px;right:-40px;bottom:12%;animation-delay:-4s"></div>
+<svg id="hero" viewBox="0 0 300 260"><defs><linearGradient id="tg" gradientUnits="userSpaceOnUse" x1="134" y1="70" x2="330" y2="-190"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+<g class="bw"><ellipse cx="150" cy="232" rx="82" ry="9" fill="rgba(0,0,0,.18)"/><path d="M52 124h196c0 62-40 104-98 104S52 186 52 124z" fill="#fff"/><path d="M60 150h180c-8 40-40 70-90 70s-82-30-90-70z" fill="#ff4b3e"/><path d="M60 150h180" stroke="#ffc94d" stroke-width="6" stroke-linecap="round"/><rect x="108" y="222" width="84" height="10" rx="5" fill="#fff"/><ellipse cx="150" cy="124" rx="98" ry="16" fill="#fff"/><ellipse cx="150" cy="124" rx="86" ry="11" fill="#ffb347"/></g>
+${[...Array(9)].map((_,i)=>`<g transform="translate(${88+i*15} 0)"><path class="nf" style="--d:${i}" d="M0 0c7 10-7 20 0 30s-7 20 0 30"/></g>`).join('')}
+<path class="nd" style="animation-delay:2.9s" d="M80 120c14-16 28 16 42 0s28 16 42 0 28 16 42 0"/><path class="nd" style="animation-delay:3.1s" d="M90 126c14-14 26 12 40 0s26 14 40 0 26 12 36-2"/><path class="nd" style="animation-delay:3.3s" d="M96 116c12-12 24 12 38 0s24 12 38 0 24 12 34-2"/>
+<g class="eg"><circle cx="190" cy="112" r="12" fill="#fff8e1"/><circle cx="190" cy="112" r="6" fill="#ffb400"/></g>
+<circle class="fl" cx="140" cy="118" r="10"/>
+<g class="st"><path class="tr" d="M134 70L330 -190" stroke="url(#tg)" stroke-width="12" stroke-linecap="round" fill="none"/><rect x="120" y="20" width="7" height="110" rx="3.5" fill="#6b3e1d" transform="rotate(-8 123 75)"/><rect x="138" y="18" width="7" height="110" rx="3.5" fill="#8a5028" transform="rotate(-2 141 73)"/></g>
+<path class="steam" style="--s:0s" d="M110 80c-10-14 10-22 0-38"/><path class="steam" style="--s:.8s" d="M150 74c-10-14 10-22 0-38"/><path class="steam" style="--s:1.6s" d="M190 80c-10-14 10-22 0-38"/>
+<path class="spark" style="--s:0s" d="M40 60l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path class="spark" style="--s:.6s" d="M260 90l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><path class="spark" style="--s:1.2s" d="M238 24l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/></svg>
+<h1>${[...'Hawker Paradise'].map((ch,i)=>ch===' '?'<br>':`<span style="--i:${i}">${ch}</span>`).join('')}</h1><p>Order local favourites, level up with every meal, and eat for less.</p><button class="btn go2" data-a="start">Start ordering</button><button class="skip" data-a="skipc">Skip</button>
+<div id="tap">${em('bowl',110)}<h2 style="color:#fff">Hawker Paradise</h2><button class="btn" data-a="begin">Tap to enter</button></div></div>`;return}
+ if(V==='loc'){R.innerHTML=`<div id="intro"><div class="bob">${em('pin',90)}</div><h2>Are you in Singapore?</h2><p>Hawker Paradise only serves customers in Singapore.</p><p id="err" style="font-weight:800"></p><button class="btn" data-a="chk">Check my location</button><button class="btn g" data-a="skip" style="font-size:14px;padding:10px 20px">Demo: skip check</button></div>`;return}
+ if(V==='stalls'){
+  const o=S.orders,sp=o.reduce((a,x)=>a+x.total,0);
+  R.innerHTML=`<div class="w"><div class="sub">Welcome to Hawker Paradise</div><h2>Choose a stall</h2>${xpCard()}
+  <div class="tabs">${['All','Halal','Non-halal'].map(x=>`<button class="tab ${x===hf?'on':''}" data-a="hf" data-v="${x}">${x}</button>`).join('')}</div>
+  <div class="list">${SH.filter(s=>hf==='All'||(hf==='Halal')===!!s.h).map(s=>`<button class="row2" data-a="shop" data-v="${s.id}" style="border-left:7px solid ${s.c[0]}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${em(s.ic,34)}</div><div><h3>${s.n}</h3><div style="margin-top:4px">${hb(s)}</div></div></button>`).join('')}</div>
+  <h2 style="margin:22px 0 8px">All my orders</h2>
+  ${o.length?`<div class="sub" style="margin-bottom:10px">${o.length} order${o.length>1?'s':''} | ${money(sp)} spent across all stalls</div>`+o.slice(0,30).map(x=>`<div class="hist"><div class="line" style="padding:0"><b>${x.shop}</b><span>${money(x.total)}</span></div><div class="sub">${x.date} | +${x.xp} XP<br>${x.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet. Pick a stall and order something.</p>'}</div>`;return}
+ /* shop view */
+ const v=lvl(),d=disc(v.l);
+ let body='';
+ if(tab==='menu'){body=`<div class="list">${shop.items.map((it,i)=>{const lk=it.t==='e'&&v.l<51,fp=it.p*(1-d/100);return`<button class="row2 ${lk?'lock':''}" data-a="item" data-v="${i}"><div class="tile" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${em(it.t==='e'?'crown':it.t==='f'?shop.ic:'drink',30)}</div><div class="in"><h3>${it.n}${it.t==='e'?'<span class="tag">Lv 51+</span>':''}</h3><div class="sub">${lk?'Unlocks at level 51':'Earn ~'+Math.round(fp*10)+' XP'}</div><div>${d?`<s class="sub">${money(it.p)}</s> `:''}<b>${money(fp)}</b></div></div><div class="plus" ${lk?'style="background:var(--mute)"':''}>${lk?em('lock',20):'<b style="font-size:24px">+</b>'}</div></button>`}).join('')}</div>`}
+ else{const ser=['All',...new Set(TOYS.map(t=>t[3]))];
+  body=`<p class="sub" style="margin-bottom:6px">Spend XP on collectible toys. Press Preview to play with any toy before you buy it.</p><div class="tabs">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-a="ts" data-v="${x}">${x}</button>`).join('')}</div>
+  <div class="toys">${TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser).map(([t,i])=>`<div class="toy"><div class="tile" style="background:${t[1]}44">${toyArt(t,58)}</div><h3 style="font-size:14px">${t[0]}</h3><div class="sub">${t[3]} | ${fmt(t[2])} XP</div><div class="b"><button class="pv" data-a="pv" data-v="${i}">Preview</button><button data-a="buy" data-v="${i}" ${S.wallet<t[2]?'disabled':''}>Redeem</button></div></div>`).join('')}</div>
+  <h2 style="margin:20px 0 8px">My toys</h2>${S.toys.length?Object.entries(S.toys.reduce((c,x)=>(c[x]=(c[x]||0)+1,c),{})).map(([k,n])=>`<div class="line"><span>${k} <b>x${n}</b></span><button class="opt" data-a="pv" data-v="${TOYS.findIndex(x=>x[0]===k)}">Play</button></div>`).join(''):'<p class="sub">No toys yet.</p>'}
+  <button class="btn g full" data-a="boost" style="font-size:14px">Demo: +5,000 XP</button>`}
+ R.innerHTML=`<div class="w"><button class="tab" data-a="back" style="margin-bottom:8px">&larr; All stalls</button><div class="ban" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${em(shop.ic,54)}<div><h2>${shop.n}</h2><div style="margin-top:4px">${hb(shop)}</div></div></div>${xpCard()}${body}</div>
+ <div id="nav"><button class="${tab==='menu'?'on':''}" data-a="tab" data-v="menu">${em('bowl',18)} Menu</button><button class="${tab==='toys'?'on':''}" data-a="tab" data-v="toys">${em('bear',18)} Toys</button><button data-a="cart" style="display:flex;gap:6px;align-items:center">${em('cart',20)}<b>${cart.reduce((a,l)=>a+l.q,0)}</b></button></div>`;
 }
-let hfil='All';
-const hb=s=>`<span class="hb ${s.halal?'y':'n'}">${s.halal?'Halal':'Non-halal'}</span>`;
-function renderShops(){
-  renderXP();
-  $('#hf').innerHTML=['All','Halal','Non-halal'].map(x=>`<button class="tab ${x===hfil?'on':''}" data-hf="${x}">${x}</button>`).join('');
-  $$('[data-hf]').forEach(b=>b.onclick=()=>{hfil=b.dataset.hf;renderShops()});
-  $('#shoplist').innerHTML=SHOPS.filter(s=>hfil==='All'||(hfil==='Halal')===s.halal).map(s=>`<button class="shop" data-s="${s.id}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${ic('bowl',34)}</div><div><h3>${s.name}</h3><div class="sub">${s.sub}</div><div style="margin-top:4px">${hb(s).replace('margin-left:6px','')}</div></div></button>`).join('');
-  $$('.shop').forEach(b=>b.onclick=()=>{const ns=SHOPS.find(s=>s.id===b.dataset.s);if(!shop||shop.id!==ns.id)cart=[];shop=ns;openShop()});
-}
-const toStalls=()=>{sfx('tap');renderShops();show('shops')};
-$('#back').onclick=toStalls;$('#navback').onclick=toStalls;
-function openShop(){$('#shopname').textContent=shop.name;$('#shopsub').innerHTML=shop.sub+hb(shop);cat=Object.keys(shop.cats)[0];tab('menu');renderMenu();renderXP();cc();show('app')}
-function renderMenu(){
-  const v=lvl(),d=disc(v.l);
-  $('#cats').innerHTML=Object.keys(shop.cats).map(c=>`<button class="tab ${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
-  $$('.tab').forEach(b=>b.onclick=()=>{cat=b.dataset.c;renderMenu()});
-  $('#menu').innerHTML=shop.cats[cat].map((it,i)=>{
-    const lk=it.req&&v.l<it.req,fp=it.p*(1-d/100);
-    return `<button class="item ${lk?'lock':''} ${it.req?'excl':''}" data-i="${i}"><div class="tile" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${ic(it.t,30)}</div>
-    <div class="in"><h3>${it.n}${it.req?`<span class="tag">Lv ${it.req}+</span>`:''}</h3><p>${lk?'Unlocks at level '+it.req:(it.g.length?'Customisable':'Ready to order')+' - earn ~'+Math.round(fp*XP_PER_DOLLAR)+' XP'}</p>
-    <div class="price">${d?`<s>${money(it.p)}</s>`:''}${money(fp)}</div></div>
-    <div class="plus" style="${lk?'background:var(--mute);box-shadow:none':''}">${ic(lk?'lock':'plus',20,2.5)}</div></button>`}).join('');
-  $$('.item').forEach(b=>b.onclick=()=>{const it=shop.cats[cat][b.dataset.i];if(it.req&&lvl().l<it.req){sfx('error');return toast('Reach level '+it.req+' to unlock this dish')}openCustom(it)});
-}
-const cc=()=>$('#cc').textContent=cart.reduce((a,l)=>a+l.q,0);
-function tab(p){$$('.pane').forEach(e=>e.classList.toggle('on',e.id==='p-'+p));$$('[data-pn]').forEach(b=>b.classList.toggle('on',b.dataset.pn===p));if(p==='rew')renderToys();if(p==='me')renderMe()}
-$$('[data-pn]').forEach(b=>b.onclick=()=>tab(b.dataset.pn));
-
-/* customise sheet */
-function openCustom(it){
-  sfx('pop');cfg={it,sel:{},q:1,note:''};
-  it.g.forEach(k=>{if(G[k][1])cfg.sel[k]=[0]; else cfg.sel[k]=[]});
-  drawCustom();$('#sheet').classList.add('on');
-}
-function cfgPrice(){let u=cfg.it.p;cfg.it.g.forEach(k=>cfg.sel[k].forEach(i=>u+=G[k][2][i][1]));return u}
+/* ===== customise + cart ===== */
+const cp=()=>{let u=cfg.it.p;G[cfg.it.t].forEach((g,k)=>cfg.sel[k].forEach(i=>u+=g[2][i][1]));return u};
 function drawCustom(){
-  const it=cfg.it,d=disc(lvl().l),u=cfgPrice();
-  $('#sbox').innerHTML=`<h2>${it.n}</h2><div class="sub">${shop.name}</div>`+
-  it.g.map(k=>{const[t,one,ch]=G[k];return `<div class="grp"><h4>${t}<small>${one?'Pick 1':'Optional, pick any'}</small></h4><div class="opts">${ch.map((c,i)=>`<button class="opt ${cfg.sel[k].includes(i)?'on':''}" data-k="${k}" data-i="${i}">${c[0]}${c[1]?' +'+money(c[1]):''}</button>`).join('')}</div></div>`}).join('')+
-  `<div class="grp"><h4>Special requests<small>Optional</small></h4><textarea id="note" maxlength="140" placeholder="e.g. less oil, no spring onion, pack separately">${cfg.note}</textarea></div>
-  <div class="row" style="margin-top:14px"><span class="qty"><button id="qm">-</button><b>${cfg.q}</b><button id="qp">+</button></span><span class="big">${money(u*cfg.q*(1-d/100))}</span></div>
-  <button class="btn" style="width:100%;margin-top:8px" id="addc">Add to order</button>
-  <button class="btn ghost" style="width:100%;margin-top:10px" id="cancel">Cancel</button>`;
-  $$('.opt').forEach(b=>b.onclick=()=>{const k=b.dataset.k,i=+b.dataset.i,s=cfg.sel[k];cfg.note=$('#note').value;
-    if(G[k][1])cfg.sel[k]=[i];else cfg.sel[k]=s.includes(i)?s.filter(x=>x!==i):[...s,i];drawCustom()});
-  $('#qm').onclick=()=>{cfg.note=$('#note').value;if(cfg.q>1)cfg.q--;drawCustom()};
-  $('#qp').onclick=()=>{cfg.note=$('#note').value;cfg.q++;drawCustom()};
-  $('#cancel').onclick=()=>$('#sheet').classList.remove('on');
-  $('#addc').onclick=()=>{
-    const desc=it.g.map(k=>cfg.sel[k].map(i=>G[k][2][i][0])).flat().join(', ');
-    sfx('add');cart.push({n:it.n,u:cfgPrice(),q:cfg.q,desc,note:$('#note').value.trim()});cc();
-    $('#sheet').classList.remove('on');toast(it.n+' added to your order')};
+ const it=cfg.it,d=disc(lvl().l),gs=G[it.t];
+ sheet(`<h2>${it.n}</h2><div class="sub">${shop.n}</div>`+gs.map((g,k)=>`<h3 style="margin-top:14px">${g[0]} <span class="sub">${g[1]?'Pick 1':'Optional'}</span></h3><div class="opts">${g[2].map((c,i)=>`<button class="opt ${cfg.sel[k].includes(i)?'on':''}" data-a="opt" data-k="${k}" data-v="${i}">${c[0]}${c[1]?' +'+money(c[1]):''}</button>`).join('')}</div>`).join('')+
+ `<h3>Special requests <span class="sub">Optional</span></h3><textarea id="note" maxlength="140" placeholder="e.g. less oil, pack separately">${cfg.note}</textarea>
+ <div class="line" style="margin-top:12px"><span class="qty"><button data-a="q" data-v="-1">-</button><b>${cfg.q}</b><button data-a="q" data-v="1">+</button></span><b style="font-size:22px">${money(cp()*cfg.q*(1-d/100))}</b></div>
+ <button class="btn full" data-a="addc">Add to order</button><button class="btn g full" data-a="close">Cancel</button>`);
 }
-/* cart */
-function totals(){const d=disc(lvl().l),sub=cart.reduce((a,l)=>a+l.u*l.q,0);return{sub,tot:sub*(1-d/100),d}}
-function renderCart(){
-  const t=totals();
-  $('#sbox').innerHTML=`<h2>Your order</h2><div class="sub">${shop.name}</div>`+(cart.length?cart.map((l,i)=>`<div class="row" style="align-items:flex-start"><div><b>${l.n}</b><div class="sub">${[l.desc,l.note&&'Note: '+l.note].filter(Boolean).join(' | ')}</div></div><span class="qty"><button data-m="${i}">-</button>${l.q}<button data-p="${i}">+</button></span></div>`).join('')+
-  `<div class="tot"><div class="row"><span>Subtotal</span><span>${money(t.sub)}</span></div><div class="row"><span>Level discount (${t.d}%)</span><span>-${money(t.sub-t.tot)}</span></div><div class="row big"><span>Total</span><span>${money(t.tot)}</span></div><div class="sub">You will earn ${Math.round(t.tot*XP_PER_DOLLAR)} XP</div></div><button class="btn" style="width:100%;margin-top:14px" id="place">Place order</button>`:`<p class="sub" style="padding:24px 0">Your tray is empty. Add something tasty.</p>`)+
-  `<button class="btn ghost" style="width:100%;margin-top:10px" id="close">Close</button>`;
-  $$('[data-m]').forEach(b=>b.onclick=()=>{const l=cart[b.dataset.m];if(--l.q<=0)cart.splice(b.dataset.m,1);cc();renderCart()});
-  $$('[data-p]').forEach(b=>b.onclick=()=>{cart[b.dataset.p].q++;cc();renderCart()});
-  $('#close').onclick=()=>$('#sheet').classList.remove('on');
-  const pl=$('#place');if(pl)pl.onclick=place;
+const totals=()=>{const d=disc(lvl().l),sub=cart.reduce((a,l)=>a+l.u*l.q,0);return{sub,tot:sub*(1-d/100),d}};
+function drawCart(){
+ const t=totals();
+ sheet(`<h2>Your order</h2><div class="sub">${shop.n}</div>`+(cart.length?cart.map((l,i)=>`<div class="line" style="align-items:flex-start"><div><b>${l.n}</b><div class="sub">${[l.desc,l.note&&'Note: '+l.note].filter(Boolean).join(' | ')}</div></div><span class="qty"><button data-a="cm" data-v="${i}">-</button>${l.q}<button data-a="cpl" data-v="${i}">+</button></span></div>`).join('')+`<div style="border-top:2px dashed #e5d5bb;margin-top:8px;padding-top:6px"><div class="line"><span>Subtotal</span><span>${money(t.sub)}</span></div><div class="line"><span>Level discount (${t.d}%)</span><span>-${money(t.sub-t.tot)}</span></div><div class="line"><b>Total</b><b style="font-size:22px">${money(t.tot)}</b></div><div class="sub">You will earn ${Math.round(t.tot*10)} XP</div></div><button class="btn full" data-a="place">Place order</button>`:'<p class="sub" style="padding:20px 0">Your tray is empty.</p>')+`<button class="btn g full" data-a="close">Close</button>`);
 }
-$('#cartbtn').onclick=()=>{if(!shop)return;sfx('pop');renderCart();$('#sheet').classList.add('on')};
-$('#sheet').onclick=e=>{if(e.target.id==='sheet')e.target.classList.remove('on')};
-function place(){
-  const t=totals(),xp=Math.round(t.tot*XP_PER_DOLLAR),before=lvl().l;
-  const o={id:Date.now(),shop:shop.name,lines:cart.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:t.tot,xp,date:new Date().toLocaleDateString()};
-  sfx('bell');S.orders.unshift(o);S.life+=xp;S.wallet+=xp;save();cart=[];cc();
-  const after=lvl().l;
-  $('#sbox').innerHTML=`<div style="text-align:center"><h2>Order placed</h2><p class="sub">${money(t.tot)} - you earned ${xp} XP</p>
-  ${after>before?`<h3 style="margin:12px 0;color:var(--pur)">Level up! You are now level ${after}</h3>`:''}
-  <p style="font-weight:800;margin-top:14px">Rate your meal for +${REVIEW_XP} XP</p>
-  <div class="stars" id="stars">${[1,2,3,4,5].map(i=>`<button data-r="${i}">${ic('star',40,1.5).replace('fill="none"','fill="currentColor"')}</button>`).join('')}</div>
-  <button class="btn" style="width:100%" id="done">Done</button></div>`;
-  if(after>before){setTimeout(()=>sfx('level'),650);confetti();toast(`Level ${after}: you now get ${disc(after)}% off`+(after>MAX_DISC_LEVEL?' and new exclusive dishes':''))}
-  $$('#stars button').forEach(b=>b.onclick=()=>{const r=+b.dataset.r;sfx('star',r);$$('#stars button').forEach(x=>x.classList.toggle('on',+x.dataset.r<=r));
-    if(r===5&&!S.reviewed[o.id]){S.reviewed[o.id]=1;const bf=lvl().l;S.life+=REVIEW_XP;S.wallet+=REVIEW_XP;save();toast('Thanks for the 5 stars! +'+REVIEW_XP+' XP');setTimeout(()=>sfx('coin'),300);confetti();renderXP()}
-    else if(r<5)toast('Thanks for the feedback')});
-  $('#done').onclick=()=>{$('#sheet').classList.remove('on');renderXP();renderMenu()};
-  renderXP();
-}
-function buy(i){const t=TOYS[i];if(S.wallet<t[2])return false;sfx('toy');S.wallet-=t[2];S.toys.push(t[0]);save();renderXP();toast('You got the '+t[0]+'!');confetti();return true}
-function renderToys(){
-  const ser=['All',...new Set(TOYS.map(t=>t[3]))];
-  const list=TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser);
-  $('#toys').innerHTML=`<div class="tabs tt" style="grid-column:1/-1">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-ts="${x}">${x}</button>`).join('')}</div>`+
-  list.map(([t,i])=>`<div class="toy"><div class="tile" style="background:linear-gradient(135deg,${t[1]}33,${t[1]}88)">${toyArt(t,60)}</div><h3 style="font-size:15px">${t[0]}</h3><div class="rar">${t[3]}</div><div class="sub">${fmt(t[2])} XP</div><div class="tb"><button class="pv" data-pv="${i}">Preview</button><button data-t="${i}" ${S.wallet<t[2]?'disabled':''}>Redeem</button></div></div>`).join('');
-  $$('[data-ts]').forEach(b=>b.onclick=()=>{tser=b.dataset.ts;renderToys()});
-  $$('[data-pv]').forEach(b=>b.onclick=()=>openPreview(+b.dataset.pv));
-  $$('[data-t]').forEach(b=>b.onclick=()=>{if(buy(+b.dataset.t))renderToys()});
-  const c={};S.toys.forEach(x=>c[x]=(c[x]||0)+1);
-  $('#owned').innerHTML=S.toys.length?Object.entries(c).map(([k,v])=>`<div class="row"><span>${k} <b>x${v}</b></span><button class="opt" data-play="${TOYS.findIndex(x=>x[0]===k)}">Play</button></div>`).join(''):'No toys yet. Earn XP and redeem some.';
-  $$('[data-play]').forEach(b=>b.onclick=()=>openPreview(+b.dataset.play));
-}
-/* toy preview: drag, throw and tap */
-let PV=null;
-function closePV(){if(PV)cancelAnimationFrame(PV.raf);PV=null;$('#pv').classList.remove('on')}
-$('#pv').onclick=e=>{if(e.target.id==='pv')closePV()};
-addEventListener('keydown',e=>{if(e.key==='Escape')closePV()});
+function buy(i){const t=TOYS[i];if(S.wallet<t[2])return false;sfx('toy');S.wallet-=t[2];S.toys.push(t[0]);save();toast('You got the '+t[0]+'!');return true}
+/* ===== toy preview (drag, throw, tap) ===== */
 function openPreview(i){
-  const t=TOYS[i];sfx('pop');
-  $('#pvbox').innerHTML=`<div class="top" style="margin:0 0 10px"><div><h2 style="font-size:22px">${t[0]}</h2><div class="sub">${t[3]} | ${fmt(t[2])} XP</div></div><button class="plus" id="pvx" style="background:var(--card);color:var(--ink);box-shadow:var(--sh)">${ic('plus',20,2.5).replace('M12 5v14M5 12h14','M6 6l12 12M18 6L6 18')}</button></div>
-  <div id="stage"><div id="ptoy">${toyArt(t,120)}</div><div class="hint">Drag it, throw it, or tap it!</div></div>
-  <div class="tb" style="margin-top:12px"><button class="opt" id="pj">Jump</button><button class="opt" id="ps">Spin</button><button class="opt" id="pq">Squeak</button><button class="opt" id="pr">Reset</button></div>
-  <button class="btn" id="pb" style="width:100%;margin-top:12px" ${S.wallet<t[2]?'disabled':''}>Redeem for ${fmt(t[2])} XP</button>`;
-  $('#pv').classList.add('on');
-  const st=$('#stage'),el=$('#ptoy'),R=60,W=st.clientWidth,H=st.clientHeight,FL=H-26-52;
-  const p=PV={x:W/2,y:70,vx:0,vy:0,r:0,vr:0,sq:0,drag:false,lx:0,ly:0,mv:0,W,FL};
-  const burst=()=>{for(let k=0;k<10;k++){const d=document.createElement('div'),a=Math.random()*6.28,m=40+Math.random()*50;d.className='spk';d.style.cssText=`left:${p.x}px;top:${p.y}px;background:${['#ff4b3e','#ffb400','#22b573','#7c5cff'][k%4]};--dx:${Math.cos(a)*m}px;--dy:${Math.sin(a)*m}px`;st.appendChild(d);setTimeout(()=>d.remove(),650)}};
-  const poke=()=>{const sp=t[4]==='spinner';p.vy=sp?-8:-15;p.vr+=(Math.random()<.5?-1:1)*(sp?45:12);p.sq=.25;sfx('squeak',i);burst()};
-  const pos=e=>{const b=st.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
-  el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);const[x,y]=pos(e);p.drag=true;p.ox=x-p.x;p.oy=y-p.y;p.mv=0;p.lx=p.x;p.ly=p.y;p.vx=p.vy=0;el.style.cursor='grabbing'};
-  el.onpointermove=e=>{if(!p.drag)return;const[x,y]=pos(e);const nx=Math.min(W-R,Math.max(R,x-p.ox)),ny=Math.min(p.FL,Math.max(R,y-p.oy));p.vx=(nx-p.lx)*.6+p.vx*.4;p.vy=(ny-p.ly)*.6+p.vy*.4;p.mv+=Math.abs(nx-p.lx)+Math.abs(ny-p.ly);p.x=p.lx=nx;p.y=p.ly=ny};
-  el.onpointerup=el.onpointercancel=()=>{if(!p.drag)return;p.drag=false;el.style.cursor='grab';const cap=v=>Math.max(-38,Math.min(38,v));if(p.mv<8){poke()}else{p.vx=cap(p.vx);p.vy=cap(p.vy);p.vr+=p.vx*1.2;sfx('whoosh')}};
-  $('#pj').onclick=poke;$('#ps').onclick=()=>{p.vr=38*(Math.random()<.5?-1:1);p.vy=-6;sfx('whoosh')};$('#pq').onclick=()=>{p.sq=.3;sfx('squeak',i);burst()};
-  $('#pr').onclick=()=>{p.x=W/2;p.y=70;p.vx=p.vy=p.vr=0;p.r=0};
-  $('#pvx').onclick=closePV;
-  $('#pb').onclick=()=>{if(buy(i)){$('#pb').disabled=true;$('#pb').textContent='Redeemed!';renderToys()}};
-  const tick=()=>{if(PV!==p)return;
-    if(!p.drag){p.vy+=.75;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vr*=.985;p.vx*=.995;
-      if(p.y>p.FL){p.y=p.FL;if(Math.abs(p.vy)>6){sfx('thud');p.sq=Math.min(.3,Math.abs(p.vy)/50)}p.vy*=-.6;if(Math.abs(p.vy)<1.6)p.vy=0;p.vx*=.92;p.vr*=.92}
-      if(p.x<R){p.x=R;p.vx*=-.7}if(p.x>W-R){p.x=W-R;p.vx*=-.7}if(p.y<R){p.y=R;p.vy*=-.5}}
-    p.sq*=.85;el.style.transform=`translate(${p.x-R}px,${p.y-R}px) rotate(${p.r}deg) scale(${1+p.sq},${1-p.sq})`;p.raf=requestAnimationFrame(tick)};
-  tick();
+ const t=TOYS[i];sfx('pop');
+ sheet(`<div class="line" style="padding-top:0"><div><h2 style="font-size:21px">${t[0]}</h2><div class="sub">${t[3]} | ${fmt(t[2])} XP</div></div><button class="plus" style="background:var(--card);color:var(--ink)" data-a="close">${ic(IC.x,20)}</button></div>
+ <div id="stage"><div id="pt">${toyArt(t,120)}</div><div class="hint">Drag it, throw it, or tap it!</div></div>
+ <div class="opts" style="justify-content:center;margin-top:12px"><button class="opt" id="pj">Jump</button><button class="opt" id="ps">Spin</button><button class="opt" id="pq">Squeak</button><button class="opt" id="pr">Reset</button></div>
+ <button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Redeem for ${fmt(t[2])} XP</button>`);
+ const st=$('#stage'),el=$('#pt'),R=60,W=st.clientWidth,FL=st.clientHeight-26-52;
+ const p=PV={x:W/2,y:70,vx:0,vy:0,r:0,vr:0,sq:0,drag:false,lx:0,ly:0,mv:0};
+ const burst=()=>{for(let k=0;k<10;k++){const d=document.createElement('div'),a=Math.random()*6.28,m=40+Math.random()*50;d.className='spk';d.style.cssText=`left:${p.x}px;top:${p.y}px;background:${['#ff4b3e','#ffb400','#22b573','#7c5cff'][k%4]};--dx:${Math.cos(a)*m}px;--dy:${Math.sin(a)*m}px`;st.appendChild(d);setTimeout(()=>d.remove(),650)}};
+ const poke=()=>{p.vy=-15;p.vr+=(Math.random()<.5?-1:1)*12;p.sq=.25;sfx('squeak',i);burst()};
+ const pos=e=>{const b=st.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
+ el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);const[x,y]=pos(e);p.drag=true;p.ox=x-p.x;p.oy=y-p.y;p.mv=0;p.lx=p.x;p.ly=p.y;p.vx=p.vy=0};
+ el.onpointermove=e=>{if(!p.drag)return;const[x,y]=pos(e),nx=Math.min(W-R,Math.max(R,x-p.ox)),ny=Math.min(FL,Math.max(R,y-p.oy));p.vx=(nx-p.lx)*.6+p.vx*.4;p.vy=(ny-p.ly)*.6+p.vy*.4;p.mv+=Math.abs(nx-p.lx)+Math.abs(ny-p.ly);p.x=p.lx=nx;p.y=p.ly=ny};
+ el.onpointerup=el.onpointercancel=()=>{if(!p.drag)return;p.drag=false;const c=v=>Math.max(-38,Math.min(38,v));if(p.mv<8)poke();else{p.vx=c(p.vx);p.vy=c(p.vy);p.vr+=p.vx*1.2;sfx('whoosh')}};
+ $('#pj').onclick=poke;$('#ps').onclick=()=>{p.vr=38;p.vy=-6;sfx('whoosh')};$('#pq').onclick=()=>{p.sq=.3;sfx('squeak',i);burst()};
+ $('#pr').onclick=()=>{p.x=W/2;p.y=70;p.vx=p.vy=p.vr=p.r=0};
+ $('#pb').onclick=()=>{if(buy(i)){$('#pb').disabled=true;$('#pb').textContent='Redeemed!';render()}};
+ const tick=()=>{if(PV!==p)return;
+  if(!p.drag){p.vy+=.75;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vr*=.985;p.vx*=.995;
+   if(p.y>FL){p.y=FL;if(Math.abs(p.vy)>6){sfx('thud');p.sq=Math.min(.3,Math.abs(p.vy)/50)}p.vy*=-.6;if(Math.abs(p.vy)<1.6)p.vy=0;p.vx*=.92;p.vr*=.92}
+   if(p.x<R){p.x=R;p.vx*=-.7}if(p.x>W-R){p.x=W-R;p.vx*=-.7}if(p.y<R){p.y=R;p.vy*=-.5}}
+  p.sq*=.85;el.style.transform=`translate(${p.x-R}px,${p.y-R}px) rotate(${p.r}deg) scale(${1+p.sq},${1-p.sq})`;p.raf=requestAnimationFrame(tick)};
+ tick();
 }
-function renderMe(){
-  $('#hist').innerHTML=S.orders.length?S.orders.slice(0,10).map(o=>`<div class="hist"><div class="row" style="padding:0"><b>${o.shop}</b><span>${money(o.total)}</span></div><div class="sub">${o.date} | +${o.xp} XP<br>${o.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet.</p>';
-  $('#perks').innerHTML=`Every level gives 1% off, up to 50% at level 50.<br>Level 51 and above unlock exclusive dishes at each stall.<br>Each level needs ${Math.round((GROWTH-1)*100)}% more XP than the last.<br><b>Next level costs ${fmt(need(lvl().l))} XP</b>`;
-}
-$('#boost').onclick=()=>{const b=lvl().l;sfx('coin');S.life+=5000;S.wallet+=5000;save();renderXP();renderMe();toast('Demo XP added');if(lvl().l>b)confetti()};
-</script>
-</body>
-</html>
+/* ===== actions ===== */
+const inSG=(a,b)=>a>=1.15&&a<=1.48&&b>=103.6&&b<=104.1;
+const pass=()=>{sfx('success');S.ok=1;save();V='stalls';render()};
+function cut(){}
+cut.T=[];
+const A={
+begin:()=>{const c=$('#cut');$('#tap').remove();c.classList.add('go');const at=(ms,f)=>cut.T.push(setTimeout(f,ms));
+ at(700,()=>sfx('thud'));for(let i=0;i<9;i++)at(1900+i*220,()=>sfx('tap'));at(2900,()=>sfx('pop'));at(3900,()=>sfx('whoosh'));at(4800,()=>sfx('coin'));at(5200,()=>sfx('level'));at(6700,()=>c.classList.add('rdy'))},
+skipc:()=>{cut.T.forEach(clearTimeout);const t=$('#tap');t&&t.remove();$('#cut').classList.add('go','fin','rdy')},
+start:()=>{(cut.T||[]).forEach(clearTimeout);sfx('success');V=S.ok?'stalls':'loc';render()},
+skip:pass,
+chk:()=>{const e=$('#err');if(!navigator.geolocation){e.textContent='Location is not supported on this device.';return}
+ navigator.geolocation.getCurrentPosition(p=>inSG(p.coords.latitude,p.coords.longitude)?pass():(e.textContent='Sorry, only works in Singapore.',sfx('error')),()=>e.textContent='Please allow location access.',{timeout:12000})},
+hf:v=>{hf=v;render()},
+shop:v=>{const s=SH[+v];if(!shop||shop.id!==s.id)cart=[];shop=s;tab='menu';V='shop';render();scrollTo(0,0)},
+back:()=>{V='stalls';render();scrollTo(0,0)},
+tab:v=>{tab=v;render()},ts:v=>{tser=v;render()},
+item:v=>{const it=shop.items[+v];if(it.t==='e'&&lvl().l<51){sfx('error');return toast('Reach level 51 to unlock this')}
+ sfx('pop');cfg={it,sel:G[it.t].map(g=>g[1]?[0]:[]),q:1,note:''};drawCustom()},
+opt:(v,t)=>{const k=+t.dataset.k,g=G[cfg.it.t][k],i=+v;cfg.note=$('#note').value;cfg.sel[k]=g[1]?[i]:cfg.sel[k].includes(i)?cfg.sel[k].filter(x=>x!==i):[...cfg.sel[k],i];drawCustom()},
+q:v=>{cfg.note=$('#note').value;cfg.q=Math.max(1,cfg.q+ +v);drawCustom()},
+addc:()=>{const it=cfg.it,desc=G[it.t].map((g,k)=>cfg.sel[k].map(i=>g[2][i][0])).flat().join(', ');sfx('add');cart.push({n:it.n,u:cp(),q:cfg.q,desc,note:$('#note').value.trim()});closeSheet();render();toast(it.n+' added')},
+close:closeSheet,
+cart:()=>{sfx('pop');drawCart()},
+cm:v=>{const l=cart[+v];if(--l.q<=0)cart.splice(+v,1);drawCart();render()},
+cpl:v=>{cart[+v].q++;drawCart();render()},
+place:()=>{const t=totals(),xp=Math.round(t.tot*10),b=lvl().l;
+ S.orders.unshift({shop:shop.n,lines:cart.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:t.tot,xp,date:new Date().toLocaleDateString()});
+ S.life+=xp;S.wallet+=xp;save();cart=[];sfx('bell');closeSheet();render();
+ toast(`Order placed! +${xp} XP`);if(lvl().l>b){setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l+': '+disc(lvl().l)+'% off')},1400)}},
+pv:v=>openPreview(+v),
+buy:v=>{if(buy(+v))render()},
+boost:()=>{sfx('coin');S.life+=5000;S.wallet+=5000;save();render();toast('Demo XP added')}};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;if(!t.dataset.a.match(/^(start|skip|chk)$/))sfx('tap');A[t.dataset.a]&&A[t.dataset.a](t.dataset.v,t)});
+render();
+</script></body></html>
