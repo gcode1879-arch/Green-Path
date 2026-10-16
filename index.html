@@ -119,6 +119,11 @@ h2{text-shadow:0 3px 0 rgba(0,0,0,.12)}
 #nav button{display:flex;gap:6px;align-items:center;color:var(--ink)}
 #nav button.on{color:#fff}
 #intro{font-family:Fredoka,sans-serif}
+.hb.e{background:#e0e7ff;color:#3730a3}
+#gstage{position:relative;height:320px;border-radius:22px;background:linear-gradient(#bfe9ff,#fff6e8);overflow:hidden;touch-action:manipulation;user-select:none;margin:10px 0}
+.gi{position:absolute;top:-50px;animation:gf var(--t) linear forwards;cursor:pointer}
+@keyframes gf{to{transform:translateY(390px) rotate(40deg)}}
+#wheel{transition:transform 4s cubic-bezier(.1,.7,.1,1)}
 </style></head><body>
 <div id="root"></div>
 <button id="snd" aria-label="Sound"></button>
@@ -207,6 +212,13 @@ x28:B('#558b2f','#c5e1a5','#fff','#ff8a65'),
 x29:B('#d32f2f','#ff1744','#ffd54f','#43a047'),
 });
 Object.assign(SV,{ub:P('#e8892b','#ffca28','#fff3e0'),kc:B('#8d6e63','#bcaaa4','#f48fb1','#fff')});
+Object.assign(SV,{y0:B('#2e7d32','#c5e1a5','#fff','#ff8a65'),
+y1:'<path d="M4 24c8-14 22-14 30 0-8 14-22 14-30 0z" fill="#4fc3f7"/><path d="M34 24l10-9v18z" fill="#0288d1"/><circle cx="12" cy="21" r="2" fill="#fff"/><path d="M18 17q4 7 0 14" stroke="#0288d1" stroke-width="2" fill="none"/>',
+y2:W('#a5d6a7','#e53935'),y3:P('#ffd54f','#e53935','#43a047'),
+y4:'<path d="M5 38c0-14 8-24 19-24s19 10 19 24z" fill="#fff" stroke="#e0c9a8" stroke-width="2"/><path d="M18 18q6 5 12 0" stroke="#e0c9a8" stroke-width="2" fill="none"/><rect x="3" y="38" width="42" height="5" rx="2" fill="#c28b4a"/>',
+y5:P('#fff59d','#ffb300','#fff'),
+y6:'<path d="M24 44L6 12a30 30 0 0136 0z" fill="#ffca28"/><path d="M6 12a30 30 0 0136 0" stroke="#e0a45c" stroke-width="4" fill="none"/><circle cx="20" cy="20" r="3" fill="#e53935"/><circle cx="29" cy="23" r="3" fill="#e53935"/><circle cx="24" cy="32" r="2.5" fill="#43a047"/>',
+y7:C('#8e24aa','#43a047','#ff4b3e')});
 const em=(k,z)=>`<svg viewBox="0 0 48 48" width="${z}" height="${z}" style="flex:none">${SV[k]}</svg>`;
 /* ===== SOUND (loud) ===== */
 let AC,MG,MUTE=false;try{MUTE=localStorage.hpm==='1'}catch(e){}
@@ -281,7 +293,15 @@ const RAW=[
 ['Hakka Lei Cha House',0,'#a1887f','#4e342e','x28','Lei Cha Rice:6:f|Abacus Seeds:5:f|Yam Abacus:5.5:f|Hakka Yong Tau Foo:5:f|Hot Chinese Tea:1.5:d|Hakka Heritage Set:15:e'],
 ['Mala Xiang Guo',0,'#90a4ae','#37474f','x29','Mala Xiang Guo:10:f|Mala Tang:9:f|Spicy Skewers:5:f|Cold Tofu Salad:4:f|Plum Juice:2.5:d|Royal Mala Pot:22:e']
 ,['Uncle Bob Ayam Gunting',1,'#ffb74d','#e65100','ub','Ayam Gunting Original:6.5:w|Ayam Gunting Cheese:7.5:w|Ayam Gunting Black Pepper:7.5:w|Ayam Gunting Mushroom:7.5:w|Chicken Chop:7:w|Chicken Cutlet:6.5:w|Chicken Wings (6):5:w|Fries:2.5:f|Coleslaw:1.5:f|Baked Beans:1.5:f|Iced Lemon Tea:2.2:d|Iced Milo:2.5:d|Golden Ayam Gunting Platter:15:e|Wagyu Chicken Feast:22:e'],
-['Uncle Lim Kway Chap',0,'#8d6e63','#4e342e','kc','Kway Chap Set:6:f|Braised Pork Belly:5:f|Braised Egg:1:f|Braised Tofu:2:f|Braised Duck Slices:5.5:f|Chinese Tea:1.5:d|Soya Bean Milk:2:d|Royal Kway Chap Platter:22:e']
+['Uncle Lim Kway Chap',0,'#8d6e63','#4e342e','kc','Kway Chap Set:6:f|Braised Pork Belly:5:f|Braised Egg:1:f|Braised Tofu:2:f|Braised Duck Slices:5.5:f|Chinese Tea:1.5:d|Soya Bean Milk:2:d|Royal Kway Chap Platter:22:e'],
+['Green Leaf Vegetarian',2,'#81c784','#2e7d32','y0','Vegetarian Rice Set:5.5:f|Mock Chicken Noodles:5:f|Vegetable Curry Rice:5:f|Mushroom Hot Pot:6.5:f|Fresh Soya Milk:2:d|Lemongrass Tea:2:d|Zen Garden Banquet:18:e'],
+['Fresh Catch Seafood Grill',2,'#4fc3f7','#0277bd','y1','Grilled Fish Set:9:f|Sambal Squid:8:f|Garlic Butter Prawns:11:f|Fish and Chips:7.5:f|Iced Lemon Tea:2.5:d|Royal Seafood Platter:28:e'],
+['Garden Wrap Bar',2,'#aed581','#558b2f','y2','Falafel Wrap:5.5:f|Chicken Caesar Wrap:6:f|Tuna Salad Bowl:6.5:f|Garden Salad:5:f|Fresh Orange Juice:3.5:d|Superfood Bowl:14:e'],
+['Pasta Piazza',2,'#ffb74d','#e65100','y3','Aglio Olio:6.5:f|Tomato Basil Pasta:6:f|Creamy Chicken Pasta:7.5:f|Mushroom Cream Pasta:7:f|Garlic Bread:3:f|Sparkling Lemonade:3:d|Truffle Pasta Feast:19:e'],
+['Bao Bunz',2,'#ffe0b2','#ef6c00','y4','Vegetable Bao:3.5:f|Chicken Bao:4:f|Custard Bao:3:f|Red Bean Bun:2.5:f|Soy Milk:2:d|Golden Bao Tower:12:e'],
+['Sunrise Breakfast Club',2,'#fff176','#f9a825','y5','Pancake Stack:6:f|Scrambled Eggs Plate:6:f|Avocado Toast:7:f|French Toast:5.5:f|Latte:3.8:d|Hot Chocolate:3.5:d|Brunch Grand Platter:16:e'],
+['Pizza Rocket Slice',2,'#ef5350','#b71c1c','y6','Margherita Slice:4:f|Chicken Pizza Slice:4.5:f|Veggie Slice:4.2:f|Cheesy Garlic Bread:3:f|Cola:2:d|Whole Pizza Feast:22:e'],
+['Acai and Smoothie Bowl',2,'#ba68c8','#6a1b9a','y7','Acai Bowl:8:f|Mango Smoothie Bowl:7.5:f|Banana Oat Pancakes:6:f|Berry Smoothie:5:d|Green Detox Smoothie:5:d|Tropical Dragon Bowl:15:e']
 ];
 const SH=RAW.map((r,i)=>({id:i,n:r[0],h:r[1],c:[r[2],r[3]],ic:r[4],items:r[5].split('|').map(s=>{const[a,b,t]=s.split(':');return{n:a,p:+b,t}})}));
 
@@ -313,7 +333,7 @@ let V='intro',shop=null,tab='menu',hf='All',tser='All',cart=[],cfg=null,PV=null;
 const need=l=>Math.round(100*Math.pow(1.5,l));
 const lvl=()=>{let l=0,x=S.life;while(x>=need(l)){x-=need(l);l++}return{l,x,n:need(l)}};
 const disc=l=>Math.min(l,50),money=n=>'$'+n.toFixed(2),fmt=n=>Math.round(n).toLocaleString();
-const hb=s=>`<span class="hb ${s.h?'y':'n'}">${s.h?'Halal':'Non-halal'}</span>`;
+const hb=s=>`<span class="hb ${s.h===2?'e':s.h?'y':'n'}">${s.h===2?'Halal and non-halal OK':s.h?'Halal':'Non-halal'}</span>`;
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
 const xpCard=()=>{const v=lvl();return`<div class="xp"><div class="r"><div><small>YOUR LEVEL</small><div class="lv">Level ${v.l}</div></div><div style="text-align:right"><span class="pill">${disc(v.l)}% off</span><div style="margin-top:6px;font-size:13px;font-weight:800">${fmt(S.wallet)} XP to spend</div></div></div><div class="bar"><i style="width:${v.x/v.n*100}%"></i></div><small>${fmt(v.x)} / ${fmt(v.n)} XP to level ${v.l+1}</small></div>`};
 const sheet=h=>{$('#box').innerHTML=h;$('#sheet').classList.add('on')};
@@ -321,8 +341,13 @@ const closeSheet=()=>{$('#sheet').classList.remove('on');if(PV){cancelAnimationF
 $('#sheet').onclick=e=>{if(e.target.id==='sheet')closeSheet()};
 
 /* ===== RENDER ===== */
+let GT=[];
+const today=()=>new Date().toDateString();
+const PR=[25,50,100,25,200,50,500,75],PC=['#ff4b3e','#ff9f1c','#22b573','#7c5cff'];
+function wheel(){let o='';const P=(t,r)=>[(r*Math.sin(t)).toFixed(1),(-r*Math.cos(t)).toFixed(1)];PR.forEach((p,i)=>{const a=i*Math.PI/4,b=(i+1)*Math.PI/4,m=(a+b)/2,q=P(m,66);o+=`<path d="M0 0L${P(a,100).join(' ')}A100 100 0 0 1 ${P(b,100).join(' ')}Z" fill="${PC[i%4]}" stroke="#fff" stroke-width="2"/><text x="${q[0]}" y="${q[1]}" fill="#fff" font-size="15" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate(${i*45+22.5} ${q[0]} ${q[1]})">${p}</text>`});return`<svg viewBox="-110 -110 220 220" width="240" style="display:block;margin:6px auto"><g id="wheel">${o}</g><path d="M-10 -112L10 -112L0 -92z" fill="#2b1d14"/></svg>`}
+function gain(x){const b=lvl().l;S.life+=x;S.wallet+=x;save();if(lvl().l>b)setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l)},900)}
 function render(){
- const R=$('#root');
+ const R=$('#root');GT.forEach(clearInterval);GT=[];
  if(V==='intro'){R.innerHTML=`<div id="cut"><div class="blob" style="width:220px;height:220px;left:-60px;top:8%"></div><div class="blob" style="width:160px;height:160px;right:-40px;bottom:12%;animation-delay:-4s"></div>
 <svg id="hero" viewBox="0 0 300 260"><defs><linearGradient id="tg" gradientUnits="userSpaceOnUse" x1="134" y1="70" x2="330" y2="-190"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
 <g class="bw"><ellipse cx="150" cy="232" rx="82" ry="9" fill="rgba(0,0,0,.18)"/><path d="M52 124h196c0 62-40 104-98 104S52 186 52 124z" fill="#fff"/><path d="M60 150h180c-8 40-40 70-90 70s-82-30-90-70z" fill="#ff4b3e"/><path d="M60 150h180" stroke="#ffc94d" stroke-width="6" stroke-linecap="round"/><rect x="108" y="222" width="84" height="10" rx="5" fill="#fff"/><ellipse cx="150" cy="124" rx="98" ry="16" fill="#fff"/><ellipse cx="150" cy="124" rx="86" ry="11" fill="#ffb347"/></g>
@@ -336,12 +361,18 @@ ${[...Array(9)].map((_,i)=>`<g transform="translate(${88+i*15} 0)"><path class="
 <h1>${[...'Hawker Paradise'].map((ch,i)=>ch===' '?'<br>':`<span style="--i:${i}">${ch}</span>`).join('')}</h1><p>Order local favourites, level up with every meal, and eat for less.</p><button class="btn go2" data-a="start">Start ordering</button><button class="skip" data-a="skipc">Skip</button>
 <div id="tap">${em('bowl',110)}<h2 style="color:#fff">Hawker Paradise</h2><button class="btn" data-a="begin">Tap to enter</button></div></div>`;return}
  if(V==='loc'){R.innerHTML=`<div id="intro"><div class="bob">${em('pin',90)}</div><h2>Are you in Singapore?</h2><p>Hawker Paradise only serves customers in Singapore.</p><p id="err" style="font-weight:800"></p><button class="btn" data-a="chk">Check my location</button><button class="btn g" data-a="skip" style="font-size:14px;padding:10px 20px">Demo: skip check</button></div>`;return}
+ if(V==='play'){const t=today(),left=S.gd===t?Math.max(0,5-S.gn):5;
+  R.innerHTML=`<div class="w"><button class="tab" data-a="back" style="margin-bottom:8px">&larr; All stalls</button><h2>Games and daily rewards</h2>${xpCard()}
+  <div class="hist"><h3>Daily bonus</h3><div class="sub">Streak: ${S.streak||0} day(s). Come back every day for a bigger bonus, up to 7 days.</div><button class="btn full" data-a="daily" ${S.last===t?'disabled':''}>${S.last===t?'Claimed today':'Claim daily bonus'}</button></div>
+  <div class="hist"><h3>Lucky wheel</h3><div class="sub">One free spin every day.</div>${wheel()}<button class="btn full" data-a="spin" ${S.spin===t?'disabled':''}>${S.spin===t?'Come back tomorrow':'Spin the wheel'}</button></div>
+  <div class="hist"><h3>Food Catch</h3><div class="sub">Tap the food before it falls. 20 seconds. Earn XP in your first 5 games each day (${left} left today).</div><div id="gstage"></div><button class="btn full" data-a="game">Play Food Catch</button></div></div>`;return}
  if(V==='stalls'){
   const o=S.orders,sp=o.reduce((a,x)=>a+x.total,0);
-  R.innerHTML=`<div class="w"><div class="sub">Welcome to Hawker Paradise</div><h2>Choose a stall</h2>${xpCard()}
-  <div class="tabs">${['All','Halal','Non-halal'].map(x=>`<button class="tab ${x===hf?'on':''}" data-a="hf" data-v="${x}">${x}</button>`).join('')}</div>
-  <div class="list">${SH.filter(s=>hf==='All'||(hf==='Halal')===!!s.h).map(s=>`<button class="row2" data-a="shop" data-v="${s.id}" style="border-left:7px solid ${s.c[0]}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${em(s.ic,34)}</div><div><h3>${s.n}</h3><div style="margin-top:4px">${hb(s)}</div></div></button>`).join('')}</div>
+  R.innerHTML=`<div class="w"><div class="sub">Welcome to Hawker Paradise</div><h2>Choose a stall</h2>${xpCard()}<button class="btn full" data-a="play" style="margin:0 0 6px">Games and daily rewards</button>
+  <div class="tabs">${['All','Halal','Non-halal','Everyone'].map(x=>`<button class="tab ${x===hf?'on':''}" data-a="hf" data-v="${x}">${x}</button>`).join('')}</div>
+  <div class="list">${SH.filter(s=>hf==='All'||(hf==='Halal'&&s.h>=1)||(hf==='Non-halal'&&s.h!==1)||(hf==='Everyone'&&s.h===2)).map(s=>`<button class="row2" data-a="shop" data-v="${s.id}" style="border-left:7px solid ${s.c[0]}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${em(s.ic,34)}</div><div><h3>${s.n}</h3><div style="margin-top:4px">${hb(s)}</div></div></button>`).join('')}</div>
   <h2 style="margin:22px 0 8px">All my orders</h2>
+  ${cart.length?`<div class="hist"><h3>Your tray</h3><div class="sub">${cart.reduce((a,l)=>a+l.q,0)} item(s) from ${new Set(cart.map(l=>l.s)).size} stall(s) | ${money(totals().tot)}</div><button class="btn full" data-a="cart">Checkout</button></div>`:''}
   ${o.length?`<div class="sub" style="margin-bottom:10px">${o.length} order${o.length>1?'s':''} | ${money(sp)} spent across all stalls</div>`+o.slice(0,30).map(x=>`<div class="hist"><div class="line" style="padding:0"><b>${x.shop}</b><span>${money(x.total)}</span></div><div class="sub">${x.date} | +${x.xp} XP<br>${x.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet. Pick a stall and order something.</p>'}<button class="btn g full" data-a="reset" style="margin-top:24px;font-size:14px">Reset account</button><div class="sub" style="text-align:center;margin-top:8px">Your progress saves automatically on this device</div></div>`;return}
  /* shop view */
  const v=lvl(),d=disc(v.l);
@@ -366,8 +397,8 @@ function drawCustom(){
 }
 const totals=()=>{const d=disc(lvl().l),sub=cart.reduce((a,l)=>a+l.u*l.q,0);return{sub,tot:sub*(1-d/100),d}};
 function drawCart(){
- const t=totals();
- sheet(`<h2>Your order</h2><div class="sub">${shop.n}</div>`+(cart.length?cart.map((l,i)=>`<div class="line" style="align-items:flex-start"><div><b>${l.n}</b><div class="sub">${[l.desc,l.note&&'Note: '+l.note].filter(Boolean).join(' | ')}</div></div><span class="qty"><button data-a="cm" data-v="${i}">-</button>${l.q}<button data-a="cpl" data-v="${i}">+</button></span></div>`).join('')+`<div style="border-top:2px dashed #e5d5bb;margin-top:8px;padding-top:6px"><div class="line"><span>Subtotal</span><span>${money(t.sub)}</span></div><div class="line"><span>Level discount (${t.d}%)</span><span>-${money(t.sub-t.tot)}</span></div><div class="line"><b>Total</b><b style="font-size:22px">${money(t.tot)}</b></div><div class="sub">You will earn ${Math.round(t.tot*10)} XP</div></div><button class="btn full" data-a="place">Place order</button>`:'<p class="sub" style="padding:20px 0">Your tray is empty.</p>')+`<button class="btn g full" data-a="close">Close</button>`);
+ const t=totals(),g={};cart.forEach((l,i)=>(g[l.s]=g[l.s]||[]).push(i));
+ sheet(`<h2>Your order</h2><div class="sub">Checkout for all stalls at once</div>`+(cart.length?Object.entries(g).map(([n,ix])=>`<h3 style="margin-top:12px">${n}</h3>`+ix.map(i=>{const l=cart[i];return`<div class="line" style="align-items:flex-start"><div><b>${l.n}</b><div class="sub">${[l.desc,l.note&&'Note: '+l.note].filter(Boolean).join(' | ')}</div></div><span class="qty"><button data-a="cm" data-v="${i}">-</button>${l.q}<button data-a="cpl" data-v="${i}">+</button></span></div>`}).join('')).join('')+`<div style="border-top:2px dashed #e5d5bb;margin-top:8px;padding-top:6px"><div class="line"><span>Subtotal</span><span>${money(t.sub)}</span></div><div class="line"><span>Level discount (${t.d}%)</span><span>-${money(t.sub-t.tot)}</span></div><div class="line"><b>Total</b><b style="font-size:22px">${money(t.tot)}</b></div><div class="sub">You will earn ${Math.round(t.tot*10)} XP</div></div><button class="btn full" data-a="place">Place order</button>`:'<p class="sub" style="padding:20px 0">Your tray is empty.</p>')+`<button class="btn g full" data-a="close">Close</button>`);
 }
 function buy(i){const t=TOYS[i];if(S.wallet<t[2])return false;sfx('toy');S.wallet-=t[2];S.toys.push(t[0]);save();toast('You got the '+t[0]+'!');return true}
 /* ===== toy preview (drag, throw, tap) ===== */
@@ -401,6 +432,14 @@ const pass=()=>{sfx('success');S.ok=1;save();V='stalls';render()};
 function cut(){}
 cut.T=[];
 const A={
+play:()=>{V='play';render();scrollTo(0,0)},
+daily:()=>{const t=today(),y=new Date(Date.now()-864e5).toDateString();if(S.last===t)return;S.streak=S.last===y?(S.streak||0)+1:1;S.last=t;const x=50+20*Math.min(S.streak,7);gain(x);sfx('coin');render();toast('Day '+S.streak+' bonus: +'+x+' XP')},
+spin:()=>{if(S.spin===today())return;S.spin=today();save();const pool=[0,0,0,1,1,3,3,5,5,2,7,7,4,6],i=pool[Math.floor(Math.random()*pool.length)];$('#wheel').style.transform=`rotate(${360*6-(i*45+22.5)}deg)`;$('[data-a=spin]').disabled=true;sfx('whoosh');for(let k=0;k<14;k++)setTimeout(()=>sfx('tap'),k*280);setTimeout(()=>{gain(PR[i]);sfx('coin');render();toast('You won '+PR[i]+' XP!')},4300)},
+game:()=>{const st=$('#gstage');if(!st||GT.length)return;let sc=0,tl=20;$('[data-a=game]').disabled=true;
+ st.innerHTML='<div id="gscore" style="position:absolute;top:8px;left:12px;font-weight:900;color:#2b1d14;z-index:2">Score 0</div><div id="gtime" style="position:absolute;top:8px;right:12px;font-weight:900;color:#2b1d14;z-index:2">20s</div>';
+ const K=['bowl','chick','noodle','prata','skewer','sweet','cupm','drink','crab','toast','dumpling'];
+ GT.push(setInterval(()=>{const d=document.createElement('div');d.className='gi';d.style.cssText=`left:${Math.random()*80+4}%;--t:${2.2+Math.random()*1.4}s`;d.innerHTML=em(K[Math.floor(Math.random()*K.length)],46);d.onpointerdown=()=>{if(d.x)return;d.x=1;sc++;sfx('coin');$('#gscore').textContent='Score '+sc;d.style.opacity=0;setTimeout(()=>d.remove(),120)};st.appendChild(d);setTimeout(()=>d.remove(),3800)},520));
+ GT.push(setInterval(()=>{tl--;const e=$('#gtime');if(e)e.textContent=tl+'s';if(tl<=0){GT.forEach(clearInterval);GT=[];const t=today();if(S.gd!==t){S.gd=t;S.gn=0}let x=0;if(S.gn<5){x=Math.min(sc*4,200);S.gn++}if(x)gain(x);save();sfx('success');render();toast(x?'Score '+sc+'! +'+x+' XP':'Score '+sc+'. Daily XP limit reached')}},1000))},
 reset:()=>{sfx('pop');sheet(`<h2>Reset account?</h2><p class="sub" style="margin:10px 0 4px">Are you sure? This permanently deletes your level, XP, toys and order history on this device. You cannot undo this.</p><button class="btn full" data-a="resetyes" style="background:#c62828">Yes, reset everything</button><button class="btn g full" data-a="close">No, keep my progress</button>`)},
 resetyes:()=>{S={life:0,wallet:0,orders:[],toys:[],ok:1};cart=[];save();closeSheet();V='stalls';render();scrollTo(0,0);sfx('error');toast('Account reset')},
 begin:()=>{const c=$('#cut');$('#tap').remove();c.classList.add('go');const at=(ms,f)=>cut.T.push(setTimeout(f,ms));
@@ -411,22 +450,21 @@ skip:pass,
 chk:()=>{const e=$('#err');if(!navigator.geolocation){e.textContent='Location is not supported on this device.';return}
  navigator.geolocation.getCurrentPosition(p=>inSG(p.coords.latitude,p.coords.longitude)?pass():(e.textContent='Sorry, only works in Singapore.',sfx('error')),()=>e.textContent='Please allow location access.',{timeout:12000})},
 hf:v=>{hf=v;render()},
-shop:v=>{const s=SH[+v];if(!shop||shop.id!==s.id)cart=[];shop=s;tab='menu';V='shop';render();scrollTo(0,0)},
+shop:v=>{const s=SH[+v];shop=s;tab='menu';V='shop';render();scrollTo(0,0)},
 back:()=>{V='stalls';render();scrollTo(0,0)},
 tab:v=>{tab=v;render()},ts:v=>{tser=v;render()},
 item:v=>{const it=shop.items[+v];if(it.t==='e'&&lvl().l<51){sfx('error');return toast('Reach level 51 to unlock this')}
  sfx('pop');cfg={it,sel:G[it.t].map(g=>g[1]?[0]:[]),q:1,note:''};drawCustom()},
 opt:(v,t)=>{const k=+t.dataset.k,g=G[cfg.it.t][k],i=+v;cfg.note=$('#note').value;cfg.sel[k]=g[1]?[i]:cfg.sel[k].includes(i)?cfg.sel[k].filter(x=>x!==i):[...cfg.sel[k],i];drawCustom()},
 q:v=>{cfg.note=$('#note').value;cfg.q=Math.max(1,cfg.q+ +v);drawCustom()},
-addc:()=>{const it=cfg.it,desc=G[it.t].map((g,k)=>cfg.sel[k].map(i=>g[2][i][0])).flat().join(', ');sfx('add');cart.push({n:it.n,u:cp(),q:cfg.q,desc,note:$('#note').value.trim()});closeSheet();render();toast(it.n+' added')},
+addc:()=>{const it=cfg.it,desc=G[it.t].map((g,k)=>cfg.sel[k].map(i=>g[2][i][0])).flat().join(', ');sfx('add');cart.push({s:shop.n,n:it.n,u:cp(),q:cfg.q,desc,note:$('#note').value.trim()});closeSheet();render();toast(it.n+' added')},
 close:closeSheet,
 cart:()=>{sfx('pop');drawCart()},
 cm:v=>{const l=cart[+v];if(--l.q<=0)cart.splice(+v,1);drawCart();render()},
 cpl:v=>{cart[+v].q++;drawCart();render()},
-place:()=>{const t=totals(),xp=Math.round(t.tot*10),b=lvl().l;
- S.orders.unshift({shop:shop.n,lines:cart.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:t.tot,xp,date:new Date().toLocaleDateString()});
- S.life+=xp;S.wallet+=xp;save();cart=[];sfx('bell');closeSheet();render();
- toast(`Order placed! +${xp} XP`);if(lvl().l>b){setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l+': '+disc(lvl().l)+'% off')},1400)}},
+place:()=>{const d=disc(lvl().l),b=lvl().l,by={};cart.forEach(l=>(by[l.s]=by[l.s]||[]).push(l));let xp=0;
+ Object.entries(by).forEach(([n,ls])=>{const tot=ls.reduce((a,l)=>a+l.u*l.q,0)*(1-d/100),x=Math.round(tot*10);xp+=x;S.orders.unshift({shop:n,lines:ls.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:tot,xp:x,date:new Date().toLocaleDateString()})});
+ S.life+=xp;S.wallet+=xp;save();cart=[];sfx('bell');closeSheet();render();toast(`Order placed! +${xp} XP`);if(lvl().l>b){setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l+': '+disc(lvl().l)+'% off')},1400)}},
 pv:v=>openPreview(+v),
 buy:v=>{if(buy(+v))render()},
 boost:()=>{sfx('coin');S.life+=5000;S.wallet+=5000;save();render();toast('Demo XP added')}};
