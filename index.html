@@ -1,659 +1,137 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hawker Paradise</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GreenPath – Study Smart. Live Green. Save More.</title>
 <style>
-:root{--bg:#fff6e8;--card:#fff;--ink:#2b1d14;--mute:#8a7766;--red:#ff4b3e;--org:#ff9f1c;--grn:#22b573;--pur:#7c5cff;--sh:0 10px 30px -14px rgba(120,60,10,.35)}
-@media(prefers-color-scheme:dark){:root{--bg:#1c130e;--card:#2a1d15;--ink:#fff3e3;--mute:#b9a38d;--sh:0 10px 30px -12px #000}}
-*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-body{font-family:system-ui,sans-serif;font-weight:600;background:var(--bg);color:var(--ink);min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-button{font:inherit;color:inherit;border:0;cursor:pointer;background:none}
-svg{display:block}
-.w{max-width:560px;margin:auto;padding:16px 16px 110px}
-h2{font-size:24px}h3{font-size:16px}
-.sub{color:var(--mute);font-size:13px;font-weight:700}
-.btn{background:linear-gradient(135deg,var(--red),var(--org));color:#fff;font-weight:800;font-size:17px;padding:14px 28px;border-radius:99px;box-shadow:0 10px 24px -8px var(--red)}
-.btn:active{transform:scale(.96)}.btn:disabled{opacity:.5}
-.btn.g{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
-.full{width:100%;margin-top:10px}
-#intro{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:24px;background:linear-gradient(160deg,#e8362f,#ff9f1c);color:#fff}
-#intro h1{font-size:clamp(40px,12vw,64px);line-height:1}
-#intro .btn{background:#fff;color:var(--red)}
-.bob{animation:bob 2s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-12px)}}
-.xp{background:linear-gradient(135deg,#7c5cff,#b45cff);color:#fff;border-radius:24px;padding:14px 16px;margin:12px 0}
-.xp .r{display:flex;justify-content:space-between;align-items:center}
-.lv{font-size:28px;font-weight:900}.pill{background:rgba(255,255,255,.22);padding:5px 11px;border-radius:99px;font-size:13px;font-weight:800}
-.bar{height:11px;background:rgba(255,255,255,.25);border-radius:99px;margin:8px 0 4px;overflow:hidden}.bar i{display:block;height:100%;background:#ffe27a;border-radius:99px}
-.tabs{display:flex;gap:8px;overflow-x:auto;margin:10px 0;padding-bottom:4px;scrollbar-width:none}
-.tab{padding:8px 15px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-size:14px;font-weight:800;white-space:nowrap}
-.tab.on{background:var(--ink);color:var(--bg)}
-.list{display:grid;gap:12px}
-.row2{display:flex;gap:13px;align-items:center;background:var(--card);padding:13px;border-radius:22px;box-shadow:var(--sh);width:100%;text-align:left}
-.row2:active{transform:scale(.98)}
-.tile{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;flex:none;color:#fff}
-.in{flex:1;min-width:0}
-.hb{font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:6px}
-.hb.y{background:#d9f7e8;color:#0b7a4b}.hb.n{background:#ffe6cc;color:#a24a00}
-.plus{width:38px;height:38px;border-radius:50%;background:var(--grn);color:#fff;display:grid;place-items:center;flex:none}
-.lock{opacity:.55}
-.tag{background:var(--pur);color:#fff;font-size:11px;padding:2px 7px;border-radius:99px;margin-left:5px}
-.hist{background:var(--card);border-radius:18px;padding:13px;margin-bottom:10px;box-shadow:var(--sh)}
-.line{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0}
-#nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));background:var(--card);padding:6px;border-radius:99px;box-shadow:0 14px 40px -10px rgba(0,0,0,.45);display:flex;gap:4px;z-index:20}
-#nav button{padding:10px 16px;border-radius:99px;font-weight:800;font-size:14px}
-#nav button.on{background:linear-gradient(135deg,var(--red),var(--org));color:#fff}
-.sheet{position:fixed;inset:0;background:rgba(20,10,0,.55);display:none;align-items:flex-end;z-index:40}
-.sheet.on{display:flex}
-.box{background:var(--bg);width:100%;max-width:560px;margin:auto;border-radius:28px 28px 0 0;padding:20px;max-height:92vh;overflow:auto}
-.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
-.opt{padding:8px 13px;border-radius:99px;background:var(--card);box-shadow:var(--sh);font-size:14px;font-weight:800;border:2px solid transparent}
-.opt.on{border-color:var(--red);color:var(--red)}
-textarea{width:100%;border-radius:14px;border:2px solid #f0e2cc;background:var(--card);color:var(--ink);font:inherit;padding:10px;height:64px;resize:none}
-.qty{display:flex;align-items:center;gap:10px}.qty button{width:30px;height:30px;border-radius:50%;background:var(--card);box-shadow:var(--sh);font-weight:900}
-.toys{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.toy{background:var(--card);border-radius:22px;padding:12px;text-align:center;box-shadow:var(--sh)}
-.toy .tile{margin:0 auto 6px;border-radius:50%;width:70px;height:70px}
-.toy .b{display:flex;gap:6px;justify-content:center;margin-top:8px}
-.toy .b button{padding:7px 12px;border-radius:99px;background:var(--pur);color:#fff;font-size:13px;font-weight:800}
-.toy .b .pv{background:none;color:var(--pur);box-shadow:inset 0 0 0 2px var(--pur)}
-.toy .b button:disabled{background:#d9cbb8;color:#8a7766}
-#stage{position:relative;height:300px;border-radius:22px;background:linear-gradient(180deg,#bfe9ff,#fff6e8 75%);overflow:hidden;touch-action:none;user-select:none}
-#stage:after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:repeating-linear-gradient(90deg,#e0b979 0 24px,#d4a762 24px 48px)}
-#pt{position:absolute;left:0;top:0;width:120px;height:120px;cursor:grab;touch-action:none;z-index:2}
-.hint{position:absolute;top:10px;left:0;right:0;text-align:center;font-size:13px;color:#4a6a80;font-weight:800;pointer-events:none}
-.spk{position:absolute;width:9px;height:9px;border-radius:50%;pointer-events:none;animation:spk .6s ease-out forwards}
-@keyframes spk{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
-#toast{position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-120px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:99px;font-weight:800;z-index:99;transition:.4s;max-width:92%;text-align:center}
-#toast.on{transform:translate(-50%,0)}
-#snd{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:60;width:40px;height:40px;border-radius:50%;background:var(--card);box-shadow:var(--sh);display:grid;place-items:center}
-
-#cut{position:fixed;inset:0;overflow:hidden;z-index:10;color:#fff;text-align:center;background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),radial-gradient(circle at 90% 85%,#ff6a4d,transparent 55%),linear-gradient(160deg,#e8362f,#ff9f1c);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
-#cut *{animation-fill-mode:both}
-#cut:not(.go) *{animation-play-state:paused!important}
-#hero{width:min(320px,76vw);overflow:visible}
-.blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.12);animation:fl 12s ease-in-out infinite}
-@keyframes fl{50%{transform:translate(20px,-40px) scale(1.15)}}
-.bw{animation:drop 1s cubic-bezier(.2,1.4,.4,1)}
-@keyframes drop{from{transform:translateY(-140px);opacity:0}to{transform:none;opacity:1}}
-.nf{fill:none;stroke:#ffe7a3;stroke-width:5;stroke-linecap:round;animation:nf 1s cubic-bezier(.5,0,.9,.6) calc(1s + var(--d)*.22s)}
-@keyframes nf{0%{transform:translateY(-330px);opacity:1}85%{transform:translateY(62px);opacity:1}100%{transform:translateY(62px);opacity:0}}
-.nd{fill:none;stroke:#ffe7a3;stroke-width:5;stroke-linecap:round;stroke-dasharray:140;animation:draw 1s ease}
-@keyframes draw{from{stroke-dashoffset:140}to{stroke-dashoffset:0}}
-.eg{transform-box:fill-box;transform-origin:center;animation:pp .5s 4.9s cubic-bezier(.2,1.6,.4,1)}
-@keyframes pp{from{transform:scale(0);opacity:0}to{transform:none;opacity:1}}
-.st{transform-origin:140px 70px;filter:drop-shadow(0 0 7px #fff);animation:star 1s cubic-bezier(.15,.7,.3,1) 3.9s}
-@keyframes star{0%{transform:translate(300px,-260px) rotate(-30deg);opacity:0}15%{opacity:1}100%{transform:none;opacity:1}}
-.tr{animation:tr 1.5s 3.9s}
-@keyframes tr{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
-.fl{fill:none;stroke:#fff;stroke-width:4;transform-box:fill-box;transform-origin:center;animation:ring .7s 4.8s ease-out}
-@keyframes ring{from{transform:scale(0);opacity:1}to{transform:scale(5);opacity:0}}
-.steam{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;animation:steam 2.6s infinite ease-out calc(5s + var(--s))}
-@keyframes steam{0%{opacity:0;transform:translateY(14px)}35%{opacity:.8}100%{opacity:0;transform:translateY(-26px)}}
-.spark{fill:#fff;transform-box:fill-box;transform-origin:center;animation:tw 2s infinite calc(5s + var(--s))}
-@keyframes tw{0%,100%{transform:scale(0)}50%{transform:scale(1)}}
-#cut h1{font-family:Fredoka,sans-serif;font-size:clamp(40px,11vw,60px);line-height:1;margin-top:8px;text-shadow:0 4px 0 rgba(0,0,0,.12)}
-#cut h1 span{display:inline-block;animation:pop .6s calc(5.2s + var(--i)*.05s) cubic-bezier(.2,1.5,.4,1)}
-@keyframes pop{from{opacity:0;transform:translateY(30px) scale(.6)}to{opacity:1;transform:none}}
-#cut p{font-size:18px;max-width:320px;font-weight:800;margin-top:12px;animation:fade .8s 6.2s}
-.go2{margin-top:22px;background:#fff!important;color:var(--red)!important;animation:fade .8s 6.7s;pointer-events:none;box-shadow:0 14px 30px -10px rgba(0,0,0,.4)}
-#cut.rdy .go2{pointer-events:auto}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-#cut.fin *:not(.steam):not(.spark){animation-delay:0s!important;animation-duration:.01s!important}
-#cut.fin .steam,#cut.fin .spark{animation-delay:0s!important}
-#tap{position:absolute;inset:0;background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),linear-gradient(160deg,#e8362f,#ff9f1c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:5}
-#tap .btn{background:#fff;color:var(--red)}
-.skip{position:absolute;top:calc(12px + env(safe-area-inset-top));left:12px;background:rgba(255,255,255,.25);padding:7px 14px;border-radius:99px;font-size:13px;font-weight:800;color:#fff;z-index:6}
-.ban{border-radius:24px;padding:16px;color:#fff;margin:8px 0;display:flex;align-items:center;gap:14px;box-shadow:var(--sh)}
-.tile span{filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
-
-:root{--bg:#fff6e8;--card:#fff;--ink:#2b1d14;--mute:#8a7766}
-body{background:radial-gradient(circle at 15% 10%,#ffd36b,transparent 45%),radial-gradient(circle at 90% 85%,#ff6a4d,transparent 55%),linear-gradient(160deg,#e8362f,#ff9f1c) fixed;color:#fff;font-family:Nunito,system-ui,sans-serif}
-h1,h2,h3,.btn,.lv,.tab,#nav button{font-family:Fredoka,Nunito,sans-serif}
-h2{text-shadow:0 3px 0 rgba(0,0,0,.12)}
-.sub{color:rgba(255,255,255,.92)}
-.row2,.hist,.toy,.box,.opt,.qty button,textarea,.btn.g{color:var(--ink)}
-.row2 .sub,.hist .sub,.toy .sub,.box .sub{color:var(--mute)}
-.tab{background:rgba(255,255,255,.22);color:#fff;box-shadow:none}
-.tab.on{background:#fff;color:var(--red)}
-#nav button{display:flex;gap:6px;align-items:center;color:var(--ink)}
-#nav button.on{color:#fff}
-#intro{font-family:Fredoka,sans-serif}
-.hb.e{background:#e0e7ff;color:#3730a3}
-#gstage{position:relative;height:320px;border-radius:22px;background:linear-gradient(#bfe9ff,#fff6e8);overflow:hidden;touch-action:manipulation;user-select:none;margin:10px 0}
-.gi{position:absolute;top:-50px;animation:gf var(--t) linear forwards;cursor:pointer}
-@keyframes gf{to{transform:translateY(390px) rotate(40deg)}}
-@keyframes sp{to{transform:rotate(360deg)}}
-.spin{width:70px;height:70px;border:8px solid #ffe0c2;border-top-color:var(--red);border-right-color:var(--org);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto}
-.pmr{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);padding:12px;border-radius:18px;box-shadow:var(--sh);border:2px solid transparent;margin-top:8px;color:var(--ink)}
-.pmr.on{border-color:var(--red)}.pmr .ri{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;flex:none}
-.rad{width:22px;height:22px;border-radius:50%;border:2px solid #cbb89f;margin-left:auto;flex:none}.pmr.on .rad{border-color:var(--red);background:radial-gradient(var(--red) 45%,transparent 50%)}
-.bch{display:flex;align-items:center;gap:7px}.bch i{width:14px;height:14px;border-radius:50%;display:block}
-.pcard{border-radius:20px;padding:18px;color:#fff;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);position:relative;overflow:hidden;margin-top:4px}
-.pcard:after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.12)}
-.paytop{border-radius:22px;padding:16px;color:#fff;background:linear-gradient(135deg,#7c5cff,#b45cff);text-align:center;margin-bottom:6px}
-@keyframes dots{0%,20%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
-.ld span{animation:dots 1.2s infinite}.ld span:nth-child(2){animation-delay:.2s}.ld span:nth-child(3){animation-delay:.4s}
-#wheel{transition:transform 4s cubic-bezier(.1,.7,.1,1)}
+:root{--g:#087553;--d:#12382E;--m:#E5F4E9;--bg:#F7F9F5;--s:#D1EADB;--t:#4a6358;--y:#f5b82e;--c:#f27b6b}
+*{box-sizing:border-box}footer{background:var(--d);color:var(--s)}body{margin:0;font:16px/1.5 Inter,system-ui,sans-serif;background:var(--bg);color:var(--d)}
+h2{border-left:8px solid var(--g);padding-left:.6rem;border-radius:4px}h1,h2,h3{color:var(--d);line-height:1.2;margin:.2em 0 .5em}h1{font-size:clamp(2rem,5vw,3.2rem)}
+a{color:var(--g)}:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+header{position:sticky;top:0;background:var(--d);border-bottom:3px solid var(--g);z-index:5;padding:.5rem 1rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.logo{font-weight:800;font-size:1.25rem;color:var(--s);text-decoration:none}nav{display:flex;flex-wrap:wrap;gap:.25rem;flex:1}
+nav a{padding:.4rem .8rem;border-radius:99px;text-decoration:none;color:var(--m);font-size:.92rem}nav a.on{background:var(--y);color:var(--d);font-weight:700}
+main{max-width:1050px;margin:auto;padding:1rem}.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:#fff;border:1px solid var(--s);border-radius:32px;padding:1.25rem 1.4rem;box-shadow:0 4px 14px #08755322}.card.m{background:linear-gradient(135deg,var(--m),var(--s));border-color:#b7dcc6}
+.btn{background:var(--g);color:#fff;border:0;border-radius:99px;padding:.55rem 1.1rem;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;margin:.15rem 0}
+.btn.o{background:#fff;color:var(--g);border:2px solid var(--g)}.btn.s{padding:.25rem .7rem;font-size:.85rem}.btn:disabled{opacity:.5}
+.hero{background:linear-gradient(135deg,var(--m),var(--s) 60%,#fbe9b7);border-radius:48px;border:2px solid var(--g);padding:2rem 1.5rem;margin-bottom:1rem}
+.bar{height:16px;background:var(--s);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--g),var(--y));transition:width .4s}
+.tag{display:inline-block;background:var(--s);border-radius:99px;padding:.1rem .7rem;font-size:.8rem;margin:0 .2rem .2rem 0}.tag.h{background:#fde2dd;color:#8a2c20}
+input,select{font:inherit;padding:.6rem 1.1rem;border:2px solid var(--s);background:var(--m);color:var(--d);border-radius:999px;max-width:100%}input:focus,select:focus{border-color:var(--g);background:#fff}input[type=checkbox]{width:1.3rem;height:1.3rem;padding:0;accent-color:var(--g)}input[type=date],input[type=time]{border-radius:999px}label{display:block;font-size:.9rem;margin:.4rem 0 .1rem}
+.sm{color:var(--t);font-size:.88rem}.row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}.done{text-decoration:line-through;opacity:.6}
+#toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--d);color:#fff;padding:.6rem 1.1rem;border-radius:99px;z-index:9;display:none}
+.opt{display:block;width:100%;text-align:left;margin:.4rem 0;padding:.7rem 1.2rem;border:2px solid var(--s);background:var(--m);border-radius:999px;font:inherit;cursor:pointer}
+.opt.ok{border-color:var(--g);background:var(--m)}.opt.no{border-color:var(--c);background:#fde2dd}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}.mem button{aspect-ratio:1;font-size:1.6rem;border-radius:50%;border:3px solid var(--g);background:var(--m);cursor:pointer}.mem button.f{background:var(--m)}
+.isl{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-width:360px}.isl button{aspect-ratio:1;font-size:1.7rem;background:var(--s);border:2px solid var(--g);border-radius:50%;cursor:pointer}
+.big{font-size:2.6rem;font-weight:800;text-align:center}footer{text-align:center;padding:2rem 1rem;font-size:.85rem;margin-top:2rem;border-radius:40px 40px 0 0}
+@media(max-width:640px){header nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}header{padding:.4rem}nav a{padding:.35rem .5rem;font-size:.82rem}}
+.nomo *{transition:none!important;animation:none!important}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style></head><body>
-<div id="root"></div>
-<button id="snd" aria-label="Sound"></button>
-<div class="sheet" id="sheet"><div class="box" id="box"></div></div>
-<div id="toast"></div>
+<header><a class="logo" href="#home" data-c="go|home|0">🍃 GreenPath</a><nav id="nav" aria-label="Main"></nav><a class="btn" href="#planner" data-c="go|planner|1">Build My Plan</a></header>
+<main id="app" tabindex="-1"></main><div id="toast" role="status" aria-live="polite"></div>
+<footer><b>Privacy:</b> GreenPath stores your data only in this browser (localStorage). It is not synced between devices and may be lost if you clear browser data. No accounts, no personal details collected. XP and badges are game mechanics, not environmental measurements. Costs shown are fictional or rough estimates.</footer>
 <script>
-const $=s=>document.querySelector(s);
-const ic=(p,s=28)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
-const IC={
-chick:'<path d="M6 19c-2-4-1-9 3-11 3-2 7-1 8 2 1 2 0 4-2 5l1 4z"/><path d="M15 6l2-2"/>',
-noodle:'<path d="M3 12h18c0 5-4 8-9 8s-9-3-9-8z"/><path d="M6 8l12-5M8 9l11-4"/>',
-prata:'<circle cx="12" cy="12" r="9"/><path d="M5 9c5 2 9 2 14 0M5 15c5-2 9-2 14 0"/>',
-skewer:'<path d="M3 21L21 3"/><circle cx="8" cy="16" r="2.5"/><circle cx="12.5" cy="11.5" r="2.5"/><circle cx="17" cy="7" r="2.5"/>',
-wok:'<path d="M3 11h18c-1 6-5 9-9 9s-8-3-9-9z"/><path d="M21 9l3-2M7 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4"/>',
-sweet:'<path d="M5 9h14l-2 11H7z"/><circle cx="12" cy="6" r="3"/>',
-bone:'<path d="M6 9a2 2 0 11-1-3 2 2 0 013-1l8 8a2 2 0 013-1 2 2 0 11-1 3 2 2 0 01-3 1L7 10a2 2 0 01-1-1z"/>',
-leaf:'<path d="M5 19C4 9 11 4 20 4c0 9-5 16-15 15z"/><path d="M5 19L14 10"/>',
-toast:'<path d="M5 20V9a4 4 0 014-4h6a4 4 0 014 4v11z"/><path d="M9 12h6"/>',
-dumpling:'<path d="M3 15c0-6 4-10 9-10s9 4 9 10z"/><path d="M8 9l1 6M12 7v8M16 9l-1 6"/>',
-crab:'<ellipse cx="12" cy="14" rx="7" ry="5"/><path d="M5 11L3 6M19 11l2-5M8 8V4M16 8V4"/>',
-cupm:'<path d="M6 8h12l-1.5 12h-9z"/><path d="M5 8h14M9 5c1-2 5-2 6 0"/>',
-plus:'<path d="M12 5v14M5 12h14"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
-cart:'<path d="M3 4h3l2.5 11h10l2-8H7"/><circle cx="10" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
-vol:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/>',
-mute:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/>',
-x:'<path d="M6 6l12 12M18 6L6 18"/>',pin:'<path d="M12 21s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>'};
-
-const bw=c=>'<path d="M6 24h36c0 11-8 18-18 18S6 35 6 24z" fill="#fff"/><path d="M9 30h30c-2 6-8 10-15 10S11 36 9 30z" fill="'+c+'"/>';
-const SV={
-bowl:bw('#ff4b3e')+'<ellipse cx="24" cy="24" rx="18" ry="4" fill="#ffb347"/><path d="M12 23q4-4 8 0t8 0 8 0" stroke="#ffe7a3" stroke-width="2" fill="none"/>',
-chick:'<circle cx="30" cy="18" r="13" fill="#e8892b"/><circle cx="26" cy="14" r="4" fill="#f5b25e"/><path d="M21 27L9 39" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="7" cy="38" r="3.5" fill="#fff"/><circle cx="11" cy="42" r="3.5" fill="#fff"/>',
-noodle:bw('#ff6a5c')+'<path d="M9 22q4-8 8 0t8 0 8 0 6 0" stroke="#ffd36b" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M28 4l6 18M34 3l4 19" stroke="#6b3e1d" stroke-width="3" stroke-linecap="round"/>',
-prata:'<circle cx="24" cy="24" r="19" fill="#f2c26b"/><path d="M10 18q14 6 28 0M8 26q16 6 32 0M12 34q12 4 24 0" stroke="#d49a3a" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="12" r="6" fill="#e07b1a"/>',
-skewer:'<path d="M5 43L43 5" stroke="#d7a86e" stroke-width="3" stroke-linecap="round"/><ellipse cx="14" cy="34" rx="6" ry="8" fill="#a8541f" transform="rotate(45 14 34)"/><ellipse cx="24" cy="24" rx="6" ry="8" fill="#c0392b" transform="rotate(45 24 24)"/><ellipse cx="34" cy="14" rx="6" ry="8" fill="#a8541f" transform="rotate(45 34 14)"/>',
-wok:'<path d="M4 24h40c-2 12-10 18-20 18S6 36 4 24z" fill="#455a64"/><rect x="40" y="21" width="8" height="4" rx="2" fill="#8d6e63"/><ellipse cx="24" cy="23" rx="19" ry="5" fill="#ffd54f"/><circle cx="16" cy="22" r="2" fill="#e53935"/><circle cx="26" cy="21" r="2" fill="#43a047"/><circle cx="33" cy="23" r="2" fill="#ff8a65"/>',
-sweet:'<path d="M12 22h24l-3 20H15z" fill="#fff"/><path d="M8 24q16-26 32 0z" fill="#ff8fb1"/><path d="M14 24q10-15 20 0z" fill="#7be3b2"/><circle cx="24" cy="8" r="3.5" fill="#e53935"/>',
-bone:bw('#8d6e63')+'<ellipse cx="24" cy="24" rx="18" ry="4" fill="#d9b48f"/><path d="M26 6a3 3 0 112 4l8 8a3 3 0 11-2 4l-4-4-4 4a3 3 0 11-4-2l4-4-4-4a3 3 0 014-2z" fill="#f5e6d3" stroke="#b08968" stroke-width="1.5"/>',
-leaf:'<path d="M3 36C3 16 20 5 45 6c0 21-13 34-42 30z" fill="#43a047"/><circle cx="22" cy="24" r="9" fill="#fff"/><circle cx="33" cy="17" r="5.5" fill="#ffca28" stroke="#fff" stroke-width="2"/><circle cx="13" cy="33" r="3.5" fill="#e53935"/><circle cx="31" cy="31" r="3" fill="#8d6e63"/>',
-toast:'<path d="M8 41V19a8 8 0 018-8h16a8 8 0 018 8v22z" fill="#e0a45c"/><rect x="13" y="18" width="22" height="19" rx="3" fill="#fff3c4"/><rect x="13" y="26" width="22" height="5" fill="#8bc34a"/>',
-dumpling:'<rect x="2" y="34" width="44" height="9" rx="3" fill="#c28b4a"/><path d="M5 35c0-14 8-23 19-23s19 9 19 23z" fill="#fff3e0" stroke="#e0b98a" stroke-width="2"/><path d="M14 19l3 15M24 14v20M34 19l-3 15" stroke="#e0b98a" stroke-width="2"/>',
-crab:'<path d="M6 24a6 6 0 1112-7M42 24a6 6 0 10-12-7" fill="#e53935"/><path d="M8 38l6-6M40 38l-6-6M12 42l5-6M36 42l-5-6" stroke="#c62828" stroke-width="3" stroke-linecap="round"/><ellipse cx="24" cy="28" rx="15" ry="11" fill="#e53935"/><circle cx="18" cy="19" r="4" fill="#fff"/><circle cx="30" cy="19" r="4" fill="#fff"/><circle cx="18" cy="19" r="2" fill="#222"/><circle cx="30" cy="19" r="2" fill="#222"/>',
-cupm:'<path d="M12 12h24l-3 30H15z" fill="#fff"/><path d="M14 21h20l-2 19H16z" fill="#6d4c41"/><rect x="10" y="8" width="28" height="6" rx="3" fill="#43a047"/><path d="M28 8l4-6" stroke="#ffd54f" stroke-width="3" stroke-linecap="round"/><path d="M19 21l3-5 3 5 3-5 3 5z" fill="#8bc34a"/>',
-drink:'<path d="M12 12h24l-3 30H15z" fill="#fff"/><path d="M14 21h20l-2 19H16z" fill="#ff9f1c"/><rect x="10" y="8" width="28" height="6" rx="3" fill="#ff4b3e"/><path d="M28 8l4-6" stroke="#7c5cff" stroke-width="3" stroke-linecap="round"/>',
-crown:'<path d="M5 34L3 14l10 8 11-14 11 14 10-8-2 20z" fill="#ffc107"/><rect x="5" y="34" width="38" height="6" rx="2" fill="#ff9800"/><circle cx="24" cy="29" r="3" fill="#e53935"/><circle cx="12" cy="30" r="2" fill="#42a5f5"/><circle cx="36" cy="30" r="2" fill="#66bb6a"/>',
-lock:'<rect x="10" y="22" width="28" height="20" rx="4" fill="#9e9e9e"/><path d="M16 22v-6a8 8 0 0116 0v6" stroke="#757575" stroke-width="4" fill="none"/><circle cx="24" cy="32" r="3" fill="#fff"/>',
-cart:'<path d="M4 8h6l5 22h20l5-16H13" stroke="#ff4b3e" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="19" cy="38" r="4" fill="#ff9f1c"/><circle cx="33" cy="38" r="4" fill="#ff9f1c"/>',
-vol:'<path d="M6 18h8l10-8v28l-10-8H6z" fill="#ff9f1c"/><path d="M30 17a9 9 0 010 14M35 12a16 16 0 010 24" stroke="#ff4b3e" stroke-width="3" fill="none" stroke-linecap="round"/>',
-mute:'<path d="M6 18h8l10-8v28l-10-8H6z" fill="#ff9f1c"/><path d="M32 18l10 12M42 18L32 30" stroke="#ff4b3e" stroke-width="4" stroke-linecap="round"/>',
-pin:'<path d="M24 44s14-12 14-24a14 14 0 10-28 0c0 12 14 24 14 24z" fill="#fff"/><circle cx="24" cy="20" r="6" fill="#ff4b3e"/>',
-bear:'<circle cx="12" cy="12" r="6" fill="#a1887f"/><circle cx="36" cy="12" r="6" fill="#a1887f"/><circle cx="24" cy="26" r="16" fill="#c8a07a"/><ellipse cx="24" cy="32" rx="7" ry="5" fill="#f3e0c8"/><circle cx="18" cy="23" r="2.5" fill="#222"/><circle cx="30" cy="23" r="2.5" fill="#222"/><circle cx="24" cy="30" r="2" fill="#222"/>'};
-const B=(c,s,a,b)=>bw(c)+`<ellipse cx="24" cy="24" rx="18" ry="4" fill="${s}"/><circle cx="17" cy="22" r="2.5" fill="${a}"/><circle cx="29" cy="22" r="2.5" fill="${b}"/><path d="M20 15q-3-4 0-8M28 15q-3-4 0-8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>`;
-const P=(f,a,b)=>`<ellipse cx="24" cy="36" rx="21" ry="7" fill="#fff"/><ellipse cx="24" cy="34" rx="15" ry="4.5" fill="#f1e4d0"/><path d="M10 33q14-26 28 0z" fill="${f}"/><circle cx="19" cy="25" r="3" fill="${a}"/><circle cx="29" cy="28" r="3" fill="${b}"/>`;
-const C=(l,t,s)=>`<path d="M12 14h24l-3 28H15z" fill="#fff"/><path d="M14 22h20l-2 18H16z" fill="${l}"/><rect x="10" y="10" width="28" height="6" rx="3" fill="${t}"/><path d="M28 10l4-7" stroke="${s}" stroke-width="3" stroke-linecap="round"/>`;
-const W=(w,f)=>`<path d="M8 36L34 8l8 8-26 28z" fill="${w}"/><path d="M34 8l8 8" stroke="#fff" stroke-width="3"/><circle cx="12" cy="40" r="3.5" fill="${f}"/><circle cx="18" cy="43" r="2.5" fill="#fff"/>`;
-const U=(b,f,g)=>`<path d="M6 22a18 14 0 0136 0z" fill="${b}"/><rect x="5" y="24" width="38" height="4" rx="2" fill="${g}"/><rect x="6" y="28" width="36" height="6" rx="2" fill="${f}"/><rect x="6" y="35" width="36" height="7" rx="4" fill="${b}"/>`;
-Object.assign(SV,{
-x0:B('#e65100','#ff7043','#43a047','#ffd54f'),
-x1:B('#ad1457','#e53935','#fff','#ffd54f'),
-x2:P('#ffb74d','#e53935','#43a047'),
-x3:B('#c62828','#ff8a65','#fff3e0','#ffcc80'),
-x4:P('#ff7043','#827717','#fdd835'),
-x5:P('#ce93d8','#81c784','#fff'),
-x6:C('#ffa726','#43a047','#e53935'),
-x7:P('#fdd835','#e53935','#43a047'),
-x8:P('#8d6e63','#ffca28','#fff'),
-x9:P('#ffb74d','#c62828','#fff'),
-x10:C('#d7a86e','#7c5cff','#ff4b3e'),
-x11:W('#e0b46a','#43a047'),
-x12:W('#fff3e0','#c62828'),
-x13:P('#fff','#e53935','#ff9800'),
-x14:'<path d="M16 24l8 20 8-20z" fill="#e0a45c"/><circle cx="24" cy="18" r="9" fill="#f48fb1"/><circle cx="19" cy="14" r="5" fill="#fff59d"/><circle cx="30" cy="15" r="4" fill="#a5d6a7"/>',
-x15:P('#a1887f','#ffca28','#43a047'),
-x16:B('#00796b','#e0f2f1','#fff','#ffcc80'),
-x17:B('#ffa000','#fff8e1','#fff','#ffb300'),
-x18:P('#ef5350','#fff','#43a047'),
-x19:B('#4e342e','#a1887f','#fff','#ffb74d'),
-x20:P('#bf360c','#ffb74d','#fff'),
-x21:B('#2e7d32','#a5d6a7','#fff','#f48fb1'),
-x22:B('#b71c1c','#ff5252','#ffd54f','#fff'),
-x23:B('#6d4c41','#8d6e63','#ffd54f','#fff'),
-x24:P('#5d4037','#ffd54f','#fff'),
-x25:B('#37474f','#ffcc80','#fff','#43a047'),
-x26:U('#e0a45c','#795548','#43a047'),
-x27:P('#fff59d','#ffd54f','#43a047'),
-x28:B('#558b2f','#c5e1a5','#fff','#ff8a65'),
-x29:B('#d32f2f','#ff1744','#ffd54f','#43a047'),
-});
-Object.assign(SV,{ub:P('#e8892b','#ffca28','#fff3e0'),kc:B('#8d6e63','#bcaaa4','#f48fb1','#fff')});
-Object.assign(SV,{y0:B('#2e7d32','#c5e1a5','#fff','#ff8a65'),
-y1:'<path d="M4 24c8-14 22-14 30 0-8 14-22 14-30 0z" fill="#4fc3f7"/><path d="M34 24l10-9v18z" fill="#0288d1"/><circle cx="12" cy="21" r="2" fill="#fff"/><path d="M18 17q4 7 0 14" stroke="#0288d1" stroke-width="2" fill="none"/>',
-y2:W('#a5d6a7','#e53935'),y3:P('#ffd54f','#e53935','#43a047'),
-y4:'<path d="M5 38c0-14 8-24 19-24s19 10 19 24z" fill="#fff" stroke="#e0c9a8" stroke-width="2"/><path d="M18 18q6 5 12 0" stroke="#e0c9a8" stroke-width="2" fill="none"/><rect x="3" y="38" width="42" height="5" rx="2" fill="#c28b4a"/>',
-y5:P('#fff59d','#ffb300','#fff'),
-y6:'<path d="M24 44L6 12a30 30 0 0136 0z" fill="#ffca28"/><path d="M6 12a30 30 0 0136 0" stroke="#e0a45c" stroke-width="4" fill="none"/><circle cx="20" cy="20" r="3" fill="#e53935"/><circle cx="29" cy="23" r="3" fill="#e53935"/><circle cx="24" cy="32" r="2.5" fill="#43a047"/>',
-y7:C('#8e24aa','#43a047','#ff4b3e')});
-const em=(k,z)=>`<svg viewBox="0 0 48 48" width="${z}" height="${z}" style="flex:none">${SV[k]}</svg>`;
-
-/* ===== per-dish food images (every item gets its own look) ===== */
-const hh=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h};
-const PL=['#e53935','#fb8c00','#fdd835','#43a047','#8d6e63','#ab47bc','#26a69a','#d84315'];
-function itemImg(n,t,z){
- const l=n.toLowerCase(),h=hh(n),a=PL[h%8],b=PL[(h>>3)%8],c=PL[(h>>5)%8],X=r=>r.test(l);let s;
- const plate='<ellipse cx="24" cy="37" rx="21" ry="7" fill="#fff"/><ellipse cx="24" cy="35" rx="15" ry="4.5" fill="#f1e4d0"/>';
- if(t==='c')s='<path d="M3 38h42l-4 8H7z" fill="#a1887f"/><path d="M5 28h18c0 6-4 10-9 10s-9-4-9-10z" fill="#ff4b3e"/><ellipse cx="14" cy="28" rx="9" ry="3" fill="#ffb347"/><path d="M27 12h14l-2 24H29z" fill="#fff"/><path d="M28 20h12l-1 15H29z" fill="#6d4c41"/><circle cx="24" cy="10" r="6" fill="#ffc107"/>';
- else if(t==='d'||t==='m'){
-  const q=X(/milo|kopi|horlicks|chocolate|tarik|yuan|coffee/)?'#6d4c41':X(/bandung|sirap|plum|berry|acai/)?'#ec407a':X(/lime|matcha|green|lemongrass|mint|lychee|jasmine/)?'#9ccc65':X(/mango|orange|juice|luo|sugarcane|jeruk|lemon|chrysanthemum|watermelon/)?'#ffb300':X(/soy|soya|milk|ayran|lassi|latte|taro|tau huay|barley|banana/)?'#f5ead8':'#c8a26b';
-  s=`<path d="M12 12h24l-3 31H15z" fill="#fff" opacity=".92"/><path d="M14 20h20l-2.4 21H16.4z" fill="${q}"/><rect x="10" y="8" width="28" height="6" rx="3" fill="${b}"/><path d="M27 8l5-7" stroke="${a}" stroke-width="3" stroke-linecap="round"/>${X(/dino|godzilla|gao|tyranno/)?'<path d="M15 20h18l1-4H14z" fill="#8d6e63"/>':''}${X(/boba|pearl/)?'<circle cx="20" cy="38" r="2" fill="#222"/><circle cx="26" cy="39" r="2" fill="#222"/><circle cx="30" cy="36" r="2" fill="#222"/>':''}${X(/peng|iced|ice |dino|godzilla|lime|lemon/)?'<rect x="18" y="24" width="7" height="7" rx="1.5" fill="#fff" opacity=".6"/><rect x="26" y="28" width="6" height="6" rx="1.5" fill="#fff" opacity=".6"/>':''}${X(/hot|pot/)?'<path d="M20 5q-3-3 0-6M26 5q-3-3 0-6" stroke="#fff" stroke-width="2" fill="none"/>':''}`}
- else if(X(/noodle|mee|laksa|ramen|pasta|aglio|soup|tulang|lor |porridge|\btang\b|hot pot|kway|chap|wanton|rojak|rebus|maggi|yong tau|pad thai|tom yum|tteok|stew|curry|claypot|lei cha|lontong|soto/)){
-  const br=X(/laksa|curry|tom yum|tulang|mala|tomato/)?'#f4793b':X(/porridge/)?'#f3e5c8':X(/soup|hot pot|lei|stew|soto/)?'#d9b878':'#ffd36b';
-  s=`<path d="M4 22h40c0 12-8 20-20 20S4 34 4 22z" fill="#fff"/><path d="M7 26h34c-2 7-8 12-17 12S9 33 7 26z" fill="${a}"/><ellipse cx="24" cy="22" rx="20" ry="5" fill="${br}"/>${X(/porridge|soup|pot|stew/)?'':'<path d="M10 22q4-5 7 0t7 0 7 0 6 0" stroke="#fff3c4" stroke-width="2.5" fill="none" stroke-linecap="round"/>'}<circle cx="16" cy="21" r="2.5" fill="${b}"/><circle cx="28" cy="22" r="2.5" fill="${c}"/><circle cx="34" cy="20" r="2" fill="#43a047"/><path d="M30 3l5 16M36 3l3 15" stroke="#6b3e1d" stroke-width="2.5" stroke-linecap="round"/>`}
- else if(X(/satay|skewer|kebab plate|ketupat/)){
-  s=`<path d="M5 43L43 5" stroke="#d7a86e" stroke-width="3" stroke-linecap="round"/><ellipse cx="14" cy="34" rx="6" ry="8" fill="${a}" transform="rotate(45 14 34)"/><ellipse cx="24" cy="24" rx="6" ry="8" fill="#a8541f" transform="rotate(45 24 24)"/><ellipse cx="34" cy="14" rx="6" ry="8" fill="${b}" transform="rotate(45 34 14)"/>`}
- else if(X(/\bice\b|chendol|cendol|kachang|sundae|scoop|sago|orh nee|acai|beancurd|smoothie bowl|dragon bowl/)){
-  s=`<path d="M10 28h28l-4 16H14z" fill="#fff"/><path d="M8 28q16-30 32 0z" fill="${a}"/><path d="M14 28q10-17 20 0z" fill="${b}"/><path d="M13 36h22" stroke="${c}" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="10" r="3.5" fill="#e53935"/>`}
- else if(X(/prata|murtabak|pancake|crepe|waffle|omelette|carrot cake|abacus|yam/)){
-  s=`<circle cx="24" cy="26" r="19" fill="${X(/omelette/)?'#ffd54f':'#f2c26b'}"/><path d="M10 20q14 6 28 0M8 28q16 6 32 0M12 36q12 4 24 0" stroke="#c98a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="32" cy="16" r="4" fill="${a}"/><circle cx="18" cy="32" r="3" fill="${b}"/>`}
- else if(X(/pizza|slice/)){
-  s=`<path d="M24 44L6 12a30 30 0 0136 0z" fill="#ffca28"/><path d="M6 12a30 30 0 0136 0" stroke="#e0a45c" stroke-width="4" fill="none"/><circle cx="20" cy="20" r="3" fill="${a}"/><circle cx="29" cy="23" r="3" fill="${a}"/><circle cx="24" cy="32" r="2.5" fill="${b}"/>`}
- else if(X(/bao|\bbun\b/)){
-  s=`<path d="M5 38c0-14 8-24 19-24s19 10 19 24z" fill="#fff" stroke="#e0c9a8" stroke-width="2"/><path d="M18 18q6 5 12 0" stroke="#e0c9a8" stroke-width="2" fill="none"/><rect x="3" y="38" width="42" height="5" rx="2" fill="#c28b4a"/><circle cx="24" cy="29" r="3" fill="${a}" opacity=".7"/>`}
- else if(X(/burger|wrap|shawarma|doner|toast|sandwich|garlic bread/)){
-  s=`<path d="M6 22a18 14 0 0136 0z" fill="#e0a45c"/><path d="M5 24q4 4 8 0t8 0 8 0 8 0 6 0v3H5z" fill="#43a047"/><rect x="6" y="27" width="36" height="6" rx="3" fill="${X(/chicken|toast|bread/)?'#d98b3a':'#6d4c41'}"/><rect x="8" y="33" width="32" height="3" fill="#fdd835"/><rect x="6" y="36" width="36" height="6" rx="3" fill="#e0a45c"/><circle cx="16" cy="14" r="1.5" fill="#fff3c4"/><circle cx="26" cy="12" r="1.5" fill="#fff3c4"/>`}
- else if(X(/har gow|siew mai|dumpling|xiao long|gyoza|dim sum|ondeh|kueh|ang ku|samosa/)){
-  s=X(/ondeh|kueh|ang ku/)?`<circle cx="14" cy="32" r="9" fill="${a}"/><circle cx="32" cy="30" r="9" fill="${b}"/><circle cx="24" cy="18" r="9" fill="${c}"/>`:`<rect x="2" y="34" width="44" height="9" rx="3" fill="#c28b4a"/><path d="M5 35c0-14 8-23 19-23s19 9 19 23z" fill="#fff3e0" stroke="#e0b98a" stroke-width="2"/><path d="M14 19l3 15M24 14v20M34 19l-3 15" stroke="#e0b98a" stroke-width="2"/>`}
- else if(X(/crab/)){s=SV.crab}
- else if(X(/prawn|lobster/)){
-  s=`<path d="M10 38q-6-18 10-26 14-6 20 6-10-4-16 4 10 4 6 18-8-4-10-12-2 8-10 10z" fill="${X(/prawn|lobster/)?'#ff8a65':a}"/><circle cx="34" cy="14" r="2" fill="#222"/><path d="M38 12l6-6M38 16l7-2" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>`}
- else if(X(/fish|squid|stingray|oyster|abalone|seafood|salmon|unagi|tuna|chips/)){
-  s=`<path d="M4 24c8-14 22-14 30 0-8 14-22 14-30 0z" fill="${X(/salmon|unagi/)?'#ff8a65':'#4fc3f7'}"/><path d="M34 24l10-9v18z" fill="${X(/salmon|unagi/)?'#e64a19':'#0288d1'}"/><circle cx="12" cy="21" r="2" fill="#fff"/><path d="M18 17q4 7 0 14" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>`}
- else if(X(/fries|nugget|youtiao|you tiao|pisang|bits|skin/)){
-  s=`${[12,18,24,30].map((x,i)=>`<rect x="${x}" y="${6+i%2*3}" width="4" height="22" rx="2" fill="#ffd54f"/>`).join('')}<path d="M8 22h32l-4 22H12z" fill="#e53935"/><path d="M13 30h22" stroke="#fff" stroke-width="3" opacity=".7"/>`}
- else if(X(/salad|greens|tofu|veget|falafel|hummus|coleslaw|beans|avocado|superfood|zen|tempeh|tuna/)){
-  s=`<path d="M4 22h40c0 12-8 20-20 20S4 34 4 22z" fill="#fff"/><path d="M6 24q6-12 12-4 4-10 10-2 6-8 10 2 4-2 4 4z" fill="#43a047"/><circle cx="16" cy="26" r="3" fill="${a}"/><circle cx="28" cy="27" r="3" fill="${b}"/><circle cx="35" cy="25" r="2.5" fill="#ffca28"/>`}
- else if(X(/egg/)){
-  s=`${plate}<path d="M8 32q-2-12 10-14 8-4 14 2 8 4 4 12-8 4-28 0z" fill="#fff" stroke="#e0d6c3" stroke-width="1.5"/><circle cx="22" cy="26" r="6" fill="#ffb400"/><circle cx="20" cy="24" r="1.8" fill="#ffe082"/>`}
- else if(X(/chicken|ayam|wing|chop|penyet|bakar|steak|trotter|rib|pork|beef|lamb|mutton|siew|char siew|rendang|bulgogi|platter|grill|roast|duck|cutlet|sausage|bone|katsu|unagi|mala/)){
-  const m=X(/chicken|ayam|wing|cutlet|gunting|katsu/)?'#d98b3a':X(/duck|roast|siew|char siew|rendang|trotter|bulgogi/)?'#a0522d':X(/beef|steak|wagyu/)?'#7b3f2a':'#c0603a';
-  s=`${plate}${X(/rice|nasi|briyani|\bdon\b|bibimbap|mandi|lemak|katsu|set/)?'<path d="M7 34q9-15 18 0z" fill="#fffdf5"/>':''}<ellipse cx="31" cy="27" rx="10" ry="7" fill="${m}"/><path d="M24 22q7-4 13 0" stroke="#fff" stroke-width="2" opacity=".4" fill="none"/><circle cx="14" cy="32" r="2.5" fill="${a}"/><circle cx="21" cy="35" r="2.5" fill="#43a047"/>`}
- else{
-  s=`${plate}<path d="M8 34q8-18 16-18 10 0 16 18z" fill="#fffdf5"/><circle cx="19" cy="26" r="2.5" fill="${a}"/><circle cx="28" cy="28" r="2.5" fill="${b}"/><circle cx="24" cy="21" r="2.5" fill="${c}"/><path d="M34 36q4-6 8-4" stroke="#43a047" stroke-width="3" fill="none" stroke-linecap="round"/>`}
- return`<svg viewBox="0 0 48 48" width="${z}" height="${z}" style="flex:none">${s}${t==='e'?'<path d="M41 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#ffd54f"/>':''}</svg>`}
-
-/* ===== SOUND (loud) ===== */
-let AC,MG,MUTE=false;try{MUTE=localStorage.hpm==='1'}catch(e){}
-function M(){if(!MG){const c=AC.createDynamicsCompressor();MG=AC.createGain();MG.gain.value=10;MG.connect(c);c.connect(AC.destination)}return MG}
-function tone(f,t,d,ty='sine',v=.12,f2){const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime+t;o.type=ty;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(Math.min(v*2.5,.9),n+.01);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g).connect(M());o.start(n);o.stop(n+d+.05)}
-function noise(t,d,v=.08,fq=3000){const b=AC.createBuffer(1,AC.sampleRate*d,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<a.length;i++)a[i]=(Math.random()*2-1)*(1-i/a.length);const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type='highpass';f.frequency.value=fq;g.gain.value=v*2.5;s.connect(f).connect(g).connect(M());s.start(AC.currentTime+t)}
-const SFX={
-squeak:a=>{const b=700+(a%7)*90;tone(b,0,.1,'sine',.2,b*1.9);tone(b*1.5,.07,.12,'triangle',.14,b*2.2)},
-thud:()=>tone(130,0,.14,'sine',.35,55),
-whoosh:()=>{noise(0,.35,.12,1200);tone(300,0,.3,'sine',.1,900)},
-tap:()=>tone(700,0,.05,'triangle',.09),pop:()=>tone(400,0,.12,'sine',.14,900),
-add:()=>{tone(523,0,.09,'square',.06);tone(784,.07,.14,'square',.06)},
-coin:()=>{tone(988,0,.07,'square',.07);tone(1319,.07,.3,'square',.07)},
-error:()=>tone(220,0,.18,'sawtooth',.08,120),
-success:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.08,.2,'triangle',.12)),
-bell:()=>{noise(0,.5,.06,2500);tone(1568,0,.7,'sine',.12);tone(2093,.02,.5,'sine',.06)},
-toy:()=>{[659,784,988,1319,1568].forEach((f,i)=>tone(f,i*.06,.18,'square',.06));noise(.3,.3,.05,6000)},
-level:()=>{[392,523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.3,'triangle',.14));tone(1319,.6,.7,'triangle',.1)}};
-function sfx(n,a){if(MUTE)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();SFX[n](a)}catch(e){}}
-const drawSnd=()=>$('#snd').innerHTML=em(MUTE?'mute':'vol',22);
-$('#snd').onclick=()=>{MUTE=!MUTE;try{localStorage.hpm=MUTE?'1':'0'}catch(e){}drawSnd();sfx('pop')};drawSnd();
-
-/* ===== DATA ===== */
-const G={
-f:[['Spice',1,[['No spice',0],['Mild',0],['Spicy',0]]],['Extras',0,[['Extra portion',1.5],['Fried egg',1]]]],
-d:[['Ice',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],['Sweetness',1,[['Normal',0],['Less sweet',0],['No sugar',0]]]],
-m:[['Ice',1,[['Normal ice',0],['Less ice',0],['No ice',0],['Hot',0]]],['Sweetness',1,[['Normal',0],['Less sweet',0],['No sugar',0]]],['Toppings',0,[['Extra Milo powder',.5],['Whipped cream',.8],['Ice cream scoop',1.2],['Pearls',.8]]]],
-w:[['Sauce',1,[['Original',0],['Cheese',.8],['Black pepper',.5],['Mushroom',.5],['Spicy sambal',.3]]],['Extras',0,[['Extra cheese',1],['Add fries',2.5],['Add coleslaw',1.5],['Fried egg',1]]]],
-e:[],c:[]};
-/* name:price:type  (f food, d drink, m milo-style drink, e exclusive lvl 51) */
-const RAW=[
-['Ah Hock Chicken Rice',0,'#ffb347','#ff7a2f','chick','Roasted Chicken Rice:4.5:f|Steamed Chicken Rice:4.5:f|Char Siew Rice:5:f|Braised Egg:1:f|Barley:1.8:d|Iced Milo:2.5:d|Golden Truffle Chicken Rice:9:e|Wagyu Char Siew Rice:14:e'],
-['Mdm Lim Laksa & Noodles',0,'#ff6a5c','#d62f4b','noodle','Curry Laksa:5:f|Prawn Mee:5.5:f|Bak Chor Mee:5:f|Wanton Mee:4.5:f|Sugarcane:2.2:d|Teh Tarik:2:d|Lobster Laksa:15:e'],
-['Uncle Raj Prata House',1,'#43c98a','#17977b','prata','Roti Prata:2.5:f|Prata Set of 3:6.5:f|Mutton Murtabak:6.5:f|Chicken Curry Bowl:4:f|Mango Lassi:3.5:d|Teh Tarik:2:d|Gold Leaf Prata:10:e'],
-['Pak Hamid Satay Club',1,'#8a5a3c','#c0392b','skewer','Chicken Satay (10):5.5:f|Beef Satay (10):6.5:f|Grilled Stingray:9:f|Ketupat:1:f|Sirap Bandung:2.5:d|Lime Juice:2:d|Wagyu Satay Set:18:e'],
-['Wok Hei Express',0,'#ffcc33','#f08a00','wok','Char Kway Teow:5:f|Hokkien Mee:5.5:f|Fried Rice:4.5:f|Carrot Cake:4:f|Soya Bean Milk:2:d|Luo Han Guo:2:d|Prawn Wok Feast:16:e'],
-['Sweet Corner Desserts',1,'#ff8fb1','#a45cff','sweet','Ice Kachang:3.5:f|Chendol:3.5:f|Cendol Durian:5:f|Orh Nee:4:f|Bandung:2.5:d|Soya Beancurd:2:d|Mao Shan Wang Chendol:12:e'],
-['Teck Heng Bak Kut Teh',0,'#6b5b4e','#2f2a26','bone','Pork Rib Soup:7:f|Pig Trotter Soup:7.5:f|Prawn Soup:8:f|You Tiao:1.5:f|Chinese Tea:1.5:d|Soya Bean Milk:2:d|Premium Spare Rib Pot:16:e'],
-['Mak Cik Nasi Lemak',1,'#5fd1a0','#1a9e78','leaf','Nasi Lemak Chicken Wing:4.5:f|Nasi Lemak Fish:4.5:f|Nasi Lemak Otah:4:f|Rendang Set:6.5:f|Teh Halia:2:d|Sirap Bandung:2.5:d|Wagyu Beef Rendang Set:15:e'],
-['Kopi & Toast Station',1,'#d9a066','#8b5a2b','toast','Kaya Butter Toast Set:4:f|Soft-boiled Eggs:2.5:f|French Toast:3.5:f|Kopi:1.6:d|Teh:1.6:d|Yuan Yang:2.2:d|Gold Kaya Toastbox:9:e'],
-['Jade Garden Dim Sum',0,'#ff9a8b','#e0527a','dumpling','Har Gow:4.5:f|Siew Mai:4.5:f|Char Siew Bao:3.8:f|Xiao Long Bao:5.5:f|Jasmine Tea:1.5:d|Chrysanthemum Tea:1.8:d|Golden Dim Sum Tower:28:e'],
-['Big Wok Zi Char',0,'#ff7043','#bf360c','crab','Sweet and Sour Pork:10:f|Cereal Prawns:14:f|Salted Egg Squid:12:f|Black Pepper Crab:22:f|Iced Lemon Tea:2.5:d|Chinese Tea Pot:3:d|Chilli Crab Royale:38:e'],
-['Dino Milo Bar',1,'#43a047','#1b5e20','cupm','Milo Dinosaur:3.2:m|Milo Godzilla:4.2:m|Milo Peng:2.5:m|Milo Kosong:2.2:d|Milo Gao:2.8:d|Hot Milo:2:d|Horlicks Dinosaur:3.2:m|Teh Tarik:2:d|Sirap Bandung:2.5:d|Barley:1.8:d|Lime Juice:2:d|Milo Tyrannosaurus:9:e|Golden Godzilla Tower:14:e'],
-['Siam Street Kitchen',1,'#ffb74d','#e65100','x0','Pad Thai:6:f|Green Curry Rice:6.5:f|Tom Yum Soup:6:f|Basil Chicken Rice:5.5:f|Mango Sticky Rice:5.5:f|Thai Milk Tea:2.8:d|Tiger Prawn Tom Yum:16:e'],
-['Seoul Bites',1,'#f06292','#ad1457','x1','Bibimbap:7.5:f|Kimchi Stew:7:f|Tteokbokki:5.5:f|Korean Fried Chicken:8:f|Yuja Citron Tea:3:d|Banana Milk:3:d|Wagyu Bulgogi Bowl:18:e'],
-['Mamak Corner',1,'#81c784','#2e7d32','x2','Mee Goreng:4.5:f|Mee Rebus:4.5:f|Maggi Goreng:4:f|Nasi Goreng:5:f|Indian Rojak:5:f|Teh Tarik:2:d|Wagyu Briyani Pot:17:e'],
-['Haji Kassim Soup Tulang',1,'#64b5f6','#1565c0','x3','Soup Tulang:6.5:f|Mee Soto:4.5:f|Soup Ekor:9:f|Lontong:4.5:f|Sirap Selasih:2.2:d|Jumbo Bone Marrow Tulang:14:e'],
-['Warung Padang Sari',1,'#ba68c8','#6a1b9a','x4','Nasi Padang Set:6:f|Nasi Ayam Penyet:6.5:f|Nasi Ikan Bakar:7.5:f|Pisang Goreng:2.5:f|Es Teh Manis:2:d|Rendang Daging Royal:17:e'],
-['Nenek Kueh & Tau Huay',1,'#ff8a65','#bf360c','x5','Ondeh Ondeh:2.5:f|Kueh Lapis:2.5:f|Ang Ku Kueh:2:f|Tau Huay:2:d|Barley:1.8:d|Heritage Kueh Hamper:20:e'],
-['Fresh Squeeze Juice Bar',1,'#4db6ac','#00695c','x6','Watermelon Juice:3:d|Mango Juice:3.5:d|Orange Juice:3.5:d|Mixed Fruit Juice:4:d|Mango Sago:4.5:f|Mao Shan Wang Smoothie:11:e'],
-['Bismillah Briyani House',1,'#ffd54f','#f57f17','x7','Chicken Briyani:6:f|Mutton Briyani:7.5:f|Fish Briyani:7:f|Samosa:2:f|Mango Lassi:3.5:d|Royal Dum Briyani:16:e'],
-['Zaini Western Grill',1,'#a1887f','#4e342e','x8','Chicken Chop:7.5:f|Fish and Chips:7:f|Beef Burger:6.5:f|Sausage Platter:6.5:f|Iced Lemon Tea:2.2:d|Wagyu Steak Plate:22:e'],
-['Ayam Penyet Express',1,'#90a4ae','#37474f','x9','Ayam Penyet:6.5:f|Ayam Bakar:7:f|Tempeh Penyet:5:f|Sambal Egg:3:f|Es Jeruk:2.2:d|Jumbo Penyet Platter:15:e'],
-['Cool Bubble Tea Hub',1,'#ffb74d','#e65100','x10','Classic Milk Tea:3.8:d|Brown Sugar Boba:4.5:d|Taro Milk Tea:4.5:d|Matcha Latte:4.8:d|Lychee Green Tea:3.8:d|Golden Boba Tower:12:e'],
-['Turkish Kebab Corner',1,'#f06292','#ad1457','x11','Chicken Kebab Wrap:6:f|Lamb Doner Wrap:7:f|Kebab Rice Plate:7.5:f|Falafel Wrap:5.5:f|Ayran:2.5:d|Sultan Mixed Grill:18:e'],
-['Arabian Shawarma Stop',1,'#81c784','#2e7d32','x12','Chicken Shawarma:5.5:f|Beef Shawarma:6.5:f|Hummus Plate:5:f|Mandi Rice:8:f|Mint Lemonade:3:d|Royal Mandi Platter:20:e'],
-['Nasi Kandar Corner',1,'#64b5f6','#1565c0','x13','Nasi Kandar Set:6.5:f|Ayam Goreng Berempah:5:f|Fish Head Curry:9:f|Telur Masak:2:f|Teh Tarik:2:d|Kandar Banquet Tray:18:e'],
-['Ice Cream & Waffle Cart',1,'#ba68c8','#6a1b9a','x14','Ice Cream Waffle:4.5:f|Chocolate Crepe:4:f|Mango Sundae:5:f|Ice Cream Scoop:2:f|Iced Milo:2.5:d|Gold Sundae Tower:14:e'],
-['Hainan Western Grill',0,'#ff8a65','#bf360c','x15','Pork Chop:7.5:f|Chicken Chop:7.5:f|Fish and Chips:7:f|Sausage Platter:6.5:f|Iced Milo:2.5:d|Surf and Turf Grill:32:e'],
-['Ah Seng Fishball Noodles',0,'#4db6ac','#00695c','x16','Fishball Noodles:4.5:f|Minced Meat Noodles:5:f|Fishcake Mee Pok:4.5:f|Fish Dumplings:3:f|Barley:1.8:d|Abalone Noodle Bowl:25:e'],
-['Ming Kee Porridge',0,'#ffd54f','#f57f17','x17','Century Egg Porridge:4:f|Fish Slice Porridge:5:f|Minced Pork Porridge:4.5:f|Youtiao:1.5:f|Soya Bean Milk:2:d|Imperial Seafood Porridge:28:e'],
-['Tokyo Don Bar',0,'#a1887f','#4e342e','x18','Chicken Katsu Don:7:f|Salmon Don:9:f|Unagi Don:12:f|Gyudon:7.5:f|Green Tea:2:d|Omakase Chirashi Bowl:35:e'],
-['Claypot Corner',0,'#90a4ae','#37474f','x19','Claypot Chicken Rice:9:f|Claypot Pork Rib Rice:10:f|Braised Tofu:4:f|Stir-fry Greens:5:f|Lemon Barley:2.2:d|Abalone Claypot Rice:22:e'],
-['Roast Duck & Char Siew',0,'#ffb74d','#e65100','x20','Roast Duck Rice:6.5:f|Char Siew Rice:5:f|Siew Yoke Rice:5.5:f|Roast Platter:12:f|Chinese Tea:1.5:d|Imperial Roast Feast:26:e'],
-['Yong Tau Foo Corner',0,'#f06292','#ad1457','x21','Yong Tau Foo Soup:6:f|Yong Tau Foo Dry:6:f|Laksa Yong Tau Foo:6.5:f|Stuffed Tofu Set:5:f|Chrysanthemum Tea:1.8:d|Premium Yong Tau Foo Pot:15:e'],
-['Steamboat Hot Pot Hub',0,'#81c784','#2e7d32','x22','Mala Hot Pot:12:f|Tomato Hot Pot:11:f|Seafood Platter:10:f|Meat Platter:10:f|Winter Melon Tea:2.2:d|Wagyu Hot Pot Feast:30:e'],
-['Lor Mee House',0,'#64b5f6','#1565c0','x23','Lor Mee:5:f|Braised Pork Noodles:5.5:f|Fried Fish Bits:2:f|Braised Egg:1:f|Sugarcane:2.2:d|Deluxe Lor Mee:14:e'],
-['Teochew Braised Duck',0,'#ba68c8','#6a1b9a','x24','Braised Duck Rice:6:f|Duck Noodles:6:f|Braised Tofu:2:f|Pig Trotter Rice:6.5:f|Chinese Tea:1.5:d|Braised Duck Banquet:24:e'],
-['Ramen Ichi',0,'#ff8a65','#bf360c','x25','Tonkotsu Ramen:9:f|Shoyu Ramen:8:f|Miso Ramen:8.5:f|Gyoza:4.5:f|Ramune:3:d|Black Garlic Wagyu Ramen:20:e'],
-['Ah Beng Burger Joint',0,'#4db6ac','#00695c','x26','Cheeseburger:6:f|Bacon Burger:7:f|Fries:2.5:f|Chicken Nuggets:4:f|Iced Lemon Tea:2.5:d|Double Wagyu Tower:18:e'],
-['Oyster Omelette Stall',0,'#ffd54f','#f57f17','x27','Oyster Omelette:6:f|Fried Carrot Cake:4:f|Fried Oyster Mee:5.5:f|Fried Fish Skin:3:f|Luo Han Guo:2:d|Jumbo Oyster Feast:16:e'],
-['Hakka Lei Cha House',0,'#a1887f','#4e342e','x28','Lei Cha Rice:6:f|Abacus Seeds:5:f|Yam Abacus:5.5:f|Hakka Yong Tau Foo:5:f|Hot Chinese Tea:1.5:d|Hakka Heritage Set:15:e'],
-['Mala Xiang Guo',0,'#90a4ae','#37474f','x29','Mala Xiang Guo:10:f|Mala Tang:9:f|Spicy Skewers:5:f|Cold Tofu Salad:4:f|Plum Juice:2.5:d|Royal Mala Pot:22:e']
-,['Uncle Bob Ayam Gunting',1,'#ffb74d','#e65100','ub','Ayam Gunting Original:6.5:w|Ayam Gunting Cheese:7.5:w|Ayam Gunting Black Pepper:7.5:w|Ayam Gunting Mushroom:7.5:w|Chicken Chop:7:w|Chicken Cutlet:6.5:w|Chicken Wings (6):5:w|Fries:2.5:f|Coleslaw:1.5:f|Baked Beans:1.5:f|Iced Lemon Tea:2.2:d|Iced Milo:2.5:d|Golden Ayam Gunting Platter:15:e|Wagyu Chicken Feast:22:e'],
-['Uncle Lim Kway Chap',0,'#8d6e63','#4e342e','kc','Kway Chap Set:6:f|Braised Pork Belly:5:f|Braised Egg:1:f|Braised Tofu:2:f|Braised Duck Slices:5.5:f|Chinese Tea:1.5:d|Soya Bean Milk:2:d|Royal Kway Chap Platter:22:e'],
-['Green Leaf Vegetarian',2,'#81c784','#2e7d32','y0','Vegetarian Rice Set:5.5:f|Mock Chicken Noodles:5:f|Vegetable Curry Rice:5:f|Mushroom Hot Pot:6.5:f|Fresh Soya Milk:2:d|Lemongrass Tea:2:d|Zen Garden Banquet:18:e'],
-['Fresh Catch Seafood Grill',2,'#4fc3f7','#0277bd','y1','Grilled Fish Set:9:f|Sambal Squid:8:f|Garlic Butter Prawns:11:f|Fish and Chips:7.5:f|Iced Lemon Tea:2.5:d|Royal Seafood Platter:28:e'],
-['Garden Wrap Bar',2,'#aed581','#558b2f','y2','Falafel Wrap:5.5:f|Chicken Caesar Wrap:6:f|Tuna Salad Bowl:6.5:f|Garden Salad:5:f|Fresh Orange Juice:3.5:d|Superfood Bowl:14:e'],
-['Pasta Piazza',2,'#ffb74d','#e65100','y3','Aglio Olio:6.5:f|Tomato Basil Pasta:6:f|Creamy Chicken Pasta:7.5:f|Mushroom Cream Pasta:7:f|Garlic Bread:3:f|Sparkling Lemonade:3:d|Truffle Pasta Feast:19:e'],
-['Bao Bunz',2,'#ffe0b2','#ef6c00','y4','Vegetable Bao:3.5:f|Chicken Bao:4:f|Custard Bao:3:f|Red Bean Bun:2.5:f|Soy Milk:2:d|Golden Bao Tower:12:e'],
-['Sunrise Breakfast Club',2,'#fff176','#f9a825','y5','Pancake Stack:6:f|Scrambled Eggs Plate:6:f|Avocado Toast:7:f|French Toast:5.5:f|Latte:3.8:d|Hot Chocolate:3.5:d|Brunch Grand Platter:16:e'],
-['Pizza Rocket Slice',2,'#ef5350','#b71c1c','y6','Margherita Slice:4:f|Chicken Pizza Slice:4.5:f|Veggie Slice:4.2:f|Cheesy Garlic Bread:3:f|Cola:2:d|Whole Pizza Feast:22:e'],
-['Acai and Smoothie Bowl',2,'#ba68c8','#6a1b9a','y7','Acai Bowl:8:f|Mango Smoothie Bowl:7.5:f|Banana Oat Pancakes:6:f|Berry Smoothie:5:d|Green Detox Smoothie:5:d|Tropical Dragon Bowl:15:e']
-];
-const SH=RAW.map((r,i)=>({id:i,n:r[0],h:r[1],c:[r[2],r[3]],ic:r[4],items:r[5].split('|').map(s=>{const[a,b,t]=s.split(':');return{n:a,p:+b,t}})}));
-
-/* combo meals: 1 to 5 per stall, $10 to $110 */
-const CN=['Solo Set','Duo Set','Trio Treat','Family Feast','Party Platter'],CS=[[1,1],[2,2],[3,3],[4,4],[6,5]];
-SH.forEach(s=>{const fo=s.items.filter(x=>x.t==='f'||x.t==='w'),dr=s.items.filter(x=>x.t==='d'||x.t==='m'),F=fo.length?fo:dr,D=dr.length?dr:fo,cn=1+s.id%5,out=[];
- for(let k=0;k<cn;k++){const pk=[];let sum=0;const add=x=>{pk.push(x.n);sum+=x.p};
-  for(let j=0;j<CS[k][0];j++)add(F[(k+j)%F.length]);
-  for(let j=0;j<CS[k][1];j++)add(D[(k+j)%D.length]);
-  for(let j=CS[k][0];sum*.88<10;j++)add(F[(k+j)%F.length]);
-  const m={};pk.forEach(x=>m[x]=(m[x]||0)+1);
-  out.push({n:F[k%F.length].n+' '+CN[k],p:Math.min(110,Math.max(10,Math.round(sum*.88*2)/2)),t:'c',parts:Object.entries(m).map(([x,q])=>q>1?q+'x '+x:x)})}
- [['Grand Hawker Feast',35,60],['Ultimate Hawker Banquet',70,110]].forEach(([nm,lo,hi],ti)=>{const tg=lo+(s.id*7+ti*3)%(hi-lo-9),pk=[];let sum=0,j=0;while(sum*.88<tg){const x=j%3===2?D[(j+ti)%D.length]:F[(j+ti*2)%F.length];pk.push(x.n);sum+=x.p;j++}
-  const m={};pk.forEach(x=>m[x]=(m[x]||0)+1);out.push({n:nm,p:Math.min(hi,Math.max(lo,Math.round(sum*.88*2)/2)),t:'c',parts:Object.entries(m).map(([x,q])=>q>1?q+'x '+x:x)})});
- s.items.unshift(...out)});
-
-/* toys: 30 things x 10 styles = 300 + legends */
-const NO=[['Satay','skewer'],['Laksa','bowl'],['Prata','plush'],['Kopi','cup'],['Durian','durian'],['Merlion','plush'],['Chilli','plush'],['Noodle','bowl'],['Dumpling','plush'],['Teh Tarik','cup'],['Ice Kachang','cup'],['Kaya Toast','plush'],['Hawker Cat','plush'],['Pigeon Chef','plush'],['Roti Dog','plush'],['Lion Dance','plush'],['Bumboat','robot'],['MRT','robot'],['Supertree','rocket'],['HDB','robot'],['Lantern','durian'],['Ketupat','durian'],['Rocket','rocket'],['UFO','rocket'],['Robot','robot'],['Spinner','durian'],['Trophy','crown'],['Crown','crown'],['Gift','bowl'],['Diya','bowl']];
-const AD=[['Tiny','#ff8a65',250],['Jumbo','#ffb74d',900],['Rainbow','#ba68c8',1200],['Golden','#ffc107',3500],['Neon','#26c6da',1500],['Pastel','#f48fb1',500],['Ninja','#546e7a',1100],['Space','#5c6bc0',1400],['Sleepy','#81c784',600],['Sparkle','#f06292',800]];
-const TOYS=[];
-NO.forEach(([n,t],i)=>AD.forEach(([a,c,p])=>TOYS.push([a+' '+n,c,Math.round(p*(1+i%5*.15)/50)*50,a,t])));
-[['Golden Chopsticks','#e8b400',3000,'Legendary','crown'],['Crystal Merlion','#4dd0e1',6000,'Legendary','plush'],['Dragon Noodle Statue','#d32f2f',8000,'Legendary','robot'],['Hawker King Crown','#ffb300',15000,'Legendary','crown'],['Grand Master Cup','#ffd54f',25000,'Legendary','crown']].forEach(t=>TOYS.push(t));
-/* brick sets (build with bricks like LEGO). letters a-d map to the set palette */
-const BP=[
-['..aaaaaaaa..','.aaaaaaaaaa.','bbbbbbbbbbbb','b.cc.cc.cc.b','b.cc.cc.cc.b','dddddddddddd'],
-['.....aa.....','....aaaa....','...aaaaaa...','.....bb.....','.....bb.....','....bbbb....','.....cc.....','.....cc.....','...cccccc...','..dddddddd..'],
-['..aaaaaaaaaa','..bccbccbccb','..bbbbbbbbbb','.ddd.ddd.ddd'],
-['.....aa.....','....aaaa....','....abba....','....abba....','....aaaa....','...cccccc...','..cc.aa.cc..','.....dd.....','....d..d....'],
-['.....aa.....','....aaaa....','...bbbbbb...','..bbbbbbbb..','.cccccccccc.','dddddddddddd'],
-['.....a......','....aaa.....','.....b......','.cccccccccc.','..cccccccc..','...dddddd...']];
-const BS=[['Hawker Stall Bricks','#e8892b',300,0,['#e53935','#fdd835','#ffffff','#8d6e63']],['Supertree Grove Bricks','#43a047',450,1,['#66bb6a','#8d6e63','#ab47bc','#546e7a']],['MRT Train Bricks','#e53935',600,2,['#e53935','#ffffff','#42a5f5','#37474f']],['Rocket Launcher Bricks','#5c6bc0',800,3,['#eceff1','#42a5f5','#ef5350','#ffb300']],['Merlion Tower Bricks','#4dd0e1',1000,4,['#e0f7fa','#4dd0e1','#0288d1','#8d6e63']],['Bumboat Bricks','#ffb74d',1400,5,['#ffffff','#ff7043','#0288d1','#5d4037']],['Satay Stand Bricks','#8d6e63',1800,0,['#a1887f','#ffb300','#e53935','#4e342e']],['Durian Tower Bricks','#c0ca33',2400,1,['#9ccc65','#ffca28','#795548','#33691e']],['Bak Kut Teh Express Bricks','#6d4c41',3200,2,['#6d4c41','#ffe0b2','#ff7043','#212121']],['Space Shuttle Bricks','#78909c',4500,3,['#ffffff','#90a4ae','#ff5252','#ffd54f']],['Grand Pyramid Bricks','#ffc107',6500,4,['#ffd54f','#ffb300','#ff8f00','#6d4c41']],['Dragon Boat Bricks','#d32f2f',10000,5,['#fff59d','#d32f2f','#00897b','#3e2723']]];
-TOYS.unshift(...BS.map(s=>[s[0],s[1],s[2],'Brick Sets','brick',s[4],s[3]]));
-TOYS.forEach(t=>t[2]*=10);
-const mix=(h,t,p)=>{const n=parseInt(h.slice(1),16),f=t?255:0,ch=x=>Math.round(((n>>x)&255)*(1-p)+f*p);return'#'+[16,8,0].map(x=>ch(x).toString(16).padStart(2,'0')).join('')};
-const E=(x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/><circle cx="${x}" cy="${y}" r="${r/2}" fill="#222"/>`;
-const SM=(x,y)=>`<path d="M${x-7} ${y}q7 6 14 0" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
-const ART={
-plush:(c,d,l)=>`<circle cx="26" cy="30" r="11" fill="${d}"/><circle cx="74" cy="30" r="11" fill="${d}"/><circle cx="50" cy="58" r="33" fill="${c}"/><ellipse cx="50" cy="69" rx="15" ry="11" fill="${l}"/><circle cx="50" cy="63" r="4" fill="#333"/>${E(37,48)}${E(63,48)}${SM(50,72)}`,
-cup:(c,d,l)=>`<path d="M26 32h48l-6 58H32z" fill="${c}"/><rect x="22" y="24" width="56" height="12" rx="6" fill="${d}"/><path d="M54 24l8-18" stroke="${l}" stroke-width="5" stroke-linecap="round"/>${E(40,58,4.5)}${E(60,58,4.5)}${SM(50,71)}`,
-bowl:(c,d,l)=>`<path d="M12 50h76c0 24-16 40-38 40S12 74 12 50z" fill="${c}"/><ellipse cx="50" cy="50" rx="38" ry="9" fill="${l}"/><path d="M26 48q8-8 16 0t16 0 16 0" stroke="${d}" stroke-width="4" fill="none"/><path d="M38 30q-6-8 0-16M52 32q-6-8 0-16M66 30q-6-8 0-16" stroke="#bbb" stroke-width="3" fill="none" stroke-linecap="round"/>${E(38,70,4)}${E(62,70,4)}`,
-skewer:(c,d,l)=>`<g transform="rotate(-35 50 50)"><rect x="6" y="47" width="88" height="5" rx="2.5" fill="#d7a86e"/>${[22,42,62].map(x=>`<ellipse cx="${x+6}" cy="50" rx="10" ry="14" fill="${c}"/><ellipse cx="${x+6}" cy="50" rx="5" ry="9" fill="${d}" opacity=".5"/>`).join('')}</g>`,
-robot:(c,d,l)=>`<path d="M50 8v12" stroke="${d}" stroke-width="4"/><circle cx="50" cy="8" r="5" fill="#ff5252"/><rect x="22" y="20" width="56" height="40" rx="10" fill="${c}"/><rect x="30" y="30" width="14" height="12" rx="3" fill="#fff"/><rect x="56" y="30" width="14" height="12" rx="3" fill="#fff"/><circle cx="37" cy="36" r="3" fill="#222"/><circle cx="63" cy="36" r="3" fill="#222"/><path d="M38 51h24" stroke="#333" stroke-width="3" stroke-dasharray="4 3"/><rect x="28" y="64" width="44" height="26" rx="6" fill="${d}"/><circle cx="50" cy="77" r="5" fill="${l}"/>`,
-durian:(c,d,l)=>`<circle cx="50" cy="56" r="32" fill="${c}" stroke="${d}" stroke-width="12" stroke-dasharray="5 6"/><circle cx="50" cy="56" r="27" fill="${c}"/>${E(40,52)}${E(60,52)}${SM(50,67)}`,
-rocket:(c,d,l)=>`<path d="M50 6c20 14 24 42 20 62H30c-4-20 0-48 20-62z" fill="${c}"/><circle cx="50" cy="38" r="9" fill="${l}" stroke="${d}" stroke-width="3"/><path d="M30 56L14 76l18-4zM70 56l16 20-18-4z" fill="${d}"/><path d="M40 72h20l-10 24z" fill="#ffb300"/>`,
-crown:(c,d,l)=>`<path d="M12 74L8 30l26 22 16-30 16 30 26-22-4 44z" fill="${c}"/><rect x="12" y="74" width="76" height="12" rx="3" fill="${d}"/><circle cx="50" cy="62" r="5" fill="#e53935"/><circle cx="28" cy="64" r="4" fill="#42a5f5"/><circle cx="72" cy="64" r="4" fill="#66bb6a"/>`,
-brick:(c,d,l)=>`<rect x="12" y="62" width="76" height="26" rx="4" fill="${c}"/>${[20,36,52,68].map(x=>`<rect x="${x}" y="56" width="12" height="7" rx="2" fill="${c}"/>`).join('')}<rect x="26" y="36" width="48" height="26" rx="4" fill="${d}"/>${[32,50].map(x=>`<rect x="${x}" y="30" width="12" height="7" rx="2" fill="${d}"/>`).join('')}<rect x="38" y="12" width="24" height="24" rx="4" fill="${l}"/><rect x="44" y="6" width="12" height="7" rx="2" fill="${l}"/>`};
-const toyArt=(t,sz)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}">${ART[t[4]](t[1],mix(t[1],0,.3),mix(t[1],1,.45))}</svg>`;
-
-/* ===== STATE ===== */
-let S;try{S=JSON.parse(localStorage.hp4)}catch(e){}if(!S){let o={};try{o=JSON.parse(localStorage.hp3)||{}}catch(e){}S={life:0,wallet:0,orders:[],toys:[],ok:o.ok||0}}
-const save=()=>{try{localStorage.hp4=JSON.stringify(S)}catch(e){}};
-addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
-let V='intro',shop=null,tab='menu',hf='All',tser='All',cart=[],cfg=null,PV=null;
-const need=l=>Math.round(100*Math.pow(1.5,l));
-const lvl=()=>{let l=0,x=S.life;while(x>=need(l)){x-=need(l);l++}return{l,x,n:need(l)}};
-const disc=l=>Math.min(l,50),money=n=>'$'+n.toFixed(2),fmt=n=>Math.round(n).toLocaleString();
-const hb=s=>`<span class="hb ${s.h===2?'e':s.h?'y':'n'}">${s.h===2?'Halal and non-halal OK':s.h?'Halal':'Non-halal'}</span>`;
-function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
-const xpCard=()=>{const v=lvl();return`<div class="xp"><div class="r"><div><small>YOUR LEVEL</small><div class="lv">Level ${v.l}</div></div><div style="text-align:right"><span class="pill">${disc(v.l)}% off</span><div style="margin-top:6px;font-size:13px;font-weight:800">${fmt(S.wallet)} XP to spend</div></div></div><div class="bar"><i style="width:${v.x/v.n*100}%"></i></div><small>${fmt(v.x)} / ${fmt(v.n)} XP to level ${v.l+1}</small></div>`};
-const sheet=h=>{$('#box').innerHTML=h;$('#sheet').classList.add('on')};
-const closeSheet=()=>{$('#sheet').classList.remove('on');if(PV){cancelAnimationFrame(PV.raf);PV=null}GT.forEach(clearInterval);GT=[]};
-$('#sheet').onclick=e=>{if(e.target.id==='sheet')closeSheet()};
-
-/* ===== RENDER ===== */
-let GT=[];
-const today=()=>new Date().toDateString();
-const PR=[25,50,100,25,200,50,500,75],PC=['#ff4b3e','#ff9f1c','#22b573','#7c5cff'];
-const GL=[['mem','Memory Match','Flip cards and match the foods. Fewer moves = more XP.'],['pig','Whack-a-Pigeon','Shoo the pigeons stealing food. Do not hit the chef!'],['wok','Perfect Wok','Stop the marker in the green zone to cook perfectly.'],['rush','Order Rush','Name the dish before 30 seconds run out.'],['tow','Tray Tower','Stack trays as high as you can.']];
-function wheel(){let o='';const P=(t,r)=>[(r*Math.sin(t)).toFixed(1),(-r*Math.cos(t)).toFixed(1)];PR.forEach((p,i)=>{const a=i*Math.PI/4,b=(i+1)*Math.PI/4,m=(a+b)/2,q=P(m,66);o+=`<path d="M0 0L${P(a,100).join(' ')}A100 100 0 0 1 ${P(b,100).join(' ')}Z" fill="${PC[i%4]}" stroke="#fff" stroke-width="2"/><text x="${q[0]}" y="${q[1]}" fill="#fff" font-size="15" font-weight="800" text-anchor="middle" dominant-baseline="middle" transform="rotate(${i*45+22.5} ${q[0]} ${q[1]})">${p}</text>`});return`<svg viewBox="-110 -110 220 220" width="240" style="display:block;margin:6px auto"><g id="wheel">${o}</g><path d="M-10 -112L10 -112L0 -92z" fill="#2b1d14"/></svg>`}
-function gain(x){const b=lvl().l;S.life+=x;S.wallet+=x;save();if(lvl().l>b)setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l)},900)}
-function render(){
- const R=$('#root');GT.forEach(clearInterval);GT=[];
- if(V==='intro'){R.innerHTML=`<div id="cut"><div class="blob" style="width:220px;height:220px;left:-60px;top:8%"></div><div class="blob" style="width:160px;height:160px;right:-40px;bottom:12%;animation-delay:-4s"></div>
-<svg id="hero" viewBox="0 0 300 260"><defs><linearGradient id="tg" gradientUnits="userSpaceOnUse" x1="134" y1="70" x2="330" y2="-190"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
-<g class="bw"><ellipse cx="150" cy="232" rx="82" ry="9" fill="rgba(0,0,0,.18)"/><path d="M52 124h196c0 62-40 104-98 104S52 186 52 124z" fill="#fff"/><path d="M60 150h180c-8 40-40 70-90 70s-82-30-90-70z" fill="#ff4b3e"/><path d="M60 150h180" stroke="#ffc94d" stroke-width="6" stroke-linecap="round"/><rect x="108" y="222" width="84" height="10" rx="5" fill="#fff"/><ellipse cx="150" cy="124" rx="98" ry="16" fill="#fff"/><ellipse cx="150" cy="124" rx="86" ry="11" fill="#ffb347"/></g>
-${[...Array(9)].map((_,i)=>`<g transform="translate(${88+i*15} 0)"><path class="nf" style="--d:${i}" d="M0 0c7 10-7 20 0 30s-7 20 0 30"/></g>`).join('')}
-<path class="nd" style="animation-delay:2.9s" d="M80 120c14-16 28 16 42 0s28 16 42 0 28 16 42 0"/><path class="nd" style="animation-delay:3.1s" d="M90 126c14-14 26 12 40 0s26 14 40 0 26 12 36-2"/><path class="nd" style="animation-delay:3.3s" d="M96 116c12-12 24 12 38 0s24 12 38 0 24 12 34-2"/>
-<g class="eg"><circle cx="190" cy="112" r="12" fill="#fff8e1"/><circle cx="190" cy="112" r="6" fill="#ffb400"/></g>
-<circle class="fl" cx="140" cy="118" r="10"/>
-<g class="st"><path class="tr" d="M134 70L330 -190" stroke="url(#tg)" stroke-width="12" stroke-linecap="round" fill="none"/><rect x="120" y="20" width="7" height="110" rx="3.5" fill="#6b3e1d" transform="rotate(-8 123 75)"/><rect x="138" y="18" width="7" height="110" rx="3.5" fill="#8a5028" transform="rotate(-2 141 73)"/></g>
-<path class="steam" style="--s:0s" d="M110 80c-10-14 10-22 0-38"/><path class="steam" style="--s:.8s" d="M150 74c-10-14 10-22 0-38"/><path class="steam" style="--s:1.6s" d="M190 80c-10-14 10-22 0-38"/>
-<path class="spark" style="--s:0s" d="M40 60l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path class="spark" style="--s:.6s" d="M260 90l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><path class="spark" style="--s:1.2s" d="M238 24l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/></svg>
-<h1>${[...'Hawker Paradise'].map((ch,i)=>ch===' '?'<br>':`<span style="--i:${i}">${ch}</span>`).join('')}</h1><p>Order local favourites, level up with every meal, and eat for less.</p><button class="btn go2" data-a="start">Start ordering</button><button class="skip" data-a="skipc">Skip</button>
-<div id="tap">${em('bowl',110)}<h2 style="color:#fff">Hawker Paradise</h2><button class="btn" data-a="begin">Tap to enter</button></div></div>`;return}
- if(V==='loc'){R.innerHTML=`<div id="intro"><div class="bob">${em('pin',90)}</div><h2>Are you in Singapore?</h2><p>Hawker Paradise only serves customers in Singapore.</p><p id="err" style="font-weight:800"></p><button class="btn" data-a="chk">Check my location</button><button class="btn g" data-a="skip" style="font-size:14px;padding:10px 20px">Demo: skip check</button></div>`;return}
- if(V==='play'){const t=today(),left=S.gd===t?Math.max(0,5-S.gn):5;
-  R.innerHTML=`<div class="w"><button class="tab" data-a="back" style="margin-bottom:8px">&larr; All stalls</button><h2>Games and daily rewards</h2>${xpCard()}
-  <div class="hist"><h3>Daily bonus</h3><div class="sub">Streak: ${S.streak||0} day(s). Come back every day for a bigger bonus, up to 7 days.</div><button class="btn full" data-a="daily" ${S.last===t?'disabled':''}>${S.last===t?'Claimed today':'Claim daily bonus'}</button></div>
-  <div class="hist"><h3>Lucky wheel</h3><div class="sub">One free spin every day.</div>${wheel()}<button class="btn full" data-a="spin" ${S.spin===t?'disabled':''}>${S.spin===t?'Come back tomorrow':'Spin the wheel'}</button></div>
-  <div class="hist"><h3>Food Catch</h3><div class="sub">Tap the food before it falls. 20 seconds. Earn XP in your first 5 games each day (${left} left today).</div><div id="gstage"></div><button class="btn full" data-a="game">Play Food Catch</button></div>
-  ${GL.map(g=>`<div class="hist"><h3>${g[1]}</h3><div class="sub">${g[2]} XP counts toward your 5 daily games (${left} left).</div><button class="btn full" data-a="${g[0]}">Play ${g[1]}</button></div>`).join('')}</div>`;return}
- if(V==='stalls'){
-  const o=S.orders,sp=o.reduce((a,x)=>a+x.total,0);
-  R.innerHTML=`<div class="w"><div class="sub">Welcome to Hawker Paradise</div><h2>Choose a stall</h2>${xpCard()}<button class="btn full" data-a="play" style="margin:0 0 6px">Games and daily rewards</button>
-  <div class="tabs">${['All','Halal','Non-halal','Everyone'].map(x=>`<button class="tab ${x===hf?'on':''}" data-a="hf" data-v="${x}">${x}</button>`).join('')}</div>
-  <div class="list">${SH.filter(s=>hf==='All'||(hf==='Halal'&&s.h>=1)||(hf==='Non-halal'&&s.h!==1)||(hf==='Everyone'&&s.h===2)).map(s=>`<button class="row2" data-a="shop" data-v="${s.id}" style="border-left:7px solid ${s.c[0]}"><div class="tile" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]})">${em(s.ic,34)}</div><div><h3>${s.n}</h3><div style="margin-top:4px">${hb(s)}</div></div></button>`).join('')}</div>
-  <h2 style="margin:22px 0 8px">All my orders</h2>
-  ${cart.length?`<div class="hist"><h3>Your tray</h3><div class="sub">${cart.reduce((a,l)=>a+l.q,0)} item(s) from ${new Set(cart.map(l=>l.s)).size} stall(s) | ${money(totals().tot)}</div><button class="btn full" data-a="cart">Checkout</button></div>`:''}
-  ${o.length?`<div class="sub" style="margin-bottom:10px">${o.length} order${o.length>1?'s':''} | ${money(sp)} spent across all stalls</div>`+o.slice(0,30).map(x=>`<div class="hist"><div class="line" style="padding:0"><b>${x.shop}</b><span>${money(x.total)}</span></div><div class="sub">${x.num?'#'+x.num+' | ':''}${x.date} | +${x.xp} XP${x.pay?' | '+x.pay:''}<br>${x.lines.join('<br>')}</div></div>`).join(''):'<p class="sub">No orders yet. Pick a stall and order something.</p>'}${o.length?'<button class="btn full" data-a="orderall" style="margin-top:24px">Order all again</button><div class="sub" style="text-align:center;margin-top:6px">Adds your latest order from every stall to the tray</div>':''}<button class="btn g full" data-a="reset" style="margin-top:${o.length?'18':'24'}px;font-size:14px">Reset account</button><div class="sub" style="text-align:center;margin-top:8px">Your progress saves automatically on this device</div></div>`;return}
- /* shop view */
- const v=lvl(),d=disc(v.l);
- let body='';
- if(tab==='menu'){body=`<div class="list">${shop.items.map((it,i)=>{const lk=it.t==='e'&&v.l<51,fp=it.p*(1-d/100);return`<button class="row2 ${lk?'lock':''}" data-a="item" data-v="${i}"><div class="tile" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${itemImg(it.n,it.t,46)}</div><div class="in"><h3>${it.n}${it.t==='e'?'<span class="tag">Lv 51+</span>':''}${it.t==='c'?'<span class="tag" style="background:var(--red)">Combo</span>':''}</h3><div class="sub">${lk?'Unlocks at level 51':(it.parts?it.parts.join(' + ')+' | ':'')+'Earn ~'+Math.round(fp*10)+' XP'}</div><div>${d?`<s class="sub">${money(it.p)}</s> `:''}<b>${money(fp)}</b></div></div><div class="plus" ${lk?'style="background:var(--mute)"':''}>${lk?em('lock',20):'<b style="font-size:24px">+</b>'}</div></button>`}).join('')}</div>`}
- else{const ser=['All',...new Set(TOYS.map(t=>t[3]))];
-  body=`<p class="sub" style="margin-bottom:6px">Toys are expensive and cost your experience points, so buying can lower your level and your discount. Preview just lets you try a toy or build a brick set. It never gives it to you.</p><div class="tabs">${ser.map(x=>`<button class="tab ${x===tser?'on':''}" data-a="ts" data-v="${x}">${x}</button>`).join('')}</div>
-  <div class="toys">${TOYS.map((t,i)=>[t,i]).filter(([t])=>tser==='All'||t[3]===tser).map(([t,i])=>`<div class="toy"><div class="tile" style="background:${t[1]}44">${toyArt(t,58)}</div><h3 style="font-size:14px">${t[0]}</h3><div class="sub">${t[3]} | ${fmt(t[2])} XP</div><div class="b"><button class="pv" data-a="pv" data-v="${i}">Preview</button><button data-a="buy" data-v="${i}" ${S.wallet<t[2]?'disabled':''}>Buy</button></div></div>`).join('')}</div>
-  <h2 style="margin:20px 0 8px">My toys</h2>${S.toys.length?Object.entries(S.toys.reduce((c,x)=>(c[x]=(c[x]||0)+1,c),{})).map(([k,n])=>`<div class="line"><span>${k} <b>x${n}</b></span><button class="opt" data-a="pv" data-v="${TOYS.findIndex(x=>x[0]===k)}">Play</button></div>`).join(''):'<p class="sub">No toys yet.</p>'}
-  <button class="btn g full" data-a="boost" style="font-size:14px">Demo: +25,000 XP</button>`}
- R.innerHTML=`<div class="w"><button class="tab" data-a="back" style="margin-bottom:8px">&larr; All stalls</button><div class="ban" style="background:linear-gradient(135deg,${shop.c[0]},${shop.c[1]})">${em(shop.ic,54)}<div><h2>${shop.n}</h2><div style="margin-top:4px">${hb(shop)}</div></div></div>${xpCard()}${body}</div>
- <div id="nav"><button class="${tab==='menu'?'on':''}" data-a="tab" data-v="menu">${em('bowl',18)} Menu</button><button class="${tab==='toys'?'on':''}" data-a="tab" data-v="toys">${em('bear',18)} Toys</button><button data-a="cart" style="display:flex;gap:6px;align-items:center">${em('cart',20)}<b>${cart.reduce((a,l)=>a+l.q,0)}</b></button></div>`;
-}
-/* ===== customise + cart ===== */
-const cp=()=>{let u=cfg.it.p;G[cfg.it.t].forEach((g,k)=>cfg.sel[k].forEach(i=>u+=g[2][i][1]));return u};
-function drawCustom(){
- const it=cfg.it,d=disc(lvl().l),gs=G[it.t];
- sheet(`<div style="display:flex;gap:12px;align-items:center">${itemImg(it.n,it.t,64)}<div><h2>${it.n}</h2><div class="sub">${shop.n}</div></div></div>${it.parts?`<div class="sub" style="margin-top:8px">Includes: ${it.parts.join(', ')}</div>`:''}`+gs.map((g,k)=>`<h3 style="margin-top:14px">${g[0]} <span class="sub">${g[1]?'Pick 1':'Optional'}</span></h3><div class="opts">${g[2].map((c,i)=>`<button class="opt ${cfg.sel[k].includes(i)?'on':''}" data-a="opt" data-k="${k}" data-v="${i}">${c[0]}${c[1]?' +'+money(c[1]):''}</button>`).join('')}</div>`).join('')+
- `<h3 style="margin-top:14px">Special requests <span class="sub">Optional</span></h3><textarea id="note" maxlength="140" placeholder="e.g. less oil, pack separately">${cfg.note}</textarea>
- <div class="line" style="margin-top:12px"><span class="qty"><button data-a="q" data-v="-1">-</button><b>${cfg.q}</b><button data-a="q" data-v="1">+</button></span><b style="font-size:22px">${money(cp()*cfg.q*(1-d/100))}</b></div>
- <button class="btn full" data-a="addc">Add to order</button><button class="btn g full" data-a="close">Cancel</button>`);
-}
-const totals=()=>{const d=disc(lvl().l),sub=cart.reduce((a,l)=>a+l.u*l.q,0);return{sub,tot:sub*(1-d/100),d}};
-function drawCart(){
- const t=totals(),g={};cart.forEach((l,i)=>(g[l.s]=g[l.s]||[]).push(i));
- sheet(`<h2>Your order</h2><div class="sub">Checkout for all stalls at once</div>`+(cart.length?Object.entries(g).map(([n,ix])=>`<h3 style="margin-top:12px">${n}</h3>`+ix.map(i=>{const l=cart[i];return`<div class="line" style="align-items:flex-start"><div><b>${l.n}</b><div class="sub">${[l.desc,l.note&&'Note: '+l.note].filter(Boolean).join(' | ')}</div></div><span class="qty"><button data-a="cm" data-v="${i}">-</button>${l.q}<button data-a="cpl" data-v="${i}">+</button></span></div>`}).join('')).join('')+`<div style="border-top:2px dashed #e5d5bb;margin-top:8px;padding-top:6px"><div class="line"><span>Subtotal</span><span>${money(t.sub)}</span></div><div class="line"><span>Level discount (${t.d}%)</span><span>-${money(t.sub-t.tot)}</span></div><div class="line"><b>Total</b><b style="font-size:22px">${money(t.tot)}</b></div><div class="sub">You will earn ${Math.round(t.tot*10)} XP</div></div><button class="btn full" data-a="place">Continue to payment</button>`:'<p class="sub" style="padding:20px 0">Your tray is empty.</p>')+`<button class="btn g full" data-a="close">Close</button>`);
-}
-const lvlAt=x=>{let l=0;while(x>=need(l)){x-=need(l);l++}return l};
-function buy(i){const t=TOYS[i];if(S.wallet<t[2]||S.life<t[2])return false;const b=lvl().l;sfx('toy');S.wallet-=t[2];S.life-=t[2];S.toys.push(t[0]);save();const a=lvl().l;toast('You got the '+t[0]+'!'+(a<b?' Level '+b+' to '+a:''));return true}
-function askBuy(i){const t=TOYS[i],b=lvl().l,a=lvlAt(S.life-t[2]),ok=S.wallet>=t[2]&&S.life>=t[2];if(PV){cancelAnimationFrame(PV.raf);PV=null}GT.forEach(clearInterval);GT=[];sfx('pop');
- sheet(`<div style="text-align:center"><div style="display:inline-block">${toyArt(t,90)}</div><h2>Buy ${t[0]}?</h2><div class="sub">Buying a toy spends your experience points for good.</div></div>
- <div class="hist" style="margin-top:12px"><div class="line"><span>Price</span><b>${fmt(t[2])} XP</b></div><div class="line"><span>Your XP now</span><b>${fmt(S.wallet)} XP</b></div><div class="line"><span>XP after buying</span><b>${ok?fmt(S.wallet-t[2]):'Not enough'}</b></div><div class="line"><span>Your level</span><b>Level ${b} &rarr; Level ${ok?a:b}</b></div><div class="line"><span>Level discount</span><b>${disc(b)}% &rarr; ${disc(ok?a:b)}%</b></div></div>
- ${ok&&a<b?`<div class="hist" style="background:#ffe6cc;color:#a24a00"><b>Careful! You will drop ${b-a} level${b-a>1?'s':''}.</b><div class="sub" style="color:#a24a00">Your discount gets smaller${b>=51&&a<51?' and Level 51+ exclusive dishes will lock again':''}.</div></div>`:''}
- ${ok?`<button class="btn full" data-a="buyyes" data-v="${i}">Yes, spend ${fmt(t[2])} XP</button>`:`<div class="sub" style="text-align:center;margin-top:8px">You need ${fmt(t[2]-S.wallet)} more XP.</div>`}<button class="btn g full" data-a="close">${ok?'No, keep my XP':'Close'}</button>`)}
-/* ===== payment + receipt ===== */
-let PM={m:'cash',b:'Visa'};
-const BR=['Visa','Mastercard','Amex','Apple Pay','Google Pay','Samsung Pay','UnionPay','JCB','Discover','Diners Club','GrabPay'];
-const BC={Visa:'#1a1f71',Mastercard:'#eb001b',Amex:'#006fcf','Apple Pay':'#111','Google Pay':'#4285f4','Samsung Pay':'#1428a0',UnionPay:'#d0021b',JCB:'#0b7a3b',Discover:'#f76f20','Diners Club':'#0079be',GrabPay:'#00b14f'};
-const WAL=['Apple Pay','Google Pay','Samsung Pay','GrabPay'];
-const orderNo=()=>'HP-'+String((S.seq=(S.seq||0)+1)%10000).padStart(4,'0')+Math.floor(Math.random()*90+10);
-const payTxt=()=>PM.m==='cash'?'Cash on delivery (pay the driver)':PM.m==='qr'?'QR code (paid)':PM.b+' (paid, demo)';
-const qr=()=>{let s='',r=hh('pay'+Date.now()%1e5);const N=21,u=8;for(let y=0;y<N;y++)for(let x=0;x<N;x++){const f=(x<7&&y<7)||(x>13&&y<7)||(x<7&&y>13);let on;if(f){const a=x>13?x-14:x,b=y>13?y-14:y;on=a===0||a===6||b===0||b===6||(a>=2&&a<=4&&b>=2&&b<=4)}else{r=(r*1103515245+12345)>>>0;on=(r>>16)&1}if(on)s+=`<rect x="${x*u}" y="${y*u}" width="${u}" height="${u}"/>`}return`<svg viewBox="0 0 168 168" width="190" style="background:#fff;padding:8px;border-radius:12px"><g fill="#111">${s}</g></svg>`};
-function drawPay(){const t=totals(),w=WAL.includes(PM.b);
- const M=[['cash','Cash on delivery','Pay the driver when food arrives','#22b573','<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/>'],['card','Card or wallet','Visa, Mastercard, Apple Pay and more','#7c5cff','<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'],['qr','QR code','Scan with your banking app','#ff9f1c','<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v3M14 20h7"/>']];
- const mk=BC[PM.b];
- sheet(`<div class="line" style="padding-top:0"><h2>Payment</h2><button class="plus" style="background:var(--card);color:var(--ink)" data-a="cart">${ic(IC.x,20)}</button></div>
- <div class="paytop"><div style="font-size:13px;opacity:.9;display:flex;gap:6px;justify-content:center;align-items:center">${ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',15)} Secure checkout (demo)</div><div style="font-size:34px;font-weight:900;font-family:Fredoka,sans-serif;margin-top:2px">${money(t.tot)}</div><div style="font-size:12px;opacity:.9">${cart.reduce((a,l)=>a+l.q,0)} item(s) from ${new Set(cart.map(l=>l.s)).size} stall(s)</div></div>
- <h3 style="margin-top:14px">Payment method</h3>
- ${M.map(([k,n,d,c,i])=>`<button class="pmr ${PM.m===k?'on':''}" data-a="pm" data-v="${k}"><div class="ri" style="background:${c}">${ic(i,24)}</div><div><b>${n}</b><div class="sub">${d}</div></div><span class="rad"></span></button>`).join('')}
- ${PM.m==='cash'?`<div class="hist" style="margin-top:12px"><b>Pay ${money(t.tot)} in cash</b><div class="sub">Please have the exact amount ready for the delivery driver.</div></div>`:''}
- ${PM.m==='card'?`<h3 style="margin-top:16px">Choose a card or wallet</h3><div class="opts">${BR.map(b=>`<button class="opt bch ${PM.b===b?'on':''}" data-a="pb" data-v="${b}"><i style="background:${BC[b]}"></i>${b}</button>`).join('')}</div>
- <div class="pcard" style="background:linear-gradient(135deg,${mk},#1b1b2b)"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:19px;font-style:${PM.b==='Visa'?'italic':'normal'}">${PM.b}</b>${PM.b==='Mastercard'?'<span style="display:flex"><i style="width:26px;height:26px;border-radius:50%;background:#eb001b;display:block"></i><i style="width:26px;height:26px;border-radius:50%;background:#f79e1b;display:block;margin-left:-10px;opacity:.9"></i></span>':'<span style="font-size:12px;opacity:.85">DEMO</span>'}</div>
- ${w?`<div style="margin:26px 0 4px;font-size:15px">Demo wallet<div style="font-size:12px;opacity:.85">Tap Pay to approve with ${PM.b}</div></div>`:`<div style="width:38px;height:28px;border-radius:6px;background:linear-gradient(135deg,#ffe082,#ffb300);margin-top:16px"></div><div style="font-size:20px;letter-spacing:3px;margin:12px 0 10px;font-family:monospace">4242 4242 4242 4242</div><div style="display:flex;justify-content:space-between;font-size:12px;opacity:.9"><span>DEMO CARDHOLDER</span><span>12/30 &nbsp; CVC 123</span></div>`}</div>
- <div class="sub" style="margin-top:8px;text-align:center">Demo only. No real payment is made.</div>`:''}
- ${PM.m==='qr'?`<div style="display:grid;place-items:center;margin:14px 0 4px;background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--sh)">${qr()}<div class="sub" style="margin-top:8px;text-align:center"><b style="color:var(--ink)">${money(t.tot)}</b><br>Scan with your banking app (demo QR), then tap Pay.</div></div>`:''}
- <button class="btn full" data-a="payok" style="display:flex;gap:8px;justify-content:center;align-items:center;margin-top:16px">${ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',20)}${PM.m==='cash'?'Confirm order (pay cash)':'Pay '+money(t.tot)}</button><button class="btn g full" data-a="cart">Back to tray</button>`)}
-function receipt(num,mn,pay,rc,xp,tt){const ar=m=>new Date(Date.now()+m*6e4).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
- sheet(`<div style="text-align:center"><div class="bob" style="display:inline-block">${em('bowl',70)}</div><h2>Order confirmed!</h2><div class="sub">Your order number</div><div style="font-size:30px;font-weight:900;font-family:Fredoka,sans-serif;color:var(--red)">#${num}</div></div>
- <div class="hist" style="margin-top:12px"><h3>Estimated arrival</h3><div style="font-size:22px;font-weight:900">${mn}-${mn+5} min</div><div class="sub">Around ${ar(mn)} to ${ar(mn+5)}</div></div>
- <div class="hist"><h3>What you ordered</h3>${rc.map(([n,ls])=>`<div style="margin-top:8px"><b>${n}</b>${ls.map(l=>`<div class="sub">${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}</div>`).join('')}</div>`).join('')}</div>
- <div class="hist"><div class="line"><span>Payment</span><b style="text-align:right">${pay}</b></div><div class="line"><span>Total</span><b>${money(tt)}</b></div><div class="line"><span>XP earned</span><b>+${xp}</b></div></div><button class="btn full" data-a="close">Done</button>`)}
-/* ===== toy preview (drag, throw, tap) ===== */
-function openPreview(i){
- if(TOYS[i][4]==='brick')return openBuilder(i);
- const t=TOYS[i];sfx('pop');
- sheet(`<div class="line" style="padding-top:0"><div><h2 style="font-size:21px">${t[0]}</h2><div class="sub">${t[3]} | ${fmt(t[2])} XP</div></div><button class="plus" style="background:var(--card);color:var(--ink)" data-a="close">${ic(IC.x,20)}</button></div>
- <div id="stage"><div id="pt">${toyArt(t,120)}</div><div class="hint">Drag it, throw it, or tap it!</div></div>
- <div class="opts" style="justify-content:center;margin-top:12px"><button class="opt" id="pj">Jump</button><button class="opt" id="ps">Spin</button><button class="opt" id="pq">Squeak</button><button class="opt" id="pr">Reset</button></div>
- <div class="sub" style="text-align:center;margin:2px 0 8px">Preview only. Nothing here is added to your toys.</div><button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Buy for ${fmt(t[2])} XP</button>`);
- const st=$('#stage'),el=$('#pt'),R=60,W=st.clientWidth,FL=st.clientHeight-26-52;
- const p=PV={x:W/2,y:70,vx:0,vy:0,r:0,vr:0,sq:0,drag:false,lx:0,ly:0,mv:0};
- const burst=()=>{for(let k=0;k<10;k++){const d=document.createElement('div'),a=Math.random()*6.28,m=40+Math.random()*50;d.className='spk';d.style.cssText=`left:${p.x}px;top:${p.y}px;background:${['#ff4b3e','#ffb400','#22b573','#7c5cff'][k%4]};--dx:${Math.cos(a)*m}px;--dy:${Math.sin(a)*m}px`;st.appendChild(d);setTimeout(()=>d.remove(),650)}};
- const poke=()=>{p.vy=-15;p.vr+=(Math.random()<.5?-1:1)*12;p.sq=.25;sfx('squeak',i);burst()};
- const pos=e=>{const b=st.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
- el.onpointerdown=e=>{e.preventDefault();el.setPointerCapture(e.pointerId);const[x,y]=pos(e);p.drag=true;p.ox=x-p.x;p.oy=y-p.y;p.mv=0;p.lx=p.x;p.ly=p.y;p.vx=p.vy=0};
- el.onpointermove=e=>{if(!p.drag)return;const[x,y]=pos(e),nx=Math.min(W-R,Math.max(R,x-p.ox)),ny=Math.min(FL,Math.max(R,y-p.oy));p.vx=(nx-p.lx)*.6+p.vx*.4;p.vy=(ny-p.ly)*.6+p.vy*.4;p.mv+=Math.abs(nx-p.lx)+Math.abs(ny-p.ly);p.x=p.lx=nx;p.y=p.ly=ny};
- el.onpointerup=el.onpointercancel=()=>{if(!p.drag)return;p.drag=false;const c=v=>Math.max(-38,Math.min(38,v));if(p.mv<8)poke();else{p.vx=c(p.vx);p.vy=c(p.vy);p.vr+=p.vx*1.2;sfx('whoosh')}};
- $('#pj').onclick=poke;$('#ps').onclick=()=>{p.vr=38;p.vy=-6;sfx('whoosh')};$('#pq').onclick=()=>{p.sq=.3;sfx('squeak',i);burst()};
- $('#pr').onclick=()=>{p.x=W/2;p.y=70;p.vx=p.vy=p.vr=p.r=0};
- $('#pb').onclick=()=>askBuy(i);
- const tick=()=>{if(PV!==p)return;
-  if(!p.drag){p.vy+=.75;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.vr*=.985;p.vx*=.995;
-   if(p.y>FL){p.y=FL;if(Math.abs(p.vy)>6){sfx('thud');p.sq=Math.min(.3,Math.abs(p.vy)/50)}p.vy*=-.6;if(Math.abs(p.vy)<1.6)p.vy=0;p.vx*=.92;p.vr*=.92}
-   if(p.x<R){p.x=R;p.vx*=-.7}if(p.x>W-R){p.x=W-R;p.vx*=-.7}if(p.y<R){p.y=R;p.vy*=-.5}}
-  p.sq*=.85;el.style.transform=`translate(${p.x-R}px,${p.y-R}px) rotate(${p.r}deg) scale(${1+p.sq},${1-p.sq})`;p.raf=requestAnimationFrame(tick)};
- tick();
-}
-/* ===== brick builder (LEGO-style preview) ===== */
-function openBuilder(i){
- const t=TOYS[i],pal=t[5],bp=BP[t[6]],C=12,R=11,cw=26,ch=20,off=R-bp.length,K='abcd';
- let br=[],col=0,wd=2,g=0,won=0;sfx('pop');
- sheet(`<div class="line" style="padding-top:0"><div><h2 style="font-size:21px">${t[0]}</h2><div class="sub">Tap to drop a brick. Tap a brick to remove it.</div></div><button class="plus" style="background:var(--card);color:var(--ink)" data-a="close">${ic(IC.x,20)}</button></div>
- <svg id="bsvg" viewBox="0 0 ${C*cw} ${R*ch+6}" style="width:100%;background:linear-gradient(#bfe9ff,#fff6e8);border-radius:18px;touch-action:manipulation"><rect x="0" y="${R*ch+3}" width="${C*cw}" height="3" fill="#8d6e63"/><g id="bsv"></g></svg>
- <div class="opts" id="bc" style="margin-top:12px">${pal.map((c,k)=>`<button class="opt ${k?'':'on'}" data-c="${k}" style="background:${c};width:40px;height:34px"></button>`).join('')}${[1,2,3,4].map(w=>`<button class="opt ${w===2?'on':''}" data-w="${w}">${w}x</button>`).join('')}</div>
- <div class="opts"><button class="opt" id="bg">Guide: off</button><button class="opt" id="ba">Auto-build</button><button class="opt" id="bx">Clear</button></div>
- <div class="sub" style="text-align:center;margin:2px 0 8px">Preview only. Nothing here is added to your toys.</div><button class="btn full" id="pb" style="margin-top:0" ${S.wallet<t[2]?'disabled':''}>Buy for ${fmt(t[2])} XP</button>`);
- const cell=(x,y)=>br.find(b=>y===b.y&&x>=b.x&&x<b.x+b.w);
- const draw=()=>{let s='';
-  if(g)bp.forEach((row,r)=>[...row].forEach((c,x)=>{if(c!=='.')s+=`<rect x="${x*cw+2}" y="${(r+off)*ch+4}" width="${cw-4}" height="${ch-5}" rx="3" fill="${pal[K.indexOf(c)]}" opacity=".3" stroke="#555" stroke-dasharray="3 2"/>`}));
-  br.forEach(b=>{s+=`<rect x="${b.x*cw+1}" y="${b.y*ch+3}" width="${b.w*cw-2}" height="${ch-2}" rx="3" fill="${pal[b.c]}" stroke="rgba(0,0,0,.3)"/>`;for(let k=0;k<b.w;k++)s+=`<rect x="${(b.x+k)*cw+8}" y="${b.y*ch}" width="10" height="5" rx="2" fill="${pal[b.c]}" stroke="rgba(0,0,0,.3)"/>`});
-  $('#bsv').innerHTML=s};
- const chk=()=>{if(won)return;if(bp.every((row,r)=>[...row].every((c,x)=>c==='.'||(cell(x,r+off)||{}).c===K.indexOf(c)))){won=1;sfx('level');toast('Perfect build! (preview only)')}};
- const svg=$('#bsvg');
- svg.onclick=e=>{const b=svg.getBoundingClientRect();let x=Math.floor((e.clientX-b.left)/b.width*C),y=Math.min(R-1,Math.floor((e.clientY-b.top)/b.height*(R*ch+6)/ch));x=Math.max(0,Math.min(C-1,x));
-  const hit=cell(x,y);if(hit){br.splice(br.indexOf(hit),1);won=0;sfx('pop');draw();return}
-  x=Math.min(x,C-wd);const free=(xx,yy)=>yy<R&&![...Array(wd)].some((_,k)=>cell(xx+k,yy));
-  if(!free(x,y)){sfx('error');return}while(free(x,y+1))y++;br.push({x,y,w:wd,c:col});sfx('tap');draw();chk()};
- $('#bc').onclick=e=>{const c=e.target.closest('[data-c]'),w=e.target.closest('[data-w]');
-  if(c){col=+c.dataset.c;document.querySelectorAll('#bc [data-c]').forEach(x=>x.classList.toggle('on',x===c))}
-  if(w){wd=+w.dataset.w;document.querySelectorAll('#bc [data-w]').forEach(x=>x.classList.toggle('on',x===w))}};
- $('#bg').onclick=()=>{g=!g;$('#bg').textContent='Guide: '+(g?'on':'off');draw()};
- $('#bx').onclick=()=>{GT.forEach(clearInterval);GT=[];br=[];won=0;draw();sfx('whoosh')};
- $('#ba').onclick=()=>{GT.forEach(clearInterval);GT=[];br=[];won=0;g=1;$('#bg').textContent='Guide: on';const q=[];
-  for(let r=bp.length-1;r>=0;r--){let x=0;const row=bp[r];while(x<C){const c=row[x];if(c==='.'){x++;continue}let n=1;while(x+n<C&&row[x+n]===c&&n<4)n++;q.push({x,y:r+off,w:n,c:K.indexOf(c)});x+=n}}
-  draw();GT.push(setInterval(()=>{const b=q.shift();if(!b){GT.forEach(clearInterval);GT=[];chk();return}br.push(b);sfx('tap');draw()},130))};
- $('#pb').onclick=()=>askBuy(i);
- draw();
-}
-/* ===== mini games ===== */
-function gsheet(title){sheet(`<div class="line" style="padding-top:0"><h2>${title}</h2><button class="plus" style="background:var(--card);color:var(--ink)" data-a="close">${ic(IC.x,20)}</button></div><div id="gb"></div>`)}
-function payout(sc,k){const t=today();if(S.gd!==t){S.gd=t;S.gn=0}let x=0;if(S.gn<5){x=Math.min(Math.round(sc*k),200);S.gn++}if(x)gain(x);save();sfx('success');closeSheet();render();toast(x?`Score ${sc}! +${x} XP`:`Score ${sc}. Daily XP limit reached`)}
-const PIG='<svg viewBox="0 0 48 48" width="64" height="64"><ellipse cx="24" cy="30" rx="15" ry="12" fill="#90a4ae"/><circle cx="32" cy="18" r="9" fill="#b0bec5"/><circle cx="35" cy="16" r="2" fill="#222"/><path d="M40 19l6 2-6 3z" fill="#ffb300"/><path d="M8 30l-6 6 12-2z" fill="#78909c"/></svg>';
-function gMem(){const F=[['Curry Laksa','f'],['Chicken Satay','f'],['Teh Tarik','d'],['Chicken Rice','f'],['Ice Kachang','f'],['Har Gow','f'],['Black Pepper Crab','f'],['Milo Dinosaur','m']];
- const c=[...F,...F].map(f=>({f,o:0,d:0})).sort(()=>Math.random()-.5);let sel=[],mv=0,lock=0,done=0;gsheet('Memory Match');
- const dr=()=>{$('#gb').innerHTML=`<div class="sub" style="margin-bottom:8px">Moves: ${mv} | Pairs: ${done}/8</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">${c.map((x,k)=>`<button class="opt" data-g="${k}" style="height:76px;padding:4px;display:grid;place-items:center;border-radius:18px;${x.o||x.d?'':'background:#7c5cff;color:#fff;font-size:28px'}">${x.o||x.d?itemImg(x.f[0],x.f[1],56):'?'}</button>`).join('')}</div>`};
- dr();$('#gb').onclick=e=>{const b=e.target.closest('[data-g]');if(!b||lock)return;const x=c[+b.dataset.g];if(x.o||x.d)return;x.o=1;sfx('tap');sel.push(x);dr();
-  if(sel.length===2){mv++;lock=1;const[p,q]=sel;setTimeout(()=>{if(p.f===q.f){p.d=q.d=1;done++;sfx('coin')}p.o=q.o=0;sel=[];lock=0;dr();if(done===8)payout(Math.max(10,100-(mv-8)*8),2)},700)}}}
-function gPig(){let sc=0,tl=20,cur=-1,ty=0;gsheet('Whack-a-Pigeon');
- const dr=()=>{$('#gb').innerHTML=`<div class="line"><b>Score ${sc}</b><b>${tl}s</b></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">${[...Array(9)].map((_,k)=>`<button data-g="${k}" style="height:88px;border-radius:22px;background:#c9a273;display:grid;place-items:center">${k===cur?(ty?em('bear',64):PIG):''}</button>`).join('')}</div><p class="sub" style="margin-top:8px">Tap pigeons. Do not tap the bear chef!</p>`};
- dr();$('#gb').onclick=e=>{const b=e.target.closest('[data-g]');if(!b||+b.dataset.g!==cur)return;if(ty){sc=Math.max(0,sc-3);sfx('error')}else{sc++;sfx('coin')}cur=-1;dr()};
- GT.push(setInterval(()=>{cur=Math.floor(Math.random()*9);ty=Math.random()<.2?1:0;dr()},700));
- GT.push(setInterval(()=>{tl--;if(tl<=0){GT.forEach(clearInterval);GT=[];return payout(sc,8)}dr()},1000))}
-function gWok(){let r=0,sc=0,p=0,dr=1,z=50;gsheet('Perfect Wok');
- $('#gb').innerHTML=`<div class="line"><b id="wi">Round 1 of 5 | Score 0</b></div><div style="display:grid;place-items:center">${em('wok',110)}</div><div style="position:relative;height:38px;background:#fff;border-radius:99px;overflow:hidden;box-shadow:var(--sh);margin:10px 0"><i id="wz" style="position:absolute;top:0;bottom:0;width:16%;background:#22b573"></i><i id="wm" style="position:absolute;top:0;bottom:0;width:8px;background:#ff4b3e"></i></div><button class="btn full" data-g="1">COOK!</button>`;
- const nz=()=>{z=20+Math.random()*60;$('#wz').style.left=(z-8)+'%'};nz();
- GT.push(setInterval(()=>{p+=dr*(1.4+r*.5);if(p>=100){p=100;dr=-1}if(p<=0){p=0;dr=1}$('#wm').style.left=p+'%'},16));
- $('#gb').onclick=e=>{if(!e.target.closest('[data-g]'))return;const d=Math.abs(p-z),pt=d<3?40:d<8?25:d<14?10:0;sc+=pt;sfx(pt?'coin':'error');toast(pt>=40?'Perfect!':pt?'Nice!':'Miss!');r++;if(r>=5){GT.forEach(clearInterval);GT=[];return payout(sc,1)}$('#wi').textContent=`Round ${r+1} of 5 | Score ${sc}`;nz()}}
-function gRush(){const all=SH.flatMap(s=>s.items.filter(i=>i.t!=='e'&&i.t!=='c'));let sc=0,tl=30,cur;gsheet('Order Rush');
- const dr=()=>{$('#gb').innerHTML=`<div class="line"><b>Score ${sc}</b><b id="rt">${tl}s</b></div><div style="display:grid;place-items:center;background:var(--card);border-radius:22px;padding:14px">${itemImg(cur.a.n,cur.a.t,120)}</div><div style="display:grid;gap:8px;margin-top:10px">${cur.o.map(n=>`<button class="opt" data-g="${n}" style="text-align:center">${n}</button>`).join('')}</div>`};
- const nx=()=>{const a=all[Math.floor(Math.random()*all.length)],o=[a.n];while(o.length<4){const n=all[Math.floor(Math.random()*all.length)].n;if(!o.includes(n))o.push(n)}cur={a,o:o.sort(()=>Math.random()-.5)};dr()};
- nx();$('#gb').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;if(b.dataset.g===cur.a.n){sc++;sfx('coin')}else sfx('error');nx()};
- GT.push(setInterval(()=>{tl--;if(tl<=0){GT.forEach(clearInterval);GT=[];return payout(sc,12)}const e=$('#rt');if(e)e.textContent=tl+'s'},1000))}
-function gTow(){const W=280,H=18;let rows=[{x:60,w:160}],cx=0,cw=160,d=1,sp=2.2;gsheet('Tray Tower');
- $('#gb').innerHTML=`<div class="line"><b id="ts">Floors 0</b><span class="sub">Tap to drop the tray</span></div><div id="tw" style="position:relative;width:${W}px;height:320px;margin:auto;background:linear-gradient(#bfe9ff,#fff6e8);border-radius:18px;overflow:hidden"></div><button class="btn full" data-g="1">Drop tray</button>`;
- const draw=()=>{const n=rows.length,off=Math.max(0,n-10);$('#tw').innerHTML=rows.map((r,i)=>`<div style="position:absolute;left:${r.x}px;bottom:${(i-off)*H}px;width:${r.w}px;height:${H-2}px;border-radius:5px;background:hsl(${i*32},75%,60%)"></div>`).join('')+`<div style="position:absolute;left:${cx}px;bottom:${(n-off)*H}px;width:${cw}px;height:${H-2}px;border-radius:5px;background:hsl(${n*32},75%,60%)"></div>`;$('#ts').textContent='Floors '+(n-1)};
- GT.push(setInterval(()=>{cx+=d*sp;if(cx<=0){cx=0;d=1}if(cx+cw>=W){cx=W-cw;d=-1}draw()},16));
- $('#gb').onclick=e=>{if(!e.target.closest('[data-g]'))return;const L=rows[rows.length-1],ov=Math.min(cx+cw,L.x+L.w)-Math.max(cx,L.x);
-  if(ov<=2){GT.forEach(clearInterval);GT=[];return payout(rows.length-1,10)}
-  rows.push({x:Math.max(cx,L.x),w:ov});cw=ov;sp+=.12;sfx('thud')}}
-/* ===== actions ===== */
-const inSG=(a,b)=>a>=1.15&&a<=1.48&&b>=103.6&&b<=104.1;
-const pass=()=>{sfx('success');S.ok=1;save();V='stalls';render()};
-function cut(){}
-cut.T=[];
-const A={
-mem:gMem,pig:gPig,wok:gWok,rush:gRush,tow:gTow,
-play:()=>{V='play';render();scrollTo(0,0)},
-daily:()=>{const t=today(),y=new Date(Date.now()-864e5).toDateString();if(S.last===t)return;S.streak=S.last===y?(S.streak||0)+1:1;S.last=t;const x=50+20*Math.min(S.streak,7);gain(x);sfx('coin');render();toast('Day '+S.streak+' bonus: +'+x+' XP')},
-spin:()=>{if(S.spin===today())return;S.spin=today();save();const pool=[0,0,0,1,1,3,3,5,5,2,7,7,4,6],i=pool[Math.floor(Math.random()*pool.length)];$('#wheel').style.transform=`rotate(${360*6-(i*45+22.5)}deg)`;$('[data-a=spin]').disabled=true;sfx('whoosh');for(let k=0;k<14;k++)setTimeout(()=>sfx('tap'),k*280);setTimeout(()=>{gain(PR[i]);sfx('coin');render();toast('You won '+PR[i]+' XP!')},4300)},
-game:()=>{const st=$('#gstage');if(!st||GT.length)return;let sc=0,tl=20;$('[data-a=game]').disabled=true;
- st.innerHTML='<div id="gscore" style="position:absolute;top:8px;left:12px;font-weight:900;color:#2b1d14;z-index:2">Score 0</div><div id="gtime" style="position:absolute;top:8px;right:12px;font-weight:900;color:#2b1d14;z-index:2">20s</div>';
- const K=['bowl','chick','noodle','prata','skewer','sweet','cupm','drink','crab','toast','dumpling'];
- GT.push(setInterval(()=>{const d=document.createElement('div');d.className='gi';d.style.cssText=`left:${Math.random()*80+4}%;--t:${2.2+Math.random()*1.4}s`;d.innerHTML=em(K[Math.floor(Math.random()*K.length)],46);d.onpointerdown=()=>{if(d.x)return;d.x=1;sc++;sfx('coin');$('#gscore').textContent='Score '+sc;d.style.opacity=0;setTimeout(()=>d.remove(),120)};st.appendChild(d);setTimeout(()=>d.remove(),3800)},520));
- GT.push(setInterval(()=>{tl--;const e=$('#gtime');if(e)e.textContent=tl+'s';if(tl<=0){GT.forEach(clearInterval);GT=[];const t=today();if(S.gd!==t){S.gd=t;S.gn=0}let x=0;if(S.gn<5){x=Math.min(sc*4,200);S.gn++}if(x)gain(x);save();sfx('success');render();toast(x?'Score '+sc+'! +'+x+' XP':'Score '+sc+'. Daily XP limit reached')}},1000))},
-reset:()=>{sfx('pop');sheet(`<h2>Reset account?</h2><p class="sub" style="margin:10px 0 4px">Are you sure? This permanently deletes your level, XP, toys and order history on this device. You cannot undo this.</p><button class="btn full" data-a="resetyes" style="background:#c62828">Yes, reset everything</button><button class="btn g full" data-a="close">No, keep my progress</button>`)},
-resetyes:()=>{S={life:0,wallet:0,orders:[],toys:[],ok:1};cart=[];save();closeSheet();V='stalls';render();scrollTo(0,0);sfx('error');toast('Account reset')},
-orderall:()=>{const seen=new Set();let n=0;S.orders.forEach(o=>{if(seen.has(o.shop)||!o.raw)return;seen.add(o.shop);o.raw.forEach(l=>{const m=cart.find(c=>c.s===l.s&&c.n===l.n&&c.desc===l.desc&&c.note===l.note);if(m)m.q+=l.q;else cart.push({...l});n+=l.q})});
- if(!n){sfx('error');return toast('Place a new order first, then you can order it all again')}sfx('pop');drawCart();render()},
-begin:()=>{const c=$('#cut');$('#tap').remove();c.classList.add('go');const at=(ms,f)=>cut.T.push(setTimeout(f,ms));
- at(700,()=>sfx('thud'));for(let i=0;i<9;i++)at(1900+i*220,()=>sfx('tap'));at(2900,()=>sfx('pop'));at(3900,()=>sfx('whoosh'));at(4800,()=>sfx('coin'));at(5200,()=>sfx('level'));at(6700,()=>c.classList.add('rdy'))},
-skipc:()=>{cut.T.forEach(clearTimeout);const t=$('#tap');t&&t.remove();$('#cut').classList.add('go','fin','rdy')},
-start:()=>{(cut.T||[]).forEach(clearTimeout);sfx('success');V=S.ok?'stalls':'loc';render()},
-skip:pass,
-chk:()=>{const e=$('#err');if(!navigator.geolocation){e.textContent='Location is not supported on this device.';return}
- navigator.geolocation.getCurrentPosition(p=>inSG(p.coords.latitude,p.coords.longitude)?pass():(e.textContent='Sorry, only works in Singapore.',sfx('error')),()=>e.textContent='Please allow location access.',{timeout:12000})},
-hf:v=>{hf=v;render()},
-shop:v=>{const s=SH[+v];shop=s;tab='menu';V='shop';render();scrollTo(0,0)},
-back:()=>{V='stalls';render();scrollTo(0,0)},
-tab:v=>{tab=v;render()},ts:v=>{tser=v;render()},
-item:v=>{const it=shop.items[+v];if(it.t==='e'&&lvl().l<51){sfx('error');return toast('Reach level 51 to unlock this')}
- sfx('pop');cfg={it,sel:G[it.t].map(g=>g[1]?[0]:[]),q:1,note:''};drawCustom()},
-opt:(v,t)=>{const k=+t.dataset.k,g=G[cfg.it.t][k],i=+v;cfg.note=$('#note').value;cfg.sel[k]=g[1]?[i]:cfg.sel[k].includes(i)?cfg.sel[k].filter(x=>x!==i):[...cfg.sel[k],i];drawCustom()},
-q:v=>{cfg.note=$('#note').value;cfg.q=Math.max(1,cfg.q+ +v);drawCustom()},
-addc:()=>{const it=cfg.it,desc=it.parts?it.parts.join(', '):G[it.t].map((g,k)=>cfg.sel[k].map(i=>g[2][i][0])).flat().join(', ');sfx('add');cart.push({s:shop.n,n:it.n,u:cp(),q:cfg.q,desc,note:$('#note').value.trim()});closeSheet();render();toast(it.n+' added')},
-close:closeSheet,
-cart:()=>{sfx('pop');drawCart()},
-cm:v=>{const l=cart[+v];if(--l.q<=0)cart.splice(+v,1);drawCart();render()},
-cpl:v=>{cart[+v].q++;drawCart();render()},
-place:()=>{if(!cart.length)return;PM={m:'cash',b:'Visa'};drawPay()},
-pm:v=>{PM.m=v;drawPay()},pb:v=>{PM.b=v;drawPay()},
-payok:()=>{const c=PM.m==='cash';sheet(`<div style="text-align:center;padding:26px 0 18px"><div class="spin"></div><h2 style="margin-top:20px">${c?'Placing your order':'Processing payment'}<span class="ld"><span>.</span><span>.</span><span>.</span></span></h2><div class="sub" style="margin-top:8px">${c?'Sending it to the stalls':'Paying '+money(totals().tot)+' with '+(PM.m==='qr'?'QR code':PM.b)}</div><div class="sub" style="margin-top:14px">Please do not close this screen</div></div>`);sfx('pop');setTimeout(()=>A.fin(),c?1000:2200)},
-fin:()=>{const d=disc(lvl().l),b=lvl().l,by={};cart.forEach(l=>(by[l.s]=by[l.s]||[]).push(l));let xp=0;const num=orderNo(),mn=25+Math.floor(Math.random()*15)+(Object.keys(by).length-1)*5,pay=payTxt(),rc=[],tt=totals().tot;
- Object.entries(by).forEach(([n,ls])=>{rc.push([n,ls]);const tot=ls.reduce((a,l)=>a+l.u*l.q,0)*(1-d/100),x=Math.round(tot*10);xp+=x;S.orders.unshift({shop:n,lines:ls.map(l=>`${l.q}x ${l.n}${l.desc?' ('+l.desc+')':''}`),total:tot,xp:x,raw:ls.map(l=>({...l})),num,pay,mn,date:new Date().toLocaleDateString()})});
- S.life+=xp;S.wallet+=xp;save();cart=[];sfx('bell');render();receipt(num,mn,pay,rc,xp,tt);if(lvl().l>b){setTimeout(()=>{sfx('level');toast('Level up! Level '+lvl().l+': '+disc(lvl().l)+'% off')},1400)}},
-pv:v=>openPreview(+v),
-buy:v=>askBuy(+v),buyyes:v=>{if(buy(+v)){closeSheet();render()}},
-boost:()=>{sfx('coin');S.life+=25000;S.wallet+=25000;save();render();toast('Demo XP added')}};
-document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;if(!t.dataset.a.match(/^(start|skip|chk)$/))sfx('tap');A[t.dataset.a]&&A[t.dataset.a](t.dataset.v,t)});
-render();
+const $=s=>document.querySelector(s),KEY='greenpath1',esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const td=()=>{let d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const addD=(d,n)=>{let x=new Date(d+'T12:00');x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};
+const def=()=>({tasks:[],hab:['bottle','lights','paper','reuse','nobuy'],cust:[],log:{},target:5,led:{},xp:0,q:{},bd:{},spent:0,isl:Array(12).fill(''),own:[],favs:[],plays:0,focus:0,uid:1,prefs:{game:true,still:false}});
+let S=(()=>{try{let d=JSON.parse(localStorage.getItem(KEY));if(d&&Array.isArray(d.tasks)&&typeof d.xp==='number'&&d.prefs)return Object.assign(def(),d)}catch(e){}return def()})();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const LV=[[0,'Seed Starter'],[50,'Green Explorer'],[150,'Habit Builder'],[300,'Eco Strategist'],[500,'Planet Protector']];
+const lvl=()=>{let i=0;LV.forEach((l,j)=>{if(S.xp>=l[0])i=j});return i};
+const BD={first:['🌱','First Green Step','Complete a green habit'],sprint:['⏱️','Study Sprinter','Finish a focus session'],reuse:['♻️','Reuse Champion','Complete The Paper Saver or Smart Shopper quest'],budget:['💰','Budget Brain','Finish the Budget Challenge'],sort:['🗂️','Sorting Star','Finish an Eco Sort round'],cons:['📈','Consistency Creator','Reach your weekly target'],qex:['🧭','Quest Explorer','Complete 3 different quests'],bal:['⚖️','Balanced Week','Complete a study task and a habit in one week']};
+function toast(m){let t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',2800)}
+function award(k,x,b,msg){if(S.led[k])return;S.led[k]=1;if(!S.prefs.game){save();return}S.xp+=x;let m='+'+x+' XP';if(b&&!S.led['b'+b]){S.led['b'+b]=1;m+=' · Badge: '+BD[b][1]}toast((msg||'')+' '+m);save()}
+const H=[['bottle','Bring a reusable water bottle','Refilling a bottle you already own is free.'],['meal','Choose a lower-waste meal or snack','Reuse a container you have; plan to avoid leftovers.'],['lights','Switch off unused lights','Takes seconds, where appropriate.'],['move','Walk, cycle or use public transport','Only when safe and practical for you.'],['paper','Reduce unnecessary paper use','Use both sides or go digital where permitted.'],['reuse','Reuse school supplies','Check what you own before buying.'],['nobuy','Avoid an unnecessary purchase','Pause and ask: do I already have something suitable?'],['sort','Separate recyclables','Follow your local guidelines — rules differ.']].map(a=>({id:a[0],n:a[1],w:a[2]}));
+const allH=()=>H.concat(S.cust);
+const R_=[['Refill a bottle you already own','Skips buying drinks.','Free',1,'Food & drinks',1],['Switch off unused lights','A quick habit while leaving a room.','Free',1,'Energy & waste',1],['Pack a reusable bag for tomorrow','Ready before the morning rush.','Free',3,'School supplies',1],['Check supplies before buying','You may already own it.','Free',5,'School supplies',1],['Use an existing container for a snack','Less single-use packaging.','Free',5,'Food & drinks',1],['Plan one low-waste lunch','Using what is at home.','Depends',10,'Food & drinks',1],['Use both sides of paper','Where your teacher allows.','Free',2,'School supplies',1],['Borrow or swap a book or supply','Ask a friend or class swap.','Free',10,'School supplies',0],['Repair a small item','Sew a button, tape a notebook.','Low Cost',15,'Clothing & personal',0],['Look at second-hand clothing','Swaps or thrift shops; compare prices first.','Depends',20,'Clothing & personal',0],['Compare transport costs and times','Walk, bus or shared ride — only if safe.','Free',10,'Transportation',0],['Sort recycling by local rules','Check your council/school guidance.','Free',5,'Energy & waste',1]].map((a,i)=>({id:i,t:a[0],d:a[1],c:a[2],m:a[3],k:a[4],sc:a[5]}));
+const QS=[['refill','The Refill Mission','Refill your reusable bottle.','1 min','Easy',15],['paper','The Paper Saver','Use both sides of a sheet where permitted.','2 min','Easy',20],['energy','The Energy Detective','Switch off unneeded lights/devices.','2 min','Easy',15],['shop','The Smart Shopper','Before buying, check if you own something suitable.','3 min','Medium',25],['exam','Exam Week Survival','One short study session + one no-cost green habit.','Flexible','Medium',30]];
+const T=[['A reusable bottle','Reusable','Refilling it many times avoids repeated single-use bottles.'],['Clean cardboard box','Recyclable','Often recyclable where accepted — check local rules.'],['A banana peel','Compostable','Compostable where facilities exist; otherwise general waste.'],['Single-use snack wrapper','General waste','Most mixed-material wrappers cannot be recycled locally.'],['Glass jar','Reusable','Reuse it for food or storage before recycling.'],['Fruit scraps','Compostable','Compostable where food-waste collection exists.']];
+const CT=['Recyclable','Reusable','Compostable','General waste'];
+const QZ=[['Which is usually the cheapest first step toward less waste?',['Buy a new bottle','Reuse what you own','Buy eco kits'],1,'Using items you already own costs nothing.'],['Studying 3 hours without breaks is…',['Always best','Not necessarily helpful — rest matters','Required'],1,'Breaks and sleep support learning.'],['Recycling rules are…',['The same everywhere','Different by location','Never useful'],1,'Always check local guidance.'],['A good question before buying something new?',['Is it on sale?','Do I already have something suitable?','Is it trendy?'],1,'Checking first avoids unnecessary purchases.']];
+const BU=[['Drink during a school day',[['Refill a bottle you own',0,'Free, but needs planning.'],['Buy a new reusable bottle',12,'Pays off over time if you use it.'],['Buy a drink each day',9,'Convenient but adds up weekly.']]],['Notebook for a new subject',[['Reuse blank pages from old notebooks',0,'Free; may need a little tidying.'],['Buy a new notebook',4,'Fine if you need one.'],['Buy a fancy set',15,'Costly if not needed.']]],['Torn bag strap',[['Ask for help to sew it',1,'Cheap and extends its life.'],['Buy a new bag',25,'Sometimes necessary.'],['Ignore it',0,'Free now, risk later.']]]];
+const WP=['Pack a reusable bottle','Use both sides of paper','Plan a low-waste snack','Switch off unused lights','Review your weekly progress','Reuse, repair or organize supplies'];const COM=[['Complete three no-cost green habits',42],['Bring a reusable bottle for five school days',31],['Reduce printing for one week',18],['Organize a school-supply exchange',9]];
+const IT=[['🌱','Sprout',1],['🌳','Tree',2],['🌸','Flowers',1],['🪑','Reuse bench',2],['💡','Solar light',3],['🚲','Bike rack',3],['🥕','Garden',3],['🦋','Wildlife patch',4]];
+const tok=()=>Math.floor(S.xp/20)-S.spent;
+const NAV=[['home','Home'],['planner','Study Planner'],['habits','Green Habits'],['games','Green Games'],['choices','Budget Solutions'],['community','Community'],['progress','My Progress']];
+let view="home",ed=null,focusNew=0,G={g:null},cf={t:1,b:0,k:''},as={t:5,b:0,seed:0,no:[]};
+const dayLog=d=>S.log[d]||[];
+const weekCount=()=>{let n=0,t=td();for(let i=0;i<7;i++)n+=dayLog(addD(t,-i)).filter(id=>allH().some(h=>h.id==id)).length;return n};
+const vis=()=>allH().filter(h=>S.hab.includes(h.id));
+function pb(p,l){return`<div class="bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100" aria-label="${l}"><i style="width:${p}%"></i></div>`}
+const xpCard=()=>{let i=lvl(),n=LV[i+1],p=n?Math.round((S.xp-LV[i][0])/(n[0]-LV[i][0])*100):100;return`<div class="card m"><h3>⭐ ${LV[i][1]}</h3><p>${S.xp} XP${n?` · ${n[0]-S.xp} to ${n[1]}`:''}</p>${pb(p,'Level progress')}</div>`};
+const taskCard=t=>`<div class="card"><div class="row"><input type="checkbox" aria-label="Complete ${esc(t.n)}" ${t.done?'checked':''} data-c="tt|${t.id}"><b class="${t.done?'done':''}">${esc(t.n)}</b></div><span class="tag">${esc(t.s)}</span><span class="tag ${t.p=='High'?'h':''}">${t.p} priority</span><span class="tag">${t.d}${t.tm?' '+t.tm:''}</span><span class="tag">${t.m} min</span><div><button class="btn s o" data-c="et|${t.id}">Edit</button> <button class="btn s o" data-c="rs|${t.id}">Move +1 day</button> <button class="btn s o" data-c="dt|${t.id}">Delete</button></div></div>`;
+const habList=()=>vis().map(h=>{let c=dayLog(td()).includes(h.id);return`<div class="card"><label class="row" style="margin:0"><input type="checkbox" ${c?'checked':''} data-c="th|${h.id}"><b>${esc(h.n)}</b></label><p class="sm">${esc(h.w)}</p><button class="btn s o" data-c="hh|${h.id}">Skip / hide</button></div>`}).join('')||'<p>No habits selected. Add some below.</p>';
+const recCard=r=>`<div class="card"><h3>${r.t}</h3><p>${r.d}</p><span class="tag">${r.c}</span><span class="tag">~${r.m} min (estimate)</span><span class="tag">${r.k}</span><p class="sm">Lower-cost alternative: use something you already own.</p><button class="btn s" data-c="tryR|${r.id}">Try This</button> <button class="btn s o" data-c="addR|${r.id}">Add to My Habits</button></div>`;
+const recFilter=(t,b,k)=>R_.filter(r=>r.m<=t&&(b==0||r.c=='Free')&&(!k||r.k==k));
+const V={
+home(){let t=td(),tk=S.tasks.filter(x=>!x.done).sort((a,b)=>a.d>b.d?1:-1).slice(0,3),hv=vis(),dn=hv.filter(h=>dayLog(t).includes(h.id)).length,p=hv.length?Math.round(dn/hv.length*100):0,q=QS[new Date().getDate()%5];
+return`<section class="hero"><svg viewBox="0 0 200 140" width="190" style="float:right;margin:0 0 .5rem 1rem" role="img" aria-label="Book, plant and bicycle illustration"><circle cx="150" cy="35" r="22" fill="#f5b82e"/><path d="M0 120Q60 70 120 110T200 100V140H0Z" fill="#087553"/><rect x="40" y="70" width="50" height="38" rx="4" fill="#fff"/><path d="M65 70v38" stroke="#087553" stroke-width="3"/><path d="M130 105c0-25 15-35 30-35 0 20-10 35-30 35z" fill="#12382E"/><circle cx="25" cy="115" r="9" fill="none" stroke="#fff" stroke-width="3"/></svg><h1>Your Academic Goals. A Greener Tomorrow.</h1><p>Busy with school? Build greener habits without spending more time or money. GreenPath helps you organize your studies, discover affordable sustainable choices, and make small changes that fit your everyday life.</p><a class="btn" href="#planner" data-c="go|planner|1">Build My Plan</a> <a class="btn o" href="#habits" data-c="go|habits|0">Explore Green Habits</a> <a class="btn o" href="#games" data-c="go|games|0">Play a Green Game</a></section>
+<div class="grid"><div class="card"><h3>📚 Plan Smarter</h3>Organize homework, study sessions and deadlines in one place.</div><div class="card"><h3>🌿 Live Greener</h3>Small, realistic actions that fit your routine.</div><div class="card"><h3>💸 Save Time and Money</h3>Practical alternatives for your schedule and budget.</div></div>
+<h2>Your dashboard</h2><p class="sm">Small steps count. Choose what works for you today. All numbers come from what you enter in this browser.</p>
+<div class="grid"><div class="card"><h3>Upcoming tasks</h3>${tk.length?tk.map(x=>`<p>• ${esc(x.n)} <span class="sm">(${esc(x.s)}, ${x.d})</span></p>`).join(''):'<p>Your first plan starts here. Add one task, then let GreenPath help with the rest.</p><a class="btn s" href="#planner" data-c="go|planner|0">Add a task</a>'}</div>
+<div class="card"><h3>Today's habits</h3><p>${dn} of ${hv.length} done (${p}%)</p>${pb(p,'Today habit completion')}<p class="sm">Your schedule is busy. Choose one small step that works for you.</p><a class="btn s" href="#habits" data-c="go|habits|0">Open tracker</a></div>${S.prefs.game?xpCard()+`<div class="card"><h3>Today's quest</h3><b>${q[1]}</b><p>${q[2]} · ${q[5]} XP</p><a class="btn s" href="#games" data-c="gg|quest">Go to quests</a></div>`:''}</div>
+${S.last&&S.last<addD(t,-2)?'<div class="card m">👋 Welcome back! No pressure — one small step: refill your bottle.</div>':''}<h2>Quick suggestion</h2><div class="grid">${recFilter(5,1).slice(0,3).map(recCard).join('')}</div><p><button class="btn s o" data-c="go|choices|0">Open the time &amp; budget assistant</button></p><h2>Featured game</h2><div class="card m"><b>Eco Sort Challenge</b> — sort everyday items and learn why. <button class="btn s" data-c="gg|sort">Play now</button></div><h2>Weekly challenge</h2><div class="card">${COM[0][0]} <span class="tag">sample data</span>${pb(COM[0][1],'Challenge')}<button class="btn s o" data-c="go|community|0">All challenges</button></div><h2>Your Eco Island</h2><div class="card"><div class="isl">${S.isl.slice(0,8).map(c=>`<button disabled aria-hidden="true">${c||'·'}</button>`).join('')}</div><button class="btn s" data-c="gg|isl">Open island</button></div><h2>Progress summary</h2><div class="card">Tasks done: ${S.tasks.filter(x=>x.done).length} · Focus sessions: ${S.focus} · Games played: ${S.plays} <button class="btn s o" data-c="go|progress|0">View progress</button></div>`},
+planner(){let e=S.tasks.find(x=>x.id==ed)||{},t=td(),days=[...Array(7)].map((_,i)=>addD(t,i));
+return`<h1>Study Planner</h1><div class="card"><h3>${e.id?'Edit task':'Add a task'}</h3><form id="tf" novalidate><div class="row"><div><label for="tn">Task name *</label><input id="tn" value="${esc(e.n||'')}"></div><div><label for="ts">Subject *</label><input id="ts" value="${esc(e.s||'')}"></div><div><label for="td">Due date *</label><input id="td" type="date" value="${e.d||t}"></div><div><label for="tm">Start time</label><input id="tm" type="time" value="${e.tm||''}"></div><div><label for="tu">Minutes *</label><input id="tu" type="number" min="5" max="240" value="${e.m||30}" style="width:6rem"></div><div><label for="tp">Priority</label><select id="tp">${['Low','Medium','High'].map(p=>`<option ${(e.p||'Medium')==p?'selected':''}>${p}</option>`).join('')}</select></div></div><p id="err" role="alert" style="color:#b3261e"></p><button class="btn">${e.id?'Save changes':'Add task'}</button> ${e.id?'<button type="button" class="btn o" data-c="cancel">Cancel</button>':''}</form></div>
+<h2>This week</h2><div class="grid">${days.map(d=>{let l=S.tasks.filter(x=>x.d==d),mins=l.reduce((a,x)=>a+(+x.m),0),busy=l.length>=3||mins>=180;return`<div class="card ${busy?'':'m'}"><b>${new Date(d+'T12:00').toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'})}</b>${busy?' <span class="tag h">⚠ Busy day — one-minute green actions only</span>':''}${l.map(x=>`<p class="${x.done?'done':''}">${esc(x.n)} <span class="sm">${x.tm||''} ${x.m}m</span></p>`).join('')||'<p class="sm">Free</p>'}${S.prefs.game&&!busy&&d==t?'<p class="sm">🌿 Optional: pack your reusable bottle.</p>':''}</div>`}).join('')}</div>
+<h2>Weekly green plan</h2><div class="card"><p class="sm">Optional and editable — clear any day you like. Skip these on busy or exam days.</p>${['Mon','Tue','Wed','Thu','Fri','Weekend'].map((d,i)=>`<label>${d}<input style="width:100%" value="${esc((S.wp||WP)[i])}" data-c="wp|${i}"></label>`).join('')}</div><h2>All tasks</h2><div class="grid">${S.tasks.length?S.tasks.slice().sort((a,b)=>a.d>b.d?1:-1).map(taskCard).join(''):'<p>Your first plan starts here. Add one task, then let GreenPath help with the rest.</p>'}</div>`},
+habits(){let t=td(),hv=vis(),dn=hv.filter(h=>dayLog(t).includes(h.id)).length,p=hv.length?Math.round(dn/hv.length*100):0,w=weekCount(),hid=H.filter(h=>!S.hab.includes(h.id));
+return`<h1>Green Habits</h1><div class="card m"><b>${dn} of ${hv.length} habits (${p}%)</b>${pb(p,'Daily completion')}<p class="sm">Busy exam week? One easy action is enough. Progress looks different for everyone.</p><label for="wt">Weekly target (ticks)</label><input id="wt" type="number" min="1" max="40" value="${S.target}" data-c="wt"> <span>${w} / ${S.target} this week</span>${pb(Math.min(100,Math.round(w/S.target*100)),'Weekly target')}<p><button class="btn s o" data-c="clr">Clear today's ticks</button></p></div><div class="grid" style="margin-top:1rem">${habList()}</div>
+${hid.length?`<h2>Add back a habit</h2><div class="row">${hid.map(h=>`<button class="btn s o" data-c="unhide|${h.id}">+ ${esc(h.n)}</button>`).join('')}</div>`:''}
+<h2>Previous days</h2><div class="card">${[1,2,3,4,5,6,7].map(i=>{let d=addD(t,-i);return`<p>${d}: ${dayLog(d).length} habit(s) completed</p>`}).join('')}<p class="sm">XP is awarded once per habit per day; unticking does not remove it, and missed days never remove rewards.</p></div>`},
+choices(){let l=recFilter(cf.t,cf.b,cf.k);return`<h1>Green Choices, Student Prices</h1><div class="card"><div class="row"><div><label for="f1">Time available</label><select id="f1" data-c="cft">${[5,10,20].map(n=>`<option value="${n}" ${cf.t==n?'selected':''}>${n} min</option>`).join('')}<option value="99" ${cf.t==99?'selected':''}>Any</option></select></div><div><label for="f2">Budget</label><select id="f2" data-c="cfb"><option value="0" ${cf.b?'':'selected'}>Any</option><option value="1" ${cf.b?'selected':''}>No extra spending</option></select></div><div><label for="f3">Category</label><select id="f3" data-c="cfk"><option value="">All</option>${[...new Set(R_.map(r=>r.k))].map(k=>`<option ${cf.k==k?'selected':''}>${k}</option>`).join('')}</select></div></div></div><p class="sm">Time and cost are rough estimates. Sustainable products aren't automatically cheaper than what you already have.</p><div class="grid">${l.map(recCard).join('')||'<p>No matches — try widening filters.</p>'}</div>
+<h2>Time-saving assistant</h2><div class="card m"><div class="row"><div><label for="a1">How much time do you have?</label><select id="a1" data-c="a1"><option value="5" ${as.t==5?'selected':''}>1–5 minutes</option><option value="10" ${as.t==10?'selected':''}>5–10 minutes</option><option value="20" ${as.t==20?'selected':''}>10–20 minutes</option></select></div><div><label for="a2">Budget</label><select id="a2" data-c="a2"><option value="0" ${as.b==0?'selected':''}>No extra spending</option><option value="1" ${as.b==1?'selected':''}>Under $5</option><option value="2" ${as.b==2?'selected':''}>$5–$15</option><option value="3" ${as.b==3?'selected':''}>Flexible</option></select></div></div><p><button class="btn s" data-c="ass">Regenerate</button></p><div class="grid">${(()=>{let l=recFilter(as.t,as.b==0?1:0).filter(r=>!as.no.includes(r.id));l=l.slice().sort((a,b)=>((a.id*7+as.seed*3)%11)-((b.id*7+as.seed*3)%11)).slice(0,3);return l.map(r=>`<div class="card"><b>${r.t}</b><p class="sm">${r.d} · ~${r.m} min · ${r.c}</p><button class="btn s o" data-c="addR|${r.id}">Add to habits</button> <button class="btn s o" data-c="fav|${r.id}">${S.favs.includes(r.id)?'★ Saved':'☆ Save'}</button> <button class="btn s o" data-c="asno|${r.id}">Not for me</button></div>`).join('')||'<p>Nothing left — press Regenerate.</p>'})()}</div></div>`},
+community(){return`<h1>Community Challenges</h1><p class="sm">Demonstration data only. No public profiles, rankings, messages or location sharing — participation is anonymous.</p><div class="grid">${COM.map(c=>`<div class="card"><h3>${c[0]}</h3><p>${c[1]} of 100 challenge actions completed <span class="tag">sample data</span></p>${pb(c[1],c[0])}</div>`).join('')}</div><h2>Curated tips</h2><div class="card">• Start a swap box for supplies in your class.<br>• Ask a teacher if both-sided printing is okay.<br>• Share a reusable-lunch idea with friends.</div>`},
+progress(){let t=td(),ds=[...Array(7)].map((_,i)=>addD(t,i-6)),cnt={};Object.values(S.log).flat().forEach(i=>cnt[i]=(cnt[i]||0)+1);let top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>(allH().find(h=>h.id==e[0])||{n:e[0]}).n),bn=Object.keys(BD).filter(k=>S.led['b'+k]).length;
+return`<h1>My Progress</h1><div class="grid"><div class="card m"><h3>Habits today</h3><div class="big">${dayLog(t).length}</div></div><div class="card m"><h3>Tasks completed</h3><div class="big">${S.tasks.filter(x=>x.done).length}</div></div><div class="card m"><h3>Focus sessions</h3><div class="big">${S.focus}</div></div><div class="card m"><h3>Games played</h3><div class="big">${S.plays}</div></div>${S.prefs.game?xpCard():''}</div>
+<h2>Last 7 days (habits)</h2><div class="card row" style="align-items:flex-end;height:150px">${ds.map(d=>{let n=dayLog(d).length;return`<div style="flex:1;text-align:center"><div style="background:var(--g);height:${n*18}px;border-radius:6px" title="${n}"></div><span class="sm">${n}<br>${d.slice(8)}</span></div>`}).join('')}</div><p>Most frequent: ${top.join(', ')||'—'} · Quests done: ${Object.values(S.q).filter(v=>v=='done').length}</p>
+${S.prefs.game?`<h2>Badges (${bn}/8)</h2><div class="grid">${Object.entries(BD).map(([k,b])=>`<div class="card ${S.led['b'+k]?'m':''}" style="opacity:${S.led['b'+k]?1:.55}"><h3>${b[0]} ${b[1]}</h3><p class="sm">${b[2]} — ${S.led['b'+k]?'Unlocked':'Locked'}</p></div>`).join('')}</div>`:''}
+<h2>Settings</h2><div class="card"><label class="row"><input type="checkbox" ${S.prefs.game?'checked':''} data-c="pg"> Gamification (XP, badges, quests, island)</label><label class="row"><input type="checkbox" ${S.prefs.still?'checked':''} data-c="ps"> Reduce animations</label><p><button class="btn s o" data-c="ex">Export my data</button> <button class="btn s o" data-c="rst">Clear all data</button></p></div>`},
+games(){let g=G.g;const menu=[['quest','🎯 Eco Quest'],['sort','🗂️ Eco Sort'],['budget','💰 Green Budget'],['mem','🃏 Memory Match'],['quiz','❓ Daily Quiz'],['focus','⏱️ Study Sprint'],['isl','🏝️ Eco Island']];
+return`<h1>Green Games</h1><p class="sm">All optional. Rewards are capped (once per game per day) and are game points, not environmental measurements.</p><div class="row">${menu.map(m=>`<button class="btn ${g==m[0]?'':'o'} s" data-c="gm|${m[0]}">${m[1]}</button>`).join('')}</div><div id="gm" style="margin-top:1rem">${g?GM[g]():'<div class="card">Pick a game above. '+(S.prefs.game?'':'(XP is off in settings.)')+'</div>'}</div>`}};
+const GM={
+quest(){return`<div class="grid">${QS.filter(q=>!S.q[q[0]+td()+'x']).map(q=>{let k=q[0]+td(),s=S.q[k];return`<div class="card"><h3>${q[1]}</h3><p>${q[2]}</p><span class="tag">${q[3]}</span><span class="tag">${q[4]}</span><span class="tag">${q[5]} XP</span><p>${s=='done'?'✅ Completed':s=='on'?'In progress — confirm when you really did it.':'Not started'}</p>${s=='done'?'':s=='on'?`<button class="btn s" data-c="qd|${q[0]}|${q[5]}">Complete Quest</button>`:`<button class="btn s" data-c="qs|${k}">Start Quest</button>`} ${s=='done'?'':`<button class="btn s o" data-c="qx|${q[0]}">Not today</button>`}</div>`}).join('')}</div>`},
+sort(){let s=G.s||(G.s={i:0,sc:0,fb:''});if(s.i>=T.length)return`<div class="card"><h3>Round complete!</h3><p>Score ${s.sc}/${T.length}</p><button class="btn" data-c="sr">Play again</button></div>`;let it=T[s.i];return`<div class="card"><p class="sm">Item ${s.i+1}/${T.length} · Score ${s.sc} · Rules vary by location.</p><div class="big">${esc(it[0])}</div>${CT.map(c=>`<button class="opt" ${s.fb?'disabled':''} data-c="so|${c}">${c}</button>`).join('')}<p role="status">${s.fb}</p>${s.fb?'<button class="btn" data-c="sn">Next</button>':''}</div>`},
+budget(){let b=G.b||(G.b={i:0,left:20,pts:0,fb:''});if(b.i>=BU.length)return`<div class="card"><h3>Done! Left: $${b.left} (fictional)</h3><p>Points ${b.pts}</p><button class="btn" data-c="br">Replay</button></div>`;let s=BU[b.i];return`<div class="card"><p>Fictional weekly allowance. Remaining: <b>$${b.left}</b> · Points ${b.pts}</p><h3>${s[0]}</h3>${s[1].map((o,j)=>`<button class="opt" ${b.fb?'disabled':''} data-c="bo|${j}">${o[0]} — $${o[1]} (fictional price)</button>`).join('')}<p role="status">${b.fb}</p>${b.fb?'<button class="btn" data-c="bn">Next</button>':''}</div>`},
+mem(){let m=G.m;if(!m){let p=['💧','📓','🚲','💡','🍱','👕'];m=G.m={c:[...p,...p].sort(()=>Math.random()-.5).map((e,i)=>({e,id:i,f:0,d:0})),o:[],mv:0,t0:0,lock:0}}let w=m.c.every(c=>c.d);return`<div class="card"><p>Moves: ${m.mv}</p><div class="mem">${m.c.map((c,i)=>`<button class="${c.f||c.d?'f':''}" aria-label="${c.f||c.d?c.e:'Hidden card '+(i+1)}" data-c="mf|${i}">${c.f||c.d?c.e:'?'}</button>`).join('')}</div>${w?`<p><b>All matched in ${m.mv} moves, ${m.t1}s!</b></p>`:''}<button class="btn s o" data-c="mr">${w?'Play again':'Shuffle'}</button></div>`},
+quiz(){let q=G.q||(G.q={i:0,sc:0,fb:''});if(q.i>=QZ.length)return`<div class="card"><h3>Score ${q.sc}/${QZ.length}</h3><button class="btn" data-c="qr">Replay</button></div>`;let x=QZ[q.i];return`<div class="card"><h3>${x[0]}</h3>${x[1].map((o,j)=>`<button class="opt" ${q.fb?'disabled':''} data-c="qa|${j}">${o}</button>`).join('')}<p role="status">${q.fb}</p>${q.fb?'<button class="btn" data-c="qn">Next</button>':''}</div>`},
+focus(){let f=G.f||(G.f={d:25,left:1500,on:0,iv:0});return`<div class="card"><div class="big" id="tm" role="timer">${fm(f.left)}</div><div class="row" style="justify-content:center">${[15,25,45].map(d=>`<button class="btn s o" data-c="fd|${d}">${d} min</button>`).join('')}</div><div class="row" style="justify-content:center"><button class="btn" data-c="fs">${f.on?'Pause':'Start / Resume'}</button><button class="btn o" data-c="fr">Reset</button></div><p class="sm">Break ideas (all optional): stretch, refill your bottle, switch off unused lights, rest away from screens — or just enjoy the break. Rest matters as much as study.</p></div>`},
+isl(){return`<div class="card"><p>Tokens: <b>${tok()}</b> (1 per 20 XP) · Symbolic garden only — not real trees or carbon removal.</p><div class="isl">${S.isl.map((c,i)=>`<button aria-label="Plot ${i+1} ${c||'empty'}" data-c="ip|${i}">${c||'·'}</button>`).join('')}</div><p class="sm">Select an item, then tap a plot (tap an item to clear).</p><div class="row">${IT.map(it=>{let o=S.own.includes(it[0]);return`<button class="btn s ${G.sel==it[0]?'':'o'}" data-c="${o?`sel|${it[0]}`:`buy|${it[0]}|${it[2]}`}">${it[0]} ${it[1]} ${o?'':'🔒'+it[2]+'🪙'}</button>`}).join('')}</div></div>`}};
+/* actions */
+function R(){let v=V[view]?view:'home';$('#app').innerHTML=V[v]();$('#nav').innerHTML=NAV.map(n=>`<a href="#${n[0]}" data-c="go|${n[0]}|0" class="${n[0]==v?'on':''}" ${n[0]==v?'aria-current="page"':''}>${n[1]}</a>`).join('');if(focusNew&&v=='planner'){focusNew=0;$('#tn').focus()}}
+function mo(){document.body.classList.toggle('nomo',S.prefs.still)}
+function st(e){e.preventDefault();let n=$('#tn').value.trim(),s=$('#ts').value.trim(),d=$('#td').value,m=+$('#tu').value,er='';if(!n)er='Please enter a task name.';else if(!s)er='Please enter a subject.';else if(!d)er='Please choose a due date.';else if(!(m>=5&&m<=240))er='Duration must be 5–240 minutes.';if(er){$('#err').textContent=er;return}let o={n,s,d,tm:$('#tm').value,m,p:$('#tp').value};if(ed){Object.assign(S.tasks.find(x=>x.id==ed),o);ed=null}else S.tasks.push({id:S.uid++,done:0,...o});save();toast('Task saved');R()}
+const tt=id=>{let t=S.tasks.find(x=>x.id==id);t.done=!t.done;if(t.done){award('t'+id,10,'','Task done!');if(weekCount()>0)award('bal'+td().slice(0,7)+Math.floor(new Date().getDate()/7),0,'bal')}save();R()};
+const et=id=>{ed=id;R();scrollTo(0,0)},dt=id=>{if(confirm('Delete this task?')){S.tasks=S.tasks.filter(x=>x.id!=id);save();R()}},rs=id=>{let t=S.tasks.find(x=>x.id==id);t.d=addD(t.d,1);save();R()};
+function th(id){let t=td(),l=S.log[t]||(S.log[t]=[]),i=l.indexOf(id);if(i>=0)l.splice(i,1);else{l.push(id);award('h:'+t+id,10,'first');if(weekCount()>=S.target)award('wk'+t.slice(0,7)+Math.floor(new Date().getDate()/7),30,'cons','Weekly target reached!')}save();R()}
+const hh=id=>{S.hab=S.hab.filter(x=>x!=id);save();R()},clr=()=>{S.log[td()]=[];save();R()};
+const tryR=id=>{award('try'+id+td(),5,'','Nice try!');toast('Optional: do it when it suits you.')};
+function addR(id){let r=R_[id],h='c'+id;if(!allH().some(x=>x.id==h)){S.cust.push({id:h,n:r.t,w:r.d});S.hab.push(h);save();toast('Added to your habits')}else if(!S.hab.includes(h)){S.hab.push(h);save();toast('Added back')}else toast('Already in your habits')}
+const fav=id=>{let i=S.favs.indexOf(id);i<0?S.favs.push(id):S.favs.splice(i,1);save();R()};
+function qd(id,x){let k=id+td();if(S.q[k]=='done')return;S.q[k]='done';award('qx'+k,x,id=='paper'||id=='shop'?'reuse':'','Quest complete!');if(new Set(Object.keys(S.q).filter(k=>S.q[k]=='done').map(k=>k.slice(0,-10))).size>=3)award('qexp',0,'qex');save();R()}
+function endG(g,x,b){S.plays++;award('g:'+g+td(),x,b,'Round done!');save()}
+function so(c){let s=G.s,it=T[s.i],ok=c==it[1];if(ok)s.sc++;s.fb=(ok?'✔ Correct. ':'✘ Not quite — '+it[1]+'. ')+it[2];R()}
+function bo(j){let b=G.b,o=BU[b.i][1][j];b.left-=o[1];b.pts+=o[1]==0?3:o[1]<10?2:1;b.fb=o[2]+' (Trade-offs depend on your situation.)';R()}
+const qa=j=>{let q=G.q,x=QZ[q.i],ok=j==x[2];if(ok)q.sc++;q.fb=(ok?'✔ Correct. ':'✘ Not quite. ')+x[3];R()};
+function mf(i){let m=G.m,c=m.c[i];if(c.f||c.d||m.o.length>1)return;if(!m.t0)m.t0=Date.now();c.f=1;m.o.push(i);if(m.o.length==2){m.mv++;let[a,b]=m.o.map(x=>m.c[x]);if(a.e==b.e){a.d=b.d=1;a.f=b.f=0;m.o=[];if(m.c.every(c=>c.d)){m.t1=Math.round((Date.now()-m.t0)/1e3);endG('mem',10)}}else setTimeout(()=>{a.f=b.f=0;m.o=[];R()},700)}R()}
+const fm=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function fd(d){fr();G.f.d=d;G.f.left=d*60;R()}
+function fs(){let f=G.f;if(f.on){clearInterval(f.iv);f.on=0}else{f.on=1;f.iv=setInterval(()=>{f.left--;let e=$('#tm');if(e)e.textContent=fm(f.left);if(f.left<=0){clearInterval(f.iv);f.on=0;S.focus++;award('foc'+td(),15,'sprint','Focus session done!');save();toast('Nice focus! Take a break — optional green or not.');R()}},1000)}R()}
+function fr(){let f=G.f;if(f){clearInterval(f.iv);f.on=0;f.left=f.d*60;R()}}
+function buy(n,c){if(tok()<c){toast('Need '+c+' tokens — earn XP through quests and habits.');return}S.spent+=c;S.own.push(n);G.sel=n;save();R()}
+function ip(i){S.isl[i]=S.isl[i]?'':(G.sel||'');save();R()}
+const ex=()=>{let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,2)],{type:'application/json'}));a.download='greenpath-data.json';a.click()};
+const rst=()=>{if(confirm('Clear ALL GreenPath data in this browser? This cannot be undone.')){S=def();save();R()}};
+const go=(v,n)=>{view=v;focusNew=+n||0;R();scrollTo(0,0)};
+const A={go,gg:g=>{G={g};go('games')},gm:g=>{G={g};R()},cancel:()=>{ed=null;R()},tt,et,rs,dt,th,hh,clr,tryR,addR,fav:id=>fav(+id),qd:(i,x)=>qd(i,+x),buy:(n,c)=>buy(n,+c),so,bo,qa,mf,ip,fd,fs,fr,ex,rst,
+wt:e=>{S.target=Math.max(1,+e.value||1);save();R()},unhide:id=>{S.hab.push(id);save();R()},cft:e=>{cf.t=+e.value;R()},cfb:e=>{cf.b=+e.value;R()},cfk:e=>{cf.k=e.value;R()},a1:e=>{as.t=+e.value;as.no=[];R()},a2:e=>{as.b=+e.value;as.no=[];R()},
+ass:()=>{as.seed++;R()},asno:id=>{as.no.push(+id);R()},pg:e=>{S.prefs.game=e.checked;save();R()},ps:e=>{S.prefs.still=e.checked;save();mo()},qs:k=>{S.q[k]='on';save();R()},qx:id=>{S.q[id+td()+'x']=1;save();R()},
+sn:()=>{G.s.i++;G.s.fb='';if(G.s.i>=T.length)endG('sort',15,'sort');R()},bn:()=>{G.b.i++;G.b.fb='';if(G.b.i>=BU.length)endG('budget',15,'budget');R()},qn:()=>{G.q.i++;G.q.fb='';if(G.q.i>=QZ.length)endG('quiz',10);R()},
+sr:()=>{G.s=null;R()},br:()=>{G.b=null;R()},mr:()=>{G.m=null;R()},qr:()=>{G.q=null;R()},sel:n=>{G.sel=n;R()},wp:(i,e)=>{S.wp=S.wp||WP.slice();S.wp[i]=e.value;save()}};
+const run=b=>{let[n,...a]=b.dataset.c.split('|'),f=A[n];if(f)f(...a,b)};
+document.addEventListener('click',e=>{let b=e.target.closest('[data-c]');if(!b||!/^(BUTTON|A)$/.test(b.tagName))return;e.preventDefault();run(b)});
+document.addEventListener('change',e=>{let b=e.target.closest('[data-c]');if(b&&/^(INPUT|SELECT)$/.test(b.tagName))run(b)});
+document.addEventListener('submit',e=>st(e));
+mo();R();S.last=td();save();
 </script></body></html>
